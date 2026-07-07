@@ -81,6 +81,7 @@ export const navGroups: { title: string; links: { label: string; href: string }[
     title: "Join Us",
     links: [
       { label: "Admissions", href: "/admissions" },
+      { label: "Fees", href: "/fees" },
       { label: "FAQs", href: "/faqs" },
       { label: "Apply Now", href: "/apply" },
       { label: "Prospectus", href: "/prospectus" },
