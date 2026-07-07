@@ -53,10 +53,10 @@ export default function MegaMenu({
         </svg>
       </button>
 
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-10 sm:px-10 sm:py-14">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-10 pt-24 sm:px-10 sm:py-14">
         <div className="grid flex-1 gap-10 lg:grid-cols-[240px_1fr_1fr] lg:gap-14">
           {/* Left: useful links (logo is pinned to the corner above) */}
-          <div className="flex flex-col">
+          <div className="order-2 flex flex-col lg:order-none">
             <div className="mt-16 lg:mt-auto">
               <p className="eyebrow text-clay">Useful links</p>
               <ul className="mt-4 space-y-2.5">
@@ -75,30 +75,60 @@ export default function MegaMenu({
             </div>
           </div>
 
-          {/* Center: primary categories */}
-          <nav className="flex flex-col">
-            {navGroups.map((g, i) => (
-              <button
-                key={g.title}
-                onMouseEnter={() => setActive(i)}
-                onFocus={() => setActive(i)}
-                onClick={() => setActive(i)}
-                className={`flex items-center justify-between border-b border-pine/15 py-4 text-left font-display text-3xl transition-colors sm:text-4xl ${
-                  active === i ? "text-clay" : "text-pine hover:text-clay"
-                }`}
-              >
-                {g.title}
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="opacity-50">
-                  <path d="M7 4l6 6-6 6" />
-                </svg>
-              </button>
-            ))}
+          {/* Center: primary categories. On desktop, hovering reveals the
+              sub-links in the right column. On mobile, tapping expands the
+              sub-links directly underneath (accordion). */}
+          <nav className="order-1 flex flex-col lg:order-none">
+            {navGroups.map((g, i) => {
+              const open = active === i;
+              return (
+                <div key={g.title} className="border-b border-pine/15">
+                  <button
+                    onMouseEnter={() => setActive(i)}
+                    onFocus={() => setActive(i)}
+                    onClick={() => {
+                      const coarse = window.matchMedia("(pointer: coarse)").matches;
+                      setActive(coarse ? (open ? -1 : i) : i);
+                    }}
+                    aria-expanded={open}
+                    className={`flex w-full items-center justify-between py-4 text-left font-display text-3xl transition-colors sm:text-4xl ${
+                      open ? "text-clay" : "text-pine hover:text-clay"
+                    }`}
+                  >
+                    {g.title}
+                    <svg
+                      width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+                      strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+                      className={`opacity-50 transition-transform duration-200 ${open ? "rotate-90" : ""}`}
+                    >
+                      <path d="M7 4l6 6-6 6" />
+                    </svg>
+                  </button>
+
+                  {/* Mobile-only accordion panel: links under the category */}
+                  {open && (
+                    <div className="pop flex flex-col items-start gap-3 pb-5 pl-1 lg:hidden">
+                      {g.links.map((l) => (
+                        <Link
+                          key={l.href}
+                          href={l.href}
+                          onClick={go}
+                          className="text-lg font-semibold text-pine/80 transition-colors hover:text-clay"
+                        >
+                          {l.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </nav>
 
-          {/* Right: sub-links of the active category */}
-          <div className="lg:pt-3">
+          {/* Right: sub-links of the active category (desktop only) */}
+          <div className="hidden lg:block lg:pt-3">
             <div key={active} className="pop flex flex-col items-start gap-5">
-              {navGroups[active].links.map((l) => (
+              {navGroups[active < 0 ? 0 : active].links.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}

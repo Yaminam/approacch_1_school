@@ -140,6 +140,19 @@
 }
 .splash-logo { animation: splashLogoIn 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
+/* Content protection: disable the long-press callout (save image / copy) and
+   image dragging everywhere. On touch devices also disable text selection so a
+   long-press can't lift text or images. Inputs stay selectable. */
+* { -webkit-touch-callout: none; }
+img { -webkit-user-drag: none; user-select: none; }
+@media (pointer: coarse) {
+  body { -webkit-user-select: none; user-select: none; }
+  input, textarea, select, [contenteditable="true"] {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
 .noise::after {
   content: "";
   position: absolute;
