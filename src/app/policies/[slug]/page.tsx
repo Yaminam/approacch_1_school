@@ -5,7 +5,7 @@ import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import Reveal from "@/components/Reveal";
 import { Section } from "@/components/ui";
-import { policies } from "@/lib/content";
+import { policies } from "@/lib/policies";
 
 export function generateStaticParams() {
   return policies.map((p) => ({ slug: p.slug }));
@@ -46,17 +46,33 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               <Reveal key={s.heading} delay={i * 60}>
                 <section className="border-t hair pt-8">
                   <h2 className="text-2xl text-pine sm:text-3xl">{s.heading}</h2>
-                  {s.body && <p className="mt-4 text-lg leading-relaxed text-mist">{s.body}</p>}
-                  {s.points && (
-                    <ul className="mt-5 space-y-3.5">
-                      {s.points.map((p) => (
-                        <li key={p} className="flex items-start gap-3.5">
-                          <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
-                          <span className="leading-relaxed text-pine">{p}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  <div className="mt-4 space-y-4">
+                    {s.blocks.map((b, j) => {
+                      if (b.type === "p")
+                        return (
+                          <p key={j} className="text-lg leading-relaxed text-mist">
+                            {b.text}
+                          </p>
+                        );
+                      if (b.type === "term")
+                        return (
+                          <p key={j} className="text-lg leading-relaxed text-mist">
+                            <span className="font-bold text-pine">{b.label}. </span>
+                            {b.text}
+                          </p>
+                        );
+                      return (
+                        <ul key={j} className="space-y-3.5">
+                          {b.items.map((item) => (
+                            <li key={item} className="flex items-start gap-3.5">
+                              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+                              <span className="leading-relaxed text-pine">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      );
+                    })}
+                  </div>
                 </section>
               </Reveal>
             ))}

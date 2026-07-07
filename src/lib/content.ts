@@ -348,9 +348,9 @@ export const learnerValues: { title: string; body: string }[] = [
 ];
 
 export const chandigarhFeatures: { title: string; body: string; img: string }[] = [
-  { title: "Equestrian Centre", body: "Horse riding, polo and show jumping from beginner to advanced, building confidence and discipline.", img: "/images/outside.jpg" },
-  { title: "Golfing Greens", body: "Professionally designed greens where students learn precision, patience and strategy.", img: "/images/campus-wide.jpg" },
-  { title: "Farm to Table", body: "From seed to plate, sustainable farming, a petting zoo, and food that feeds the school kitchen.", img: "/images/trekking.jpg" },
+  { title: "Equestrian Centre", body: "Horse riding, polo and show jumping from beginner to advanced, building confidence and discipline.", img: "/images/gallery/equestrian.jpg" },
+  { title: "Golfing Greens", body: "Professionally designed greens where students learn precision, patience and strategy.", img: "/images/gallery/golf.jpg" },
+  { title: "Farm to Table", body: "From seed to plate, sustainable farming, a petting zoo, and food that feeds the school kitchen.", img: "/images/gallery/farm.jpg" },
 ];
 
 /* ───────────────────────── PER-CAMPUS DETAIL ─────────────────────────
@@ -648,8 +648,8 @@ export const onlyAt: { title: string; body: string; img: string }[] = [
   { title: "A campus at 7,000 ft", body: "A school set high in the alpine, where the mountain is part of the timetable.", img: "/images/campus-hero.jpg" },
   { title: "Mountaineering & treks", body: "Real expeditions that build endurance, teamwork and quiet grit.", img: "/images/trekking.jpg" },
   { title: "An indoor shooting range", body: "Marksmanship with national recognition in rifle and pistol.", img: "/images/shooting.jpg" },
-  { title: "Equestrian & golf", body: "Riding, polo and professional golfing greens at New Chandigarh.", img: "/images/outside.jpg" },
-  { title: "Farm to table", body: "Food grown, harvested and cooked by the children who eat it.", img: "/images/campus-wide.jpg" },
+  { title: "Equestrian & golf", body: "Riding, polo and professional golfing greens at New Chandigarh.", img: "/images/gallery/equestrian.jpg" },
+  { title: "Farm to table", body: "Food grown, harvested and cooked by the children who eat it.", img: "/images/gallery/farm.jpg" },
   { title: "The Defence Pathway", body: "A dedicated route for children who dream in uniform.", img: "/images/gym.jpg" },
 ];
 

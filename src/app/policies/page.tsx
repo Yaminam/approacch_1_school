@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import Reveal from "@/components/Reveal";
 import { SectionHead, Section } from "@/components/ui";
-import { policies } from "@/lib/content";
+import { policies } from "@/lib/policies";
 
 export const metadata: Metadata = {
   title: "Policies, Dalhousie Public School",

@@ -1,24 +1,36 @@
 import type { Metadata } from "next";
-import { Fraunces, Nunito_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyVisit from "@/components/StickyVisit";
 import { CampusProvider } from "@/components/campus";
 
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-fraunces",
+// Self-hosted brand fonts, extracted from the live dalhousiepublicschool.com:
+// "Helvetica Neue" for body/UI and "Helvetica Neue LT Pro" for display.
+// Variable names are kept as-is so globals.css needs no rewiring.
+const fraunces = localFont({
+  variable: "--font-fraunces", // display / headings → Helvetica Neue LT Pro
   display: "swap",
+  src: [
+    { path: "../fonts/HelveticaNeueLTProMd.ttf", weight: "400", style: "normal" },
+    { path: "../fonts/HelveticaNeueLTProMd.ttf", weight: "500", style: "normal" },
+    { path: "../fonts/HelveticaNeueLTProBd_1.ttf", weight: "600", style: "normal" },
+    { path: "../fonts/HelveticaNeueLTProBd_1.ttf", weight: "700", style: "normal" },
+  ],
 });
 
-const nunito = Nunito_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-  variable: "--font-nunito",
+const nunito = localFont({
+  variable: "--font-nunito", // body / UI → Helvetica Neue
   display: "swap",
+  src: [
+    { path: "../fonts/Light.ttf", weight: "300", style: "normal" },
+    { path: "../fonts/Light.ttf", weight: "400", style: "normal" },
+    { path: "../fonts/HelveticaNeueMedium.woff", weight: "500", style: "normal" },
+    { path: "../fonts/HelveticaNeueMedium.woff", weight: "600", style: "normal" },
+    { path: "../fonts/HelveticaNeueBold.woff", weight: "700", style: "normal" },
+    { path: "../fonts/HelveticaNeueBold.woff", weight: "800", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {

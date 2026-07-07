@@ -24,8 +24,8 @@
   --color-ink: #2e1c24;
   --color-mist: #75616a;
 
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
-  --font-body: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), "Helvetica Neue LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: var(--font-nunito), "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 @layer base {
