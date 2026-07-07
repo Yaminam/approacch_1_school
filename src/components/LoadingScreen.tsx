@@ -1,37 +1,46 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-// Full-screen branded splash shown on every load / refresh. It is rendered in
-// the initial HTML (so it covers the page instantly), then fades out once the
-// page has finished loading, with a short minimum on-screen time.
+// Full-screen branded splash. Shown on first load / refresh, and again briefly
+// on every client-side navigation (route change) so moving between pages always
+// passes through the Dalhousie loading screen.
 export default function LoadingScreen() {
-  const [hidden, setHidden] = useState(false);
-  const [removed, setRemoved] = useState(false);
+  const pathname = usePathname();
+  const [show, setShow] = useState(true);
+  const first = useRef(true);
+  const timer = useRef<number | undefined>(undefined);
 
+  // Whenever the splash is shown, hide it again after a short beat.
   useEffect(() => {
-    // This effect only runs after hydration (past DOMContentLoaded), so the
-    // page is already interactive. Reveal after a short, predictable beat
-    // rather than waiting on window.load (which blocks on the large hero image).
-    const t = window.setTimeout(() => setHidden(true), 1100);
-    return () => window.clearTimeout(t);
+    if (!show) return;
+    timer.current = window.setTimeout(() => setShow(false), 1000);
+    return () => window.clearTimeout(timer.current);
+  }, [show]);
+
+  // Re-show the splash on client navigation (skip the very first render).
+  useEffect(() => {
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    setShow(true);
+  }, [pathname]);
+
+  // Allow anything (e.g. the intro's "Continue") to summon the splash on demand.
+  useEffect(() => {
+    const onShow = () => setShow(true);
+    window.addEventListener("dps:loading", onShow);
+    return () => window.removeEventListener("dps:loading", onShow);
   }, []);
-
-  // unmount after the fade-out completes
-  useEffect(() => {
-    if (!hidden) return;
-    const t = window.setTimeout(() => setRemoved(true), 650);
-    return () => window.clearTimeout(t);
-  }, [hidden]);
-
-  if (removed) return null;
 
   return (
     <div
       aria-hidden
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-pine-800 transition-opacity duration-500 ease-out ${
-        hidden ? "pointer-events-none opacity-0" : "opacity-100"
+        show ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
       <div className="splash-logo flex flex-col items-center">
@@ -48,7 +57,6 @@ export default function LoadingScreen() {
           Exceptional by Nature
         </span>
 
-        {/* indeterminate loading bar */}
         <div className="mt-8 h-px w-40 overflow-hidden bg-paper/15">
           <div className="splash-bar h-full w-1/4 rounded-full bg-brass-soft" />
         </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import MegaMenu from "@/components/MegaMenu";
 
 // Photos tiled onto the sphere.
 const IMAGES = [
@@ -88,6 +89,7 @@ const TILE_H = 132;
 
 export default function IntroGlobe() {
   const [phase, setPhase] = useState<"hidden" | "showing" | "leaving" | "done">("hidden");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const seen = sessionStorage.getItem("dps-intro-seen");
@@ -105,8 +107,19 @@ export default function IntroGlobe() {
 
   function enter() {
     sessionStorage.setItem("dps-intro-seen", "1");
+    // Show the Dalhousie loading screen, jump to the top, then reveal the site.
+    window.scrollTo(0, 0);
+    window.dispatchEvent(new Event("dps:loading"));
     setPhase("leaving");
     window.setTimeout(() => setPhase("done"), 800);
+  }
+
+  // A menu link was clicked: dismiss the intro instantly and let the router
+  // (plus the loading screen) take over.
+  function navigateAway() {
+    sessionStorage.setItem("dps-intro-seen", "1");
+    setMenuOpen(false);
+    setPhase("done");
   }
 
   if (phase === "hidden" || phase === "done") return null;
@@ -129,7 +142,7 @@ export default function IntroGlobe() {
           className="h-9 w-auto [filter:brightness(0)_invert(1)]"
         />
         <button
-          onClick={enter}
+          onClick={() => setMenuOpen(true)}
           aria-label="Menu"
           className="grid h-12 w-12 place-items-center rounded-full bg-clay text-paper transition-colors hover:bg-brass-soft hover:text-pine-800"
         >
@@ -231,6 +244,8 @@ export default function IntroGlobe() {
           </button>
         </div>
       </div>
+
+      {menuOpen && <MegaMenu onClose={() => setMenuOpen(false)} onNavigate={navigateAway} />}
     </div>
   );
 }
