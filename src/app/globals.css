@@ -121,6 +121,25 @@
 }
 .kenburns { animation: kenburns 24s ease-in-out infinite alternate; }
 
+/* Intro globe */
+@keyframes globeSpin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+.globe-spin { animation: globeSpin 44s linear infinite; transform-style: preserve-3d; }
+
+/* Splash / loading screen */
+@keyframes splashBar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+.splash-bar { animation: splashBar 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes splashLogoIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.splash-logo { animation: splashLogoIn 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
 .noise::after {
   content: "";
   position: absolute;

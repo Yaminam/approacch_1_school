@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyVisit from "@/components/StickyVisit";
+import LoadingScreen from "@/components/LoadingScreen";
+import IntroGlobe from "@/components/IntroGlobe";
 import { CampusProvider } from "@/components/campus";
 
 // Self-hosted brand fonts, extracted from the live dalhousiepublicschool.com:
@@ -47,6 +49,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${nunito.variable}`}>
       <body>
+        <LoadingScreen />
+        <IntroGlobe />
         <CampusProvider>
           <Header />
           {children}
