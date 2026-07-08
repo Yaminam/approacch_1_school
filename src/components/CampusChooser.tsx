@@ -260,7 +260,7 @@ function Result({
                   href={campusHref[c.id]}
                   className="inline-block rounded-full bg-clay px-5 py-2.5 text-sm font-bold text-paper transition-transform hover:-translate-y-0.5"
                 >
-                  Explore {c.name.split(" ")[0]} &rarr;
+                  Explore {c.name.replace(/ Campus$/, "")} &rarr;
                 </Link>
                 <a
                   href={whatsappHref(
