@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { whatsappHref, school } from "@/lib/content";
+import BookVisitButton from "./BookVisitButton";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -68,7 +68,7 @@ export default function Hero() {
             sizes="100vw"
             className="object-cover object-[center_22%]"
           />
-          {/* Red tint over the whole photo — grows with scroll. mix-blend
+          {/* Red tint over the whole photo, grows with scroll. mix-blend
               "color" keeps the scene's luminance but forces its hue to red. */}
           <div
             className="pointer-events-none absolute inset-0 bg-[#e11d2a] [mix-blend-mode:color]"
@@ -87,8 +87,20 @@ export default function Hero() {
           />
         </div>
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-pine-800/80 via-pine-800/45 to-pine-800/25" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-pine-800/70 via-transparent to-pine-800/30" />
+      {/* Light legibility gradients only, so at the top of the page the photo
+          reads as the original. Just enough shading behind the headline. */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-pine-800/60 via-pine-800/18 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-pine-800/55 via-transparent to-transparent" />
+
+      {/* Brand maroon and depth arrive only as you scroll (driven by --red) */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-clay"
+        style={{ opacity: "calc(var(--red) * 0.45)" }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-pine-800"
+        style={{ opacity: "calc(var(--red) * 0.32)" }}
+      />
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-28 sm:px-10">
@@ -109,22 +121,18 @@ export default function Hero() {
           <span className="hero-rise mt-7 block h-px w-16 bg-brass-soft/70" style={{ animationDelay: "0.38s" }} />
 
           <p
-            className="hero-rise mt-7 max-w-lg text-lg leading-relaxed text-paper/85"
+            className="hero-rise mt-7 max-w-lg text-lg leading-relaxed text-paper/85 [text-wrap:pretty]"
             style={{ animationDelay: "0.48s" }}
           >
-            A 54-year-old co-educational boarding school, seven thousand feet above
-            sea level, with a modern second campus in New Chandigarh.
+            Fifty-four years in the alpine. A boarding school for boys and girls,
+            seven thousand feet above sea level, with a modern second campus in
+            New Chandigarh.
           </p>
 
           <div className="hero-rise mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "0.58s" }}>
-            <a
-              href={whatsappHref(`Hi! I would like to book a campus visit at ${school.name}.`)}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full bg-brass-soft px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5"
-            >
+            <BookVisitButton className="rounded-full bg-brass-soft px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5">
               Book a visit
-            </a>
+            </BookVisitButton>
             <a
               href="#chooser"
               className="rounded-full border border-paper/45 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-colors hover:border-brass-soft hover:text-brass-soft"

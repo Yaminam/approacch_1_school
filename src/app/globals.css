@@ -29,16 +29,36 @@
 }
 
 @layer base {
+  /* The site has one fixed light palette. This stops browsers (Chrome auto dark mode,
+     some mobile browsers) from re-tinting text and backgrounds to match the OS theme. */
+  :root {
+    color-scheme: light;
+    /* The layout stops growing past this width, so it reads the same on every monitor. */
+    --site-max: 1600px;
+  }
   html {
+    color-scheme: light;
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+    /* Same crest maroon as the statement section, so the scroll and
+       overscroll areas match rather than reading as a darker red. */
+    background-color: var(--color-clay);
   }
   body {
-    background-color: var(--color-cream);
+    /* Outside the capped shell, on very wide monitors. */
+    background-color: var(--color-clay);
     color: var(--color-ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+  }
+  /* The centred page shell: full-bleed sections stop stretching past --site-max. */
+  .site-shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: var(--site-max);
+    background-color: var(--color-cream);
+    position: relative;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
@@ -120,6 +140,12 @@
   to { transform: scale(1.16); }
 }
 .kenburns { animation: kenburns 24s ease-in-out infinite alternate; }
+
+@keyframes popupIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+.popup-in { animation: popupIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
 /* Intro globe */
 @keyframes globeSpin {

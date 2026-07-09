@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
 // IMPORTANT: The web platform cannot truly prevent screenshots. The OS captures
 // the screen before JavaScript can react, so a raw Print Screen, a phone photo,
 // or screen recording will still capture the page. What we CAN do:
-//  - block right-click, dev-tools / save / view-source shortcuts, image drag
-//  - blank the screen the instant the window loses focus or is hidden, which is
-//    when many capture tools (e.g. Snipping Tool) activate — so a grab taken
-//    then lands on a blank screen. (This also blanks when you switch tabs/apps.)
+// - block right-click, dev-tools / save / view-source shortcuts, image drag
+// - blank the screen the instant the window loses focus or is hidden, which is
+// when many capture tools (e.g. Snipping Tool) activate, so a grab taken
+// then lands on a blank screen. (This also blanks when you switch tabs/apps.)
 export default function ContentProtection() {
   const [blanked, setBlanked] = useState(false);
 

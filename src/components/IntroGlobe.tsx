@@ -215,22 +215,31 @@ export default function IntroGlobe() {
             "radial-gradient(circle at 50% 50%, transparent 30%, rgba(41,18,27,0.35) 48%, rgba(41,18,27,0.8) 68%, rgba(41,18,27,0.97) 82%, #29121b 94%)",
         }}
       />
-      {/* Soft scrim behind the headline / button for legibility */}
+      {/* Scrim behind the headline / button so the text stays legible over the bright cards */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 42% 34% at 50% 49%, rgba(41,18,27,0.6) 0%, rgba(41,18,27,0.28) 45%, transparent 72%)",
+            "radial-gradient(ellipse 58% 46% at 50% 48%, rgba(41,18,27,0.9) 0%, rgba(41,18,27,0.78) 30%, rgba(41,18,27,0.5) 55%, rgba(41,18,27,0.2) 74%, transparent 88%)",
         }}
       />
 
       {/* Centre content */}
       <div className="pointer-events-none absolute inset-0 grid place-items-center px-6 text-center">
         <div className="relative flex flex-col items-center">
-          <span className="eyebrow text-brass-soft">Dalhousie Public School</span>
+          <span
+            className="eyebrow text-brass-soft"
+            style={{ textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 16px rgba(0,0,0,0.8)" }}
+          >
+            Dalhousie Public School
+          </span>
           <h1
             className="mt-5 font-display leading-[0.92] text-paper"
-            style={{ fontSize: "clamp(2rem, 5.5vw, 4.4rem)", textShadow: "0 2px 40px rgba(0,0,0,0.7)" }}
+            style={{
+              fontSize: "clamp(2rem, 5.5vw, 4.4rem)",
+              textShadow:
+                "0 2px 6px rgba(0,0,0,0.85), 0 4px 30px rgba(0,0,0,0.8), 0 0 90px rgba(41,18,27,0.9)",
+            }}
           >
             Exceptional by Nature
           </h1>
@@ -238,7 +247,8 @@ export default function IntroGlobe() {
           <button
             onClick={enter}
             aria-label="Enter the website"
-            className="pointer-events-auto mt-12 grid h-36 w-36 place-items-center rounded-full border border-paper/70 text-sm font-bold uppercase tracking-[0.2em] text-paper backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-brass-soft hover:bg-brass-soft hover:text-pine-800"
+            className="pointer-events-auto mt-12 grid h-36 w-36 place-items-center rounded-full border border-paper/80 bg-pine-800/45 text-sm font-bold uppercase tracking-[0.2em] text-paper backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-brass-soft hover:bg-brass-soft hover:text-pine-800"
+            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.8)" }}
           >
             Continue
           </button>

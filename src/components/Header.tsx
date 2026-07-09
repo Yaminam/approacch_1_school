@@ -26,7 +26,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 mx-auto w-full max-w-[var(--site-max)] transition-all duration-300 ${
         solid
           ? "bg-cream/90 backdrop-blur-md border-b border-sand soft-shadow-sm"
           : "bg-transparent"

@@ -15,8 +15,8 @@ export default function Footer() {
               unoptimized
               className="h-11 w-auto [filter:brightness(0)_invert(1)]"
             />
-            <p className="mt-5 max-w-sm leading-relaxed text-sage-soft">
-              Exceptional by Nature. A 54-year-old alpine boarding school in the
+            <p className="mt-5 max-w-sm leading-relaxed text-sage-soft [text-wrap:pretty]">
+              Exceptional by Nature. Fifty-four years of alpine boarding in the
               Himachal Himalayas, and a modern campus in New Chandigarh.
             </p>
           </div>

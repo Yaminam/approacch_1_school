@@ -4,7 +4,14 @@ import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import Reveal from "@/components/Reveal";
 import { SectionHead, Section } from "@/components/ui";
-import { prospectusIncludes, prospectusDocs, whatsappHref, school } from "@/lib/content";
+import {
+  prospectusIncludes,
+  prospectusDocs,
+  whatsappHref,
+  school,
+  brochurePdf,
+  feeScope,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Prospectus, Dalhousie Public School",
@@ -49,33 +56,67 @@ export default function Page() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div className="rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm">
-              <h3 className="text-2xl text-pine">Request your copy</h3>
-              <p className="mt-2 leading-relaxed text-mist">
-                Tell us a little about your child and we will send the prospectus, and answer any
-                questions you have.
-              </p>
-              <div className="mt-7 flex flex-col gap-3">
-                <a
-                  href={whatsappHref("Hi! I would like to receive the Dalhousie Public School prospectus.")}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full bg-clay px-6 py-3.5 text-center font-bold text-paper transition-transform hover:-translate-y-0.5"
-                >
-                  Request on WhatsApp
-                </a>
-                <a
-                  href={`mailto:${school.email}?subject=Prospectus%20Request&body=Hi,%20please%20send%20me%20the%20prospectus.`}
-                  className="rounded-full border-2 border-pine px-6 py-3 text-center font-bold text-pine transition-colors hover:border-clay hover:text-clay"
-                >
-                  Request by email
-                </a>
-                <Link
-                  href="/admissions"
-                  className="rounded-full border-2 border-pine px-6 py-3 text-center font-bold text-pine transition-colors hover:border-clay hover:text-clay"
-                >
-                  See admissions
-                </Link>
+            <div className="space-y-6">
+              <div className="rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm">
+                <span className="eyebrow text-clay">Download now</span>
+                <h3 className="mt-4 text-2xl text-pine">The brochure, straight away.</h3>
+                <p className="mt-2 leading-relaxed text-mist">
+                  No form, no waiting. Open it now or save it to read with your family.
+                </p>
+                <div className="mt-7 flex flex-col gap-3">
+                  <a
+                    href={brochurePdf}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full bg-clay px-6 py-3.5 text-center font-bold text-paper transition-transform hover:-translate-y-0.5"
+                  >
+                    Download the brochure
+                  </a>
+                  <a
+                    href={feeScope.pdf}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full border-2 border-pine px-6 py-3 text-center font-bold text-pine transition-colors hover:border-clay hover:text-clay"
+                  >
+                    Download the fee structure
+                  </a>
+                </div>
+                <p className="mt-4 text-sm leading-relaxed text-mist">
+                  The fee structure covers boarders at the Dalhousie campus, KG to Class X, for {feeScope.year}.{" "}
+                  <Link href="/fees" className="font-bold text-clay hover:text-pine">
+                    See the figures on the fees page.
+                  </Link>
+                </p>
+              </div>
+
+              <div className="rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm">
+                <h3 className="text-2xl text-pine">Prefer to talk?</h3>
+                <p className="mt-2 leading-relaxed text-mist">
+                  Tell us a little about your child and we will answer any questions you have,
+                  usually the same day.
+                </p>
+                <div className="mt-7 flex flex-col gap-3">
+                  <a
+                    href={whatsappHref("Hi! I would like to know more about Dalhousie Public School.")}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-full border-2 border-pine px-6 py-3 text-center font-bold text-pine transition-colors hover:border-clay hover:text-clay"
+                  >
+                    Ask on WhatsApp
+                  </a>
+                  <a
+                    href={`mailto:${school.email}?subject=Prospectus%20Enquiry&body=Hi,%20I%20have%20a%20question%20about%20admissions.`}
+                    className="rounded-full border-2 border-pine px-6 py-3 text-center font-bold text-pine transition-colors hover:border-clay hover:text-clay"
+                  >
+                    Ask by email
+                  </a>
+                  <Link
+                    href="/admissions"
+                    className="rounded-full border-2 border-pine px-6 py-3 text-center font-bold text-pine transition-colors hover:border-clay hover:text-clay"
+                  >
+                    See admissions
+                  </Link>
+                </div>
               </div>
             </div>
           </Reveal>

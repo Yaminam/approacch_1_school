@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -36,6 +36,12 @@ const nunito = localFont({
   ],
 });
 
+// One fixed light palette; stops browser auto dark mode from re-tinting the site.
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#6b0630",
+};
+
 export const metadata: Metadata = {
   title: "Dalhousie Public School, Exceptional by Nature",
   description:
@@ -55,8 +61,10 @@ export default function RootLayout({
         <IntroGlobe />
         <CampusProvider>
           <Header />
-          {children}
-          <Footer />
+          <div className="site-shell">
+            {children}
+            <Footer />
+          </div>
           <StickyVisit />
         </CampusProvider>
       </body>

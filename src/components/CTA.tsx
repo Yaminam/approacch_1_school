@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { whatsappHref, school } from "@/lib/content";
+import { school } from "@/lib/content";
+import BookVisitButton from "./BookVisitButton";
 
 export default function CTA() {
   return (
@@ -14,29 +15,33 @@ export default function CTA() {
             <span className="h-px w-8 bg-brass-soft" />
           </span>
         </div>
+
         <h2 className="mt-6 font-display text-4xl leading-[1.02] text-paper sm:text-6xl">
-          Come and feel the mountain air.
+          You will not lie awake <span className="italic text-brass-soft">wondering.</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-sage-soft">
-          The best way to understand Dalhousie is to stand in it. Book a visit,
-          or message us on WhatsApp, and we will reply personally.
+
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sage-soft">
+          Because you will have met the people who will know your child by name,
+          seen the room where they will sleep, and stood in the air they will
+          breathe every morning. Choosing a school is a big decision. Come and
+          make it with your own eyes.
         </p>
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <a
-            href={whatsappHref(`Hi! I would like to book a campus visit at ${school.name}.`)}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-brass-soft px-7 py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-pine-800 transition-transform hover:-translate-y-0.5"
-          >
-            Book a visit on WhatsApp
-          </a>
+
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <BookVisitButton className="rounded-full bg-brass-soft px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5">
+            Book a visit
+          </BookVisitButton>
           <a
             href={`tel:${school.phoneRaw}`}
-            className="rounded-full border border-paper/40 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-paper transition-colors hover:border-brass-soft hover:text-brass-soft"
+            className="rounded-full border border-paper/45 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-colors hover:border-brass-soft hover:text-brass-soft"
           >
             Call {school.phone}
           </a>
         </div>
+
+        <p className="mt-7 text-sm text-paper/60">
+          A real person replies, usually the same day.
+        </p>
       </div>
     </section>
   );

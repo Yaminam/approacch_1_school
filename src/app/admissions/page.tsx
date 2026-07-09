@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import CTA from "@/components/CTA";
 import Reveal from "@/components/Reveal";
 import { SectionHead, Section } from "@/components/ui";
-import { admissionSteps, admissionDocs, whatsappHref } from "@/lib/content";
+import { admissionSteps, admissionDocs, whatsappHref, brochurePdf, feeScope } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Admissions, Dalhousie Public School",
@@ -74,6 +74,54 @@ export default function Page() {
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      <Section tone="cream">
+        <SectionHead
+          eyebrow="Downloads"
+          title="Read it before you decide."
+          intro="Two documents answer most of what parents ask us first. Both open straight away, with no form to fill in."
+        />
+        <div className="mt-11 grid gap-5 md:grid-cols-2">
+          <Reveal>
+            <a
+              href={brochurePdf}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex h-full flex-col rounded-[1.5rem] border border-sand bg-paper p-8 soft-shadow-sm transition-transform hover:-translate-y-1"
+            >
+              <span className="eyebrow text-clay">Brochure</span>
+              <h3 className="mt-4 text-2xl text-pine">The school, in full.</h3>
+              <p className="mt-2 flex-1 leading-relaxed text-mist">
+                Both campuses, the academic programme, boarding life and everything in between.
+              </p>
+              <span className="mt-6 font-bold text-clay group-hover:text-pine">Download the brochure</span>
+            </a>
+          </Reveal>
+          <Reveal delay={100}>
+            <a
+              href={feeScope.pdf}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex h-full flex-col rounded-[1.5rem] border border-sand bg-paper p-8 soft-shadow-sm transition-transform hover:-translate-y-1"
+            >
+              <span className="eyebrow text-clay">Fee structure {feeScope.year}</span>
+              <h3 className="mt-4 text-2xl text-pine">What it costs, plainly.</h3>
+              <p className="mt-2 flex-1 leading-relaxed text-mist">
+                Fees and dues for boarders at the Dalhousie campus, KG to Class X, with the three
+                instalment dates and payment details.
+              </p>
+              <span className="mt-6 font-bold text-clay group-hover:text-pine">Download the fee structure</span>
+            </a>
+          </Reveal>
+        </div>
+        <p className="mt-8 text-sm text-mist">
+          You can also{" "}
+          <Link href="/fees" className="font-bold text-clay hover:text-pine">
+            read the fees on this site
+          </Link>
+          . Schedules for Classes XI and XII, and for New Chandigarh, are issued by the admissions office.
+        </p>
       </Section>
 
       <Section tone="pine">

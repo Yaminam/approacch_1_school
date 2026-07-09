@@ -266,52 +266,73 @@ export const admissionDocs = [
   "Passport-size photographs",
 ];
 
-export const concessions: { label: string; detail: string }[] = [
-  { label: "Armed forces", detail: "10% concession for children of armed-forces parents." },
-  { label: "Siblings", detail: "10-15% concession from the second child onward." },
-  { label: "Single payment", detail: "Up to 5% off when annual tuition is paid upfront." },
+/* ───────────────────────── FEES ─────────────────────────
+   Source: "Fee & Dues for Boarders 2026", Dalhousie Public School, Dalhousie.
+   Scope: Dalhousie Campus, boarders, KG to Class X only. All figures in rupees. */
+
+export const feeScope = {
+  campus: "Dalhousie Campus",
+  applies: "Boarders, KG to Class X",
+  year: "2026",
+  pdf: "/downloads/dalhousie-fee-structure-boarders-2026.pdf",
+};
+
+export const feeOneTime: { label: string; amount: string }[] = [
+  { label: "Registration fee (non-refundable)", amount: "8,000" },
+  { label: "Admission fee (non-refundable)", amount: "40,000" },
+  { label: "Security (refundable)", amount: "30,000" },
+  { label: "Sundry deposit", amount: "35,000" },
 ];
 
-/* ───────────────────────── FEES (public figures, ₹) ───────────────────────── */
+export const feeAnnual: { grade: string; tuition: string; boarding: string }[] = [
+  { grade: "KG to Class 4", tuition: "60,858", boarding: "3,50,892" },
+  { grade: "Class 5 to Class 10", tuition: "62,715", boarding: "3,52,695" },
+];
 
-export const feeNote =
-  "Indicative annual figures in ₹, as published for 2025-26. Uniforms, equipment and transport are charged separately. Please confirm current figures with the admissions office.";
-
-export const feeTables: {
-  campus: string;
-  kind: string;
-  rows: { grade: string; tuition: string; boarding: string }[];
+export const feeInstalments: {
+  grades: string;
+  rows: { when: string; detail: string; total: string }[];
 }[] = [
   {
-    campus: "Dalhousie Campus",
-    kind: "Residential (Board & Lodging)",
+    grades: "KG to Class 4",
     rows: [
-      { grade: "KG - Grade 4", tuition: "60,858", boarding: "3,50,892" },
-      { grade: "Grade 5 - 10", tuition: "62,715", boarding: "3,52,695" },
-      { grade: "Grade 11 - 12", tuition: "1,08,840", boarding: "4,22,790" },
+      { when: "First instalment", detail: "At admission. Security, admission fee, sundry deposit, plus tuition 20,286 and board and lodging 1,16,964.", total: "2,42,250" },
+      { when: "Second instalment", detail: "First week of June. Tuition 20,286 and board and lodging 1,16,964.", total: "1,37,250" },
+      { when: "Third instalment", detail: "First week of September. Tuition 20,286 and board and lodging 1,16,964.", total: "1,37,250" },
     ],
   },
   {
-    campus: "New Chandigarh Campus",
-    kind: "Boarding",
+    grades: "Class 5 to Class 10",
     rows: [
-      { grade: "Pre-Nursery - LKG", tuition: "1,14,231", boarding: "4,69,212" },
-      { grade: "UKG - Grade 8", tuition: "2,10,354", boarding: "4,69,212" },
-      { grade: "Grade 9 - 10", tuition: "2,22,000", boarding: "5,12,232" },
-      { grade: "Grade 11 - 12", tuition: "2,76,000", boarding: "5,12,232" },
-    ],
-  },
-  {
-    campus: "New Chandigarh Campus",
-    kind: "Day Boarding",
-    rows: [
-      { grade: "Pre-Nursery - LKG", tuition: "1,14,231", boarding: "40,000" },
-      { grade: "UKG - Grade 8", tuition: "2,10,354", boarding: "40,000" },
-      { grade: "Grade 9 - 10", tuition: "2,22,000", boarding: "40,000" },
-      { grade: "Grade 11 - 12", tuition: "2,76,000", boarding: "40,000" },
+      { when: "First instalment", detail: "At admission. Security, admission fee, sundry deposit, plus tuition 20,905 and board and lodging 1,17,565.", total: "2,43,470" },
+      { when: "Second instalment", detail: "First week of June. Tuition 20,905 and board and lodging 1,17,565.", total: "1,38,470" },
+      { when: "Third instalment", detail: "First week of September. Tuition 20,905 and board and lodging 1,17,565.", total: "1,38,470" },
     ],
   },
 ];
+
+export const feeNotes: string[] = [
+  "Parents with more than one child in the school receive a 15% concession on the annual fee (tuition, board and lodging) for the second child.",
+  "Tuition and board and lodging are paid in three instalments. All other dues are cleared in the first instalment.",
+  "Late clearance of fees and dues is charged at 2% per month.",
+  "The actual cost of books and stationery, outings and extra classes is debited to the sundry account. A complete statement of sundry expenditure is given to parents at the end of the year.",
+  "Fees deposited in the first instalment are not refunded if the child leaves the school after joining.",
+  "A fee of 20,000 is payable by residential students leaving after the CBSE examinations in 2027.",
+  "Winter classes, which are optional, are charged in the third instalment.",
+  "Educational trips, field trips and excursions are charged in the second instalment.",
+  "If physical classes are discontinued due to unforeseen circumstances, tuition fee and one third of the annual lodging and boarding charges are levied.",
+];
+
+export const feePayment = {
+  bank: "Punjab National Bank, DPS Dalhousie",
+  account: "6711002100000013",
+  ifsc: "PUNB0671100",
+  note: "Payment can also be made by UPI or the school QR code. After transferring, please confirm with the office.",
+  email: "info@dpsdalhousie.com",
+  whatsapp: "+91 94183 81111",
+};
+
+export const brochurePdf = "/downloads/dalhousie-brochure.pdf";
 
 /* ───────────────────────── FAQs ───────────────────────── */
 
@@ -320,7 +341,8 @@ export const faqs: { q: string; a: string }[] = [
   { q: "What boarding options are there?", a: "Full boarding, weekly boarding and day boarding, so families can choose the level of immersion that suits their child." },
   { q: "How old must my child be?", a: "Age is taken as on 31 March of the admission year: Toddlers 2+, EY1 3+, EY2 4+, EY3 5+, and so on." },
   { q: "How does admission work?", a: "Register, then an assessment (entrance exam for Grades III-X), a day on campus across six activities, and finally your offer." },
-  { q: "Are there concessions for armed-forces families?", a: "Yes. We warmly welcome children of armed-forces families and offer them a concession. Please ask the admissions office for details." },
+  { q: "What are the fees?", a: "Fees and dues for boarders at the Dalhousie campus, KG to Class X, are published in full on our Fees page, along with the three instalment dates. Schedules for Classes XI and XII, and for New Chandigarh, are issued by the admissions office." },
+  { q: "Is there a concession for a second child?", a: "Yes. Parents with more than one child in the school receive a 15% concession on the annual fee, meaning tuition and board and lodging, for the second child." },
   { q: "Can I visit before applying?", a: "Absolutely. Booking a campus visit is the best first step, use the Visit Us page or message us on WhatsApp." },
 ];
 
@@ -708,12 +730,34 @@ export const affiliations: string[] = [
 /* ───────────────────────── RECOGNITION & FILM ───────────────────────── */
 
 export const milestones: { year: string; title: string; body: string }[] = [
-  { year: "2010", title: "National Teacher's Award", body: "Presented to our Chairman by the President of India." },
-  { year: "2010", title: "NASA, every year", body: "Annual student trips to the Kennedy Space Center begin." },
-  { year: "2013", title: "A visit from the Dalai Lama", body: "His Holiness graces the campus." },
-  { year: "2014", title: "Tallest flag in Himachal", body: "A 108-ft national flag raised over the school." },
-  { year: "2023", title: "Golden Jubilee", body: "Fifty years, marked with the Chief of Air Staff." },
+  { year: "2010", title: "National Teacher's Award", body: "From the President of India." },
+  { year: "2010", title: "NASA, every year", body: "Kennedy Space Center trips begin." },
+  { year: "2013", title: "A visit from the Dalai Lama", body: "His Holiness graced the campus." },
+  { year: "2014", title: "Tallest flag in Himachal", body: "A 108-ft national flag raised." },
+  { year: "2023", title: "Golden Jubilee", body: "Fifty years, with the Air Chief." },
 ];
 
 // Swap this for a real YouTube or Vimeo link when available; for now it opens the school's Instagram.
 export const filmUrl = "https://www.instagram.com/_dalhousiepublicschool";
+
+/* ───────────────────────── PHILOSOPHY, PREP TEASER, PASTORAL TRUST ───────────────────────── */
+
+export const pillars: { n: string; title: string; body: string }[] = [
+  { n: "01", title: "Academic", body: "CBSE, Cambridge and IB pathways, taught in fifty smart classrooms by teachers who know every child by name." },
+  { n: "02", title: "Character", body: "The Confidence Code and Life Code turn courage, integrity and independence into things we teach on purpose." },
+  { n: "03", title: "Community", body: "Houses, house parents, and a family drawn from 102 cities and ten countries. Nobody here stays a stranger." },
+  { n: "04", title: "Physical", body: "Mountaineering, shooting, sport and sunrise yoga at seven thousand feet. The mountain is part of the timetable." },
+];
+
+export const prepTeaser: { name: string; body: string; href: string }[] = [
+  { name: "Confidence Code", body: "A structured character and leadership programme, unique to Dalhousie.", href: "/confidence-code" },
+  { name: "Life Code", body: "Real-world life skills, taught deliberately, not left to chance.", href: "/life-code" },
+  { name: "Residential Advantage", body: "Why boarding here changes the outcome, not just the address.", href: "/residential-advantage" },
+];
+
+export const pastoralTrust: { title: string; body: string }[] = [
+  { title: "House parents who live alongside", body: "Housemasters and mistresses stay with your child through all their years here." },
+  { title: "A 24-hour infirmary", body: "Trained medical staff on campus, day and night, with first-aid stations across the grounds." },
+  { title: "A counsellor team", body: "Confidential support, with daily mindfulness and breathing built into the routine." },
+  { title: "You, kept in the loop", body: "Calling hours, letters and honest updates, so distance never means silence." },
+];

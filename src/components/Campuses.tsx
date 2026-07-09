@@ -37,9 +37,9 @@ export default function Campuses() {
                   <p className="mt-3 max-w-lg leading-relaxed text-mist">{c.blurb}</p>
                   <Link
                     href={href}
-                    className="mt-5 inline-flex items-center gap-2 font-bold text-pine transition-colors hover:text-clay"
+                    className="mt-5 inline-flex items-center gap-2 whitespace-nowrap font-bold text-pine transition-colors hover:text-clay"
                   >
-                    Explore {c.name.split(" ")[0]}
+                    Explore {c.name.replace(/\s*Campus$/, "")}
                     <span aria-hidden className="transition-transform group-hover:translate-x-1">-&gt;</span>
                   </Link>
                 </div>
