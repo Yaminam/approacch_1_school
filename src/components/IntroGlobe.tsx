@@ -87,6 +87,12 @@ const TILES = buildTiles();
 const TILE_W = 118;
 const TILE_H = 132;
 
+// The spinning globe is a composited layer, so the browser rasterises each tile
+// once at its layout size and then the perspective magnifies that bitmap (~1.75x
+// for the front tiles) — which looks blurry. Lay the tiles out at SS times their
+// visual size and scale them back down, so the raster has SS times the pixels.
+const SS = 2;
+
 export default function IntroGlobe() {
   const [phase, setPhase] = useState<"hidden" | "showing" | "leaving" | "done">("hidden");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -164,13 +170,15 @@ export default function IntroGlobe() {
             {TILES.map((t, i) => (
               <div
                 key={i}
-                className="absolute left-1/2 top-1/2 overflow-hidden rounded-[3px] shadow-xl"
+                className="absolute left-1/2 top-1/2 overflow-hidden rounded-[6px] shadow-xl"
                 style={{
-                  width: TILE_W,
-                  height: TILE_H,
-                  marginLeft: -TILE_W / 2,
-                  marginTop: -TILE_H / 2,
-                  transform: t.transform,
+                  width: TILE_W * SS,
+                  height: TILE_H * SS,
+                  marginLeft: (-TILE_W * SS) / 2,
+                  marginTop: (-TILE_H * SS) / 2,
+                  // scale() is applied first, so the tile keeps its visual size
+                  // while being rasterised at SS times the resolution.
+                  transform: `${t.transform} scale(${1 / SS})`,
                   backfaceVisibility: "visible",
                 }}
               >
@@ -180,21 +188,21 @@ export default function IntroGlobe() {
                       src={t.src}
                       alt=""
                       fill
-                      sizes="180px"
+                      sizes="420px"
                       className={`object-cover ${t.gray ? "grayscale" : ""}`}
                     />
                     <span className="absolute inset-0 bg-pine-800/12" />
                   </>
                 ) : (
-                  <div className="flex h-full w-full flex-col bg-[#6b0630] p-2 text-center">
-                    <div className="flex h-full w-full flex-col items-center justify-center border border-brass-soft/45 px-2">
-                      <span className="text-[7px] font-bold uppercase tracking-[0.2em] text-brass-soft/90">
+                  <div className="flex h-full w-full flex-col bg-[#6b0630] p-4 text-center">
+                    <div className="flex h-full w-full flex-col items-center justify-center border-2 border-brass-soft/45 px-4">
+                      <span className="text-[14px] font-bold uppercase tracking-[0.2em] text-brass-soft/90">
                         {t.label}
                       </span>
-                      <h3 className="mt-2 font-display text-[12px] font-semibold leading-tight text-paper">
+                      <h3 className="mt-4 font-display text-[24px] font-semibold leading-tight text-paper">
                         {t.title}
                       </h3>
-                      <span className="mt-2.5 text-[6px] font-bold uppercase tracking-[0.3em] text-paper/45">
+                      <span className="mt-5 text-[12px] font-bold uppercase tracking-[0.3em] text-paper/45">
                         Dalhousie
                       </span>
                     </div>

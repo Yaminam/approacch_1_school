@@ -35,14 +35,14 @@ export default function Recognition() {
         <div className="mt-14 hidden gap-x-6 lg:grid lg:grid-cols-5">
           {milestones.map((m, i) => (
             <Reveal key={m.title} delay={i * 70}>
-              <div className="border-t hair pt-5">
+              <div className="border-t hair pt-5 text-center">
                 <span className="font-display text-3xl text-brass [font-variant-numeric:tabular-nums]">
                   {m.year}
                 </span>
-                <h3 className="mt-3 whitespace-nowrap text-lg leading-snug text-pine">
+                <h3 className="mt-3 text-lg leading-snug text-pine">
                   {m.title}
                 </h3>
-                <p className="mt-1.5 whitespace-nowrap text-sm leading-relaxed text-mist">
+                <p className="mt-1.5 text-sm leading-relaxed text-mist">
                   {m.body}
                 </p>
               </div>
