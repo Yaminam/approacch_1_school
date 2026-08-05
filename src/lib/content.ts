@@ -28,64 +28,86 @@ export const stats = [
 
 export const nav: { label: string; href: string }[] = [
   { label: "The Difference", href: "/the-dalhousie-difference" },
+  { label: "Preparation System", href: "/preparation-system" },
   { label: "Academics", href: "/academics" },
   { label: "Campuses", href: "/campuses" },
-  { label: "Life", href: "/student-life" },
   { label: "Admissions", href: "/admissions" },
-  { label: "Visit Us", href: "/visit-us" },
+  { label: "Contact", href: "/contact" },
 ];
 
-// Grouped navigation for the mega-menu / footer.
-export const navGroups: { title: string; links: { label: string; href: string }[] }[] = [
+// Grouped navigation for the mega-menu / footer. Mirrors the Main Menu column
+// of Website Copy Draft 2.
+export const navGroups: { title: string; short: string; links: { label: string; href: string }[] }[] = [
   {
-    title: "The School",
+    title: "The Dalhousie Difference",
+    short: "The Difference",
     links: [
       { label: "The Dalhousie Difference", href: "/the-dalhousie-difference" },
       { label: "The Dalhousie Day", href: "/the-dalhousie-day" },
-      { label: "About & Heritage", href: "/about" },
-      { label: "Gallery", href: "/gallery" },
-      { label: "Policies", href: "/policies" },
+      { label: "The Whole Child Report", href: "/whole-child-report" },
+      { label: "Pastoral Care & Parent Connect", href: "/pastoral-care" },
+      { label: "Parent Connect", href: "/parent-connect" },
+    ],
+  },
+  {
+    title: "Preparation System",
+    short: "Preparation",
+    links: [
+      { label: "Overview: seven pathways", href: "/preparation-system" },
+      { label: "Dalhousie Competitive Edge", href: "/competitive-edge" },
+      { label: "Dalhousie Defence Pathway", href: "/defence-pathway" },
+      { label: "Dalhousie Sports Pathway", href: "/sports-pathway" },
+      { label: "Dalhousie Confidence Code", href: "/confidence-code" },
+      { label: "Dalhousie Life Code", href: "/life-code" },
+      { label: "Dalhousie Residential Advantage", href: "/residential-advantage" },
+    ],
+  },
+  {
+    title: "Academics & Pathways",
+    short: "Academics",
+    links: [
+      { label: "Academics & Pathways", href: "/academics" },
+      { label: "Academics at Dalhousie Campus", href: "/campuses/dalhousie/academics" },
+      { label: "Academic Journey, New Chandigarh", href: "/campuses/new-chandigarh/academic-journey" },
+      { label: "The Whole Child Report", href: "/whole-child-report" },
     ],
   },
   {
     title: "Campuses",
+    short: "Campuses",
     links: [
+      { label: "Both campuses", href: "/campuses" },
+      { label: "Find Your Campus", href: "/campuses/find-your-campus" },
+      { label: "Compare Campuses", href: "/campuses/compare" },
       { label: "Dalhousie Campus", href: "/campuses/dalhousie" },
       { label: "New Chandigarh Campus", href: "/campuses/new-chandigarh" },
     ],
   },
   {
-    title: "Preparation System",
-    links: [
-      { label: "Overview", href: "/preparation-system" },
-      { label: "Academics & Pathways", href: "/academics" },
-      { label: "Defence Pathway", href: "/defence-pathway" },
-      { label: "Residential Life", href: "/residential-life" },
-      { label: "Student Life", href: "/student-life" },
-      { label: "Pastoral Care / Parent Connect", href: "/pastoral-care" },
-      { label: "Whole Child Report", href: "/whole-child-report" },
-    ],
-  },
-  {
-    title: "Signature",
-    links: [
-      { label: "Competitive Edge", href: "/competitive-edge" },
-      { label: "Sports Pathway", href: "/sports-pathway" },
-      { label: "Confidence Code", href: "/confidence-code" },
-      { label: "Life Code", href: "/life-code" },
-      { label: "Residential Advantage", href: "/residential-advantage" },
-      { label: "Parent Connect", href: "/parent-connect" },
-    ],
-  },
-  {
-    title: "Join Us",
+    title: "Admissions",
+    short: "Admissions",
     links: [
       { label: "Admissions", href: "/admissions" },
-      { label: "Fees", href: "/fees" },
-      { label: "FAQs", href: "/faqs" },
-      { label: "Apply Now", href: "/apply" },
-      { label: "Prospectus", href: "/prospectus" },
-      { label: "Visit Us", href: "/visit-us" },
+      { label: "Admission Process", href: "/admissions/process" },
+      { label: "Fees", href: "/admissions/fees" },
+      { label: "Book a Visit", href: "/admissions/book-a-visit" },
+      { label: "Enquire & Prospectus", href: "/admissions/enquire" },
+      { label: "Apply Now", href: "/admissions/apply" },
+      { label: "Admissions FAQs", href: "/admissions/faqs" },
+    ],
+  },
+  {
+    title: "About & More",
+    short: "About",
+    links: [
+      { label: "About Dalhousie", href: "/about" },
+      { label: "Our Heritage", href: "/about/heritage" },
+      { label: "Leadership & People", href: "/about/leadership-people" },
+      { label: "Stories & Events", href: "/stories-events" },
+      { label: "Alumni", href: "/alumni" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Policies & Disclosures", href: "/policies-disclosures" },
+      { label: "Contact Us", href: "/contact" },
     ],
   },
 ];

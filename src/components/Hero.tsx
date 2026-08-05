@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import BookVisitButton from "./BookVisitButton";
 
 export default function Hero() {
@@ -110,35 +111,36 @@ export default function Hero() {
             <span className="eyebrow text-brass-soft">Est. 1970 &middot; Himachal Himalayas</span>
           </div>
 
+          {/* Campaign hero, page 1 of Website Copy Draft 2 */}
           <h1
-            className="hero-rise mt-7 font-display leading-[0.9] text-paper"
-            style={{ animationDelay: "0.22s", fontSize: "clamp(3.2rem, 8vw, 7.5rem)" }}
+            className="hero-rise mt-7 max-w-4xl font-display leading-[0.95] text-paper"
+            style={{ animationDelay: "0.22s", fontSize: "clamp(2.5rem, 5.6vw, 5.2rem)" }}
           >
-            Exceptional
-            <span className="block italic text-brass-soft">by Nature.</span>
+            Your child does not need two lives
+            <span className="block italic text-brass-soft">to prepare for one future.</span>
           </h1>
 
           <span className="hero-rise mt-7 block h-px w-16 bg-brass-soft/70" style={{ animationDelay: "0.38s" }} />
 
           <p
-            className="hero-rise mt-7 max-w-lg text-lg leading-relaxed text-paper/85 [text-wrap:pretty]"
+            className="hero-rise mt-7 max-w-xl text-lg leading-relaxed text-paper/85 [text-wrap:pretty]"
             style={{ animationDelay: "0.48s" }}
           >
-            Fifty-four years in the alpine. A boarding school for boys and girls,
-            seven thousand feet above sea level, with a modern second campus in
-            New Chandigarh.
+            School, preparation, sport, confidence, responsibility and care do not exist as
+            separate shifts in a child&apos;s life. At Dalhousie, they come together inside one
+            better-designed day, so ambition can grow without childhood being pulled apart.
           </p>
 
           <div className="hero-rise mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "0.58s" }}>
             <BookVisitButton className="rounded-full bg-brass-soft px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5">
-              Book a visit
+              Book a Dalhousie visit
             </BookVisitButton>
-            <a
-              href="#chooser"
+            <Link
+              href="/the-dalhousie-day"
               className="rounded-full border border-paper/45 px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-colors hover:border-brass-soft hover:text-brass-soft"
             >
-              Find your campus
-            </a>
+              Explore The Dalhousie Day
+            </Link>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export default function Header() {
             <a href={school.instagram} target="_blank" rel="noreferrer" className="text-paper/70 transition-colors hover:text-brass-soft">
               Instagram
             </a>
-            <Link href="/apply" className="text-brass-soft transition-colors hover:text-paper">
+            <Link href="/admissions/apply" className="text-brass-soft transition-colors hover:text-paper">
               Apply Now
             </Link>
           </div>
@@ -64,22 +64,27 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        {/* Desktop bar uses the short label so no item ever wraps to two lines;
+            the dropdown and the mobile sheet keep the full section title. */}
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
           {navGroups.map((g) => (
             <div key={g.title} className="group relative py-3">
               <button
-                className={`flex items-center gap-1 text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-1 whitespace-nowrap text-sm font-semibold transition-colors ${
                   onDark
                     ? "text-paper/85 hover:text-brass-soft"
                     : "text-pine/80 hover:text-clay"
                 }`}
               >
-                {g.title}
+                {g.short}
                 <svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" className="opacity-70">
                   <path d="M2 3.5 L5 6.5 L8 3.5" />
                 </svg>
               </button>
-              <div className="invisible absolute left-1/2 top-full w-60 -translate-x-1/2 translate-y-1 rounded-2xl border border-sand bg-paper p-2 opacity-0 soft-shadow transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+              <div className="invisible absolute left-1/2 top-full w-[17rem] -translate-x-1/2 translate-y-1 rounded-2xl border border-sand bg-paper p-2 opacity-0 soft-shadow transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                <p className="px-3.5 pb-1.5 pt-2 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-brass">
+                  {g.title}
+                </p>
                 {g.links.map((l) => (
                   <Link
                     key={l.href}
@@ -96,8 +101,8 @@ export default function Header() {
 
         <div className="flex items-center gap-3">
           <Link
-            href="/#chooser"
-            className={`hidden rounded-full border px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] transition-colors sm:inline-block ${
+            href="/campuses/find-your-campus"
+            className={`hidden whitespace-nowrap rounded-full border px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] transition-colors xl:inline-block ${
               onDark
                 ? "border-paper/40 text-paper hover:border-brass-soft hover:text-brass-soft"
                 : "border-pine/25 text-pine hover:border-clay hover:text-clay"
@@ -105,16 +110,12 @@ export default function Header() {
           >
             Find your campus
           </Link>
-          <a
-            href={whatsappHref(
-              `Hi! I'd like to know more about admission at ${school.name}.`,
-            )}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-brass-soft px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5"
+          <Link
+            href="/admissions/book-a-visit"
+            className="whitespace-nowrap rounded-full bg-brass-soft px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5"
           >
-            Enquire
-          </a>
+            Book a visit
+          </Link>
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}

@@ -91,6 +91,28 @@
   .soft-shadow { box-shadow: 0 24px 55px -34px rgba(46, 20, 30, 0.4); }
   .soft-shadow-sm { box-shadow: 0 12px 30px -24px rgba(46, 20, 30, 0.32); }
   .hair { border-color: color-mix(in srgb, var(--color-ink) 12%, transparent); }
+
+  /* Tonal steps within the cream family.
+
+     Content pages previously jumped from cream to a full clay slab and then to
+     a full pine slab mid-page, which read as three unrelated blocks pasted
+     together. These are successive steps of the same warm neutral, so a
+     section can gain contrast without the page changing character. */
+  .tone-1 { background-color: #F7F2EA; }
+  .tone-2 { background-color: #F1E9DC; }
+  .tone-3 { background-color: #E9DECD; }
+
+  /* Ambient warmth so a text-only section is never flat colour. */
+  .lit {
+    background-image:
+      radial-gradient(115% 85% at 8% 0%, rgba(162, 134, 79, 0.13) 0%, transparent 58%),
+      radial-gradient(95% 75% at 100% 100%, rgba(107, 6, 48, 0.07) 0%, transparent 62%);
+  }
+  .lit-deep {
+    background-image:
+      radial-gradient(110% 80% at 88% 0%, rgba(203, 174, 111, 0.18) 0%, transparent 55%),
+      radial-gradient(120% 90% at 0% 100%, rgba(0, 0, 0, 0.28) 0%, transparent 60%);
+  }
 }
 
 @keyframes rise {
