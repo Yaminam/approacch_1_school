@@ -10,9 +10,7 @@ export default function CTA() {
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center sm:px-8">
         <div className="flex justify-center">
           <span className="flex items-center gap-3">
-            <span className="h-px w-8 bg-brass-soft" />
             <span className="eyebrow text-brass-soft">Visit Us</span>
-            <span className="h-px w-8 bg-brass-soft" />
           </span>
         </div>
 

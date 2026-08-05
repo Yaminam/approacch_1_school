@@ -26,24 +26,32 @@ export default function Page() {
 
       {/* How the guide works */}
       <Section tone="cream">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          {/* Sticky on desktop so the explanation stays with the questions as
+              they scroll, rather than leaving the column empty below it. The
+              callout that used to sit here repeated the paragraph's own closing
+              sentence word for word, so it has gone. */}
           <Reveal>
-            <div>
+            <div className="lg:sticky lg:top-32">
               <Eyebrow>{p.kicker}</Eyebrow>
-              <h2 className="mt-5 text-3xl leading-[1.05] text-pine sm:text-4xl">{how.h}</h2>
+              <h2 className="mt-5 font-display text-3xl leading-[1.05] text-pine sm:text-4xl">
+                {how.h}
+              </h2>
               {how.p.map((t, i) => (
-                <p key={i} className="mt-5 leading-relaxed text-mist">{t}</p>
+                <p key={i} className="mt-5 max-w-[52ch] leading-relaxed text-mist">{t}</p>
               ))}
-              <p className="mt-6 rounded-2xl border border-brass/30 bg-blush/50 p-5 text-sm leading-relaxed text-pine">
-                It is a guide, not an admission decision.
-              </p>
+              <a
+                href="#finder"
+                className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-full bg-clay px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
+              >
+                Start the campus finder
+              </a>
             </div>
           </Reveal>
 
           <Reveal delay={110}>
             <div>
-              <p className="eyebrow text-clay">What the six questions consider</p>
-              <div className="mt-5">
+              <div>
                 {questions.map((q, i) => (
                   <div key={q.h} className="border-t hair py-5">
                     <div className="flex gap-5">

@@ -34,10 +34,11 @@ import type { PageCopy, PullSlot, Block } from "@/lib/copy/types";
      to 50. The deck is already written to roughly that length. */
 
 function CtaPair({ primary, secondary, dark = false }: { primary: Cta; secondary: Cta; dark?: boolean }) {
-  const solid = `inline-flex items-center justify-center rounded-full px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] transition-transform hover:-translate-y-0.5 ${
+  // whitespace-nowrap: a CTA label must never break across two lines.
+  const solid = `inline-flex items-center justify-center whitespace-nowrap rounded-full px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] transition-transform hover:-translate-y-0.5 ${
     dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
   }`;
-  const quiet = `inline-flex items-center gap-2 text-[0.8125rem] font-bold uppercase tracking-[0.1em] underline decoration-2 underline-offset-[6px] transition-colors ${
+  const quiet = `inline-flex items-center gap-2 whitespace-nowrap text-[0.8125rem] font-bold uppercase tracking-[0.1em] underline decoration-2 underline-offset-[6px] transition-colors ${
     dark
       ? "text-brass-soft decoration-brass-soft/50 hover:text-paper hover:decoration-paper"
       : "text-clay decoration-brass hover:text-pine hover:decoration-pine"
@@ -65,25 +66,62 @@ function CtaPair({ primary, secondary, dark = false }: { primary: Cta; secondary
 /* The deck numbers some headings itself ("1. Dalhousie Competitive Edge"). */
 const stripNum = (h: string) => h.replace(/^\s*\d+\.\s*/, "");
 
+/* Card width on a six-column track, chosen so the last row always fills.
+
+   Thirds (span 2) by default. When the count leaves a remainder, the trailing
+   cards widen to halves (span 3) so the run ends on a complete row instead of
+   a single stretched card marooned across the full width.
+
+     6 cards -> 3 + 3
+     5 cards -> 3 + 2 halves
+     4 cards -> 2 halves + 2 halves
+     2 cards -> 2 halves                                                    */
+function cardSpan(n: number, i: number): string {
+  if (n === 1) return "lg:col-span-6";
+  const r = n % 3;
+  if (r === 0) return "lg:col-span-2";
+  // remainder of two: the final pair become halves
+  if (r === 2) return i >= n - 2 ? "lg:col-span-3" : "lg:col-span-2";
+  // remainder of one: the final four become two rows of halves
+  return i >= n - 4 ? "lg:col-span-3" : "lg:col-span-2";
+}
+
+/* "Proof: ..." is a named device in the deck. Split it out so a card can pin
+   it to its own bottom edge, which lines the proofs up across a row instead of
+   letting them float wherever the body copy happens to end. */
+const isProof = (t: string) => /^proof:\s*/i.test(t);
+const proofText = (t: string) => t.replace(/^proof:\s*/i, "");
+
+function ProofMark({ text, dark = false }: { text: string; dark?: boolean }) {
+  return (
+    <p
+      className={`flex max-w-[60ch] items-baseline gap-3 border-l-2 pl-4 text-[0.9375rem] leading-relaxed ${
+        dark ? "border-brass-soft/60 text-sage-soft" : "border-brass text-pine/80"
+      }`}
+    >
+      <span
+        className={`shrink-0 text-[0.6875rem] font-bold uppercase tracking-[0.16em] ${
+          dark ? "text-brass-soft" : "text-brass"
+        }`}
+      >
+        Proof
+      </span>
+      <span>{text}</span>
+    </p>
+  );
+}
+
 function Body({ paras, dark = false }: { paras: string[]; dark?: boolean }) {
   const lede = dark ? "text-sage-soft" : "text-pine/85";
   const rest = dark ? "text-sage-soft/75" : "text-mist";
   return (
     <>
       {paras.map((t, i) => {
-        if (/^proof:\s*/i.test(t)) {
+        if (isProof(t)) {
           return (
-            <p
-              key={i}
-              className={`mt-5 flex max-w-[60ch] items-baseline gap-3 border-l-2 pl-4 text-[0.9375rem] leading-relaxed ${
-                dark ? "border-brass-soft/60 text-sage-soft" : "border-brass text-pine/80"
-              }`}
-            >
-              <span className={`shrink-0 text-[0.6875rem] font-bold uppercase tracking-[0.16em] ${dark ? "text-brass-soft" : "text-brass"}`}>
-                Proof
-              </span>
-              <span>{t.replace(/^proof:\s*/i, "")}</span>
-            </p>
+            <div key={i} className="mt-5">
+              <ProofMark text={proofText(t)} dark={dark} />
+            </div>
           );
         }
         return (
@@ -104,18 +142,14 @@ function Body({ paras, dark = false }: { paras: string[]; dark?: boolean }) {
 /* One content block: photograph and words, side by side, alternating.
    An inline call to action attaches here when the copy has earned one. */
 function Chapter({
-  n,
   block,
   image,
   flip,
-  numbered,
   pull,
 }: {
-  n: number;
   block: Block;
   image: string;
   flip: boolean;
-  numbered: boolean;
   pull?: { line: string; label: string; alt?: string };
 }) {
   const c = pull ? cta(pull.label) : undefined;
@@ -137,15 +171,8 @@ function Chapter({
         </div>
 
         <div className={`lg:col-span-6 ${flip ? "lg:order-1" : ""}`}>
-          <div className="flex items-center gap-4">
-            <span className="h-px w-10 bg-brass" />
-            {numbered && (
-              <span className="font-display text-sm text-brass [font-variant-numeric:tabular-nums]">
-                {String(n).padStart(2, "0")}
-              </span>
-            )}
-          </div>
-          <h3 className="mt-5 font-display text-[1.6rem] leading-[1.14] text-pine sm:text-[2rem]">
+          {/* No index numeral. The heading leads. */}
+          <h3 className="font-display text-[1.6rem] leading-[1.14] text-pine sm:text-[2rem]">
             {stripNum(block.h)}
           </h3>
           <div className="mt-5">
@@ -192,9 +219,6 @@ export default function CopyPage({ page }: { page: PageCopy }) {
   const close = middle.length > 1 ? middle[middle.length - 1] : undefined;
   const chapters = close ? middle.slice(0, -1) : middle;
 
-  // Sequences keep their numbering; parallel sets do not, because numbering an
-  // unordered set tells the reader that safeguarding follows medical support.
-  const numbered = page.kind === "sequence";
 
   /* Density ladder, and a layout-family count that passes pre-flight.
 
@@ -204,13 +228,15 @@ export default function CopyPage({ page }: { page: PageCopy }) {
      moment that Gordonstoun, Great Walstead and SAS all use. The remainder
      runs as tinted cards. That is five distinct layout families on the page:
      opening, split, statement, cards, close. */
-  const FEATURES = 2;
+  const FEATURES = 1;
   const features = chapters.slice(0, FEATURES);
   const statement = chapters[FEATURES];
   const cards = chapters.slice(FEATURES + 1);
 
-  // One photograph per feature block.
-  const shots = imagesFor(page.slug, features.length, [page.image2 ?? ""]);
+  // One photograph for the opening, one per feature block.
+  const shots = imagesFor(page.slug, features.length + 1, [page.image2 ?? ""]);
+  const leadShot = shots[0];
+  const featureShots = shots.slice(1);
   const slotOrder: PullSlot[] = ["lead", "grid", "split", "list"];
   const pulls = slotOrder.flatMap((s) => (page.pulls ?? []).filter((p) => p.slot === s));
 
@@ -252,31 +278,44 @@ export default function CopyPage({ page }: { page: PageCopy }) {
              container empty on desktop, which is where the dead space came
              from; splitting the prose also halves the column height. */
           <section className="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:px-8 sm:pt-24">
-            <Reveal>
-              <div>
-                <p className="eyebrow text-clay">{page.kicker}</p>
-                <h2 className="mt-6 max-w-5xl font-display text-[2.1rem] leading-[1.04] text-pine sm:text-[2.9rem] lg:text-[3.4rem]">
-                  {stripNum(lead.h)}
-                </h2>
+            {/* Opening: words left, photograph right.
 
-                <div className="mt-9 grid gap-x-14 gap-y-5 md:grid-cols-2">
-                  {lead.p.map((t, i) => (
-                    <p
-                      key={i}
-                      className={`leading-relaxed [text-wrap:pretty] ${
-                        i === 0 ? "text-[1.0625rem] text-pine/85" : "text-base text-mist"
-                      }`}
-                    >
-                      {t}
-                    </p>
-                  ))}
+                Earlier attempts kept this text-only and tried to fill the right
+                with a second prose column (unbalanced, left a hole) and then
+                with the buttons (a lone element floating mid-right). Both read
+                as broken, and text alone on a tinted ground read as
+                unfinished. A photograph is what the reference sites put here.
+                This counts as one of the two permitted image splits, so the
+                feature run below is reduced to one. */}
+            <div className="grid items-center gap-y-10 lg:grid-cols-12 lg:gap-x-16">
+              <Reveal className="lg:col-span-7">
+                <div>
+                  <p className="eyebrow text-clay">{page.kicker}</p>
+                  <h2 className="mt-6 font-display text-[2.3rem] leading-[1.02] text-pine sm:text-[3rem] lg:text-[3.5rem]">
+                    {stripNum(lead.h)}
+                  </h2>
+                  <div className="mt-8">
+                    <Body paras={lead.p} />
+                  </div>
+                  <div className="mt-10">
+                    <CtaPair primary={primary} secondary={secondary} />
+                  </div>
                 </div>
+              </Reveal>
 
-                <div className="mt-10">
-                  <CtaPair primary={primary} secondary={secondary} />
+              <Reveal delay={130} className="lg:col-span-5">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] soft-shadow">
+                  <Image
+                    src={leadShot}
+                    alt=""
+                    fill
+                    priority
+                    sizes="(max-width:1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
           </section>
         )}
 
@@ -290,11 +329,9 @@ export default function CopyPage({ page }: { page: PageCopy }) {
           {features.map((s, i) => (
             <Chapter
               key={stripNum(s.h)}
-              n={i + 1}
               block={s}
-              image={shots[i]}
+              image={featureShots[i]}
               flip={i % 2 === 1}
-              numbered={numbered}
               pull={pullFor.get(i)}
             />
           ))}
@@ -314,7 +351,6 @@ export default function CopyPage({ page }: { page: PageCopy }) {
               >
                 <Reveal className={statementPull ? "lg:col-span-7" : ""}>
                   <div>
-                    <span className="block h-1 w-20 bg-clay" />
                     <h2
                       className={`mt-8 font-display leading-[1.04] text-pine ${
                         statementPull
@@ -375,38 +411,44 @@ export default function CopyPage({ page }: { page: PageCopy }) {
         {cards.length > 0 && (
           <section className="mx-auto max-w-7xl px-6 pb-24 sm:px-8 sm:pb-28">
             <div className="border-t-2 border-pine/15 pt-12">
-              {/* Columns follow the card count. A fixed three-column grid left
-                  an empty third column whenever a page had only two cards,
-                  which is where the dead space on the right came from. */}
-              <div
-                className={`grid gap-x-12 gap-y-12 ${
-                  cards.length === 1
-                    ? "max-w-2xl"
-                    : cards.length === 2
-                      ? "sm:grid-cols-2"
-                      : cards.length === 4
-                        ? "sm:grid-cols-2"
-                        : "sm:grid-cols-2 lg:grid-cols-3"
-                }`}
-              >
+              {/* A six-column track so the last row can redistribute rather
+                  than leave an orphan. Cards are normally a third of the width
+                  (span 2), which keeps the measure tight enough that the copy
+                  fills the card. When the count leaves one or two over, the
+                  trailing cards widen to halves (span 3) and close the row. */}
+              <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-6">
                 {/* No index numeral on cards. These are parallel aspects, and
                     a "06" label on a tile the reader can already count is
                     pagination for its own sake. A tinted surface carries the
                     grouping instead, which also gives the grid the background
                     variation a flat text grid was missing. */}
                 {cards.map((s, i) => (
-                  <Reveal key={stripNum(s.h)} delay={i * 60}>
+                  <Reveal
+                    key={stripNum(s.h)}
+                    delay={i * 60}
+                    className={cardSpan(cards.length, i)}
+                  >
                     {/* One surface for every card. Alternating the tint by
                         index produced a checkerboard that read as a mistake
                         rather than a decision. */}
-                    <article className="group h-full rounded-[1.25rem] bg-paper p-7 transition-colors hover:bg-blush/60">
-                      <span className="block h-0.5 w-9 bg-brass transition-all duration-300 group-hover:w-16" />
-                      <h3 className="mt-5 font-display text-[1.3rem] leading-[1.2] text-pine">
+                    {/* A brass rule along the card's top edge: structural, it
+                        delineates the card, rather than a short dash floating
+                        above the heading. */}
+                    {/* Body grows, proof is pinned to the bottom edge, so the
+                        proof lines align across the row however long the copy
+                        above them runs. */}
+                    <article className="group flex h-full flex-col rounded-[1.25rem] border-t-2 border-brass/35 bg-paper p-7 transition-colors hover:border-clay hover:bg-blush/60">
+                      <h3 className="font-display text-[1.3rem] leading-[1.2] text-pine">
                         {stripNum(s.h)}
                       </h3>
-                      <div className="mt-3">
-                        <Body paras={s.p} />
+                      <div className="mt-3 flex-1">
+                        <Body paras={s.p.filter((t) => !isProof(t))} />
                       </div>
+                      {s.p.filter(isProof).map((t) => (
+                        <div key={t} className="mt-6">
+                          <ProofMark text={proofText(t)} />
+                        </div>
+                      ))}
                     </article>
                   </Reveal>
                 ))}
@@ -419,18 +461,28 @@ export default function CopyPage({ page }: { page: PageCopy }) {
       {/* One closing panel, at the foot of the page where a CTA belongs. */}
       {close && (
         <section className="grain-pine lit-deep">
-          <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-28">
-            <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-16">
-              <Reveal className="lg:col-span-7">
-                <div>
-                  <span className="eyebrow text-brass-soft">{page.closeEyebrow ?? "In closing"}</span>
-                  <h2 className="mt-6 font-display text-[2rem] leading-[1.08] text-paper sm:text-[2.6rem] lg:text-[3rem]">
-                    {stripNum(close.h)}
-                  </h2>
-                </div>
+          <div className="mx-auto max-w-7xl px-6 py-16 sm:px-8 sm:py-24">
+            {/* Label first, then a rule running out from it to the edge.
+                Putting the border on the container instead drew a full-width
+                line with the label stranded underneath, which read as a stray
+                divider rather than a heading. */}
+            <Reveal>
+              <div className="flex items-center gap-6">
+                <span className="eyebrow shrink-0 text-brass-soft">
+                  {page.closeEyebrow ?? "In closing"}
+                </span>
+                <span aria-hidden className="h-px flex-1 bg-paper/20" />
+              </div>
+            </Reveal>
+
+            <div className="mt-10 grid gap-y-10 lg:grid-cols-12 lg:gap-x-16">
+              <Reveal className="lg:col-span-6">
+                <h2 className="font-display text-[2rem] leading-[1.06] text-paper sm:text-[2.6rem] lg:text-[3rem]">
+                  {stripNum(close.h)}
+                </h2>
               </Reveal>
-              <Reveal delay={120} className="lg:col-span-5">
-                <div className="border-t border-paper/20 pt-8">
+              <Reveal delay={120} className="lg:col-span-6">
+                <div>
                   <Body paras={close.p} dark />
                   <div className="mt-9">
                     <CtaPair primary={primary} secondary={secondary} dark />

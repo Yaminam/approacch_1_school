@@ -12,8 +12,7 @@ export default function Testimonial() {
             <span className="text-brass">&rdquo;</span>
           </blockquote>
           <figcaption className="mt-8 flex items-center gap-3">
-            <span className="h-px w-8 bg-brass" />
-            <span className="font-bold text-pine">{testimonial.name}</span>
+                  <span className="font-bold text-pine">{testimonial.name}</span>
             <span className="text-mist">{testimonial.role}</span>
           </figcaption>
         </figure>

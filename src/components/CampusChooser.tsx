@@ -145,9 +145,7 @@ export default function CampusChooser() {
         <div className="text-center">
           <div className="flex justify-center">
             <span className="flex items-center gap-3">
-              <span className="h-px w-8 bg-brass" />
               <span className="eyebrow text-clay">Find your campus</span>
-              <span className="h-px w-8 bg-brass" />
             </span>
           </div>
           <h2 className="mt-6 text-4xl leading-[1.02] text-pine sm:text-5xl">

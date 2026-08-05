@@ -107,7 +107,6 @@ export default function Hero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-28 sm:px-10">
         <div className="max-w-2xl">
           <div className="hero-rise flex items-center gap-3" style={{ animationDelay: "0.1s" }}>
-            <span className="h-px w-10 bg-brass-soft" />
             <span className="eyebrow text-brass-soft">Est. 1970 &middot; Himachal Himalayas</span>
           </div>
 

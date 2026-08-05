@@ -4,12 +4,11 @@ import Reveal from "./Reveal";
 /* Editorial building blocks. Restraint over chrome: hairlines, index numerals,
    generous whitespace, one gold accent. No em dashes, no emoji. */
 
+/* The label carries itself. A short floating rule beside it was decoration
+   with nothing to organise, and it repeated on every section of every page. */
 export function Eyebrow({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
   return (
-    <span className="flex items-center gap-3">
-      <span className="h-px w-8 bg-brass" />
-      <span className={`eyebrow ${dark ? "text-brass-soft" : "text-clay"}`}>{children}</span>
-    </span>
+    <span className={`eyebrow block ${dark ? "text-brass-soft" : "text-clay"}`}>{children}</span>
   );
 }
 

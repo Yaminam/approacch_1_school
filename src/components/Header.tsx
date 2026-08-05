@@ -33,7 +33,9 @@ export default function Header() {
       }`}
     >
       <div className="hidden bg-pine text-paper lg:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-1.5">
+        {/* Matches the bar below, so the tagline lines up with the logo and the
+            utility links line up with the calls to action. */}
+        <div className="flex w-full items-center justify-between px-5 py-1.5 sm:px-8 lg:px-10">
           <span className="text-[0.66rem] font-bold uppercase tracking-[0.3em] text-brass-soft">
             Exceptional by Nature
           </span>
@@ -51,7 +53,11 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
+      {/* Full-bleed bar: the logo sits hard left, the two calls to action hard
+          right, and the navigation is centred in the space between them. A
+          max-w-7xl container held all three in the middle of the viewport,
+          which is what made the bar look clustered on a wide screen. */}
+      <div className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 px-5 py-3 sm:px-8 lg:px-10">
         <Link href="/" className="flex items-center" aria-label="Dalhousie Public School home">
           <Image
             src="/images/logo.svg"
@@ -66,7 +72,7 @@ export default function Header() {
 
         {/* Desktop bar uses the short label so no item ever wraps to two lines;
             the dropdown and the mobile sheet keep the full section title. */}
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
+        <nav className="hidden items-center justify-center gap-5 lg:flex xl:gap-8">
           {navGroups.map((g) => (
             <div key={g.title} className="group relative py-3">
               <button
@@ -99,7 +105,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-end gap-3">
           <Link
             href="/campuses/find-your-campus"
             className={`hidden whitespace-nowrap rounded-full border px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] transition-colors xl:inline-block ${

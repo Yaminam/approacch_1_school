@@ -209,17 +209,22 @@ export default function Page() {
       {/* Close */}
       <section className="grain-pine lit-deep">
         <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-28">
-          <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-16">
-            <Reveal className="lg:col-span-7">
-              <div>
-                <span className="eyebrow text-brass-soft">Neither is the lesser</span>
-                <h2 className="mt-6 font-display text-[2rem] leading-[1.08] text-paper sm:text-[2.6rem] lg:text-[3rem]">
-                  The question is not which campus is better.
-                </h2>
-              </div>
+          {/* Label on the rule, matching the close band used across the site. */}
+          <Reveal>
+            <div className="flex items-center gap-6">
+              <span className="eyebrow shrink-0 text-brass-soft">Neither is the lesser</span>
+              <span aria-hidden className="h-px flex-1 bg-paper/20" />
+            </div>
+          </Reveal>
+
+          <div className="mt-10 grid gap-y-10 lg:grid-cols-12 lg:gap-x-16">
+            <Reveal className="lg:col-span-6">
+              <h2 className="font-display text-[2rem] leading-[1.06] text-paper sm:text-[2.6rem] lg:text-[3rem]">
+                The question is not which campus is better.
+              </h2>
             </Reveal>
-            <Reveal delay={120} className="lg:col-span-5">
-              <div className="border-t border-paper/20 pt-8">
+            <Reveal delay={120} className="lg:col-span-6">
+              <div>
                 <p className="max-w-[60ch] text-lg leading-relaxed text-sage-soft [text-wrap:pretty]">
                   It is which experience is right for the child and family. Six short questions will
                   get you closer to an answer than any table can.
