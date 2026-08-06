@@ -34,11 +34,11 @@ import type { PageCopy, PullSlot, Block } from "@/lib/copy/types";
      to 50. The deck is already written to roughly that length. */
 
 function CtaPair({ primary, secondary, dark = false }: { primary: Cta; secondary: Cta; dark?: boolean }) {
-  // whitespace-nowrap: a CTA label must never break across two lines.
-  const solid = `inline-flex items-center justify-center whitespace-nowrap rounded-full px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] transition-transform hover:-translate-y-0.5 ${
+  // sm:whitespace-nowrap: a CTA label must never break across two lines.
+  const solid = `inline-flex items-center justify-center sm:whitespace-nowrap rounded-full px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] transition-transform hover:-translate-y-0.5 ${
     dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
   }`;
-  const quiet = `inline-flex items-center gap-2 whitespace-nowrap text-[0.8125rem] font-bold uppercase tracking-[0.1em] underline decoration-2 underline-offset-[6px] transition-colors ${
+  const quiet = `inline-flex min-h-11 items-center gap-2 sm:whitespace-nowrap py-2 text-[0.8125rem] font-bold uppercase tracking-[0.1em] underline decoration-2 underline-offset-[6px] transition-colors ${
     dark
       ? "text-brass-soft decoration-brass-soft/50 hover:text-paper hover:decoration-paper"
       : "text-clay decoration-brass hover:text-pine hover:decoration-pine"
@@ -187,7 +187,7 @@ function Chapter({
               <div className="mt-4 flex flex-wrap items-center gap-x-7 gap-y-3">
                 <Link
                   href={c.href}
-                  className="inline-flex items-center gap-2 text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-[6px] transition-colors hover:text-pine hover:decoration-pine"
+                  className="inline-flex min-h-11 items-center gap-2 py-2 text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-[6px] transition-colors hover:text-pine hover:decoration-pine"
                 >
                   {c.label}
                   <span aria-hidden>&rarr;</span>
@@ -195,7 +195,7 @@ function Chapter({
                 {alt && (
                   <Link
                     href={alt.href}
-                    className="text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-mist transition-colors hover:text-clay"
+                    className="inline-flex min-h-11 items-center py-2 text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-mist transition-colors hover:text-clay"
                   >
                     {alt.label}
                   </Link>

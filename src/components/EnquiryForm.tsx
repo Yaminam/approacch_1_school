@@ -242,7 +242,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
                 type="button"
                 key={i}
                 onClick={() => toggle(i)}
-                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                className={`min-h-11 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors ${
                   interests.includes(i)
                     ? "border-clay bg-clay text-paper"
                     : "border-pine/20 text-pine hover:border-clay hover:text-clay"
@@ -275,7 +275,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
           type="checkbox"
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
-          className="mt-1 h-4 w-4 shrink-0 accent-[#6b0630]"
+          className="mt-0.5 h-5 w-5 shrink-0 accent-[#6b0630]"
         />
         <span className="text-sm leading-relaxed text-mist">{CONSENT[variant]}</span>
       </label>

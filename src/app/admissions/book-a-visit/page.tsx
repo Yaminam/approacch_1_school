@@ -61,10 +61,10 @@ export default function Page() {
                   <div key={c.name} className="mt-5 border-t hair pt-5 first:border-t-0 first:pt-0">
                     <div className="font-bold text-pine">{c.name}</div>
                     <p className="mt-1.5 text-sm leading-relaxed text-mist">{c.address}</p>
-                    <a href={`mailto:${c.email}`} className="mt-2 block text-sm font-bold text-clay hover:text-pine">
+                    <a href={`mailto:${c.email}`} className="mt-1 inline-flex min-h-11 items-center py-1.5 text-sm font-bold text-clay hover:text-pine">
                       {c.email}
                     </a>
-                    <a href={`tel:${c.phone.replace(/[^0-9+]/g, "")}`} className="text-sm font-bold text-clay hover:text-pine">
+                    <a href={`tel:${c.phone.replace(/[^0-9+]/g, "")}`} className="inline-flex min-h-11 items-center py-1.5 text-sm font-bold text-clay hover:text-pine">
                       {c.phone}
                     </a>
                   </div>

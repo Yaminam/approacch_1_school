@@ -39,11 +39,15 @@ export default function LoadingScreen() {
   return (
     <div
       aria-hidden
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-pine-800 transition-opacity duration-500 ease-out ${
+      /* overflow-hidden and horizontal padding: the splash sits above every
+         page, so any content wider than the screen here gives the whole site a
+         horizontal scrollbar. The wordmark and its wide letter-spacing did
+         exactly that on a 320px phone. */
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden bg-pine-800 px-6 transition-opacity duration-500 ease-out ${
         show ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
-      <div className="splash-logo flex flex-col items-center">
+      <div className="splash-logo flex w-full max-w-full flex-col items-center">
         <Image
           src="/images/logo.svg"
           alt="Dalhousie Public School"
@@ -51,13 +55,13 @@ export default function LoadingScreen() {
           height={60}
           priority
           unoptimized
-          className="h-14 w-auto [filter:brightness(0)_invert(1)]"
+          className="h-10 w-auto max-w-full [filter:brightness(0)_invert(1)] sm:h-14"
         />
-        <span className="mt-6 text-[0.7rem] font-bold uppercase tracking-[0.35em] text-brass-soft">
+        <span className="mt-6 max-w-full text-center text-[0.6rem] font-bold uppercase tracking-[0.22em] text-brass-soft sm:text-[0.7rem] sm:tracking-[0.35em]">
           Exceptional by Nature
         </span>
 
-        <div className="mt-8 h-px w-40 overflow-hidden bg-paper/15">
+        <div className="mt-8 h-px w-32 max-w-full overflow-hidden bg-paper/15 sm:w-40">
           <div className="splash-bar h-full w-1/4 rounded-full bg-brass-soft" />
         </div>
       </div>

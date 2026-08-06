@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { navGroups, whatsappHref, school } from "@/lib/content";
+import MegaMenu from "@/components/MegaMenu";
+import { navGroups, school } from "@/lib/content";
 
 export default function Header() {
   const pathname = usePathname();
@@ -35,7 +36,7 @@ export default function Header() {
       <div className="hidden bg-pine text-paper lg:block">
         {/* Matches the bar below, so the tagline lines up with the logo and the
             utility links line up with the calls to action. */}
-        <div className="flex w-full items-center justify-between px-5 py-1.5 sm:px-8 lg:px-10">
+        <div className="flex w-full items-center justify-between px-4 py-1.5 sm:px-8 lg:px-10">
           <span className="text-[0.66rem] font-bold uppercase tracking-[0.3em] text-brass-soft">
             Exceptional by Nature
           </span>
@@ -57,7 +58,10 @@ export default function Header() {
           right, and the navigation is centred in the space between them. A
           max-w-7xl container held all three in the middle of the viewport,
           which is what made the bar look clustered on a wide screen. */}
-      <div className="grid w-full grid-cols-[auto_1fr_auto] items-center gap-6 px-5 py-3 sm:px-8 lg:px-10">
+      {/* Flex below lg, grid from lg. The three-column grid uses auto tracks
+          that cannot shrink below their content, which forced the page wider
+          than a 320px screen and gave the whole site a horizontal scroll. */}
+      <div className="flex w-full items-center justify-between gap-3 px-4 py-3 sm:px-8 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:px-10">
         <Link href="/" className="flex items-center" aria-label="Dalhousie Public School home">
           <Image
             src="/images/logo.svg"
@@ -66,7 +70,7 @@ export default function Header() {
             height={42}
             unoptimized
             priority
-            className={`h-9 w-auto ${onDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
+            className={`h-7 w-auto shrink-0 sm:h-9 ${onDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
           />
         </Link>
 
@@ -76,7 +80,7 @@ export default function Header() {
           {navGroups.map((g) => (
             <div key={g.title} className="group relative py-3">
               <button
-                className={`flex items-center gap-1 whitespace-nowrap text-sm font-semibold transition-colors ${
+                className={`flex items-center gap-1 sm:whitespace-nowrap text-sm font-semibold transition-colors ${
                   onDark
                     ? "text-paper/85 hover:text-brass-soft"
                     : "text-pine/80 hover:text-clay"
@@ -108,7 +112,7 @@ export default function Header() {
         <div className="flex items-center justify-end gap-3">
           <Link
             href="/campuses/find-your-campus"
-            className={`hidden whitespace-nowrap rounded-full border px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] transition-colors xl:inline-block ${
+            className={`hidden sm:whitespace-nowrap rounded-full border px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] transition-colors xl:inline-block ${
               onDark
                 ? "border-paper/40 text-paper hover:border-brass-soft hover:text-brass-soft"
                 : "border-pine/25 text-pine hover:border-clay hover:text-clay"
@@ -118,7 +122,7 @@ export default function Header() {
           </Link>
           <Link
             href="/admissions/book-a-visit"
-            className="whitespace-nowrap rounded-full bg-brass-soft px-5 py-2 text-[0.72rem] font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5"
+            className="hidden min-h-10 items-center sm:whitespace-nowrap rounded-full bg-brass-soft px-4 py-2.5 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5 sm:inline-flex sm:px-5 sm:text-[0.72rem]"
           >
             Book a visit
           </Link>
@@ -147,26 +151,11 @@ export default function Header() {
         </div>
       </div>
 
-      {open && (
-        <div className="max-h-[80vh] overflow-y-auto border-t border-sand bg-cream px-5 py-4 lg:hidden">
-          {navGroups.map((g) => (
-            <div key={g.title} className="py-2">
-              <div className="eyebrow px-3 text-clay">{g.title}</div>
-              <nav className="mt-1 flex flex-col">
-                {g.links.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className="rounded-xl px-3 py-2 font-semibold text-pine hover:bg-blush"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* The mobile menu opens the full-screen mega menu, which collapses each
+          section into an accordion. The previous sheet printed every group with
+          every link expanded, around forty rows deep, which is what made it
+          feel oversized and awkward to scan on a phone. */}
+      {open && <MegaMenu onClose={() => setOpen(false)} onNavigate={() => setOpen(false)} />}
     </header>
   );
 }

@@ -44,8 +44,8 @@ export default function Page() {
                   <div>
                     <dt className="font-bold text-pine">Admissions and general office</dt>
                     <dd className="mt-1">
-                      <a href={`mailto:${c.email}`} className="block font-bold text-clay hover:text-pine">{c.email}</a>
-                      <a href={`tel:${c.phone.replace(/[^0-9+]/g, "")}`} className="block font-bold text-clay hover:text-pine">{c.phone}</a>
+                      <a href={`mailto:${c.email}`} className="inline-flex min-h-11 items-center py-1.5 font-bold text-clay hover:text-pine">{c.email}</a>
+                      <a href={`tel:${c.phone.replace(/[^0-9+]/g, "")}`} className="inline-flex min-h-11 items-center py-1.5 font-bold text-clay hover:text-pine">{c.phone}</a>
                     </dd>
                   </div>
                 </dl>
@@ -99,7 +99,7 @@ export default function Page() {
                 <span className="font-display text-2xl text-brass">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 text-xl text-pine">{r.label}</h3>
                 <p className="mt-2.5 flex-1 leading-relaxed text-mist">{r.body}</p>
-                <Link href={r.href} className="mt-5 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
+                <Link href={r.href} className="mt-4 inline-flex min-h-11 items-center py-2 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
                   {r.cta} &rarr;
                 </Link>
               </article>
@@ -128,7 +128,7 @@ export default function Page() {
                   Your information is used to respond to the enquiry in accordance with the approved
                   privacy notice.
                 </p>
-                <Link href="/policies-disclosures" className="mt-4 inline-block text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
+                <Link href="/policies-disclosures" className="mt-3 inline-flex min-h-11 items-center py-2 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
                   Read the privacy notice &rarr;
                 </Link>
               </div>

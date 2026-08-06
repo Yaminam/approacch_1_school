@@ -54,7 +54,7 @@ export default function FaqSearch({
               <button
                 key={t}
                 onClick={() => setTopic(t)}
-                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                className={`min-h-11 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors ${
                   topic === t
                     ? "border-clay bg-clay text-paper"
                     : "border-pine/20 text-pine hover:border-clay hover:text-clay"

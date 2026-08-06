@@ -42,7 +42,7 @@ export default function Page() {
               ))}
               <a
                 href="#finder"
-                className="mt-8 inline-flex items-center justify-center whitespace-nowrap rounded-full bg-clay px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
+                className="mt-8 inline-flex items-center justify-center sm:whitespace-nowrap rounded-full bg-clay px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
               >
                 Start the campus finder
               </a>

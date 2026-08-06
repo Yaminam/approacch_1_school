@@ -234,7 +234,10 @@ export default function IntroGlobe() {
 
       {/* Centre content */}
       <div className="pointer-events-none absolute inset-0 grid place-items-center px-6 text-center">
-        <div className="relative flex flex-col items-center">
+        {/* w-full matters: place-items-center sizes a grid child to max-content,
+            so without it the headline refuses to wrap and is clipped off the
+            right edge of a phone screen. */}
+        <div className="relative flex w-full max-w-3xl flex-col items-center">
           <span
             className="eyebrow text-brass-soft"
             style={{ textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 16px rgba(0,0,0,0.8)" }}
@@ -242,9 +245,9 @@ export default function IntroGlobe() {
             Dalhousie Public School
           </span>
           <h1
-            className="mt-5 font-display leading-[0.92] text-paper"
+            className="mt-5 max-w-full font-display leading-[1.02] text-paper [text-wrap:balance] sm:leading-[0.92]"
             style={{
-              fontSize: "clamp(2rem, 5.5vw, 4.4rem)",
+              fontSize: "clamp(1.75rem, 8vw, 4.4rem)",
               textShadow:
                 "0 2px 6px rgba(0,0,0,0.85), 0 4px 30px rgba(0,0,0,0.8), 0 0 90px rgba(41,18,27,0.9)",
             }}
