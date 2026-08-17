@@ -5,21 +5,34 @@ import LineIcon, { iconFor } from "./LineIcon";
 import { Botanical, Ridge, GoldRule, Crest } from "./Ornament";
 import { cta } from "@/lib/cta";
 
-/* The inner-page section system.
+/* The inner-page editorial system.
 
-   One vocabulary, reused on every inner page: warm ivory grounds, maroon
-   Fraunces headings, antique-gold rules, numerals and line icons, thin sand
-   borders and a small corner radius. Pages differ by which sections they use
-   and in what order, never by restyling the parts. */
+   This is art direction, not a component kit. A page is a visual story:
+   typography, image, space, text, a dark movement, a statement, the ask.
+   Nothing in the narrative flow renders as a "card", because a run of
+   identical bordered tiles is what made the page read as a template.
 
-export const PAD = "mx-auto max-w-7xl px-6 sm:px-8";
+   Rules the whole system obeys:
+
+   - Warm ivory ground, burgundy type, muted gold accents, warm-grey second.
+   - Images sit almost square-cornered and vary in proportion: cinematic wide,
+     tall editorial portrait, asymmetric crop. A picture is part of the
+     composition, never a rounded rectangle floating in a container.
+   - Numerals are editorial markers, set large and quiet beside the heading,
+     not labels stamped on a tile.
+   - Prose is held near a 60-character measure, so the eye never traverses the
+     full width of a 1440 screen.
+   - Vertical rhythm is 80 to 120px for ordinary sections, 120 to 160 for a
+     major transition. No section is a full viewport. */
+
+export const PAD = "mx-auto max-w-[78rem] px-6 sm:px-10";
 
 /* ── Shared marks ──────────────────────────────────────────────────── */
 
 export function Eyebrow({ children, gold = false }: { children: React.ReactNode; gold?: boolean }) {
   return (
     <p
-      className={`text-[0.7rem] font-bold uppercase tracking-[0.22em] ${
+      className={`text-[0.68rem] font-bold uppercase tracking-[0.24em] ${
         gold ? "text-brass-soft" : "text-brass"
       }`}
     >
@@ -28,64 +41,20 @@ export function Eyebrow({ children, gold = false }: { children: React.ReactNode;
   );
 }
 
-export function SectionHead({
-  eyebrow,
-  title,
-  emphasis,
-  intro,
-  center = false,
-}: {
-  eyebrow?: string;
-  title: string;
-  emphasis?: string;
-  intro?: string;
-  center?: boolean;
-}) {
+/* A numeral as an editorial marker: large, quiet, beside the heading. */
+function Marker({ n, dark = false }: { n: number; dark?: boolean }) {
   return (
-    <Reveal>
-      <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-        <h2
-          className={`font-display leading-[1.08] text-clay ${
-            eyebrow ? "mt-4" : ""
-          } text-[2rem] sm:text-[2.5rem]`}
-        >
-          {title}
-          {emphasis && <span className="italic"> {emphasis}</span>}
-        </h2>
-        {intro && (
-          <p
-            className={`mt-4 text-[1rem] leading-relaxed text-pine/75 [text-wrap:pretty] ${
-              center ? "mx-auto max-w-2xl" : "max-w-[60ch]"
-            }`}
-          >
-            {intro}
-          </p>
-        )}
-        <div className={center ? "mt-6 flex justify-center" : "mt-6"}>
-          <GoldRule className="text-brass" />
-        </div>
-      </div>
-    </Reveal>
-  );
-}
-
-/* Small gold link with an arrow, the standard in-page call to action. */
-export function GoldLink({ label, href }: { label: string; href: string }) {
-  return (
-    <Link
-      href={href}
-      className="group mt-4 inline-flex items-center gap-2 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-clay transition-colors hover:text-brass"
+    <span
+      aria-hidden
+      className={`block font-display text-[2.6rem] leading-none [font-variant-numeric:tabular-nums] sm:text-[3.1rem] ${
+        dark ? "text-brass-soft/45" : "text-brass/40"
+      }`}
     >
-      {label}
-      <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
-    </Link>
+      {String(n).padStart(2, "0")}
+    </span>
   );
 }
 
-/* The deck labels some lines: "Proof: ..." names the instrument a pathway is
-   evidenced by, "What this part of the day builds: ..." names the outcome.
-   They are not another paragraph, so they get a gold label and a rule. */
 const TAGS: { re: RegExp; label: string }[] = [
   { re: /^proof:\s*/i, label: "Proof" },
   { re: /^what this part of the day builds:\s*/i, label: "Builds" },
@@ -98,15 +67,18 @@ function tagOf(t: string) {
 
 export function Paras({
   paras,
-  size = "text-[0.9rem]",
-  tone = "text-pine/75",
-  gap = "mt-3",
+  size = "text-[1.0625rem]",
+  dark = false,
+  gap = "mt-5",
+  measure = "max-w-[60ch]",
 }: {
   paras: string[];
   size?: string;
-  tone?: string;
+  dark?: boolean;
   gap?: string;
+  measure?: string;
 }) {
+  const tone = dark ? "text-sage-soft/85" : "text-pine/75";
   return (
     <>
       {paras.map((t, i) => {
@@ -115,9 +87,15 @@ export function Paras({
           return (
             <p
               key={i}
-              className={`${gap} flex items-baseline gap-2.5 border-l-2 border-brass/70 pl-3 ${size} leading-relaxed text-pine/75`}
+              className={`${i ? gap : ""} flex ${measure} items-baseline gap-3 border-l pl-4 ${size} leading-[1.75] ${
+                dark ? "border-brass-soft/60 text-sage-soft/85" : "border-brass/60 text-pine/75"
+              }`}
             >
-              <span className="shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brass">
+              <span
+                className={`shrink-0 text-[0.6rem] font-bold uppercase tracking-[0.18em] ${
+                  dark ? "text-brass-soft" : "text-brass"
+                }`}
+              >
                 {tag.label}
               </span>
               <span>{tag.body}</span>
@@ -125,7 +103,10 @@ export function Paras({
           );
         }
         return (
-          <p key={i} className={`${gap} ${size} leading-relaxed ${tone} [text-wrap:pretty]`}>
+          <p
+            key={i}
+            className={`${i ? gap : ""} ${measure} ${size} leading-[1.75] ${tone} [text-wrap:pretty]`}
+          >
             {t}
           </p>
         );
@@ -134,309 +115,348 @@ export function Paras({
   );
 }
 
-/* ── TYPE A: editorial introduction ────────────────────────────────── */
+export function GoldLink({
+  label,
+  href,
+  dark = false,
+}: {
+  label: string;
+  href: string;
+  dark?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`group inline-flex items-center gap-2.5 text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-colors ${
+        dark ? "text-brass-soft hover:text-paper" : "text-clay hover:text-brass"
+      }`}
+    >
+      <span className="border-b border-current pb-1">{label}</span>
+      <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
+    </Link>
+  );
+}
 
-export function EditorialIntro({
+export function PrimaryCta({
+  label,
+  href,
+  dark = false,
+}: {
+  label: string;
+  href: string;
+  dark?: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`inline-flex items-center gap-2.5 rounded-full px-7 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] transition-transform hover:-translate-y-0.5 ${
+        dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
+      }`}
+    >
+      {label}
+      <span aria-hidden>&rarr;</span>
+    </Link>
+  );
+}
+
+/* An in-flow invitation: a line of argument in italic display, then the link.
+   No container, because a filled panel here reads as an advertisement. */
+export function Pull({
+  line,
+  label,
+  alt,
+  dark = false,
+}: {
+  line: string;
+  label: string;
+  alt?: string;
+  dark?: boolean;
+}) {
+  const c = cta(label);
+  const a = alt ? cta(alt) : undefined;
+  return (
+    <div className={`mt-9 border-t pt-6 ${dark ? "border-brass-soft/25" : "border-sand"}`}>
+      <p
+        className={`max-w-[46ch] font-display text-[1.2rem] italic leading-snug ${
+          dark ? "text-brass-soft" : "text-clay"
+        }`}
+      >
+        {line}
+      </p>
+      <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3">
+        <GoldLink label={c.label} href={c.href} dark={dark} />
+        {a && (
+          <Link
+            href={a.href}
+            className={`text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-colors ${
+              dark ? "text-sage-soft/70 hover:text-brass-soft" : "text-mist hover:text-clay"
+            }`}
+          >
+            {a.label}
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ── The opening statement ─────────────────────────────────────────── */
+
+export function OpeningStatement({
+  eyebrow,
   title,
-  emphasis,
   paras,
-  actions,
 }: {
+  eyebrow?: string;
   title: string;
-  emphasis?: string;
   paras: string[];
-  actions?: React.ReactNode;
-}) {
-  /* The reference holds the statement and its first line of support together
-     on the left, with the rest of the argument beside it. Sending every
-     paragraph right leaves the left column a heading floating in space. */
-  const [lede, ...rest] = paras;
-  const split = paras.length > 1;
-  return (
-    <section className={`${PAD} py-16 sm:py-20`}>
-      <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-16">
-        <Reveal className="lg:col-span-5">
-          <div>
-            <h2 className="font-display text-[2.1rem] leading-[1.06] text-clay sm:text-[2.6rem]">
-              {title}
-              {emphasis && <span className="block italic text-brass">{emphasis}</span>}
-            </h2>
-            <GoldRule className="mt-6 text-brass" />
-            {split && (
-              <p className="mt-6 max-w-[46ch] text-[1rem] leading-relaxed text-pine/75 [text-wrap:pretty]">
-                {lede}
-              </p>
-            )}
-            {actions && <div className="mt-8">{actions}</div>}
-          </div>
-        </Reveal>
-        <Reveal delay={120} className="lg:col-span-7">
-          <div>
-            {(split ? rest : paras).map((t, i) => (
-              <p
-                key={i}
-                className={`max-w-[62ch] text-[1.0625rem] leading-relaxed text-pine/80 [text-wrap:pretty] ${
-                  i ? "mt-5" : ""
-                }`}
-              >
-                {t}
-              </p>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* Choose a column count that divides the set evenly, so the last row fills
-   and the dividing rules never fence off empty cells. */
-function evenCols(n: number, max = 4): number {
-  for (let c = Math.min(max, 5); c >= 2; c--) if (n % c === 0) return c;
-  return Math.min(max, n < 5 ? 3 : 4);
-}
-
-const COLS: Record<number, string> = {
-  2: "lg:grid-cols-2",
-  3: "lg:grid-cols-3",
-  4: "lg:grid-cols-4",
-  5: "lg:grid-cols-5",
-};
-
-/* ── TYPE C: icon feature grid ─────────────────────────────────────── */
-
-export type Item = { h: string; p: string[] };
-
-export function IconGrid({ items, tone = "cream" }: { items: Item[]; tone?: "cream" | "paper" }) {
-  const cols = COLS[evenCols(items.length, 5)];
-  return (
-    <section className={tone === "paper" ? "bg-paper" : ""}>
-      <div className={`${PAD} py-14 sm:py-16`}>
-        <div
-          className={`grid gap-y-10 sm:grid-cols-2 sm:gap-x-8 ${cols} lg:divide-x lg:divide-sand`}
-        >
-          {items.map((it, i) => (
-            <Reveal key={it.h} delay={i * 70}>
-              <div className="h-full lg:px-6 lg:first:pl-0 lg:last:pr-0">
-                <LineIcon name={iconFor(it.h)} className="text-brass" size={50} />
-                <h3 className="mt-5 text-[0.76rem] font-bold uppercase leading-snug tracking-[0.14em] text-clay">
-                  {it.h}
-                </h3>
-                <Paras paras={it.p} tone="text-pine/70" />
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── TYPE B: numbered distinctions ─────────────────────────────────── */
-
-export function NumberedColumns({ items }: { items: Item[] }) {
-  const cols = COLS[evenCols(items.length, 4)];
-  return (
-    <section className={`${PAD} py-14 sm:py-16`}>
-      <div className="overflow-hidden rounded-[0.65rem] border border-sand bg-paper">
-        <div className={`grid sm:grid-cols-2 ${cols} divide-y divide-sand sm:divide-y-0 sm:divide-x`}>
-          {items.map((it, i) => (
-            <Reveal key={it.h} delay={i * 60}>
-              <div className="flex h-full flex-col p-7">
-                <span className="font-display text-[2rem] leading-none text-brass [font-variant-numeric:tabular-nums]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span aria-hidden className="mt-4 block h-px w-9 bg-brass/60" />
-                <h3 className="mt-4 text-[0.76rem] font-bold uppercase leading-snug tracking-[0.14em] text-clay">
-                  {it.h}
-                </h3>
-                <Paras paras={it.p} tone="text-pine/70" />
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── TYPE D: numbered editorial cards, photograph beside the words ─── */
-
-export function EditorialCards({
-  items,
-  images,
-  startAt = 0,
-}: {
-  items: (Item & { cta?: { label: string; href: string } })[];
-  images: string[];
-  startAt?: number;
 }) {
   return (
-    <section className={`${PAD} py-14 sm:py-16`}>
-      <div className="grid gap-6 lg:grid-cols-2">
-        {items.map((it, i) => {
-          /* An odd count leaves an orphan in a two-up grid, so the last card
-             runs the full width with the photograph held to a third. */
-          const wide = items.length % 2 === 1 && i === items.length - 1;
-          const flip = !wide && i % 2 === 1;
-          return (
-            <Reveal
-              key={it.h}
-              delay={(i % 2) * 90}
-              className={`h-full ${wide ? "lg:col-span-2" : ""}`}
-            >
-              <article
-                className={`grid h-full overflow-hidden rounded-[0.65rem] border border-sand bg-paper ${
-                  wide
-                    ? "sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]"
-                    : "sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
-                }`}
-              >
-                <div className={`relative min-h-[210px] ${flip ? "sm:order-2" : ""}`}>
-                  <Image
-                    src={images[i % images.length]}
-                    alt=""
-                    fill
-                    sizes="(max-width:1024px) 100vw, 24vw"
-                    className="object-cover"
-                  />
-                </div>
-                <div className={`flex flex-col p-6 sm:p-7 ${flip ? "sm:order-1" : ""}`}>
-                  <span className="font-display text-[1.05rem] leading-none text-brass [font-variant-numeric:tabular-nums]">
-                    {String(startAt + i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-3 font-display text-[1.35rem] leading-[1.15] text-clay sm:text-[1.5rem]">
-                    {it.h}
-                  </h3>
-                  <Paras paras={it.p} />
-                  {it.cta && (
-                    <div className="mt-auto pt-2">
-                      <GoldLink label={it.cta.label} href={it.cta.href} />
-                    </div>
-                  )}
-                </div>
-              </article>
-            </Reveal>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-/* ── TYPE D (wide): one photograph, one argument ───────────────────── */
-
-export function ImageEditorial({
-  item,
-  image,
-  flip = false,
-  pull,
-}: {
-  item: Item;
-  image: string;
-  flip?: boolean;
-  pull?: { line: string; label: string; alt?: string };
-}) {
-  const c = pull ? cta(pull.label) : undefined;
-  const alt = pull?.alt ? cta(pull.alt) : undefined;
-  return (
-    <section className={`${PAD} py-14 sm:py-16`}>
+    <section className={`${PAD} pb-14 pt-16 sm:pb-16 sm:pt-20`}>
       <Reveal>
-        <article className="grid items-center gap-y-8 lg:grid-cols-12 lg:gap-x-14">
-          <div className={`lg:col-span-6 ${flip ? "lg:order-2" : ""}`}>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[0.75rem]">
-              <Image
-                src={image}
-                alt=""
-                fill
-                sizes="(max-width:1024px) 100vw, 46vw"
-                className="object-cover"
-              />
-            </div>
+        <div className="mx-auto max-w-4xl text-center">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 className="mt-6 font-display text-[2.1rem] leading-[1.12] text-clay sm:text-[2.9rem]">
+            {title}
+          </h2>
+          <div className="mt-7 flex justify-center">
+            <GoldRule className="text-brass" />
           </div>
-          <div className={`lg:col-span-6 ${flip ? "lg:order-1" : ""}`}>
-            <h3 className="font-display text-[1.7rem] leading-[1.12] text-clay sm:text-[2.1rem]">
-              {item.h}
-            </h3>
-            <GoldRule className="mt-5 text-brass" width={64} />
-            <div className="max-w-[58ch]">
-              <Paras paras={item.p} size="text-[1rem]" tone="text-pine/80" gap="mt-4" />
-            </div>
-            {c && pull && (
-              <div className="mt-7 border-t border-sand pt-5">
-                <p className="max-w-[50ch] font-display text-[1.15rem] italic leading-snug text-clay">
-                  {pull.line}
-                </p>
-                <div className="mt-3 flex flex-wrap items-center gap-x-7">
-                  <GoldLink label={c.label} href={c.href} />
-                  {alt && (
-                    <Link
-                      href={alt.href}
-                      className="mt-4 inline-flex items-center text-[0.7rem] font-bold uppercase tracking-[0.16em] text-mist transition-colors hover:text-clay"
-                    >
-                      {alt.label}
-                    </Link>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        </article>
+        </div>
+      </Reveal>
+      {/* The supporting argument runs in two measured columns beneath the
+          statement: short lines, and a compact block rather than a tall stack. */}
+      <Reveal delay={120}>
+        <div className="mx-auto mt-9 grid max-w-5xl gap-x-14 gap-y-5 md:grid-cols-2">
+          {paras.map((t, i) => (
+            <p key={i} className="text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
+              {t}
+            </p>
+          ))}
+        </div>
       </Reveal>
     </section>
   );
 }
 
-/* ── TYPE E: the held statement, on deepest maroon ─────────────────── */
+/* ── The movements ─────────────────────────────────────────────────── */
 
-export function QuoteBand({ item }: { item: Item }) {
-  const [first, ...more] = item.p;
+export type Item = { h: string; p: string[] };
+export type PullData = { line: string; label: string; alt?: string };
+export type Variant = "portrait" | "cinematic" | "offset" | "plain";
+
+/* One movement of the story. Four compositions cycle, so no two consecutive
+   sections are built the same way; each uses a different image proportion and
+   a different relationship between picture and text. */
+export function Movement({
+  item,
+  image,
+  n,
+  variant,
+  pull,
+}: {
+  item: Item;
+  image?: string;
+  n: number;
+  variant: Variant;
+  pull?: PullData;
+}) {
+  const heading = (
+    <h2 className="font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
+      {item.h}
+    </h2>
+  );
+
+  /* Tall editorial portrait held left, the argument set high beside it. */
+  if (variant === "portrait" && image) {
+    return (
+      <section className={`${PAD} py-12 sm:py-14`}>
+        <div className="grid items-center gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+          <Reveal className="lg:col-span-5">
+            <div className="relative aspect-[1/1] overflow-hidden rounded-[3px]">
+              <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 38vw" className="object-cover" />
+            </div>
+          </Reveal>
+          <Reveal delay={110} className="lg:col-span-7">
+            <div>
+              <Marker n={n} />
+              <div className="mt-5">{heading}</div>
+              <div className="mt-6">
+                <Paras paras={item.p} />
+              </div>
+              {pull && <Pull {...pull} />}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
+
+  /* Wide cinematic frame, the argument beneath in a narrow column with the
+     numeral out in the left margin. */
+  if (variant === "cinematic" && image) {
+    return (
+      <section className={`${PAD} py-12 sm:py-14`}>
+        <Reveal>
+          <div className="relative aspect-[5/2] overflow-hidden rounded-[3px]">
+            <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
+          </div>
+        </Reveal>
+        <Reveal delay={110}>
+          <div className="mt-8 grid gap-y-5 lg:grid-cols-12 lg:gap-x-14">
+            <div className="lg:col-span-4">
+              <Marker n={n} />
+              <div className="mt-5">{heading}</div>
+            </div>
+            <div className="lg:col-span-7 lg:col-start-6">
+              <Paras paras={item.p} />
+              {pull && <Pull {...pull} />}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    );
+  }
+
+  /* Argument left, tall picture right, dropped below the headline so the two
+     columns never start on the same line. */
+  if (variant === "offset" && image) {
+    return (
+      <section className={`${PAD} py-12 sm:py-14`}>
+        <div className="grid items-center gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+          <Reveal className="lg:col-span-6">
+            <div>
+              <Marker n={n} />
+              <div className="mt-5">{heading}</div>
+              <div className="mt-6">
+                <Paras paras={item.p} />
+              </div>
+              {pull && <Pull {...pull} />}
+            </div>
+          </Reveal>
+          <Reveal delay={110} className="lg:col-span-6 lg:pt-10">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[3px]">
+              <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 44vw" className="object-cover" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
+
+  /* No photograph. A held moment on a warmer ground, giving the run of
+     pictures somewhere to breathe. */
+  return (
+    <section className="bg-blush/40">
+      <div className={`${PAD} py-12 sm:py-14`}>
+        <Reveal>
+          <div className="grid gap-y-6 lg:grid-cols-12 lg:gap-x-16">
+            <div className="lg:col-span-5">
+              <Marker n={n} />
+              <div className="mt-5">{heading}</div>
+              <GoldRule className="mt-6 text-brass" width={64} />
+            </div>
+            <div className="lg:col-span-7">
+              <Paras paras={item.p} />
+              {pull && <Pull {...pull} />}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* Two arguments sharing one band, side by side under their markers.
+
+   This is the compression device. Twelve arguments each given a full-height
+   section of their own runs to ten thousand pixels however tight the padding
+   is; pairing the shorter ones lets the page keep every word while reading as
+   a spread rather than an endless scroll. */
+export function PairMovement({
+  items,
+  ns,
+  pull,
+}: {
+  items: [Item, Item];
+  ns: [number, number];
+  pull?: PullData;
+}) {
+  return (
+    <section className="bg-blush/35">
+      <div className={`${PAD} py-12 sm:py-14`}>
+        <div className="grid gap-x-16 gap-y-10 lg:grid-cols-2">
+          {items.map((it, i) => (
+            <Reveal key={it.h} delay={i * 110}>
+              <div className="h-full border-t border-brass/30 pt-7">
+                <Marker n={ns[i]} />
+                <h2 className="mt-4 font-display text-[1.5rem] leading-[1.16] text-clay sm:text-[1.8rem]">
+                  {it.h}
+                </h2>
+                <div className="mt-5">
+                  <Paras paras={it.p} size="text-[1rem]" measure="max-w-[52ch]" />
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        {pull && (
+          <div className="mt-2">
+            <Pull {...pull} />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── The dark movement ─────────────────────────────────────────────── */
+
+export function DarkMovement({
+  item,
+  image,
+  eyebrow,
+  pull,
+}: {
+  item: Item;
+  image?: string;
+  eyebrow?: string;
+  pull?: PullData;
+}) {
+  const [lede, ...more] = item.p;
   return (
     <section className="relative overflow-hidden bg-pine-800">
-      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full text-brass-soft/20" />
-      <Botanical className="pointer-events-none absolute -right-4 top-0 hidden h-full w-24 text-brass-soft/15 lg:block" />
-      <div className={`${PAD} relative py-14 sm:py-16`}>
+      {image && (
+        <>
+          <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-[0.16]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-pine-800 via-pine-800/90 to-pine-800/60" />
+        </>
+      )}
+      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-32 w-full text-brass-soft/20" />
+      <Botanical className="pointer-events-none absolute -right-6 top-0 hidden h-full w-24 text-brass-soft/15 lg:block" />
+      <div className={`${PAD} relative py-20 sm:py-24`}>
         <Reveal>
-          {/* The statement holds the left; the supporting copy runs beside it
-              rather than under it, so the band never ends on dead space. */}
-          <div className="grid gap-y-6 lg:grid-cols-12 lg:gap-x-14">
+          <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-16">
             <div className="lg:col-span-6">
-              <Crest className="h-9 w-8 text-brass-soft/70" />
-              <p className="mt-5 font-display text-[1.7rem] leading-[1.18] text-brass-soft sm:text-[2.1rem]">
+              <Crest className="h-10 w-9 text-brass-soft/70" />
+              {eyebrow && (
+                <div className="mt-6">
+                  <Eyebrow gold>{eyebrow}</Eyebrow>
+                </div>
+              )}
+              <h2 className="mt-5 font-display text-[2.1rem] leading-[1.14] text-brass-soft sm:text-[2.8rem]">
                 {item.h}
-              </p>
-              {first && (
-                <p className="mt-5 max-w-[52ch] text-[1rem] leading-relaxed text-sage-soft/90">
-                  {first}
+              </h2>
+              {lede && (
+                <p className="mt-7 max-w-[54ch] text-[1.0625rem] leading-[1.8] text-sage-soft/90">
+                  {lede}
                 </p>
               )}
             </div>
             {more.length > 0 && (
-              <div className="lg:col-span-6 lg:pt-14">
-                {more.map((t, i) => {
-                  const tag = tagOf(t);
-                  if (tag) {
-                    return (
-                      <p
-                        key={i}
-                        className={`flex max-w-[54ch] items-baseline gap-2.5 border-l-2 border-brass-soft/70 pl-3 text-[0.95rem] leading-relaxed text-sage-soft/85 ${i ? "mt-4" : ""}`}
-                      >
-                        <span className="shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.16em] text-brass-soft">
-                          {tag.label}
-                        </span>
-                        <span>{tag.body}</span>
-                      </p>
-                    );
-                  }
-                  return (
-                    <p
-                      key={i}
-                      className={`max-w-[54ch] text-[0.95rem] leading-relaxed text-sage-soft/75 ${i ? "mt-4" : ""}`}
-                    >
-                      {t}
-                    </p>
-                  );
-                })}
+              <div className="lg:col-span-5 lg:col-start-8 lg:pt-16">
+                <Paras paras={more} dark measure="max-w-[52ch]" size="text-[1rem]" />
+                {pull && <Pull {...pull} dark />}
               </div>
             )}
           </div>
@@ -446,7 +466,158 @@ export function QuoteBand({ item }: { item: Item }) {
   );
 }
 
-/* ── TYPE F: comparison and data ───────────────────────────────────── */
+/* ── The bleeding split ────────────────────────────────────────────── */
+
+/* Text held in a narrow column on the ivory, the photograph running off the
+   page edge. The asymmetry is the point: it stops the page reading as a
+   sequence of centred two-column rows. */
+export function SplitBleed({
+  item,
+  image,
+  n,
+  flip = false,
+  pull,
+}: {
+  item: Item;
+  image: string;
+  n?: number;
+  flip?: boolean;
+  pull?: PullData;
+}) {
+  return (
+    <section className="py-12 sm:py-14">
+      <div className="grid items-center gap-y-10 lg:grid-cols-2">
+        <Reveal className={flip ? "lg:order-2" : ""}>
+          <div
+            className={`relative aspect-[4/3] overflow-hidden lg:aspect-[16/10] ${
+              flip ? "lg:rounded-l-[3px]" : "lg:rounded-r-[3px]"
+            }`}
+          >
+            <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
+          </div>
+        </Reveal>
+        <Reveal delay={110} className={flip ? "lg:order-1" : ""}>
+          <div
+            className={`px-6 sm:px-10 ${
+              flip ? "lg:ml-auto lg:max-w-[34rem] lg:pr-14" : "lg:mr-auto lg:max-w-[34rem] lg:pl-14"
+            }`}
+          >
+            {n !== undefined && <Marker n={n} />}
+            <h2 className="mt-5 font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
+              {item.h}
+            </h2>
+            <GoldRule className="mt-6 text-brass" width={64} />
+            <div className="mt-6">
+              <Paras paras={item.p} measure="max-w-[52ch]" />
+            </div>
+            {pull && <Pull {...pull} />}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ── Short parallel sets ───────────────────────────────────────────── */
+
+/* A genuine set of short items, set as an open row divided by hairlines.
+   No borders and no fills: this is a list given air, not a grid of cards. */
+export function IconRow({ items }: { items: Item[] }) {
+  const n = items.length;
+  const cols =
+    n % 3 === 0
+      ? "lg:grid-cols-3"
+      : n % 4 === 0
+        ? "lg:grid-cols-4"
+        : n === 5
+          ? "lg:grid-cols-5"
+          : "lg:grid-cols-2";
+  return (
+    <section className={`${PAD} py-12 sm:py-14`}>
+      <div className={`grid gap-x-12 gap-y-12 sm:grid-cols-2 ${cols}`}>
+        {items.map((it, i) => (
+          <Reveal key={it.h} delay={i * 70}>
+            <div className="h-full border-t border-sand pt-7">
+              <LineIcon name={iconFor(it.h)} className="text-brass" size={44} />
+              <h3 className="mt-5 font-display text-[1.2rem] leading-[1.2] text-clay">{it.h}</h3>
+              <div className="mt-3">
+                <Paras paras={it.p} size="text-[0.95rem]" gap="mt-3" measure="max-w-[38ch]" />
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ── The closing statement ─────────────────────────────────────────── */
+
+export function ClosingStatement({ item }: { item: Item }) {
+  return (
+    <section className={`${PAD} py-20 sm:py-24`}>
+      <Reveal>
+        <div className="mx-auto max-w-3xl text-center">
+          <Crest className="mx-auto h-9 w-8 text-brass/60" />
+          <h2 className="mt-8 font-display text-[2rem] leading-[1.16] text-clay sm:text-[2.7rem]">
+            {item.h}
+          </h2>
+          <div className="mt-7 flex justify-center">
+            <GoldRule className="text-brass" />
+          </div>
+          <div className="mt-7 space-y-5">
+            {item.p.map((t, i) => (
+              <p key={i} className="text-[1.0625rem] leading-[1.8] text-pine/70 [text-wrap:pretty]">
+                {t}
+              </p>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+/* ── The closing call to action ────────────────────────────────────── */
+
+export function ClosingCta({
+  title,
+  primary,
+  secondary,
+  eyebrow,
+}: {
+  title: string;
+  primary: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  eyebrow?: string;
+}) {
+  return (
+    <section className="relative overflow-hidden bg-clay">
+      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-brass-soft/20" />
+      <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-24 text-brass-soft/15 lg:block" />
+      <div className={`${PAD} relative py-16 sm:py-20`}>
+        <div className="grid items-center gap-y-8 lg:grid-cols-12 lg:gap-x-14">
+          <Reveal className="lg:col-span-7">
+            <div>
+              {eyebrow && <Eyebrow gold>{eyebrow}</Eyebrow>}
+              <p className="mt-5 max-w-[26ch] font-display text-[1.7rem] leading-[1.2] text-paper sm:text-[2.1rem]">
+                {title}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={120} className="lg:col-span-5">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 lg:justify-end">
+              <PrimaryCta label={primary.label} href={primary.href} dark />
+              {secondary && <GoldLink label={secondary.label} href={secondary.href} dark />}
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Comparison and data ───────────────────────────────────────────── */
 
 export function DataTable({
   columns,
@@ -458,18 +629,15 @@ export function DataTable({
   label?: string;
 }) {
   return (
-    <section className={`${PAD} py-14 sm:py-16`}>
+    <section className={`${PAD} py-12 sm:py-14`}>
       {label && <Eyebrow>{label}</Eyebrow>}
-      <div className="mt-5 overflow-x-auto rounded-[0.65rem] border border-sand bg-paper">
+      <div className="mt-6 overflow-x-auto">
         <table className="w-full min-w-[46rem] border-collapse text-left">
           <thead>
-            <tr className="border-b border-sand bg-cream/70">
-              <th className="w-[16%] px-5 py-4 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brass" />
+            <tr className="border-b border-brass/40">
+              <th className="w-[16%] py-4 pr-5" />
               {columns.map((c) => (
-                <th
-                  key={c}
-                  className="px-5 py-4 font-display text-[1.05rem] font-normal text-clay"
-                >
+                <th key={c} className="px-5 py-4 font-display text-[1.1rem] font-normal text-clay">
                   {c}
                 </th>
               ))}
@@ -477,15 +645,15 @@ export function DataTable({
           </thead>
           <tbody>
             {rows.map((r) => (
-              <tr key={r.dimension} className="border-b border-sand/70 last:border-0">
+              <tr key={r.dimension} className="border-b border-sand last:border-0">
                 <th
                   scope="row"
-                  className="px-5 py-4 align-top text-[0.68rem] font-bold uppercase tracking-[0.14em] text-mist"
+                  className="py-5 pr-5 align-top text-[0.66rem] font-bold uppercase tracking-[0.16em] text-mist"
                 >
                   {r.dimension}
                 </th>
                 {r.values.map((v, i) => (
-                  <td key={i} className="px-5 py-4 align-top text-[0.9rem] leading-relaxed text-pine/75">
+                  <td key={i} className="px-5 py-5 align-top text-[0.95rem] leading-[1.7] text-pine/75">
                     {v}
                   </td>
                 ))}
@@ -493,66 +661,6 @@ export function DataTable({
             ))}
           </tbody>
         </table>
-      </div>
-    </section>
-  );
-}
-
-/* ── TYPE G: the closing call to action ────────────────────────────── */
-
-export function ClosingCta({
-  title,
-  paras,
-  primary,
-  secondary,
-  eyebrow,
-}: {
-  title: string;
-  paras?: string[];
-  primary: { label: string; href: string };
-  secondary?: { label: string; href: string };
-  eyebrow?: string;
-}) {
-  return (
-    <section className="relative overflow-hidden bg-clay">
-      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full text-brass-soft/20" />
-      <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-24 text-brass-soft/15 lg:block" />
-      <div className={`${PAD} relative py-14 sm:py-16`}>
-        <div className="grid items-center gap-y-8 lg:grid-cols-12 lg:gap-x-14">
-          <Reveal className="lg:col-span-7">
-            <div>
-              {eyebrow && <Eyebrow gold>{eyebrow}</Eyebrow>}
-              <p className="mt-4 font-display text-[1.7rem] leading-[1.2] text-paper sm:text-[2.1rem]">
-                {title}
-              </p>
-              {paras?.map((t, i) => (
-                <p key={i} className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-blush/85">
-                  {t}
-                </p>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={120} className="lg:col-span-5">
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 lg:justify-end">
-              <Link
-                href={primary.href}
-                className="inline-flex items-center gap-2.5 rounded-full bg-brass-soft px-7 py-3.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-pine-800 transition-transform hover:-translate-y-0.5"
-              >
-                {primary.label}
-                <span aria-hidden>&rarr;</span>
-              </Link>
-              {secondary && (
-                <Link
-                  href={secondary.href}
-                  className="group inline-flex items-center gap-2 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-brass-soft underline decoration-brass-soft/50 decoration-1 underline-offset-[7px] transition-colors hover:text-paper"
-                >
-                  {secondary.label}
-                  <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
-                </Link>
-              )}
-            </div>
-          </Reveal>
-        </div>
       </div>
     </section>
   );

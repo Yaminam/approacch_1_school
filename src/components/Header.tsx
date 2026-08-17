@@ -56,7 +56,7 @@ export default function Header() {
         solid ? "border-b border-sand bg-cream/95 backdrop-blur-md" : "bg-transparent"
       }`}
     >
-      <div className="flex w-full items-center justify-between gap-3 px-4 py-2.5 sm:px-8 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:px-10">
+      <div className="flex w-full items-center justify-between gap-3 px-4 py-2 sm:px-8 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:px-10">
         {/* Crest lockup: the mark, then the tagline in gold beneath it. */}
         <Link href="/" className="flex flex-col justify-center" aria-label="Dalhousie Public School home">
           <Image
@@ -66,10 +66,10 @@ export default function Header() {
             height={42}
             unoptimized
             priority
-            className={`h-7 w-auto shrink-0 sm:h-9 ${onDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
+            className={`h-6 w-auto shrink-0 sm:h-7 ${onDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
           />
           <span
-            className={`mt-1 hidden text-[0.52rem] font-bold uppercase tracking-[0.3em] sm:block ${
+            className={`mt-0.5 hidden text-[0.48rem] font-bold uppercase tracking-[0.28em] sm:block ${
               onDark ? "text-brass-soft/90" : "text-brass"
             }`}
           >
@@ -83,9 +83,9 @@ export default function Header() {
           {navGroups.map((g) => {
             const active = g.title === activeGroup;
             return (
-              <div key={g.title} className="group relative py-3">
+              <div key={g.title} className="group relative py-2.5">
                 <button
-                  className={`flex items-center gap-1 sm:whitespace-nowrap border-b-2 pb-1 text-sm font-semibold transition-colors ${
+                  className={`flex items-center gap-1 sm:whitespace-nowrap border-b-2 pb-1 text-[0.82rem] font-semibold transition-colors ${
                     active ? "border-brass" : "border-transparent"
                   } ${
                     onDark
@@ -120,9 +120,9 @@ export default function Header() {
         </nav>
 
         {/* Right cluster: contact line above, the two calls to action below. */}
-        <div className="flex items-center justify-end gap-3 lg:flex-col lg:items-end lg:gap-1.5">
+        <div className="flex items-center justify-end gap-3 lg:flex-col lg:items-end lg:gap-1">
           <div
-            className={`hidden items-center gap-4 text-[0.72rem] font-semibold lg:flex ${
+            className={`hidden items-center gap-3.5 text-[0.68rem] font-semibold lg:flex ${
               onDark ? "text-paper/75" : "text-mist"
             }`}
           >
@@ -143,7 +143,7 @@ export default function Header() {
           <div className="flex items-center gap-2.5">
             <Link
               href="/campuses/find-your-campus"
-              className={`hidden sm:whitespace-nowrap rounded-full border px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.13em] transition-colors xl:inline-block ${
+              className={`hidden sm:whitespace-nowrap rounded-full border px-3.5 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.14em] transition-colors xl:inline-block ${
                 onDark
                   ? "border-paper/40 text-paper hover:border-brass-soft hover:text-brass-soft"
                   : "border-brass/50 text-clay hover:border-clay hover:bg-blush/50"
@@ -153,7 +153,7 @@ export default function Header() {
             </Link>
             <Link
               href="/admissions/book-a-visit"
-              className="hidden min-h-9 items-center sm:whitespace-nowrap rounded-full bg-brass-soft px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.13em] text-pine-800 transition-transform hover:-translate-y-0.5 sm:inline-flex sm:px-5"
+              className="hidden items-center sm:whitespace-nowrap rounded-full bg-clay px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-paper transition-transform hover:-translate-y-0.5 sm:inline-flex sm:px-5"
             >
               Book a visit
             </Link>
