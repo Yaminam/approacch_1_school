@@ -8,7 +8,7 @@ export default function Recognition() {
       <div className="mx-auto max-w-7xl px-6 pt-16 sm:px-8 sm:pt-20">
         <SectionHead
           eyebrow="Recognition"
-          title="Fifty-four years, and the moments that marked them."
+          title="More than five decades, and the moments that marked them."
         />
       </div>
 

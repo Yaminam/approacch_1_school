@@ -1,22 +1,22 @@
 import type { PageCopy } from "./types";
 import { img } from "../images";
 
-/* Pages 38 to 44 of Website Copy Draft 2: about, heritage, people, stories,
-   alumni, policies and contact. */
+/* About, heritage, people, stories, alumni, policies and contact, transcribed
+   from Final Reviewed Content - DPS. */
 
 export const about: PageCopy = {
   slug: "/about",
   nav: "About Dalhousie",
-  kicker: "Dalhousie Public School",
-  title: "A complete environment",
-  emphasis: "for growth.",
+  kicker: "About Dalhousie",
+  title: "The whole child for",
+  emphasis: "the whole future.",
   subhead:
-    "Dalhousie Public School prepares the whole child for the whole future through a better-designed day, a visible preparation system and two distinct campus experiences.",
+    "For over half a century, Dalhousie Public School has continued to refine an educational philosophy built around the complete development of the child. From our original Himalayan home in Dalhousie to our New Chandigarh Campus, that belief continues to shape everything we do.",
   primary: "Explore Our Campuses",
-  secondary: "Contact Us",
+  secondary: "Discover Our Heritage",
   image: img.aboutHero,
   image2: img.aboutSplit,
-  closeEyebrow: "The institution",
+  closeEyebrow: "Exceptional by Nature",
   pulls: [
     {
       slot: "grid",
@@ -28,49 +28,49 @@ export const about: PageCopy = {
   meta: {
     title: "About Dalhousie Public School",
     description:
-      "The whole-child philosophy, the Dalhousie Day, the seven-pathway Preparation System, two campuses and a school established in 1970.",
+      "A philosophy shaped over generations: the whole child for the whole future, a better-designed childhood, two campuses and an education that stays rooted while looking forward.",
   },
   blocks: [
     {
-      h: "The whole-child philosophy",
+      h: "More than an education",
       p: [
-        "Academics, preparation, sport, confidence, responsibility, residential life and character are not separate promises. They are connected parts of one growth journey.",
+        "A philosophy shaped over generations. Dalhousie believes that a child should not be prepared in fragments. Academic learning matters. But so do confidence, fitness, communication, responsibility, character and the ability to stand independently.",
+        "Over the years, this belief has developed into a rigorous and complete educational approach: tried, tested and continually evolving with the needs of each new generation. The aim is not simply to help children perform well in school. It is to prepare them well for life.",
       ],
     },
     {
-      h: "The Dalhousie Day",
+      h: "Because the future will ask more than marks.",
       p: [
-        "The designed rhythm brings learning, preparation, movement, communication, mentoring, care, rest and responsibility together.",
+        "A child's future will depend on more than what they know. It will depend on how clearly they think, how confidently they communicate, how well they work with others, how they respond to challenge and how responsibly they manage themselves.",
+        "That is why Dalhousie looks at development across the whole child: academic growth, confidence and communication, physical development, responsibility, and character. These are not treated as separate promises. They come together through the child's everyday experience at Dalhousie.",
       ],
     },
     {
-      h: "The Dalhousie Preparation System",
+      h: "A better-designed childhood",
       p: [
-        "Seven pathways give clear names and proof to the School's approach: Competitive Edge, Defence Pathway, Sports Pathway, Confidence Code, Life Code, Residential Advantage and the Whole Child Report.",
+        "Dalhousie's philosophy is not about making children busier. It is about bringing more of what matters into one connected experience.",
+        "Learning, preparation, sport, confidence, responsibility and care work together rather than being pushed into separate parts of the child's day. The result is a school experience designed not only around what children need to achieve, but around who they need to become.",
       ],
     },
     {
       h: "One Dalhousie. Two ways to grow.",
       p: [
-        "The Mountain Campus and the Modern Campus share one philosophy while serving different parent needs and student journeys.",
+        "The Dalhousie experience extends across two distinct campuses, each shaped by its own environment while remaining connected by one philosophy.",
+        "Dalhousie Campus, the Mountain Campus: a World Away. Ready For The World. New Chandigarh Campus, the Modern Campus: All-Round. Without the Running Around.",
       ],
     },
     {
-      h: "A school established in 1970",
+      h: "The natural and the modern",
       p: [
-        "Dalhousie's heritage is a living foundation: a story of how the School has evolved while remaining rooted in character, care and complete preparation.",
+        "Rooted in nature. Ready for a changing world. Dalhousie gives students access to the natural world while preparing them for a modern one. Children experience learning environments that bring together technology, contemporary academic opportunities and wider exposure with an enduring connection to nature, culture, physical development and real-world experience.",
+        "From smart classrooms and coding to sport, the arts, Indian heritage and wider excursions, children are encouraged to engage with both where they come from and where the world is going. The result is an education that remains rooted while continuing to look forward.",
       ],
     },
     {
-      h: "Leadership and people",
+      h: "Exceptional by Nature",
       p: [
-        "Meet the people responsible for academic direction, campus life, care, administration and the daily experience of students.",
-      ],
-    },
-    {
-      h: "Institutional information",
-      p: [
-        "Approved affiliations, governance information, contacts and statutory details are available clearly, while the parent journey remains simple.",
+        "For Dalhousie, Exceptional by Nature is more than a description of where our schools are located. It reflects an educational belief: that children grow through meaningful experiences, through the environments around them, through relationships, through challenge and through opportunities that allow different parts of the child to develop together.",
+        "Nature gives Dalhousie its setting. The whole-child philosophy gives it its purpose.",
       ],
     },
   ],
@@ -79,62 +79,95 @@ export const about: PageCopy = {
 export const heritage: PageCopy = {
   slug: "/about/heritage",
   nav: "Our Heritage",
-  kicker: "Established 1970",
-  title: "Rooted in experience.",
-  emphasis: "Evolving with purpose.",
+  kicker: "Our heritage",
+  title: "More than five decades of",
+  emphasis: "educational excellence.",
   subhead:
-    "Dalhousie Public School's heritage is a living foundation, not simply a timeline, but the roots from which the present-day promise has grown.",
+    "Dalhousie Public School began in 1970 with just 10 students in Moti Tibba, Dalhousie. What began as a small school in the Himalayas has grown across generations, milestones and experiences, while remaining connected to the educational values on which it was founded.",
   primary: "Explore Our Campuses",
   secondary: "About Dalhousie",
   image: img.heritageHero,
   image2: img.heritageSplit,
-  closeEyebrow: "On the record",
+  closeEyebrow: "The story continues",
   meta: {
     title: "Our Heritage, Dalhousie Public School",
     description:
-      "The beginning in 1970, the Himalayan home, the milestones that changed the institution, what remained constant and the New Chandigarh chapter.",
+      "From the first session in 1970 at Moti Tibba to the Golden Jubilee and the launch of the New Chandigarh Campus, the milestones of the Dalhousie journey.",
   },
   blocks: [
     {
-      h: "The beginning",
+      h: "Where the story began",
       p: [
-        "Dalhousie Public School was established in 1970 with a clear educational purpose. Its verified founding story, the people behind it and the need it set out to serve form the opening chapter of the School's journey.",
+        "1970, the first session. Dalhousie Public School began its first academic session with 10 students in Moti Tibba, Dalhousie.",
+        "It marked the beginning of an educational journey that would continue to evolve for more than half a century.",
       ],
     },
     {
-      h: "The Himalayan home",
+      h: "1972, our forever home",
       p: [
-        "The original Dalhousie setting shaped the School's character through residential depth, discipline, community, outdoor strength and self-reliance.",
+        "A new chapter began as the School established the home that would become central to the Dalhousie story.",
       ],
     },
     {
-      h: "Milestones that changed the institution",
+      h: "1986, a new mentor",
+      p: ["An important milestone in the School's continuing educational journey."],
+    },
+    {
+      h: "1990, National Cadet Corps introduced",
       p: [
-        "Meaningful milestones trace campus development, academic evolution, leadership chapters, programme introductions and institutional recognition.",
+        "The introduction of the National Cadet Corps added a new dimension of discipline, service and participation to school life.",
       ],
     },
     {
-      h: "What remained constant",
+      h: "2004, 34th Founders Day",
+      p: ["A celebration of more than three decades of the Dalhousie journey."],
+    },
+    {
+      h: "2007, Computer Literacy Award",
+      p: ["Recognition of the School's efforts in developing computer literacy."],
+    },
+    {
+      h: "2010, National Teacher's Award and a trip to NASA",
       p: [
-        "Across every chapter, the same values endure: care, discipline, character, academic seriousness and the formation of the whole child.",
+        "A milestone recognising excellence in education.",
+        "In the same year, students extended learning beyond the campus through an educational experience at NASA.",
       ],
     },
     {
-      h: "The New Chandigarh chapter",
+      h: "2012, 42nd Founders Day",
+      p: ["Another milestone in the School's continuing journey."],
+    },
+    {
+      h: "2013, blessed by His Holiness",
+      p: ["A memorable moment in the history of Dalhousie Public School."],
+    },
+    {
+      h: "2014, tallest flag in Himachal",
+      p: ["A landmark moment on the Dalhousie campus."],
+    },
+    {
+      h: "2015, awarded for contribution to education",
+      p: ["Recognition of Dalhousie Public School's contribution to education."],
+    },
+    {
+      h: "2016, Beeji's Park inaugurated",
+      p: ["A new addition to the School's campus and legacy."],
+    },
+    {
+      h: "2023, Golden Jubilee celebrated",
+      p: ["Dalhousie marked more than five decades of its educational journey."],
+    },
+    {
+      h: "2025, launch of the New Chandigarh Campus",
       p: [
-        "New Chandigarh extends the Dalhousie philosophy through a contemporary campus experience built around academic choice, confidence, exposure, sport and flexibility.",
+        "The Dalhousie philosophy entered a new chapter with the launch of the New Chandigarh Campus, extending the School's educational journey into a contemporary new environment.",
       ],
     },
     {
-      h: "Dalhousie today",
+      h: "From one campus to two, the story continues.",
       p: [
-        "Today, Dalhousie carries one promise across two distinct campus experiences, and continues to prepare the next generation of the whole child for the whole future.",
-      ],
-    },
-    {
-      h: "Archival storytelling",
-      p: [
-        "Every archival image carries an accurate date or period, caption, source and usage permission.",
+        "The Dalhousie Campus remains the original Himalayan home of the School. The New Chandigarh Campus carries that philosophy forward in a new setting and for a new generation.",
+        "Different environments. One continuing educational journey. Over half a century later, Dalhousie continues to evolve, while remaining rooted in what has always mattered.",
       ],
     },
   ],
@@ -143,16 +176,16 @@ export const heritage: PageCopy = {
 export const leadership: PageCopy = {
   slug: "/about/leadership-people",
   nav: "Leadership & People",
-  kicker: "The people who guide the Dalhousie experience",
-  title: "Leadership is visible in",
-  emphasis: "the life of the School.",
+  kicker: "Leadership",
+  title: "Carrying a",
+  emphasis: "philosophy forward.",
   subhead:
-    "Parents can understand who leads the institution, who is responsible for each campus and how academic, residential, pastoral and administrative teams work together.",
+    "For more than half a century, Dalhousie Public School has continued to develop its educational approach while remaining committed to the complete growth of the child. The role of leadership is to protect that purpose while ensuring the School continues to evolve with changing times.",
   primary: "Explore Our Campuses",
   secondary: "Contact Us",
   image: img.leadershipHero,
   image2: img.leadershipSplit,
-  closeEyebrow: "About each profile",
+  closeEyebrow: "Meet our leadership",
   pulls: [
     {
       slot: "grid",
@@ -164,45 +197,35 @@ export const leadership: PageCopy = {
   meta: {
     title: "Leadership & People, Dalhousie Public School",
     description:
-      "Institutional leadership, group leadership, campus leadership at Dalhousie and New Chandigarh, faculty and key people, and the leadership philosophy.",
+      "A clear educational belief, one philosophy across two campuses, and leadership that continues to evolve while protecting what has shaped the School.",
   },
   blocks: [
     {
-      h: "Institutional leadership",
+      h: "Rooted in a clear educational belief",
       p: [
-        "The School's approved governing and management structure provides direction, accountability and continuity across the institution.",
+        "Dalhousie's educational philosophy has been refined over decades. It is based on the belief that children need more than academic instruction alone. They need opportunities, guidance and an environment that helps them become complete and confident young adults.",
+        "School leadership carries the responsibility of translating this philosophy into the everyday experience across both campuses.",
       ],
     },
     {
-      h: "Group leadership",
-      p: ["Group leadership carries the shared Dalhousie vision, standards and two-campus architecture."],
-    },
-    {
-      h: "Dalhousie Campus leadership",
-      p: ["Meet the academic, residential and pastoral leaders responsible for the Mountain Campus."],
-    },
-    {
-      h: "New Chandigarh Campus leadership",
+      h: "One philosophy across two campuses",
       p: [
-        "Meet the leaders responsible for the Modern Campus, its academic stages, student experience and residential or day-boarding models.",
+        "The expansion from the original Dalhousie Campus to New Chandigarh represents a new chapter in the School's journey.",
+        "Leadership across both campuses remains connected by the same larger purpose: maintaining the values and educational philosophy of Dalhousie while allowing each campus to develop an experience suited to its environment and students.",
       ],
     },
     {
-      h: "Faculty and key people",
+      h: "Continuing to evolve",
       p: [
-        "Meet the people who guide the Dalhousie experience. Profiles are organised by campus and department, with concise, current and human introductions.",
+        "Dalhousie describes its educational programme as tried, tested, proven and always developing. That continuing development is important. Education changes. Technology changes. The opportunities available to children change.",
+        "The School's responsibility is to continue moving forward without losing sight of the values that have shaped it for more than five decades.",
       ],
     },
     {
-      h: "Leadership philosophy",
+      h: "Meet our leadership",
       p: [
-        "Leadership at Dalhousie is connected by one commitment: the whole child, supported through care, academic seriousness and visible growth.",
-      ],
-    },
-    {
-      h: "Profile content",
-      p: [
-        "Each profile introduces the person's role, campus or department, relevant experience and contribution to the student journey, together with an approved photograph.",
+        "Profiles introduce each leader's name, designation and campus or group role, together with a short introduction and their educational philosophy.",
+        "You will meet the people who teach, guide and support your child on a campus visit.",
       ],
     },
   ],
@@ -212,15 +235,15 @@ export const storiesEvents: PageCopy = {
   slug: "/stories-events",
   nav: "Stories & Events",
   kicker: "Dalhousie in action",
-  title: "Proof lives in",
-  emphasis: "real moments.",
+  title: "The moments that make",
+  emphasis: "the philosophy real.",
   subhead:
-    "Stories and events show the School's philosophy being lived, in classrooms, houses, competitions, performances, service, student growth and the changing rhythm of campus life.",
+    "A school is best understood through what happens every day. In classrooms and houses. On fields and stages. Through competitions, performances, service, preparation and the everyday moments in which children discover something new about themselves.",
   primary: "Explore Stories",
   secondary: "View Upcoming Events",
   image: img.storiesHero,
   image2: img.storiesSplit,
-  closeEyebrow: "Editorial standards",
+  closeEyebrow: "Proof lives in the moments",
   pulls: [
     {
       slot: "grid",
@@ -231,55 +254,49 @@ export const storiesEvents: PageCopy = {
   meta: {
     title: "Stories & Events, Dalhousie Public School",
     description:
-      "Featured stories, academic stories, student achievements, campus life, upcoming and past events, filtered by campus, category and date.",
+      "Featured stories, academic stories, achievements and events from both campuses, with the journey behind every result.",
   },
   blocks: [
     {
-      h: "Featured stories",
+      h: "Stories worth knowing",
       p: [
-        "Featured stories bring forward the strongest current examples of the whole-child promise and the distinct strengths of each campus.",
+        "Every achievement has a journey behind it. A result may begin with months of preparation. A confident performance may begin with a child who once hesitated to speak. A sporting achievement may carry lessons in discipline and teamwork long before the final score.",
+        "Here, we share the people, experiences and moments that bring the Dalhousie philosophy to life.",
       ],
     },
     {
       h: "Academic stories",
       p: [
-        "Academic stories cover learning, preparation, student work, mentor support, pathways and progress, not only results announcements.",
+        "Learning beyond the result. Academic growth is not only visible on the day results are announced.",
+        "It can be seen when a difficult concept begins to make sense, when preparation becomes more disciplined or when a student finds clearer direction towards what comes next.",
       ],
     },
     {
-      h: "Student achievements",
+      h: "Achievement stories",
       p: [
-        "Student achievements are shared with the context behind the outcome: the effort, pathway, support and learning that made it possible.",
+        "Celebrate the outcome. Understand the journey. Dalhousie students participate and achieve across academics, sport, creativity, leadership and wider school life.",
+        "But the achievement is only one part of the story. Behind it may be practice, persistence, support, a setback, another attempt and the confidence to keep going.",
       ],
     },
     {
-      h: "Campus life",
+      h: "Events",
       p: [
-        "Real moments from the Dalhousie Day, residential life, sport, Confidence Code, Life Code and community make the story visible.",
+        "What is happening at Dalhousie. Each event carries its name, date, campus and venue, together with a short introduction.",
+        "Expanded details include the programme or schedule, participation information, photographs or event creative, and contact information where required.",
       ],
     },
     {
-      h: "Upcoming events",
+      h: "Every story carries its campus and category.",
       p: [
-        "Every event includes its date, time, campus, venue, intended audience, summary, contact or registration details and current status.",
+        "Stories are filed by campus, Dalhousie or New Chandigarh, and by category across academics, sport, student life, leadership and community.",
+        "Each opens on the same page, with student or faculty quotes, photographs, video where available, the outcome and the wider learning behind the experience.",
       ],
     },
     {
-      h: "Past events",
+      h: "Proof lives in the moments.",
       p: [
-        "Selected past events remain available as stories, with outcomes, media and links to the programmes they brought to life.",
-      ],
-    },
-    {
-      h: "Filters",
-      p: [
-        "Find stories by campus, category, date or content type, from academics and residential life to sport, confidence, service and events.",
-      ],
-    },
-    {
-      h: "Editorial standards",
-      p: [
-        "Every story is current, accurately captioned and published with the required student consent, making it a reliable window into life at Dalhousie.",
+        "The Dalhousie philosophy is visible in how children learn, participate, compete, communicate, contribute and grow. Some moments become achievements. Others simply become part of who the child is becoming.",
+        "Together, they tell the story of Dalhousie. The whole child for the whole future.",
       ],
     },
   ],
@@ -289,15 +306,15 @@ export const alumni: PageCopy = {
   slug: "/alumni",
   nav: "Alumni",
   kicker: "Where Dalhousie journeys continue",
-  title: "The whole-child promise is tested",
-  emphasis: "in life beyond school.",
+  title: "School ends. What it",
+  emphasis: "builds continues.",
   subhead:
-    "Alumni stories can show how discipline, confidence, friendships, responsibility and academic direction continue to shape lives long after the school years.",
+    "For more than five decades, generations of students have carried their Dalhousie experience into lives far beyond the campus. Different professions. Different cities. Different ambitions. Yet the confidence, discipline, friendships, responsibility and memories built during school often remain part of the journey.",
   primary: "Explore Alumni Stories",
   secondary: "Share Your Story",
   image: img.alumniHero,
   image2: img.alumniSplit,
-  closeEyebrow: "Story standards",
+  closeEyebrow: "The real measure of school",
   pulls: [
     {
       slot: "grid",
@@ -308,49 +325,53 @@ export const alumni: PageCopy = {
   meta: {
     title: "Alumni, Dalhousie Public School",
     description:
-      "The Dalhousie alumni community: stories of direction, service and leadership, campus memories, alumni events and how to share your story.",
+      "A community across generations: alumni stories, memories that stay, reunions and events, and an invitation to share where life took you after Dalhousie.",
   },
   blocks: [
     {
-      h: "The Dalhousie alumni community",
+      h: "A community across generations",
       p: [
-        "The Dalhousie alumni community connects generations of students to the School, its campuses and the values that continue beyond the school years.",
+        "Once part of Dalhousie, always part of its story. Dalhousie alumni represent different generations, interests and walks of life. Some journeys may be defined by professional achievement. Others by service, entrepreneurship, creativity, leadership or contribution to a community.",
+        "There is no single Dalhousie outcome. The common thread is a school experience that continues to mean something after the uniform has been put away.",
       ],
     },
     {
-      h: "Stories of direction",
+      h: "Alumni stories",
       p: [
-        "Alumni stories trace academic and career journeys with the context that matters: how interests developed, which choices shaped the path and what the individual carried forward from Dalhousie.",
+        "Different paths. Individual journeys. Each story carries the alumnus, their batch and year, and the field or role their life took them into.",
+        "The expanded story covers the Dalhousie years, the journey after, what stayed with them, and a personal reflection or message for current students.",
       ],
     },
     {
-      h: "Service and leadership",
+      h: "Alumni across the years",
       p: [
-        "Alumni journeys reflect contribution across defence, public service, business, the professions, creative work, community and other fields.",
+        "Journeys are grouped by decade, batch, campus and field, across service and defence, business and entrepreneurship, and creative and professional careers.",
       ],
     },
     {
-      h: "Memories that reveal the School",
+      h: "Memories that stay",
       p: [
-        "Memories of teachers, houses, routines, friendships, sport, mountains and formative moments make the culture visible.",
+        "A teacher. A friendship. A habit. A value. An experience that continued to matter long after school, alongside the photographs that carry it.",
       ],
     },
     {
-      h: "Alumni events",
+      h: "Alumni events & reunions",
       p: [
-        "Current reunion, mentoring, speaking and community opportunities give alumni meaningful ways to remain connected and contribute.",
+        "Come back to where the journey began. Reunions, alumni meets, talks and community initiatives are listed here with dates, locations and details.",
+        "Each entry expands to reveal the complete event information, photographs or post-event highlights.",
       ],
     },
     {
-      h: "Share an alumni story",
+      h: "Share your Dalhousie story.",
       p: [
-        "Submit a story with consent and supporting details for verification and editorial review.",
+        "Your story is part of ours. We invite alumni to share where life took them after Dalhousie, and the people, experiences or memories from school that stayed with them.",
       ],
     },
     {
-      h: "Story standards",
+      h: "The real measure of school appears over time.",
       p: [
-        "Every alumni story is verified and shared with the required permissions, so memories and achievements remain accurate and respectful.",
+        "A Dalhousie education is intended to prepare children for more than one examination or one milestone. Its real impact continues to reveal itself in how former students learn, adapt, communicate, contribute and take responsibility long after school ends.",
+        "Every alumni journey adds another chapter to the Dalhousie story.",
       ],
     },
   ],
@@ -427,11 +448,11 @@ export const policiesDisclosures: PageCopy = {
 export const contact: PageCopy = {
   slug: "/contact",
   nav: "Contact Us",
-  kicker: "Reach the right Dalhousie team",
-  title: "Choose the campus or",
-  emphasis: "purpose of your enquiry.",
+  kicker: "Contact Dalhousie",
+  title: "How can",
+  emphasis: "we help?",
   subhead:
-    "Use the contact routes below for admissions, campus information, policies or general School communication.",
+    "Whether you are exploring admissions, planning a campus visit or simply want to know more about Dalhousie, our teams are here to help. Choose the campus you would like to connect with, or send us a message and we will get in touch shortly.",
   primary: "Contact a Campus",
   secondary: "Book a Visit",
   image: img.contactHero,
@@ -440,7 +461,7 @@ export const contact: PageCopy = {
   meta: {
     title: "Contact Us, Dalhousie Public School",
     description:
-      "Group contact, Dalhousie Campus and New Chandigarh Campus addresses, admissions routing, department contacts and a general enquiry form.",
+      "Dalhousie Campus and New Chandigarh Campus contacts, admissions routing, and a general enquiry form for anything else.",
   },
   blocks: [],
 };

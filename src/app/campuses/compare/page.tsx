@@ -25,7 +25,7 @@ const CAMPUSES = [
     key: "dal" as const,
     name: "Dalhousie Campus",
     label: "The Mountain Campus",
-    line: "Formed for life. Far from distraction. Close to what matters.",
+    line: "A World Away. Ready For The World.",
     image: img.dalHero,
     href: "/campuses/dalhousie",
     marks: ["Full residential", "CBSE", "Himalayan setting"],
@@ -34,10 +34,10 @@ const CAMPUSES = [
     key: "chd" as const,
     name: "New Chandigarh Campus",
     label: "The Modern Campus",
-    line: "Built for tomorrow. All-Round. Without the Running Around.",
+    line: "All-Round. Without the Running Around.",
     image: img.chdHero,
     href: "/campuses/new-chandigarh",
-    marks: ["Day to full residential", "Toddler to Senior", "City-connected"],
+    marks: ["Boarding & day boarding", "Early Years to Senior", "City-connected"],
   },
 ];
 
@@ -46,62 +46,77 @@ const CLUSTERS: {
   rows: { dimension: string; dal: string; chd: string }[];
 }[] = [
   {
-    title: "Setting and daily rhythm",
+    title: "Campus character and daily rhythm",
     rows: [
       {
-        dimension: "Campus role",
-        dal: "The original Himalayan home of the School.",
-        chd: "The contemporary Dalhousie experience.",
+        dimension: "Campus character",
+        dal: "Immersive. Residential. Mountain-shaped. The environment and residential rhythm are central to the child's formation.",
+        chd: "Contemporary. Connected. Future-facing. The campus brings a wider range of learning and developmental opportunities together within one ecosystem.",
       },
       {
-        dimension: "Environment",
-        dal: "Terrain, weather and distance participate in the education, and reduce distraction.",
-        chd: "A contemporary campus with greater flexibility and proximity to the city.",
+        dimension: "Daily rhythm",
+        dal: "A deeply structured residential day shaped by classrooms, guided preparation, sport, house life, shared meals, mentoring and routine.",
+        chd: "A connected campus rhythm designed to bring academics, preparation, sport, confidence and wider development together with less running around.",
       },
       {
-        dimension: "Residential model",
-        dal: "Full residential immersion. Boarding is preparation, not separation.",
-        chd: "Day, day-boarding, weekly and full residential models.",
+        dimension: "Residential experience",
+        dal: "Full residential immersion sits at the heart of the campus experience. House life, routines, prep, friendships and everyday responsibility become part of the education.",
+        chd: "Greater flexibility across the campus formats available to the relevant age and stage, designed to bring more continuity to the child's day.",
       },
     ],
   },
   {
-    title: "Academics and pathways",
+    title: "Academics, pathways and sport",
     rows: [
       {
-        dimension: "Academic journey",
-        dal: "CBSE with concept depth, guided prep, testing and mentoring inside a residential rhythm.",
-        chd: "A stage ladder from Toddler and Early Years through Primary, Middle and Senior School.",
+        dimension: "Academic experience",
+        dal: "CBSE education within a protected residential rhythm, supported by Competitive Edge, guided preparation, testing and mentoring.",
+        chd: "An age-and-stage academic journey with increasing choice, confidence and pathway readiness from the early years through senior school.",
       },
       {
-        dimension: "Preparation pathways",
-        dal: "Competitive Edge, with a natural fit for the Defence Pathway through discipline and service.",
-        chd: "Competitive Edge, Scholars Track, Achievers Track and wider routes by age and stage.",
+        dimension: "Defence Pathway",
+        dal: "A particularly natural connection with the Defence Pathway through residential discipline, physical environment, service orientation and NDA relevance.",
+        chd: "Students may engage with relevant Defence Pathway elements subject to stage, programme and campus availability.",
       },
       {
-        dimension: "Sport and student life",
-        dal: "House sport, competitive teams, outdoor education and the mountain itself.",
-        chd: "Sport, clubs, speaking, leadership and confirmed specialist opportunities.",
+        dimension: "Sports & physical development",
+        dal: "Mountain terrain, outdoor movement, sport and physical challenge naturally support fitness, courage and resilience.",
+        chd: "Sport and physical development sit within the wider all-round campus experience, alongside confidence, leadership and exposure.",
       },
     ],
   },
   {
-    title: "Fit, outcome and care",
+    title: "Independence, confidence and fit",
     rows: [
       {
-        dimension: "Parent fit",
-        dal: "Families seeking a true boarding experience, distance from distraction and residential immersion.",
-        chd: "Families seeking academic choice, communication, confidence, exposure and flexibility.",
+        dimension: "Independence",
+        dal: "Independence grows through full residential life, house responsibility, self-management and distance from everyday parental supervision.",
+        chd: "Independence develops progressively through age-appropriate responsibility, participation and the available campus experience.",
       },
       {
-        dimension: "Student outcome",
-        dal: "Grounded. Resilient. Respectful. Independent. Physically confident.",
-        chd: "Articulate. Adaptive. Confident. Choice-ready. Globally aware.",
+        dimension: "Confidence & communication",
+        dal: "Confidence grows through residential participation, house culture, assemblies, outdoor challenge, speaking and responsibility.",
+        chd: "Communication, participation and leadership are particularly visible within the contemporary campus experience.",
       },
       {
-        dimension: "Pastoral care",
-        dal: "House parents, mentors and campus teams, with clear communication and escalation.",
-        chd: "Mentors, supervision, medical support and safeguarding on the same parent-connect system.",
+        dimension: "The child who steps out",
+        dal: "Grounded. Resilient. Respectful. Independent. Physically confident. Designed to help children become stronger from within.",
+        chd: "Articulate. Adaptive. Confident. Choice-ready. Globally aware. Designed to help children become more expressive, adaptable and ready to respond to wider possibilities.",
+      },
+    ],
+  },
+  {
+    title: "What does not change",
+    rows: [
+      {
+        dimension: "Closer to your family if you are seeking",
+        dal: "A true residential-school experience, greater independence and self-reliance, distance from urban distraction, strong routine and house culture, outdoor strength and resilience, academic seriousness within a protected residential day, and strong alignment with defence-oriented aspirations.",
+        chd: "Academic choice, confidence and communication, wider exposure, greater flexibility, contemporary learning, future pathway readiness, and all-round development without a fragmented schedule.",
+      },
+      {
+        dimension: "One Dalhousie philosophy",
+        dal: "The whole child, serious preparation, confidence that is trained, responsibility that grows, care that stays close and growth that becomes visible.",
+        chd: "The whole child, serious preparation, confidence that is trained, responsibility that grows, care that stays close and growth that becomes visible.",
       },
     ],
   },

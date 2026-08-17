@@ -110,12 +110,12 @@ export default function Hero() {
             <span className="eyebrow text-brass-soft">Est. 1970 &middot; Himachal Himalayas</span>
           </div>
 
-          {/* Campaign hero, page 1 of Website Copy Draft 2 */}
+          {/* Campaign hero: the whole child for the whole future. */}
           <h1
             className="hero-rise mt-7 max-w-4xl font-display leading-[0.95] text-paper"
             style={{ animationDelay: "0.22s", fontSize: "clamp(2.5rem, 5.6vw, 5.2rem)" }}
           >
-            Your child does not need two lives
+            Your child should not need two lives
             <span className="block italic text-brass-soft">to prepare for one future.</span>
           </h1>
 
@@ -125,14 +125,16 @@ export default function Hero() {
             className="hero-rise mt-7 max-w-xl text-lg leading-relaxed text-paper/85 [text-wrap:pretty]"
             style={{ animationDelay: "0.48s" }}
           >
-            School, preparation, sport, confidence, responsibility and care do not exist as
-            separate shifts in a child&apos;s life. At Dalhousie, they come together inside one
-            better-designed day, so ambition can grow without childhood being pulled apart.
+            School. Tuition. Sports. Enrichment classes. Homework. Screens. Travel. For most
+            children, preparation has become a second life after school. Dalhousie brings
+            academics, preparation, sport, responsibility, confidence and character into one
+            complete environment, so a child prepares seriously without losing their childhood
+            in the process.
           </p>
 
           <div className="hero-rise mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "0.58s" }}>
             <BookVisitButton className="rounded-full bg-brass-soft px-8 py-4 text-sm font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5">
-              Book a Dalhousie visit
+              Book a visit
             </BookVisitButton>
             <Link
               href="/the-dalhousie-day"

@@ -10,19 +10,19 @@ export default function CTA() {
       <div className="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center sm:px-8">
         <div className="flex justify-center">
           <span className="flex items-center gap-3">
-            <span className="eyebrow text-brass-soft">Visit Us</span>
+            <span className="eyebrow text-brass-soft">The whole child for the whole future</span>
           </span>
         </div>
 
         <h2 className="mt-6 font-display text-4xl leading-[1.02] text-paper sm:text-6xl">
-          You will not lie awake <span className="italic text-brass-soft">wondering.</span>
+          A child should not have to choose between{" "}
+          <span className="italic text-brass-soft">achievement and childhood.</span>
         </h2>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-sage-soft">
-          Because you will have met the people who will know your child by name,
-          seen the room where they will sleep, and stood in the air they will
-          breathe every morning. Choosing a school is a big decision. Come and
-          make it with your own eyes.
+          One school philosophy. Two distinct campus experiences. Seven pathways of preparation.
+          And one belief at the centre of everything. Choosing a school is a big decision. Come
+          and make it with your own eyes.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-3">

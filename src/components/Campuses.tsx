@@ -8,10 +8,14 @@ export default function Campuses() {
   return (
     <section id="campuses" className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
       <Reveal>
-        <Eyebrow>Our Campuses</Eyebrow>
+        <Eyebrow>Two campuses. One philosophy.</Eyebrow>
         <h2 className="mt-6 max-w-3xl text-4xl leading-[1.02] text-pine sm:text-5xl">
-          One school, two homes in the hills.
+          Find the Dalhousie experience that fits your child.
         </h2>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-mist [text-wrap:pretty]">
+          Both campuses share the same commitment to the whole child. What changes is the
+          environment, the rhythm and the kind of experience a family is seeking.
+        </p>
       </Reveal>
 
       <div className="mt-12 grid gap-x-10 gap-y-14 lg:grid-cols-2">

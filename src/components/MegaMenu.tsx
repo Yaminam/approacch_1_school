@@ -10,7 +10,7 @@ const USEFUL = [
   { label: "Admissions", href: "/admissions" },
   { label: "Visit Us", href: "/visit-us" },
   { label: "Prospectus", href: "/prospectus" },
-  { label: "FAQs", href: "/faqs" },
+  { label: "FAQs", href: "/admissions/faqs" },
 ];
 
 export default function MegaMenu({
@@ -156,7 +156,7 @@ export default function MegaMenu({
             <Link href="/policies" onClick={go} className="transition-colors hover:text-clay">
               Policies
             </Link>
-            <Link href="/faqs" onClick={go} className="transition-colors hover:text-clay">
+            <Link href="/admissions/faqs" onClick={go} className="transition-colors hover:text-clay">
               FAQs
             </Link>
             <Link href="/visit-us" onClick={go} className="transition-colors hover:text-clay">

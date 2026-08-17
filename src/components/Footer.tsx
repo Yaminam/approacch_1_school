@@ -16,8 +16,9 @@ export default function Footer() {
               className="h-11 w-auto [filter:brightness(0)_invert(1)]"
             />
             <p className="mt-5 max-w-sm leading-relaxed text-sage-soft [text-wrap:pretty]">
-              Exceptional by Nature. Fifty-four years of alpine boarding in the
-              Himachal Himalayas, and a modern campus in New Chandigarh.
+              Exceptional by Nature. The whole child for the whole future,
+              across the Mountain Campus in the Himachal Himalayas and the
+              Modern Campus in New Chandigarh.
             </p>
           </div>
 

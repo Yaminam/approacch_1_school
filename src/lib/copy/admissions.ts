@@ -1,21 +1,26 @@
 import type { PageCopy } from "./types";
 import { img } from "../images";
 
-/* Pages 31 to 37 of Website Copy Draft 2: the admissions journey. */
+/* The admissions journey, transcribed from Final Reviewed Content - DPS.
+
+   The reviewed content sets the admission rule plainly: no entrance test up to
+   Grade II, an entrance/diagnostic assessment from Grade III onwards, and
+   registration that begins the process without confirming a place. Every page
+   below states it the same way. */
 
 export const admissions: PageCopy = {
   slug: "/admissions",
   nav: "Admissions",
-  kicker: "Begin the Dalhousie journey",
-  title: "Find your",
-  emphasis: "Dalhousie experience.",
+  kicker: "Join Dalhousie",
+  title: "Find the right beginning",
+  emphasis: "for your child.",
   subhead:
-    "Choosing a school begins with fit. Understand the two campuses, explore the programmes, ask the questions that matter and experience the day before you decide.",
-  primary: "Book a Visit",
-  secondary: "Apply Now",
+    "Choosing a school is about more than completing an application. It is about finding an environment in which your child can learn seriously, grow confidently and become increasingly ready for the future.",
+  primary: "Begin an Enquiry",
+  secondary: "Book a Visit",
   image: img.admissionsHero,
   image2: img.admissionsSplit,
-  closeEyebrow: "When you are ready",
+  closeEyebrow: "Start with a conversation",
   pulls: [
     {
       slot: "grid",
@@ -33,61 +38,55 @@ export const admissions: PageCopy = {
   meta: {
     title: "Admissions, Dalhousie Public School",
     description:
-      "Choose the right campus, understand the process and fees, book a visit, download the prospectus, speak to admissions or begin your application.",
+      "Choose the right campus, understand the admission journey and the fees, book a visit, speak to admissions or begin your enquiry.",
   },
   blocks: [
     {
-      h: "Choose the right campus",
+      h: "Start with the right campus.",
       p: [
-        "Begin with the campus that fits your family. The Mountain Campus and the Modern Campus carry the same Dalhousie promise through different environments, levels of residential depth and parent choices.",
+        "One Dalhousie. Two ways to grow. The two campuses offer distinct expressions of the same Dalhousie philosophy. Dalhousie Campus, the Mountain Campus, offers a deeper residential experience shaped by mountain discipline, academic seriousness, house culture, outdoor strength and growing independence.",
+        "New Chandigarh Campus, the Modern Campus, brings academics, preparation, confidence, sport, leadership and future pathways together within a contemporary environment. Before applying, families can understand both experiences and choose the one that feels closer to what their child needs.",
       ],
     },
     {
-      h: "Find Your Campus",
+      h: "A simple admission journey",
       p: [
-        "Find Your Campus considers the child's stage, residential preference, academic needs and family priorities through six short questions.",
+        "Clear steps. Personal guidance. The admission process begins with registration. For children applying up to Grade II, there is no entrance test. From Grade III onwards, students complete an entrance or diagnostic assessment before admission is confirmed.",
+        "01 Register: complete the registration form with the student and parent details. 02 Understand the child: applicants up to Grade II are taken forward without an entrance test, while Grade III onwards complete an assessment. 03 Admission confirmation: the School communicates the decision and next formalities. 04 Complete formalities: submit the required documentation and fee payment to confirm the seat.",
       ],
     },
     {
-      h: "Entry points and programmes",
+      h: "Understand the fees",
       p: [
-        "Admissions information lists the grades, programmes and residential models currently open at each campus.",
+        "Parents should be able to understand the financial commitment clearly before completing admission.",
+        "The published schedules set out tuition, boarding or day-boarding charges, deposits, the instalment plan and the concessions available.",
       ],
     },
     {
-      h: "Understand the process",
+      h: "See Dalhousie before you decide.",
       p: [
-        "See the journey from enquiry and campus consultation to visit, application, assessment or interaction, offer, confirmation and joining.",
+        "A school should be experienced, not only researched. A campus visit gives families the opportunity to understand the environment, see the spaces and speak with the admissions team before making a decision.",
+        "Parents can choose the campus and preferred visit date, after which the School team confirms the visit.",
       ],
     },
     {
-      h: "Review fees clearly",
+      h: "Have a question?",
       p: [
-        "Compare approved fees by campus, grade and residential model, with inclusions, exclusions, payment schedule and last-updated date.",
+        "If you are still deciding between campuses, want to understand the appropriate grade, boarding format, fees or admission process, send us an enquiry.",
+        "Our admissions team will connect with you and help you understand the next step.",
       ],
     },
     {
-      h: "Visit before you decide",
+      h: "Frequently asked questions",
       p: [
-        "A visit allows the family to experience the day, meet the team, see the environment and ask questions in context.",
+        "From entrance requirements and registration to fees, visits and boarding, find quick answers to the questions parents ask most often.",
       ],
     },
     {
-      h: "Download the prospectus",
+      h: "Start with a conversation.",
       p: [
-        "The prospectus provides a concise overview of the Dalhousie promise, campuses, programmes, admissions process and contacts.",
-      ],
-    },
-    {
-      h: "Speak to admissions",
-      p: [
-        "Admissions helps the family understand fit, not simply complete a form. Clear campus-specific contact routes connect each family to the right team.",
-      ],
-    },
-    {
-      h: "Ready to apply?",
-      p: [
-        "Families who are ready can move into the approved application platform with clear requirements and support.",
+        "Every child and every family begins from a different place.",
+        "Tell us what you are looking for. We will help you understand the Dalhousie experience and the next step in your child's admission journey.",
       ],
     },
   ],
@@ -97,20 +96,20 @@ export const admissionProcess: PageCopy = {
   kind: "sequence",
   slug: "/admissions/process",
   nav: "Admission Process",
-  kicker: "A clear path from enquiry to joining",
-  title: "Know what",
-  emphasis: "happens next.",
+  kicker: "The admission process",
+  title: "A clear path to",
+  emphasis: "joining Dalhousie.",
   subhead:
-    "The admissions journey is considered, transparent and human. Each step helps the School and family understand whether the experience is the right fit for the child.",
-  primary: "Start an Enquiry",
-  secondary: "Apply Now",
+    "We want the admission process to help families understand the School while allowing us to understand the child. The journey begins with registration and varies slightly according to the grade for which the child is applying.",
+  primary: "Begin an Enquiry",
+  secondary: "Book a Visit",
   image: img.processHero,
   image2: img.processSplit,
-  closeEyebrow: "Need help?",
+  closeEyebrow: "Welcome to Dalhousie",
   pulls: [
     {
       slot: "grid",
-      line: "Step three is the one that decides it for most families. Choose your morning.",
+      line: "A visit is the step that decides it for most families. Choose your morning.",
       label: "Book a Visit",
       alt: "Speak to Admissions",
     },
@@ -118,61 +117,42 @@ export const admissionProcess: PageCopy = {
   meta: {
     title: "Admission Process, Dalhousie Public School",
     description:
-      "Eight steps from enquiry and campus consultation to visit, application, documents, assessment, offer and joining preparation.",
+      "Registration, the admission interaction or assessment from Grade III onwards, admission confirmation, documents and fee formalities, and joining Dalhousie.",
   },
   blocks: [
     {
-      h: "1. Enquiry",
+      h: "Step 1. Complete registration",
       p: [
-        "Share the child's age, grade, current school, preferred campus, residential interest and the questions most important to your family.",
+        "Parents begin by completing the registration form with the student's details, parent or guardian information, contact details, current school and the grade being applied for.",
+        "The registration material also asks for proof of the child's date of birth and records the requested residential format. Registration begins the admission process; it does not by itself confirm admission.",
       ],
     },
     {
-      h: "2. Campus consultation",
+      h: "Step 2. Admission interaction or assessment",
       p: [
-        "An admissions counsellor helps the family understand campus fit, available programmes, residential models and the next appropriate step.",
+        "Up to Grade II, no entrance test is required. Once registration is complete, the admissions team will guide the family through the relevant next steps for admission.",
+        "Students applying for Grade III and above complete an entrance or diagnostic assessment. The assessment helps the School understand the child's current academic level and readiness for the grade being applied for.",
       ],
     },
     {
-      h: "3. Campus visit",
+      h: "Step 3. Admission confirmation",
       p: [
-        "Visit the campus, experience the environment and discuss academics, preparation, care, fees and daily rhythm.",
+        "Once the relevant process has been completed, the admissions team communicates the admission outcome and guides parents through the next formalities.",
+        "Any additional information required for the relevant grade or campus will be communicated directly to the family.",
       ],
     },
     {
-      h: "4. Application",
+      h: "Step 4. Documents & fee formalities",
       p: [
-        "Complete the approved application form and submit the required information through the School's selected platform.",
+        "Admission is completed once the required documentation and applicable admission fees and dues have been submitted.",
+        "Parents should refer to the current fee schedule for the campus and residential format selected.",
       ],
     },
     {
-      h: "5. Required documents",
+      h: "Step 5. Welcome to Dalhousie",
       p: [
-        "Required documents are listed by campus and grade, with clear file and verification requirements.",
-      ],
-    },
-    {
-      h: "6. Assessment or interaction",
-      p: [
-        "The admissions team explains the purpose, format, participants, preparation expectations and any grade-specific differences before the interaction.",
-      ],
-    },
-    {
-      h: "7. Offer and confirmation",
-      p: [
-        "The offer communication sets out its validity period, fee or payment requirement and the steps for accepting the place.",
-      ],
-    },
-    {
-      h: "8. Joining preparation",
-      p: [
-        "After confirmation, families receive the approved joining pack, calendar, uniform information, residential checklist, medical forms and orientation details.",
-      ],
-    },
-    {
-      h: "Need help at any stage?",
-      p: [
-        "Contact the correct admissions team at any stage and receive confirmation after each digital submission.",
+        "Once admission formalities are complete, the School will share the information required to prepare the child and family for joining.",
+        "A new school journey begins here.",
       ],
     },
   ],
@@ -182,12 +162,12 @@ export const fees: PageCopy = {
   kind: "sequence",
   slug: "/admissions/fees",
   nav: "Fees",
-  kicker: "Transparent, current and campus-specific",
-  title: "Clear fees.",
-  emphasis: "Clear choices.",
+  kicker: "Fees & dues",
+  title: "Clear information",
+  emphasis: "before you decide.",
   subhead:
-    "Select the campus, grade and residential model to view the approved fee structure. Every figure carries an effective date and a clear explanation of what is included.",
-  primary: "Compare Fees",
+    "The fee structure varies by campus, grade and whether the child joins as a boarder or a day boarder. The figures published here reflect the New Chandigarh Fee & Dues schedules for 2026 supplied by the School.",
+  primary: "Enquire About Fees",
   secondary: "Speak to Admissions",
   image: img.feesHero,
   image2: img.feesSplit,
@@ -203,55 +183,41 @@ export const fees: PageCopy = {
   meta: {
     title: "Fees, Dalhousie Public School",
     description:
-      "Approved fees by campus, grade and residential model, with inclusions, exclusions, payment schedule, refund terms and effective dates.",
+      "New Chandigarh 2026 fee and dues schedules for boarding and day boarding, with the instalment plan, concessions and the expenses charged separately.",
   },
   blocks: [
     {
-      h: "Select your campus",
-      p: ["Choose Dalhousie Campus or New Chandigarh Campus."],
-    },
-    {
-      h: "Select the child's grade",
-      p: ["Only grades currently offered at the selected campus appear."],
-    },
-    {
-      h: "Select the residential model",
+      h: "Select the campus, grade and format",
       p: [
-        "Choose from the approved day, day-boarding, weekly boarding, full residential or other available models.",
-      ],
-    },
-    {
-      h: "Fee structure",
-      p: [
-        "Tuition, boarding, meals, activities, deposits, transport and other approved components appear in one consistent format.",
-      ],
-    },
-    {
-      h: "What is included",
-      p: ["The approved services and experiences included in the displayed fee are listed clearly."],
-    },
-    {
-      h: "What is not included",
-      p: [
-        "Uniform, books, examination fees, travel, specialist programmes and refundable deposits are shown separately where applicable.",
+        "Fees differ by campus, by grade band and by whether the child joins as a boarder or a day boarder. Select the combination that applies to your child to see the approved record.",
       ],
     },
     {
       h: "Payment schedule",
       p: [
-        "The payment schedule sets out due dates, instalments, approved payment methods and applicable late-payment information.",
+        "Tuition fees, and for boarders, boarding and lodging fees, are payable across three instalments: at the time of admission, in the first week of July and in the first week of September.",
+        "Other dues are cleared with the first instalment. Late payment is charged at 2% per month.",
       ],
     },
     {
-      h: "Refund and withdrawal",
+      h: "Concessions",
       p: [
-        "View the current approved policy for complete refund, withdrawal and notice-period terms.",
+        "A 3.5% discount is provided when the applicable annual fee is paid in a single instalment. For day boarding this applies to the Annual Tuition Fee; for boarding it applies to Annual Tuition Fee plus Boarding & Lodging.",
+        "Parents with more than one child in the School receive a 10% concession on Annual Tuition Fee for the additional child or children. Parents from the Armed Forces receive a 10% reduction on Annual Tuition Fee.",
       ],
     },
     {
-      h: "Important information",
+      h: "Additional expenses",
       p: [
-        "Every fee record states the academic year, effective date and applicable tax treatment. Any revision is published only after formal School approval.",
+        "Clothing and uniforms, equipment, transport, books, stationery and specified miscellaneous expenses are charged separately or as actuals according to the applicable fee schedule.",
+        "For boarding students, educational trips and excursions are charged as actuals, while specified personal expenses such as laundry, birthday celebrations and toiletries may be debited from the sundry deposit.",
+      ],
+    },
+    {
+      h: "Dalhousie Campus fees",
+      p: [
+        "The approved 2026/27 fee and dues schedule for Dalhousie Campus is issued directly by the admissions office.",
+        "We publish a figure only once it has been formally approved for the current year, so please ask admissions for the schedule that applies to your child.",
       ],
     },
   ],
@@ -261,11 +227,11 @@ export const bookAVisit: PageCopy = {
   kind: "sequence",
   slug: "/admissions/book-a-visit",
   nav: "Book a Visit",
-  kicker: "See the Dalhousie experience in action",
-  title: "Visit the day,",
-  emphasis: "not only the buildings.",
+  kicker: "Book a campus visit",
+  title: "See where your",
+  emphasis: "child could grow.",
   subhead:
-    "A campus visit lets you experience the rhythm: how children learn, prepare, speak, play, eat, live and relate to the adults around them.",
+    "Photographs can introduce a campus. A visit lets you understand its rhythm. Come and experience the environment, understand the school day and speak with our team about what you are looking for in your child's education.",
   primary: "Book My Visit",
   secondary: "Call Admissions",
   image: img.visitHero,
@@ -278,27 +244,23 @@ export const bookAVisit: PageCopy = {
   },
   blocks: [
     {
-      h: "Choose a campus",
+      h: "Choose your campus",
       p: [
-        "Choose Dalhousie Campus, New Chandigarh Campus or 'Help me choose'. A short campus description helps families who are still deciding.",
+        "Dalhousie Campus, the Mountain Campus: experience the original Himalayan home of Dalhousie Public School and understand its residential rhythm, academic environment and mountain setting.",
+        "New Chandigarh Campus, the Modern Campus: explore the contemporary campus experience and understand how academics, preparation, sport, confidence and wider development come together.",
       ],
     },
     {
-      h: "Tell us about your child",
+      h: "Plan your visit",
       p: [
-        "Student name, age, current grade, intended entry grade, current school and residential interest.",
-      ],
-    },
-    {
-      h: "Tell us what matters to your family",
-      p: [
-        "Choose academics, Competitive Edge, Defence Pathway, residential life, early years, sport, confidence, care, fees or another area.",
+        "Tell us a little about your child and when you would like to visit. Our admissions team will connect with you to confirm the details.",
       ],
     },
     {
       h: "Choose a preferred date",
       p: [
-        "Choose from the available visit windows. Your visit is confirmed after the admissions team contacts you.",
+        "Choose from the available visit windows, and tell us your preferred campus and residential format where applicable.",
+        "Your visit is confirmed after the admissions team contacts you.",
       ],
     },
     {
@@ -308,15 +270,22 @@ export const bookAVisit: PageCopy = {
       ],
     },
     {
-      h: "Before your visit",
+      h: "Before you come",
       p: [
-        "Before your visit, we will share directions, the arrival point, expected duration, identification requirements, accessibility information and a contact number.",
+        "If there are particular questions you want answered, about academics, residential life, future pathways, the admission process or fees, mention them while booking.",
+        "It helps our team make the visit more useful for your family.",
       ],
     },
     {
       h: "Alternative contact",
       p: [
         "Need help sooner? Contact the admissions team by telephone or approved WhatsApp.",
+      ],
+    },
+    {
+      h: "A campus can feel very different once you are inside it.",
+      p: [
+        "See the environment. Meet the people. Ask the questions that matter to your family.",
       ],
     },
   ],
@@ -326,11 +295,11 @@ export const enquire: PageCopy = {
   kind: "sequence",
   slug: "/admissions/enquire",
   nav: "Enquire & Prospectus",
-  kicker: "Start the right conversation",
-  title: "Tell us what your",
-  emphasis: "family is looking for.",
+  kicker: "Admissions enquiry",
+  title: "Tell us what you",
+  emphasis: "are looking for.",
   subhead:
-    "Share a few details about the child and your priorities. The enquiry will be routed to the appropriate campus team, and you can access the current prospectus.",
+    "Whether you have already chosen a campus or are only beginning to explore Dalhousie, our admissions team can help you understand the options available for your child. Complete the short form and we will get in touch.",
   primary: "Submit Enquiry",
   secondary: "Download Prospectus",
   image: img.enquireHero,
@@ -343,25 +312,32 @@ export const enquire: PageCopy = {
   },
   blocks: [
     {
-      h: "Campus interest",
-      p: ["Choose Dalhousie Campus, New Chandigarh Campus or 'Help me choose'."],
-    },
-    {
       h: "Student information",
-      p: ["Name, age, current grade, intended entry year, intended grade and current school."],
-    },
-    {
-      h: "Residential preference",
-      p: ["Choose the residential option currently available for the selected campus."],
+      p: ["Student's full name, grade applying for and academic year."],
     },
     {
       h: "Parent contact details",
-      p: ["Name, relationship, email, telephone, city and preferred contact method."],
+      p: ["Parent or guardian name, phone number, email address, city of residence, state and pincode."],
     },
     {
-      h: "Your priorities",
+      h: "Preferred campus",
+      p: ["Dalhousie Campus, New Chandigarh Campus, or not sure yet."],
+    },
+    {
+      h: "Preferred format",
+      p: ["Boarding, day boarding, or not sure yet, so the enquiry reaches the right admissions team."],
+    },
+    {
+      h: "Not sure which campus?",
       p: [
-        "Choose academics, preparation, confidence, sport, residential life, Defence Pathway, early years, fees, care or another question.",
+        "That is completely fine. Tell us your child's grade, the kind of school experience you are seeking and whether you are considering residential education.",
+        "The admissions team can help you understand the difference between the two campus experiences before you decide.",
+      ],
+    },
+    {
+      h: "Already ready to visit?",
+      p: [
+        "If you would rather experience Dalhousie before taking the application forward, schedule a campus visit.",
       ],
     },
     {
@@ -371,10 +347,10 @@ export const enquire: PageCopy = {
       ],
     },
     {
-      h: "Prospectus access",
+      h: "What happens next",
       p: [
-        "Download the current Dalhousie Public School prospectus.",
-        "Thank you for contacting Dalhousie Public School. Your enquiry has been routed to the relevant admissions team. We will respond through your preferred contact method.",
+        "Thank you for contacting Dalhousie Public School. Your enquiry is routed to the relevant admissions team.",
+        "We will respond through your preferred contact method.",
       ],
     },
   ],
@@ -384,12 +360,12 @@ export const apply: PageCopy = {
   kind: "sequence",
   slug: "/admissions/apply",
   nav: "Apply Now",
-  kicker: "Begin your application",
+  kicker: "Begin your registration",
   title: "Ready to take",
   emphasis: "the next step?",
   subhead:
-    "Review the requirements, select the campus and programme, and continue to the School's approved application platform.",
-  primary: "Start Application",
+    "Registration begins the admission process. Complete the form with your child's and family's details, and the admissions team will guide you through the step that applies to the grade you are applying for.",
+  primary: "Start Registration",
   secondary: "Get Help",
   image: img.applyHero,
   image2: img.applySplit,
@@ -405,53 +381,56 @@ export const apply: PageCopy = {
   meta: {
     title: "Apply Now, Dalhousie Public School",
     description:
-      "Prepare your documents, choose the campus, programme and grade, review the requirements and continue to the approved application platform.",
+      "Complete registration with your child's details, understand the assessment that applies to the grade, and confirm the seat through documents and fee formalities.",
   },
   blocks: [
     {
       h: "Before you begin",
       p: [
-        "Prepare the child's basic information, parent or guardian details, current school information and the documents listed for the selected grade.",
+        "Prepare the child's basic personal and school details, parent or guardian information, contact details, the grade being applied for and proof of the child's date of birth.",
+        "The registration form also records the residential format you are requesting.",
       ],
     },
     {
       h: "Choose a campus",
       p: [
-        "Choose Dalhousie Campus or New Chandigarh Campus. Only grades and residential models currently open for application are shown.",
+        "Choose Dalhousie Campus or New Chandigarh Campus. Only grades and residential formats currently open for admission are shown.",
       ],
     },
     {
-      h: "Choose the programme and grade",
+      h: "Up to Grade II",
       p: [
-        "Choose the programme, grade and residential model for which you wish to apply. Unavailable combinations do not appear.",
+        "No entrance test is required. Once registration is complete, the admissions team will guide the family through the relevant next steps for admission.",
       ],
     },
     {
-      h: "Application requirements",
+      h: "Grade III onwards",
       p: [
-        "Before you begin, review the age criteria, required documents, assessment or interaction process and any campus-specific conditions.",
+        "Students applying for Grade III and above complete an entrance or diagnostic assessment, which helps the School understand the child's current academic level and readiness for the grade being applied for.",
       ],
     },
     {
-      h: "Continue to the application platform",
-      p: ["Continue to the School's secure application system."],
+      h: "Registration is not admission.",
+      p: [
+        "Registration begins the admission process but does not by itself confirm admission. The School completes the applicable admission steps before confirming the seat.",
+      ],
     },
     {
-      h: "Technical help",
+      h: "Documents and fee formalities",
       p: [
-        "Need technical help? Contact admissions for support with login, payment, document upload or form completion.",
+        "Admission is completed once the required documentation and applicable admission fees and dues have been submitted, against the current fee schedule for the campus and residential format selected.",
+      ],
+    },
+    {
+      h: "Need help?",
+      p: [
+        "Contact admissions for support with the form, documents, payment or any question about the grade your child is applying for.",
       ],
     },
     {
       h: "Privacy and consent",
       p: [
-        "Your application information is processed for admissions in accordance with the approved privacy notice.",
-      ],
-    },
-    {
-      h: "Application confirmation",
-      p: [
-        "After submission, the application platform provides a reference number or clear confirmation.",
+        "Your registration information is processed for admissions in accordance with the approved privacy notice.",
       ],
     },
   ],
@@ -460,12 +439,12 @@ export const apply: PageCopy = {
 export const admissionsFaqs: PageCopy = {
   slug: "/admissions/faqs",
   nav: "Admissions FAQs",
-  kicker: "Questions parents ask before they decide",
+  kicker: "The questions parents ask first",
   title: "Clear answers, organised",
   emphasis: "around the parent journey.",
   subhead:
-    "Search by campus or topic to find current information about admissions, academics, fees, residential life, care, visits and applications.",
-  primary: "Ask Admissions",
+    "Here are answers to some of the most common questions about joining Dalhousie, from entrance requirements and registration to fees, visits and boarding.",
+  primary: "Enquire Now",
   secondary: "Book a Visit",
   image: img.faqsHero,
   image2: img.faqsSplit,
@@ -473,7 +452,7 @@ export const admissionsFaqs: PageCopy = {
   meta: {
     title: "Admissions FAQs, Dalhousie Public School",
     description:
-      "Answers on campus choice, the admission process, fees, residential life, safety and medical care, academics, visits and applications.",
+      "Answers on beginning the admission process, entrance tests, the diagnostic assessment, registration, visits, boarding formats, fees and concessions.",
   },
   blocks: [],
 };
@@ -488,52 +467,77 @@ export const admissionsPages = [
   admissionsFaqs,
 ];
 
-/* FAQ content, page 37 of the deck. Kept as its own structure because the
-   page needs search and campus/topic filtering rather than prose bands. */
+/* FAQ content, kept as its own structure because the page needs search and
+   topic filtering rather than prose bands. */
 export const admissionsFaqItems: { topic: string; q: string; a: string }[] = [
   {
-    topic: "Campus choice",
-    q: "How do the two campuses differ, and how do we choose?",
-    a: "Dalhousie Campus is the Mountain Campus: a deeper, full residential experience shaped by mountain discipline, house culture and outdoor strength. New Chandigarh is the Modern Campus: All-Round. Without the Running Around. Current grade, programme and residential availability is shown for each campus. Find Your Campus uses six short questions to suggest the experience that may best fit your child and family.",
+    topic: "Admission process",
+    q: "How do I begin the admission process?",
+    a: "Begin by completing the registration form with your child's and family's details. The admissions team will then guide you through the next step applicable to the grade being applied for.",
+  },
+  {
+    topic: "Assessment",
+    q: "Does my child need to take an entrance test?",
+    a: "There is no entrance test for children applying up to Grade II. Students applying for Grade III onwards complete an entrance or diagnostic assessment as part of the admission process.",
+  },
+  {
+    topic: "Assessment",
+    q: "What is the purpose of the diagnostic assessment?",
+    a: "It helps the School understand the child's current academic level and readiness for the grade being applied for.",
   },
   {
     topic: "Admission process",
-    q: "What does the admission process involve?",
-    a: "The journey begins with an enquiry or campus consultation, followed by a visit, application, required documents and any approved assessment or interaction. The School then communicates the decision and joining steps. Opening dates, entry points and response timelines are published for the relevant campus and grade.",
-  },
-  {
-    topic: "Fees",
-    q: "How are fees structured, and what is included?",
-    a: "Fees vary by campus, grade and residential model. The Fees page shows the approved structure, what is included, what is charged separately, the payment schedule and the effective date. Deposits and additional expenses are identified separately. The current refund and withdrawal policy is available under Policies & Disclosures.",
-  },
-  {
-    topic: "Residential life",
-    q: "How does residential life work, and how will we stay in touch?",
-    a: "Residential students belong to a house community supported by house parents, mentors and campus teams. Communication combines scheduled contact, mentor updates, academic reporting, Whole Child reporting and urgent escalation where required. Families receive a current joining and packing checklist after admission is confirmed. Weekends balance sport, clubs, outdoor experience, community, rest, service and time with peers and mentors.",
-  },
-  {
-    topic: "Safety and medical care",
-    q: "How are safety, medical care and safeguarding handled?",
-    a: "Medical support, emergency response, medication management, supervision and parent notification follow the approved campus processes. Safeguarding is built on clear adult responsibility, access control, reporting routes, consent, privacy and escalation. Campus-specific medical and safeguarding details are available through Pastoral Care & Parent Connect and the current approved policies.",
-  },
-  {
-    topic: "Academics and pathways",
-    q: "What academic pathways are available?",
-    a: "Current curriculum, grades, subjects and pathways are shown separately for each campus. Dalhousie Competitive Edge integrates diagnostics, concept strengthening, guided practice, test discipline, doubt support and mentoring into the designed day. The Scholars Track supports approved competitive and top-university pathways; the Achievers Track supports boards and wider academic routes. The Defence Pathway develops academic readiness, fitness, communication, bearing and service orientation. Availability and eligibility vary by campus and stage.",
+    q: "Does completing registration guarantee admission?",
+    a: "Registration begins the admission process but does not by itself confirm admission. The School completes the applicable admission steps before confirming the seat. The registration documentation similarly states that registration does not guarantee admission.",
   },
   {
     topic: "Visits",
-    q: "How do we book a visit, and what will we see?",
-    a: "Book a visit online by selecting the campus, child's grade, residential interest and preferred date. The admissions team confirms the schedule and shares directions, arrival information and expected duration. Families may request visits to both campuses. A visit is designed to help you experience how children learn, prepare, speak, play, eat, live and relate to the adults around them.",
+    q: "Can we visit the School before applying?",
+    a: "Yes. Parents can request a visit to either campus and select a preferred visit date. The admissions team confirms the schedule and shares directions and arrival information.",
+  },
+  {
+    topic: "Residential life",
+    q: "Does Dalhousie offer boarding and day boarding?",
+    a: "The New Chandigarh fee schedules provided for 2026 include both Boarding and Day Boarding formats. The availability of a particular format should be confirmed for the child's grade while enquiring.",
+  },
+  {
+    topic: "Fees",
+    q: "What is the registration fee at New Chandigarh?",
+    a: "For 2026, the fee documents state Rs. 4,000 for day boarders and Rs. 8,000 for boarders. Both are non-refundable.",
+  },
+  {
+    topic: "Fees",
+    q: "Can school fees be paid in instalments?",
+    a: "Yes. The 2026 New Chandigarh schedules provide for three instalments: at admission, in the first week of July and in the first week of September.",
+  },
+  {
+    topic: "Fees",
+    q: "Is there a discount for paying annually?",
+    a: "Yes. The current 2026 schedules provide an additional 3.5% discount for qualifying annual fees paid in a single instalment. For day boarding this applies to the Annual Tuition Fee; for boarding it applies to Annual Tuition Fee plus Boarding & Lodging.",
+  },
+  {
+    topic: "Fees",
+    q: "Is there a sibling concession?",
+    a: "Yes. The 2026 New Chandigarh schedules state a 10% concession on Annual Tuition Fee for the additional child or children when more than one child from the family attends the School.",
+  },
+  {
+    topic: "Fees",
+    q: "Is there a concession for Armed Forces families?",
+    a: "Yes. The 2026 schedules state a 10% reduction on Annual Tuition Fee for parents from the Armed Forces.",
+  },
+  {
+    topic: "Fees",
+    q: "Are books, uniforms and transport included in the fee?",
+    a: "No. The 2026 fee schedules state that items such as clothing and uniforms, equipment, transport, books, stationery and specified miscellaneous expenses are charged separately or as actuals.",
   },
   {
     topic: "Applications and documents",
-    q: "What documents are required, and what if we need help?",
-    a: "Required documents are listed by campus and grade before the application begins. For corrections, login, payment, document upload or technical difficulty, contact the admissions team using the support route on the Apply Now page. After submission, the application platform provides a reference number or clear confirmation.",
+    q: "What documents are required for registration?",
+    a: "The registration form asks for the child's basic personal and school details, parent or guardian information and proof of date of birth. The admissions team provides the final documentation checklist required to complete admission.",
   },
   {
-    topic: "Still need help",
-    q: "Our question is not answered here. What should we do?",
-    a: "If the answer affects eligibility, fees, policy or a child-specific decision, contact admissions for the current approved information.",
+    topic: "Campus choice",
+    q: "Who should I speak to if I am unsure which campus is right?",
+    a: "Submit an admissions enquiry with your child's grade, preferred residential format and what you are looking for from the school experience. The admissions team can guide you through the two options, and Find Your Campus uses six short questions to suggest the closer fit.",
   },
 ];

@@ -10,134 +10,148 @@ const campusHref: Record<string, string> = {
   chandigarh: "/campuses/new-chandigarh",
 };
 
-type Lean = "dalhousie" | "chandigarh";
 type Campus = "dalhousie" | "chandigarh" | "both";
 
-type Node =
-  | { type: "question"; q: string; options: { label: string; lean: Lean; next: string }[] }
-  | { type: "result" };
+/* The six-question fit quiz from the reviewed content. Every answer carries
+   points towards A (Dalhousie Campus, the Mountain Campus) and B (New
+   Chandigarh Campus, the Modern Campus). The higher total suggests the closer
+   fit; a close score means either campus could work.
 
-// Adaptive branching tree: the first answers change which questions come next
-// (mountain path vs city path), then every path funnels through shared
-// questions. All six answers are tallied to reach the conclusion.
-const tree: Record<string, Node> = {
-  start: {
-    type: "question",
-    q: "What setting do you picture for your child?",
-    options: [
-      { label: "High in the alpine mountains, fully immersed in nature", lean: "dalhousie", next: "mtnBoarding" },
-      { label: "A modern campus near the city, well connected", lean: "chandigarh", next: "cityPathway" },
-    ],
-  },
+   This is a guided fit quiz, not a test. There are no right or wrong answers,
+   which is why no option is ever worth nothing on both sides. */
 
-  // ── Mountain branch (Q2, Q3) ──────────────────────────────────────
-  mtnBoarding: {
-    type: "question",
-    q: "Dalhousie in the mountains is a full residential school. How should boarding work for your family?",
-    options: [
-      { label: "Full residential boarding, the complete experience", lean: "dalhousie", next: "mtnStage" },
-      { label: "We'd prefer flexible day, weekly or full boarding", lean: "chandigarh", next: "mtnStage" },
-    ],
-  },
-  mtnStage: {
-    type: "question",
-    q: "How is your child starting out?",
-    options: [
-      { label: "Old enough to board and thrive independently", lean: "dalhousie", next: "excite" },
-      { label: "Just beginning, we'd like a play-based Early Years start", lean: "chandigarh", next: "excite" },
-    ],
-  },
+type Option = { label: string; a: number; b: number };
+type Question = { q: string; options: Option[] };
 
-  // ── City branch (Q2, Q3) ──────────────────────────────────────────
-  cityPathway: {
-    type: "question",
-    q: "New Chandigarh offers a choice of curriculum. Which pathway fits your plans?",
+const QUESTIONS: Question[] = [
+  {
+    q: "What stage is your child at?",
     options: [
-      { label: "A focused CBSE route towards Indian universities", lean: "dalhousie", next: "cityStage" },
-      { label: "An international IB and Cambridge pathway", lean: "chandigarh", next: "cityStage" },
+      { label: "Toddler or Early Years", a: 2, b: 1 },
+      { label: "Primary Years", a: 2, b: 2 },
+      { label: "Middle School", a: 1, b: 2 },
+      { label: "Senior School", a: 1, b: 3 },
     ],
   },
-  cityStage: {
-    type: "question",
-    q: "How is your child starting out?",
+  {
+    q: "What kind of school rhythm are you looking for?",
     options: [
-      { label: "Already independent and settled in school", lean: "dalhousie", next: "excite" },
-      { label: "Just beginning, we'd like a play-based Early Years start", lean: "chandigarh", next: "excite" },
+      { label: "A deeply immersive residential experience", a: 3, b: 0 },
+      { label: "A more flexible campus experience", a: 1, b: 3 },
+      { label: "I am open to both", a: 2, b: 2 },
     ],
   },
+  {
+    q: "What would you most like school to build in your child right now?",
+    options: [
+      { label: "Greater independence and discipline", a: 3, b: 1 },
+      { label: "Confidence and communication", a: 1, b: 3 },
+      { label: "Academic direction and preparation", a: 2, b: 2 },
+      { label: "Physical strength and resilience", a: 3, b: 1 },
+      { label: "Wider exposure and future readiness", a: 1, b: 3 },
+      { label: "A balance of all of these", a: 2, b: 2 },
+    ],
+  },
+  {
+    q: "Which environment feels closer to what your child needs?",
+    options: [
+      { label: "A quieter, more immersive environment away from urban distraction", a: 3, b: 1 },
+      { label: "A contemporary environment with greater access, choice and flexibility", a: 1, b: 3 },
+      { label: "I am not sure yet", a: 2, b: 2 },
+    ],
+  },
+  {
+    q: "How ready is your child for greater independence?",
+    options: [
+      { label: "Very ready", a: 3, b: 2 },
+      { label: "Ready with support", a: 2, b: 2 },
+      { label: "Still developing", a: 1, b: 3 },
+      { label: "Not sure", a: 2, b: 2 },
+    ],
+  },
+  {
+    q: "What matters most when you think about the next few years?",
+    options: [
+      { label: "A true residential-school experience", a: 3, b: 1 },
+      { label: "Academic choice and future pathways", a: 1, b: 3 },
+      { label: "Defence-oriented preparation", a: 3, b: 1 },
+      { label: "Confidence, leadership and exposure", a: 1, b: 3 },
+      { label: "Strong academics without a second-shift childhood", a: 1, b: 3 },
+      { label: "All-round development within one environment", a: 2, b: 2 },
+    ],
+  },
+];
 
-  // ── Shared questions (Q4, Q5, Q6) ─────────────────────────────────
-  excite: {
-    type: "question",
-    q: "What are you most excited for?",
-    options: [
-      { label: "Mountaineering, treks and the outdoors as a classroom", lean: "dalhousie", next: "connect" },
-      { label: "Equestrian, golf and farm-to-table learning", lean: "chandigarh", next: "connect" },
+const TOTAL_QUESTIONS = QUESTIONS.length;
+
+/* Within a point of each other and the decision is about lived experience,
+   not preference. Anything wider is a genuine lean. */
+const CLOSE_MARGIN = 1;
+
+const RESULTS: Record<Campus, { heading: string; reason: string; why: string[] }> = {
+  dalhousie: {
+    heading: "Your responses point towards the Mountain Campus.",
+    reason:
+      "Your responses suggest a stronger alignment with immersive residential life, structured routine, independence, physical resilience and close-knit community living. Dalhousie Campus brings these together through full residential education, CBSE learning, house culture, mountain discipline, outdoor exposure and pastoral care.",
+    why: [
+      "You value deeper residential immersion",
+      "Independence and self-management are priorities",
+      "You prefer a structured, distraction-free environment",
+      "Physical strength and resilience matter",
+      "You are open to defence-oriented pathways",
     ],
   },
-  connect: {
-    type: "question",
-    q: "How much does being well connected to a city matter to you?",
-    options: [
-      { label: "Not much, the remoteness of the mountains is a plus", lean: "dalhousie", next: "everyday" },
-      { label: "A lot, we value easy travel and access", lean: "chandigarh", next: "everyday" },
+  chandigarh: {
+    heading: "Your responses point towards the Modern Campus.",
+    reason:
+      "Your responses suggest a stronger alignment with academic choice, communication, flexibility, exposure and future readiness within a contemporary campus environment. New Chandigarh Campus brings these together while maintaining the Dalhousie philosophy of whole-child development.",
+    why: [
+      "You value academic choice and flexibility",
+      "Confidence and communication are priorities",
+      "You want wider exposure and future readiness",
+      "You prefer a contemporary learning environment",
+      "You want all-round development in one place",
     ],
   },
-  everyday: {
-    type: "question",
-    q: "What matters most in the everyday?",
-    options: [
-      { label: "Character, resilience and nature woven through each day", lean: "dalhousie", next: "result" },
-      { label: "Modern facilities and a choice of academic pathways", lean: "chandigarh", next: "result" },
+  both: {
+    heading: "Both campuses could work for your family.",
+    reason:
+      "Your scores are close. This suggests your priorities are balanced across both residential immersion and contemporary flexibility. That is a strong position: it means the decision is less about better and more about fit of experience.",
+    why: [
+      "Your child may thrive in either environment",
+      "The decision depends on lived experience, not just preference",
+      "A campus visit will be especially valuable",
     ],
   },
-
-  result: { type: "result" },
-};
-
-const TOTAL_QUESTIONS = 6;
-
-const reasons: Record<Campus, string> = {
-  dalhousie:
-    "Your answers lean to the mountains, full boarding, the outdoors and independence. Dalhousie Campus is where your child would flourish.",
-  chandigarh:
-    "Your answers point to flexibility, a choice of curricula and modern, city-close facilities. New Chandigarh is your fit.",
-  both:
-    "Your answers are split evenly between the mountains and the city. Either campus could suit your child, let's talk it through.",
 };
 
 export default function CampusChooser() {
-  const [current, setCurrent] = useState("start");
-  const [history, setHistory] = useState<string[]>([]);
-  const [leans, setLeans] = useState<Lean[]>([]);
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Option[]>([]);
 
-  const node = tree[current];
+  const done = step >= TOTAL_QUESTIONS;
+  const question = done ? undefined : QUESTIONS[step];
 
-  function choose(lean: Lean, next: string) {
-    setHistory((h) => [...h, current]);
-    setLeans((l) => [...l, lean]);
-    setCurrent(next);
+  function choose(o: Option) {
+    setAnswers((prev) => [...prev.slice(0, step), o]);
+    setStep(step + 1);
   }
   function back() {
-    if (history.length === 0) return;
-    setCurrent(history[history.length - 1]);
-    setHistory((h) => h.slice(0, -1));
-    setLeans((l) => l.slice(0, -1));
+    if (step === 0) return;
+    setStep(step - 1);
+    setAnswers((prev) => prev.slice(0, -1));
   }
   function restart() {
-    setHistory([]);
-    setLeans([]);
-    setCurrent("start");
+    setStep(0);
+    setAnswers([]);
   }
 
-  const answered = leans.length;
-  const progress =
-    node.type === "result" ? 1 : Math.min(answered / TOTAL_QUESTIONS, 0.95);
+  const progress = done ? 1 : Math.min(step / TOTAL_QUESTIONS, 0.95);
 
-  // conclusion: tally the six answers
-  const dal = leans.filter((l) => l === "dalhousie").length;
-  const chd = leans.length - dal;
-  const winner: Campus = dal === chd ? "both" : dal > chd ? "dalhousie" : "chandigarh";
+  const a = answers.reduce((n, o) => n + o.a, 0);
+  const b = answers.reduce((n, o) => n + o.b, 0);
+  const winner: Campus =
+    Math.abs(a - b) <= CLOSE_MARGIN ? "both" : a > b ? "dalhousie" : "chandigarh";
 
   return (
     <section id="chooser" className="bg-paper">
@@ -149,16 +163,16 @@ export default function CampusChooser() {
             </span>
           </div>
           <h2 className="mt-6 text-4xl leading-[1.02] text-pine sm:text-5xl">
-            Two campuses. One is right for your child.
+            Which Dalhousie experience fits your child?
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-mist">
-            Answer six quick questions, each one shaped by your last, and
-            we&apos;ll point you to the Dalhousie that fits your family best.
+            Answer six questions about your child and your family&apos;s priorities. This is a
+            guided fit quiz, not a test. There are no right or wrong answers.
           </p>
         </div>
 
         <div className="mt-12 rounded-3xl border border-pine/12 bg-cream p-6 sm:p-10">
-          {node.type === "question" ? (
+          {question ? (
             <div>
               {/* progress */}
               <div className="mb-8 flex items-center gap-3">
@@ -169,32 +183,30 @@ export default function CampusChooser() {
                   />
                 </div>
                 <span className="text-sm font-bold text-mist">
-                  {answered + 1} / {TOTAL_QUESTIONS}
+                  {step + 1} / {TOTAL_QUESTIONS}
                 </span>
               </div>
 
-              <h3 key={current} className="pop text-2xl text-pine sm:text-3xl">
-                {node.q}
+              <h3 key={step} className="pop text-2xl text-pine sm:text-3xl">
+                {question.q}
               </h3>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                {node.options.map((o, oi) => (
+                {question.options.map((o, oi) => (
                   <button
                     key={o.label}
-                    onClick={() => choose(o.lean, o.next)}
+                    onClick={() => choose(o)}
                     className="group flex items-center gap-4 rounded-2xl border border-pine/15 bg-paper p-6 text-left transition-all duration-200 hover:-translate-y-1 hover:border-clay hover:bg-brass-soft/10"
                   >
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-sage-soft font-display text-lg font-semibold text-pine transition-colors group-hover:border-clay group-hover:bg-clay group-hover:text-paper">
-                      {oi === 0 ? "A" : "B"}
+                      {String.fromCharCode(65 + oi)}
                     </span>
-                    <span className="font-semibold leading-snug text-pine">
-                      {o.label}
-                    </span>
+                    <span className="font-semibold leading-snug text-pine">{o.label}</span>
                   </button>
                 ))}
               </div>
 
-              {answered > 0 && (
+              {step > 0 && (
                 <button
                   onClick={back}
                   className="mt-7 text-sm font-bold text-mist transition-colors hover:text-clay"
@@ -204,7 +216,7 @@ export default function CampusChooser() {
               )}
             </div>
           ) : (
-            <Result winner={winner} reason={reasons[winner]} onRestart={restart} />
+            <Result winner={winner} onRestart={restart} />
           )}
         </div>
       </div>
@@ -212,25 +224,32 @@ export default function CampusChooser() {
   );
 }
 
-function Result({
-  winner,
-  reason,
-  onRestart,
-}: {
-  winner: Campus;
-  reason: string;
-  onRestart: () => void;
-}) {
+function Result({ winner, onRestart }: { winner: Campus; onRestart: () => void }) {
   const showBoth = winner === "both";
   const list = showBoth ? campuses : campuses.filter((c) => c.id === winner);
+  const r = RESULTS[winner];
 
   return (
-    <div className="pop text-center">
-      <span className="eyebrow text-clay">Your result</span>
-      <h3 className="mt-3 text-2xl text-pine sm:text-3xl">
-        {showBoth ? "You're torn, and that's okay." : "We found your Dalhousie."}
-      </h3>
-      <p className="mx-auto mt-3 max-w-md text-mist">{reason}</p>
+    <div className="pop">
+      <div className="text-center">
+        <span className="eyebrow text-clay">Your result</span>
+        <h3 className="mt-3 text-2xl text-pine sm:text-3xl">{r.heading}</h3>
+        <p className="mx-auto mt-4 max-w-xl leading-relaxed text-mist">{r.reason}</p>
+      </div>
+
+      <div className="mx-auto mt-8 max-w-md text-left">
+        <p className="text-sm font-bold uppercase tracking-[0.12em] text-brass">
+          {showBoth ? "What this means" : "Why it may suit your child"}
+        </p>
+        <ul className="mt-4 space-y-2.5">
+          {r.why.map((w) => (
+            <li key={w} className="flex items-start gap-3">
+              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+              <span className="leading-relaxed text-mist">{w}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div className={`mt-8 grid gap-5 ${showBoth ? "sm:grid-cols-2" : ""}`}>
         {list.map((c) => (
@@ -276,12 +295,19 @@ function Result({
         ))}
       </div>
 
-      <button
-        onClick={onRestart}
-        className="mt-8 text-sm font-bold text-pine underline decoration-clay decoration-2 underline-offset-4 hover:text-clay"
-      >
-        Take the quiz again
-      </button>
+      <p className="mt-8 text-center text-sm leading-relaxed text-mist">
+        Still have questions? This quiz guides you. Conversation completes it, and our admissions
+        team can help interpret the result with you.
+      </p>
+
+      <div className="mt-5 text-center">
+        <button
+          onClick={onRestart}
+          className="text-sm font-bold text-pine underline decoration-clay decoration-2 underline-offset-4 hover:text-clay"
+        >
+          Take the quiz again
+        </button>
+      </div>
     </div>
   );
 }

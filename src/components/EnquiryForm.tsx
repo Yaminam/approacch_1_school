@@ -15,7 +15,7 @@ export type Variant = "visit" | "enquire" | "contact";
 
 const CAMPUSES = [
   { value: "Dalhousie Campus", label: "Dalhousie Campus", note: "The Mountain Campus. Full residential, CBSE." },
-  { value: "New Chandigarh Campus", label: "New Chandigarh Campus", note: "The Modern Campus. Day, day-boarding or residential." },
+  { value: "New Chandigarh Campus", label: "New Chandigarh Campus", note: "The Modern Campus. Boarding or day boarding." },
   { value: "Help me choose", label: "Help me choose", note: "We will talk it through with you." },
 ];
 
@@ -31,7 +31,7 @@ const INTERESTS = [
   "Fees",
 ];
 
-const RESIDENTIAL = ["Day school", "Day-boarding", "Weekly boarding", "Full residential", "Not sure yet"];
+const RESIDENTIAL = ["Boarding", "Day boarding", "Not sure yet"];
 
 const CONSENT: Record<Variant, string> = {
   visit:

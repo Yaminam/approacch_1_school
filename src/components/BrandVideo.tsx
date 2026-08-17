@@ -27,13 +27,14 @@ export default function BrandVideo() {
       <div className="absolute inset-0 bg-gradient-to-t from-pine-800/85 via-pine-800/40 to-pine-800/55" />
 
       <div className="relative z-10 mx-auto flex min-h-[85vh] max-w-7xl flex-col justify-center px-6 py-24 sm:px-10">
-        <Eyebrow dark>In motion</Eyebrow>
+        <Eyebrow dark>The school in motion</Eyebrow>
         <h2 className="mt-6 max-w-3xl font-display text-5xl leading-[1.0] text-paper sm:text-7xl">
-          See Dalhousie <span className="italic text-brass-soft">for yourself.</span>
+          Growth becomes visible in <span className="italic text-brass-soft">everyday moments.</span>
         </h2>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-paper/85">
-          A website can only say so much. This is everyday life on the mountain,
-          in motion.
+          A debate where a hesitant child raises a hand. A morning when a student no longer needs
+          to be reminded. A difficult match that teaches more than an easy victory. These moments
+          may not appear on a marksheet. But over time, they become the child.
         </p>
         <div className="mt-9">
           <a

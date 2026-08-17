@@ -8,14 +8,16 @@ import { SectionHead, FeatureGrid, Section } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Parent Connect, Dalhousie Public School",
   description:
-    "You are far away, but never out of the loop. Calling hours, letters, honest updates and the Whole Child Report keep families close.",
+    "Distance should not mean uncertainty. Parent Connect brings the school and family into a clearer conversation about academic progress, wellbeing, confidence, responsibility and residential growth.",
 };
 
 const ways = [
-  { title: "Calling hours", body: "Regular, protected time to hear your child's voice and how their week has really been." },
-  { title: "Letters home", body: "A gentle, old-fashioned habit that keeps the bond strong across the miles." },
-  { title: "Honest updates", body: "Housemasters and mistresses who stay with your child, and who tell you the truth." },
-  { title: "Whole Child Report", body: "A rounded account each term of how your child is truly doing, marks and all." },
+  { title: "Academic progress", body: "How the child is learning and where greater focus may be required." },
+  { title: "Wellbeing", body: "How the child is settling, participating and responding to everyday school life." },
+  { title: "Confidence & participation", body: "How comfortably the child is communicating, contributing and engaging." },
+  { title: "Responsibility & independence", body: "How the child is managing routines, commitments and increasing ownership." },
+  { title: "Residential growth", body: "For boarding students, how they are adapting to house life, relationships and greater independence." },
+  { title: "Clear channels", body: "Academic, residential, medical or pastoral concerns reach the people responsible for supporting the child." },
 ];
 
 export default function Page() {
@@ -23,23 +25,31 @@ export default function Page() {
     <main>
       <PageHero
         eyebrow="Parent Connect"
-        title="Far away, but never"
-        emphasis="out of the loop."
-        subtitle="Trusting a school with your child from a distance is hard. Parent Connect is our promise that distance will never mean silence."
+        title="Distance should not"
+        emphasis="mean uncertainty."
+        subtitle="Parents need more than occasional information. They need a clear understanding of how their child is learning, participating, adapting and growing."
         image="/images/campus-wide.jpg"
       />
 
       <Section tone="cream">
-        <SectionHead eyebrow="Staying close" title="How we keep you in your child's week." />
-        <FeatureGrid items={ways} cols={4} />
+        <SectionHead
+          eyebrow="Staying close"
+          title="A clearer view of the child, not only the timetable."
+        />
+        <FeatureGrid items={ways} cols={3} />
       </Section>
 
       <Section tone="blush">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <h2 className="text-3xl text-pine sm:text-4xl">A partnership, not a drop-off.</h2>
+            <h2 className="text-3xl text-pine sm:text-4xl">
+              Not only how the child is performing, but how the child is growing.
+            </h2>
             <p className="mt-5 leading-relaxed text-mist">
-              The best outcomes come when school, parents and community pull together. We treat your involvement as essential, and we make it easy. See how the Whole Child Report keeps the picture honest and complete.
+              Marks remain important. But parents also want to know whether their child is becoming
+              more confident, taking greater responsibility, developing stronger routines,
+              participating and becoming more independent, and where they still need help. The
+              Whole Child approach makes those questions part of the conversation.
             </p>
             <Link
               href="/whole-child-report"

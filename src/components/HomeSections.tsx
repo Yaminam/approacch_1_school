@@ -4,10 +4,10 @@ import Reveal from "./Reveal";
 import { Eyebrow } from "./ui";
 import { img } from "@/lib/images";
 
-/* Home page sections, page 1 of Website Copy Draft 2, in deck order:
-   the parent problem, the master promise, the seven pathways, Competitive
-   Edge, the Defence Pathway, boarding, the Whole Child Report and the
-   admissions conversion panel. */
+/* Home page sections, transcribed from Final Reviewed Content - DPS, in the
+   order the content runs: the parent problem, the Dalhousie environment, the
+   seven pathways, no second shift, the Defence Pathway, boarding, the Whole
+   Child Report and the admissions conversion panel. */
 
 export function ParentProblem() {
   return (
@@ -21,17 +21,15 @@ export function ParentProblem() {
         <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-16">
           <Reveal delay={100}>
             <p className="text-lg leading-relaxed text-paper/85 [text-wrap:pretty]">
-              School teaches. Coaching drills. Homework stretches late. Travel takes time. Screens take
-              over the spaces left behind. Sport is squeezed in, confidence is often left to personality,
-              and parents receive marks without always seeing who their child is becoming.
+              School handles academics. Tuition handles competitive preparation. Sport is fitted in
+              when there is time. Confidence is expected to develop on its own. Independence is
+              postponed. And parents are left coordinating a day that keeps getting longer.
             </p>
           </Reveal>
           <Reveal delay={180}>
             <p className="text-lg leading-relaxed text-paper/85 [text-wrap:pretty]">
-              The result may be a very busy child, but not always a better-prepared one. Dalhousie offers
-              a different answer: not more pressure, but better design. Academics, preparation, fitness,
-              confidence, responsibility, residential care and character are brought together inside one
-              complete environment.
+              The child may be busy throughout the day. But being busy is not the same as growing.
+              Dalhousie brings the child back together.
             </p>
           </Reveal>
         </div>
@@ -46,7 +44,7 @@ export function MasterPromise() {
       <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
         <Reveal>
           <div className="max-w-3xl">
-            <Eyebrow>The master promise</Eyebrow>
+            <Eyebrow>The Dalhousie environment</Eyebrow>
             <h2 className="mt-6 text-4xl leading-[1.02] text-pine sm:text-5xl lg:text-6xl">
               The whole child for <span className="italic text-clay">the whole future.</span>
             </h2>
@@ -55,17 +53,26 @@ export function MasterPromise() {
         <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-16">
           <Reveal delay={100}>
             <p className="text-lg leading-relaxed text-mist [text-wrap:pretty]">
-              A future cannot be prepared for in fragments. It asks for knowledge, but also judgement.
-              Confidence, but also discipline. Independence, but also the ability to belong. Physical
-              strength, emotional steadiness, communication, manners and moral courage.
+              Academic success matters. But so does the ability to stand up and speak. To stay
+              physically strong. To manage oneself. To make good decisions. To live with others. To
+              recover from difficulty. To carry responsibility.
             </p>
           </Reveal>
           <Reveal delay={180}>
-            <p className="text-lg leading-relaxed text-mist [text-wrap:pretty]">
-              Dalhousie prepares the whole child academically, physically, socially, emotionally and
-              morally, through a school day that is designed around growth and a system that makes
-              progress visible.
-            </p>
+            <div>
+              <p className="text-lg leading-relaxed text-mist [text-wrap:pretty]">
+                Dalhousie prepares children across all of these dimensions, not as separate
+                activities, but as part of one connected school experience. Because the future will
+                demand more than marks. It will demand the overall growth, the whole child.
+              </p>
+              <Link
+                href="/the-dalhousie-difference"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-4 hover:text-pine"
+              >
+                Discover the Dalhousie Difference
+                <span aria-hidden>&rarr;</span>
+              </Link>
+            </div>
           </Reveal>
         </div>
       </div>
@@ -95,8 +102,9 @@ export function SevenPathways() {
                 Seven pathways. <span className="italic text-brass-soft">One outcome.</span>
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-sage-soft">
-                The Dalhousie Preparation System turns the school&apos;s approach into seven clear
-                pathways. The first six build the child. The seventh makes that growth visible.
+                Preparation should develop more than one part of the child. The Dalhousie
+                Preparation System brings together seven areas of growth within one clear
+                framework. The first six build the child. The seventh makes that growth visible.
               </p>
             </div>
             <Link
@@ -227,12 +235,12 @@ function ArgumentBand({
 export function NoSecondShift() {
   return (
     <ArgumentBand
-      eyebrow="Dalhousie Competitive Edge"
-      title="No Second Shift"
-      emphasis="Childhood."
+      eyebrow="No second shift childhood"
+      title="Serious preparation should not require a"
+      emphasis="second life after school."
       paras={[
-        "Academic ambition does not require a second life after school. Dalhousie Competitive Edge builds board readiness, concept depth, guided practice, test discipline, doubt support and future-pathway preparation into the child's designed day.",
-        "Preparation remains serious. Childhood remains whole.",
+        "Ambition matters. But the solution does not have to be school, followed by tuition, followed by enrichment classes, followed by travel, followed by homework late into the evening.",
+        "Dalhousie Competitive Edge brings stronger preparation into the academic rhythm itself. Concept strengthening. Guided practice. Tests. Doubt support. Mentoring. Progress tracking. The child still prepares seriously. The difference is that preparation belongs inside a better-designed day.",
       ]}
       image={img.edgeHero}
       cta="Explore Competitive Edge"
@@ -246,12 +254,12 @@ export function NoSecondShift() {
 export function DrawnToServe() {
   return (
     <ArgumentBand
-      eyebrow="Dalhousie Defence Pathway"
-      title="For those"
-      emphasis="drawn to serve."
+      eyebrow="For those drawn to serve"
+      title="Before the uniform,"
+      emphasis="the making of the person."
       paras={[
-        "The Dalhousie Defence Pathway prepares more than an examination candidate. It begins with the qualities that service demands: discipline, fitness, awareness, communication, bearing, teamwork and responsibility.",
-        "Before the uniform, the making of the person.",
+        "For some children, ambition has a specific direction. They are drawn towards service, leadership and the armed forces. The Dalhousie Defence Pathway develops the foundational qualities required before any examination can truly matter.",
+        "Mind. Body. Voice. Bearing. Service. The pathway develops progressively, from early foundations in discipline and teamwork to deeper readiness for NDA and defence-oriented futures.",
       ]}
       image={img.defenceHero}
       cta="Explore the Defence Pathway"
@@ -265,15 +273,15 @@ export function DrawnToServe() {
 export function BoardingBecome() {
   return (
     <ArgumentBand
-      eyebrow="Dalhousie Residential Advantage"
-      title="Boarding is where"
-      emphasis="children become."
+      eyebrow="Growing up is part of the education"
+      title="Children learn to stand on their own,"
+      emphasis="without standing alone."
       paras={[
-        "Residential life is not presented as a facility. It is where routine becomes self-management, house life becomes belonging, dining becomes manners, prep becomes discipline, mentorship becomes guidance and everyday responsibility becomes independence.",
-        "Children are cared for closely, while learning to stand on their own.",
+        "Residential life gives children everyday opportunities to manage themselves. Their time. Their belongings. Their friendships. Their responsibilities. Their studies. Their decisions. This independence develops gradually, supported by house parents, mentors, teachers and pastoral care.",
+        "Boarding is not simply where children stay after school. It is where responsibility becomes real. Where friendships deepen. Where manners are practised. Where routines become habits. Where children begin to discover that they are capable of more than they thought.",
       ]}
       image={img.residentialHero}
-      cta="Explore residential life"
+      cta="Explore the Residential Advantage"
       ctaHref="/residential-advantage"
       alt="View pastoral care"
       altHref="/pastoral-care"
@@ -290,16 +298,16 @@ export function ReportsGrowth() {
             <div>
               <Eyebrow dark>The Dalhousie Whole Child Report</Eyebrow>
               <h2 className="mt-6 max-w-2xl text-3xl leading-[1.05] text-paper sm:text-4xl lg:text-5xl">
-                Most schools report marks.{" "}
-                <span className="italic text-brass-soft">Dalhousie reports growth.</span>
+                What is your child <span className="italic text-brass-soft">becoming?</span>
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-sage-soft [text-wrap:pretty]">
-                The Dalhousie Whole Child Report is designed to make development visible across academics,
-                physical fitness, confidence and voice, responsibility, residential growth, character and
-                mentor feedback.
+                Marks can tell you how a child performed in a subject, but they cannot tell you
+                everything. Is your child becoming fitter? More confident? More responsible? More
+                independent? More willing to speak? Better able to work with others?
               </p>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-sage-soft">
-                Parents can see not only what their child scored, but who their child is becoming.
+                The Whole Child Report brings these dimensions of growth into one clearer picture.
+                Most schools report marks. Dalhousie reports growth.
               </p>
             </div>
           </Reveal>
@@ -320,10 +328,30 @@ export function ReportsGrowth() {
 }
 
 const NEXT_STEPS = [
-  { h: "Understand the two campuses", href: "/campuses", cta: "Explore campuses" },
-  { h: "Compare the experience", href: "/campuses/compare", cta: "Compare campuses" },
-  { h: "Explore fees", href: "/admissions/fees", cta: "View fees" },
-  { h: "Speak to the admissions team", href: "/admissions/enquire", cta: "Start an enquiry" },
+  {
+    h: "Find your campus",
+    body: "Not sure which campus fits your family? Begin with the Campus Finder.",
+    href: "/campuses/find-your-campus",
+    cta: "Find your campus",
+  },
+  {
+    h: "Book a visit",
+    body: "See the classrooms, houses, sports spaces and the everyday rhythm of Dalhousie.",
+    href: "/admissions/book-a-visit",
+    cta: "Book a visit",
+  },
+  {
+    h: "Speak to admissions",
+    body: "Discuss your child's age, stage, academic needs and preferred campus experience.",
+    href: "/admissions/enquire",
+    cta: "Start an enquiry",
+  },
+  {
+    h: "Ready to apply?",
+    body: "Begin registration and we will guide you through the step that applies to the grade.",
+    href: "/admissions/apply",
+    cta: "Apply now",
+  },
 ];
 
 export function FindYourExperience() {
@@ -337,8 +365,7 @@ export function FindYourExperience() {
               Find your <span className="italic text-clay">Dalhousie experience.</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-mist [text-wrap:pretty]">
-              Understand the two campuses. Compare the experience. Explore fees. Speak to the admissions
-              team. Most importantly, visit the School and see the day in action.
+              The next step is to see where your child could grow.
             </p>
           </div>
         </Reveal>
@@ -348,7 +375,8 @@ export function FindYourExperience() {
             <Reveal key={s.href} delay={i * 70}>
               <article className="flex h-full flex-col border-t hair pt-6">
                 <span className="font-display text-2xl text-brass">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 flex-1 text-xl leading-snug text-pine">{s.h}</h3>
+                <h3 className="mt-4 text-xl leading-snug text-pine">{s.h}</h3>
+                <p className="mt-2.5 flex-1 text-sm leading-relaxed text-mist">{s.body}</p>
                 <Link href={s.href} className="mt-5 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
                   {s.cta} &rarr;
                 </Link>
@@ -360,20 +388,20 @@ export function FindYourExperience() {
         <Reveal delay={120}>
           <div className="mt-14 flex flex-col gap-6 border-t hair pt-10 lg:flex-row lg:items-center lg:justify-between">
             <p className="max-w-2xl font-display text-2xl leading-snug text-pine sm:text-[1.75rem]">
-              Most importantly, visit the School and see the day in action.
+              A child should not have to choose between achievement and childhood.
             </p>
             <div className="flex shrink-0 flex-wrap gap-3">
               <Link
                 href="/admissions/book-a-visit"
                 className="rounded-full bg-clay px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
               >
-                Book a Dalhousie visit
+                Book a visit
               </Link>
               <Link
-                href="/admissions/apply"
+                href="/campuses/find-your-campus"
                 className="rounded-full border-2 border-pine px-7 py-3.5 text-sm font-bold uppercase tracking-[0.1em] text-pine transition-colors hover:border-clay hover:text-clay"
               >
-                Apply now
+                Find your campus
               </Link>
             </div>
           </div>

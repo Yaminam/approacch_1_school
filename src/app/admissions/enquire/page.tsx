@@ -50,14 +50,12 @@ export default function Page() {
                 >
                   Download prospectus
                 </a>
-                <a
-                  href={feeScope.pdf}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  href="/admissions/fees"
                   className="mt-3 block rounded-full border-2 border-pine px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.1em] text-pine transition-colors hover:border-clay hover:text-clay"
                 >
-                  Fee structure {feeScope.year}
-                </a>
+                  Fees &amp; dues {feeScope.year}
+                </Link>
               </div>
             </Reveal>
 

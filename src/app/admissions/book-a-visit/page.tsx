@@ -13,7 +13,7 @@ const p = bookAVisit;
 // The blocks that describe the form itself are rendered as the form; the rest
 // become the reassurance column beside it.
 const aside = p.blocks.filter((b) =>
-  ["Before your visit", "Alternative contact", "Choose a preferred date", "Consent and privacy"].includes(b.h),
+  ["Choose a preferred date", "Consent and privacy", "Before you come", "Alternative contact"].includes(b.h),
 );
 
 export default function Page() {

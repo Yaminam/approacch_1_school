@@ -35,10 +35,17 @@ export default function Page() {
         </h2>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {[details.dalhousie, details.chandigarh].map((c, i) => (
+          {[
+            { ...details.dalhousie, anchor: "dalhousie", label: "The Mountain Campus" },
+            { ...details.chandigarh, anchor: "new-chandigarh", label: "The Modern Campus" },
+          ].map((c, i) => (
             <Reveal key={c.name} delay={i * 100}>
-              <article className="h-full rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm">
-                <h3 className="text-2xl text-pine">{c.name}</h3>
+              <article
+                id={c.anchor}
+                className="h-full scroll-mt-28 rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm"
+              >
+                <span className="eyebrow text-brass">{c.label}</span>
+                <h3 className="mt-3 text-2xl text-pine">{c.name}</h3>
                 <p className="mt-4 leading-relaxed text-mist">{c.address}</p>
                 <dl className="mt-6 space-y-3 text-sm">
                   <div>

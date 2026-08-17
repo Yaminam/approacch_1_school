@@ -1,28 +1,27 @@
 import type { PageCopy } from "./types";
 import { img } from "../images";
 
-/* Pages 14 to 30 of Website Copy Draft 2: the two campuses, the campus finder
-   and every campus sub-page. Route slugs are taken from the deck's own page
-   headers, e.g. "PAGE 20 | /campuses/dalhousie/student-life". */
+/* The two campuses, the campus finder and every campus sub-page, transcribed
+   from Final Reviewed Content - DPS. */
 
 export const campusesOverview: PageCopy = {
   slug: "/campuses",
   nav: "Campuses",
-  kicker: "Two distinct campus experiences",
-  title: "One Dalhousie.",
-  emphasis: "Two ways to grow.",
+  kicker: "One Dalhousie. Two ways to grow.",
+  title: "Same roots.",
+  emphasis: "Different wings.",
   subhead:
-    "Same roots. Different wings. The two campuses express the same Dalhousie promise through different environments, rhythms and parent choices. The question is not which campus is better. It is which experience is right for the child and family.",
+    "Every child needs a school that fits not only their academic needs, but also the way they are ready to grow. Dalhousie offers two distinct campus experiences built around one shared philosophy: the whole child for the whole future.",
   primary: "Find Your Campus",
   secondary: "Compare Campuses",
   image: img.campusesHero,
   image2: img.campusesSplit,
-  closeEyebrow: "Choosing well",
+  closeEyebrow: "See the difference in person",
   pulls: [
     {
       slot: "grid",
       line: "Six questions, and a reason behind the answer. Let the fit decide, not the brochure.",
-      label: "Find Your Campus",
+      label: "Find Your Campus - Take the Quiz Now",
       alt: "Compare Campuses",
     },
   ],
@@ -33,49 +32,57 @@ export const campusesOverview: PageCopy = {
   },
   blocks: [
     {
-      h: "The same roots.",
+      h: "The question is not which campus is better.",
       p: [
-        "Both campuses are grounded in the same commitment to the whole child: academic seriousness, confidence, discipline, care, physical development, responsibility and visible growth.",
+        "It is which environment is the better fit for your child. Across both campuses, children are prepared academically, physically, socially and emotionally. They build confidence. Learn responsibility. Develop stronger habits. Receive academic direction. Participate in sport and wider school life. And grow within a system of care and guidance.",
+        "What changes is the setting, the rhythm and the kind of experience the family is looking for. One offers the depth and immersion of mountain residential life. The other brings all-round preparation, academic choice and flexibility into a contemporary campus environment.",
       ],
     },
     {
-      h: "Different wings.",
+      h: "Dalhousie Campus, the Mountain Campus",
       p: [
-        "The Dalhousie Campus offers the depth of a full mountain residential experience. The New Chandigarh Campus brings the Dalhousie philosophy into a contemporary, all-round environment with academic choice, confidence, exposure and residential flexibility.",
+        "A World Away. Ready For The World. The original Himalayan home of Dalhousie Public School offers the deeper, more immersive expression of the Dalhousie experience. Full residential life, CBSE education, mountain discipline, house culture, academic preparation, outdoor exposure and pastoral care come together within one complete environment.",
+        "Children learn to manage themselves, contribute to a community and grow stronger through the everyday responsibilities of residential life. The child who emerges: grounded, resilient, respectful, independent and physically confident.",
       ],
     },
     {
-      h: "Dalhousie Campus, The Mountain Campus",
+      h: "Far from distraction. Close to what matters.",
       p: [
-        "Formed for life. Far from distraction. Close to what matters.",
-        "The original Himalayan home of Dalhousie Public School offers full residential depth, mountain discipline, house culture, outdoor strength, academic seriousness, pastoral care and the quiet confidence that comes from learning to stand on one's own.",
+        "Dalhousie Campus may suit families seeking full residential immersion, greater independence and self-reliance, strong routine and discipline, house culture and community, outdoor strength and resilience, academic seriousness within a protected rhythm, and a natural environment for the Dalhousie Defence Pathway.",
       ],
     },
     {
-      h: "New Chandigarh Campus, The Modern Campus",
+      h: "New Chandigarh Campus, the Modern Campus",
       p: [
-        "Built for tomorrow. All-Round. Without the Running Around.",
-        "The contemporary Dalhousie experience brings academics, pathways, confidence, sport, communication, leadership, exposure and flexible residential choices together in one coordinated environment.",
+        "All-Round. Without the Running Around. New Chandigarh Campus brings the Dalhousie philosophy into a contemporary learning environment. Academics, preparation, confidence, communication, sport, leadership and future pathways come together within one more connected campus experience.",
+        "Children gain wider exposure and increasing academic choice without their development being divided across school, coaching, multiple classes and continuous travel. The child who emerges: articulate, adaptive, confident, choice-ready and globally aware.",
       ],
     },
     {
-      h: "Different parent fits",
+      h: "More opportunity. More direction. Less fragmentation.",
       p: [
-        "The Mountain Campus may suit families seeking a true boarding experience, distance from urban distraction, character formation and deeper residential immersion.",
-        "The Modern Campus may suit families seeking academic choice, communication, confidence, exposure, flexibility and future pathways within the assurance of the Dalhousie brand.",
+        "New Chandigarh Campus may suit families seeking academic choice, confidence and communication, wider exposure, future pathway readiness, flexibility across the available campus formats, a contemporary school environment, and all-round preparation within one ecosystem.",
       ],
     },
     {
-      h: "Different student outcomes, one complete child.",
+      h: "What both campuses share",
       p: [
-        "The Dalhousie Campus aims to form children who are grounded, resilient, respectful, independent and physically confident.",
-        "The New Chandigarh Campus aims to develop children who are articulate, adaptive, confident, choice-ready and globally aware.",
+        "The Dalhousie promise remains the same. The whole child: academic performance matters, but so do fitness, confidence, responsibility, independence and character. Academic seriousness: children receive structured learning, preparation, mentoring and direction appropriate to their stage. Confidence that is trained: speaking, participation, performance and leadership are developed through repeated experience.",
+        "Responsibility that grows: children receive opportunities to take greater ownership of their routines, choices and contribution. Care that stays close: teachers, mentors and pastoral teams work together to keep the child known and supported. Visible growth: parents receive a wider view of development beyond marks alone.",
       ],
     },
     {
-      h: "Choose through fit, not assumption.",
+      h: "Different children need different environments.",
       p: [
-        "Compare the practical differences, use Find Your Campus to consider the child's stage, residential preference and family priorities, and then experience the rhythm through a campus visit.",
+        "Some children are ready for a deeper residential experience. They may benefit from distance from urban distraction, greater independence, house culture and the discipline of a mountain rhythm.",
+        "Others may benefit from a contemporary environment that offers greater flexibility, academic choice, communication and wider exposure. Neither choice is a compromise. Both are Dalhousie.",
+      ],
+    },
+    {
+      h: "A campus is more than what can be compared on a screen.",
+      p: [
+        "Walk through the classrooms. See how children participate. Understand the rhythm of the day. Experience the residential environment. Meet the adults who will guide and support your child. And consider where your child can imagine belonging and becoming.",
+        "One Dalhousie. Two ways to grow.",
       ],
     },
   ],
@@ -85,69 +92,68 @@ export const findYourCampus: PageCopy = {
   kind: "sequence",
   slug: "/campuses/find-your-campus",
   nav: "Find Your Campus",
-  kicker: "A six-question parent decision tool",
-  title: "Which Dalhousie experience fits",
-  emphasis: "your child and family?",
+  kicker: "A guided fit quiz, not a test",
+  title: "Which Dalhousie experience",
+  emphasis: "fits your child?",
   subhead:
-    "Every family begins with different priorities. This short guide helps you consider the child's stage, the environment in which they may thrive and the kind of school day your family is seeking.",
+    "There is no single right school experience for every child. Some children thrive in deeper residential immersion. Others need greater flexibility, academic choice and a contemporary campus rhythm. Answer six questions about your child and your family's priorities.",
   primary: "Start the Campus Finder",
   secondary: "Compare Campuses",
   image: img.finderHero,
   image2: img.finderSplit,
-  closeEyebrow: "After the result",
+  closeEyebrow: "Still have questions?",
   meta: {
     title: "Find Your Campus, Dalhousie Public School",
     description:
-      "Answer six questions to understand whether the Dalhousie Mountain Campus or New Chandigarh Modern Campus may better fit your child and family.",
+      "Answer six questions to understand whether the Dalhousie Mountain Campus or the New Chandigarh Modern Campus may be the closer fit for your child and family.",
   },
   blocks: [
     {
-      h: "How the guide works",
+      h: "How it works",
       p: [
-        "Answer six questions about the child and your family's priorities. The recommendation will suggest the campus that appears to align more closely and explain the reasons behind it. It is a guide, not an admission decision.",
+        "This is a guided fit quiz, not a test. There are no right or wrong answers.",
+        "Each answer carries points towards the Mountain Campus or the Modern Campus. At the end, the higher score suggests the campus environment that may be the closer fit, and a close score simply means both campuses could work for your family.",
       ],
     },
     {
-      h: "Question 1: The child's age and academic stage",
+      h: "Question 1: What stage is your child at?",
       p: [
-        "Choose the child's current age, grade or intended entry point. The result considers only grades and programmes currently available.",
+        "Toddler and Early Years, Primary Years, Middle School or Senior School.",
       ],
     },
     {
-      h: "Question 2: Residential preference",
+      h: "Question 2: What kind of school rhythm are you looking for?",
       p: [
-        "Choose between a full residential experience, residential flexibility, day-boarding or the options currently available to your family.",
+        "A deeply immersive residential experience, a more flexible campus experience, or open to both.",
       ],
     },
     {
-      h: "Question 3: The environment your child may respond to",
+      h: "Question 3: What would you most like school to build in your child right now?",
       p: [
-        "Consider whether the child may benefit more from deeper residential immersion and distance from distraction, or from a contemporary campus environment with greater flexibility and proximity.",
+        "Greater independence and discipline, confidence and communication, academic direction and preparation, physical strength and resilience, wider exposure and future readiness, or a balance of all of these.",
       ],
     },
     {
-      h: "Question 4: Your highest parent priorities",
+      h: "Question 4: Which environment feels closer to what your child needs?",
       p: [
-        "Choose the priorities that matter most: discipline, academic choice, competitive preparation, confidence, sport, independence, defence orientation, communication, care or flexibility.",
+        "A quieter, more immersive environment away from urban distraction, a contemporary environment with greater access, choice and flexibility, or not sure yet.",
       ],
     },
     {
-      h: "Question 5: The child's current needs",
+      h: "Question 5: How ready is your child for greater independence?",
+      p: ["Very ready, ready with support, still developing, or not sure."],
+    },
+    {
+      h: "Question 6: What matters most when you think about the next few years?",
       p: [
-        "Consider whether the child most needs structure, independence, confidence, exposure, physical strength, academic direction or a balanced combination.",
+        "A true residential-school experience, academic choice and future pathways, defence-oriented preparation, confidence, leadership and exposure, strong academics without a second-shift childhood, or all-round development within one environment.",
       ],
     },
     {
-      h: "Question 6: Future pathways",
+      h: "This quiz guides you. Conversation completes it.",
       p: [
-        "Indicate any known interests such as competitive examinations, defence, wider university pathways, sport or a broad all-round foundation.",
-      ],
-    },
-    {
-      h: "Every child is different.",
-      p: [
-        "Your result presents the recommended campus, the strongest reasons for the match and the alternate campus for comparison. From there, you can book a visit or speak to admissions.",
-        "The final choice becomes clearer after speaking with the School and experiencing the campus. This guide helps your family begin the right conversation.",
+        "Your result presents the campus your answers point towards, the reasons it may suit your child, and the alternative for comparison. From there, you can book a visit or speak to admissions.",
+        "If you would like to go deeper into your child's personality, readiness or aspirations, our admissions team can help interpret the result with you.",
       ],
     },
   ],
@@ -156,11 +162,11 @@ export const findYourCampus: PageCopy = {
 export const compareCampuses: PageCopy = {
   slug: "/campuses/compare",
   nav: "Compare Campuses",
-  kicker: "Same roots. Different wings.",
+  kicker: "One Dalhousie. Two ways to grow.",
   title: "Compare the two",
   emphasis: "Dalhousie experiences.",
   subhead:
-    "The two campuses share one philosophy, but differ in setting, residential depth, academic journey, flexibility and parent fit. Compare the experience without turning the choice into a ranking.",
+    "The two campuses share one philosophy, one commitment to the whole child and one belief in serious preparation with care. What changes is the environment, the rhythm and the kind of experience a family is seeking.",
   primary: "Find Your Campus",
   secondary: "Visit a Campus",
   image: img.compareHero,
@@ -169,7 +175,7 @@ export const compareCampuses: PageCopy = {
   meta: {
     title: "Compare Campuses, Dalhousie Public School",
     description:
-      "A plain-language comparison of the Dalhousie Mountain Campus and the New Chandigarh Modern Campus across setting, residential model, academics and parent fit.",
+      "A plain-language comparison of the Dalhousie Mountain Campus and the New Chandigarh Modern Campus across character, rhythm, academics, residential life and fit.",
   },
   blocks: [],
 };
@@ -180,15 +186,15 @@ export const dalhousieCampus: PageCopy = {
   slug: "/campuses/dalhousie",
   nav: "Dalhousie Campus",
   kicker: "The original Himalayan home",
-  title: "Rooted in the mountains.",
-  emphasis: "Formed for life.",
+  title: "A World Away.",
+  emphasis: "Ready For The World.",
   subhead:
-    "Dalhousie Campus is the deeper, more immersive expression of the Dalhousie experience: full residential life, CBSE education, mountain discipline, house culture, outdoor exposure, pastoral care and the quiet strength that comes from living, learning and growing together.",
+    "Dalhousie Campus is the deeper, more immersive expression of the Dalhousie experience. Full residential life, CBSE education, academic preparation, mountain discipline, house culture, outdoor exposure and pastoral care come together within one complete environment.",
   primary: "Visit Dalhousie Campus",
   secondary: "Explore Residential Life",
   image: img.dalHero,
   image2: img.dalSplit,
-  closeEyebrow: "Best understood in motion",
+  closeEyebrow: "Visit the Mountain Campus",
   pulls: [
     {
       slot: "grid",
@@ -200,61 +206,90 @@ export const dalhousieCampus: PageCopy = {
   meta: {
     title: "Dalhousie Campus, The Mountain Campus",
     description:
-      "Full residential immersion, CBSE academic seriousness, house culture, outdoor strength and pastoral care, seven thousand feet up in the Himalayas.",
+      "Full residential immersion, CBSE academic seriousness, house culture, outdoor strength and pastoral care, in the original Himalayan home of the School.",
   },
   blocks: [
     {
       h: "Far from distraction. Close to what matters.",
       p: [
-        "The mountain setting creates more than a beautiful backdrop. Distance, terrain, weather, routine and community reduce distraction and give children the space to build attention, discipline and stronger relationships.",
+        "The mountain setting is more than a backdrop. Distance from the constant movement and distraction of urban life creates space for children to focus, participate and form deeper relationships with the people and environment around them.",
+        "The terrain asks them to move. The weather asks them to adapt. Residential life asks them to contribute. Routine asks them to become more disciplined. And, gradually, children learn that they are capable of doing more for themselves.",
       ],
     },
     {
-      h: "A mountain-shaped education.",
+      h: "A mountain-shaped education",
       p: [
-        "This is not simply a school located in the mountains. The environment participates in the child's growth. Walking, weather, outdoor movement, residential routine, shared spaces and the demands of daily life help children become more resilient and self-reliant.",
+        "At Dalhousie Campus, growth does not happen only inside classrooms. It happens during the morning routine. On the walk across campus. On the sports field. At the dining table. During prep. Inside the house. In friendships, duties and everyday decisions.",
+        "The mountain environment makes effort, adaptability and self-reliance part of daily life. The result is not simply a child who has studied in the mountains. It is a child who has been shaped by them.",
       ],
     },
     {
-      h: "Full residential immersion",
+      h: "Academics at Dalhousie Campus",
       p: [
-        "Boarding is seen as preparation, not separation. The child learns to manage time, belongings, friendships, duties, study, rest and everyday decisions with the support of house parents, mentors and a close community.",
+        "Academic ambition inside balance and care. CBSE learning, concept depth, guided preparation, testing and mentoring sit within a structured residential rhythm.",
+        "Through Dalhousie Competitive Edge, serious academic preparation becomes part of the school experience rather than a second academic shift after it.",
       ],
     },
     {
-      h: "Structured academic seriousness",
+      h: "Residential life",
       p: [
-        "CBSE learning, classroom depth, Competitive Edge, guided prep, testing and mentoring sit inside a balanced residential rhythm. Academic ambition is supported without turning the child's life into a second shift.",
+        "Boarding is preparation, not separation. House life, daily routines, shared meals, prep, friendships and responsibilities give children repeated opportunities to become more independent.",
+        "They learn to stand on their own, while remaining supported by the adults and community around them.",
       ],
     },
     {
-      h: "Defence Pathway fit",
+      h: "Student life",
       p: [
-        "The mountain campus has a natural connection with discipline, fitness, service and NDA aspiration. The Defence Pathway can draw strength from the environment while remaining broader than examination coaching.",
+        "Living, learning and growing together. Assemblies, speaking, performance, service, house activities, friendships and shared traditions give children many ways to participate beyond academics.",
+        "Student life is where confidence becomes visible and belonging becomes real.",
       ],
     },
     {
-      h: "House culture and pastoral care",
+      h: "Sports, outdoors & adventure",
       p: [
-        "The house is where children belong, contribute, seek support and learn to live with others. Pastoral care keeps every child known and every parent clear about communication and escalation.",
+        "Character in motion. The mountain environment naturally encourages movement and physical challenge.",
+        "Sport, fitness, house competition and outdoor experiences develop strength, teamwork, courage and resilience, whether or not a child becomes a competitive athlete.",
       ],
     },
     {
-      h: "Outdoor strength",
+      h: "House culture & pastoral care",
       p: [
-        "Sport, movement, adventure and the terrain itself help build fitness, courage, teamwork and the confidence to meet difficulty.",
+        "Every child should be known. The house is where children belong, contribute and seek support.",
+        "House parents, mentors, teachers and pastoral teams help children navigate residential life while parents remain connected to their child's progress and wellbeing.",
+      ],
+    },
+    {
+      h: "Academic seriousness without the second shift",
+      p: [
+        "Academic ambition should not require children to begin another life after school. Dalhousie Competitive Edge brings concept strengthening, guided practice, testing, doubt support, mentoring and progress tracking into a more coherent academic rhythm.",
+        "Children prepare seriously. But academic preparation sits alongside sport, friendships, responsibility and rest.",
+      ],
+    },
+    {
+      h: "A natural home for the Defence Pathway",
+      p: [
+        "The Dalhousie Campus has a natural connection with discipline, fitness, service and defence-oriented aspiration. Residential life builds self-management. The mountain develops physical confidence and resilience. House culture teaches teamwork and responsibility. Speaking and leadership opportunities strengthen voice and presence.",
+        "The aim goes beyond preparing for an examination. It begins with forming the kind of person who may one day be ready to earn the uniform. Mind. Body. Voice. Bearing. Service.",
       ],
     },
     {
       h: "The Dalhousie Campus child",
       p: [
-        "Grounded. Resilient. Respectful. Independent. Physically confident. The aim is not to create hardness, but inner strength supported by care, community and purpose.",
+        "Grounded. Resilient. Respectful. Independent. Physically confident. The Mountain Campus is not designed to create hardness. It is designed to build inner strength.",
+        "Children learn to meet difficulty without immediately stepping away from it. To live with people who are different from them. To take responsibility before being reminded. To ask for guidance when they need it. And to become increasingly capable of standing on their own.",
       ],
     },
     {
-      h: "Visit the Mountain Campus",
+      h: "Is the Mountain Campus right for your child?",
       p: [
-        "Experience the morning rhythm, classrooms, house life, dining, sport, prep and the way students and adults relate to one another. The campus is best understood in motion.",
+        "Dalhousie Campus may be a strong fit for families looking for a true residential-school experience, greater independence and self-reliance, distance from urban distraction and screen-heavy routines, stronger discipline and daily structure, house culture and close community life, academic seriousness within a protected residential rhythm, outdoor strength and resilience, and a natural environment for defence-oriented preparation.",
+      ],
+    },
+    {
+      h: "See the rhythm for yourself.",
+      p: [
+        "The Mountain Campus is best understood in motion. See the morning routine. Visit the classrooms. Experience the houses and dining spaces. Watch sport and preparation. Meet the adults who teach, mentor and care for the children.",
+        "And consider whether this is the environment in which your child can imagine growing. A World Away. Ready For The World.",
       ],
     },
   ],
@@ -264,15 +299,15 @@ export const dalAcademics: PageCopy = {
   slug: "/campuses/dalhousie/academics",
   nav: "Academics at Dalhousie",
   kicker: "Academics within a protected residential rhythm",
-  title: "Academic ambition sits inside",
+  title: "Academic ambition inside",
   emphasis: "balance and care.",
   subhead:
-    "The Mountain Campus combines CBSE learning, concept depth, guided preparation, mentoring and disciplined study habits inside a residential environment designed to protect focus and childhood.",
+    "At Dalhousie Campus, academic learning does not sit apart from the rest of the child's life. CBSE education, classroom depth, guided preparation, mentoring and disciplined study habits work within a residential rhythm that also creates space for sport, responsibility, friendships and rest.",
   primary: "Speak to Admissions",
   secondary: "Explore Competitive Edge",
   image: img.dalAcademicsHero,
   image2: img.dalAcademicsSplit,
-  closeEyebrow: "The proof",
+  closeEyebrow: "A more complete day",
   pulls: [
     {
       slot: "grid",
@@ -284,55 +319,62 @@ export const dalAcademics: PageCopy = {
   meta: {
     title: "Academics at Dalhousie Campus, Dalhousie Public School",
     description:
-      "The CBSE academic journey, concept depth before repetition, Competitive Edge, the Scholars and Achievers Tracks and the Dalhousie Academic Dashboard.",
+      "CBSE learning with depth, a residential academic rhythm, Competitive Edge, the Scholars and Achievers Tracks and the Dalhousie Academic Dashboard.",
   },
   blocks: [
     {
-      h: "The CBSE academic journey",
+      h: "CBSE learning with depth",
       p: [
-        "Parents can see the grades offered, subject structure, academic expectations and transitions, together with the support that surrounds the curriculum.",
-      ],
-    },
-    {
-      h: "Concept depth before repetition",
-      p: [
-        "Strong academic preparation begins with understanding. Classroom discussion, explanation, practice and feedback build concepts before speed and test intensity increase.",
+        "Understanding before acceleration. Strong academic preparation begins with strong concepts. Classroom learning gives students the opportunity to question, understand, practise and strengthen what they know before expectations become more demanding.",
+        "The goal is not only syllabus completion. It is a stronger academic foundation from which future preparation can grow.",
       ],
     },
     {
       h: "A residential academic rhythm",
       p: [
-        "Classes, preparation, sport, meals, mentoring and rest are coordinated. Children do not need to travel between systems or begin a second shift after school.",
+        "At a residential campus, preparation does not have to begin with another commute. Classes, guided prep, sport, meals, mentoring and rest can sit within one more coherent rhythm.",
+        "Students learn when to focus. How to organise work. When to ask for support. And, over time, how to take greater responsibility for their own preparation.",
       ],
     },
     {
       h: "Dalhousie Competitive Edge",
       p: [
-        "Competitive Edge brings diagnostics, concept strengthening, guided practice, doubt support, test discipline and future-pathway preparation into the day.",
+        "Serious preparation. Without the second shift. Competitive Edge strengthens the academic experience through academic diagnostics, concept strengthening, guided practice, test discipline, doubt support, and mentoring and progress tracking.",
+        "Understanding where the student stands. Addressing gaps before they become larger weaknesses. Learning how to apply concepts consistently. Developing accuracy, time management and examination composure. Resolving uncertainty before it accumulates. Turning assessment into clearer academic direction.",
       ],
     },
     {
       h: "Scholars Track",
       p: [
-        "For approved competitive and top-university pathways, the Scholars Track brings together clear eligibility, subjects, timetable, testing and support.",
+        "For students pursuing highly competitive academic routes such as JEE, NEET, CUET, Olympiads and top-university preparation, subject to the School's current programme and eligibility framework.",
       ],
     },
     {
       h: "Achievers Track",
       p: [
-        "The Achievers Track supports board preparation and wider pathways across commerce, humanities, law, design, business, entrepreneurship, defence and approved international routes.",
+        "For students preparing towards boards and broader routes across commerce, humanities, law, design, defence, entrepreneurship, business, international pathways and wider future readiness.",
+        "The goal is not to place every student on the same route. It is to help each student prepare seriously for the route that fits.",
       ],
     },
     {
-      h: "Mentoring and doubt support",
+      h: "For those drawn to serve",
       p: [
-        "Students need regular access to adults who can identify difficulty, explain next steps and help them build independent study habits.",
+        "The Mountain Campus also provides a natural setting for students exploring defence-oriented futures. Academic preparation is supported by a wider focus on fitness, awareness, communication, discipline, teamwork and service.",
+        "Before the uniform, the making of the person.",
       ],
     },
     {
-      h: "The Dalhousie Academic Dashboard",
+      h: "Progress with direction",
       p: [
-        "Parents see progress patterns, goals, concept gaps, assessments, mentor observations and the next academic priorities.",
+        "Assessment becomes more useful when it leads to action. The Academic Dashboard is designed to help students, mentors and parents see academic progress more clearly, including areas of strength, gaps that require attention and priorities for what comes next.",
+        "Because a score should not only tell a student how they performed. It should help them prepare better.",
+      ],
+    },
+    {
+      h: "Serious academics. A more complete day.",
+      p: [
+        "Dalhousie Campus brings academic ambition into an environment where preparation, physical development, responsibility and care can grow alongside it.",
+        "Academic seriousness without losing the whole child.",
       ],
     },
   ],
@@ -342,15 +384,15 @@ export const dalResidential: PageCopy = {
   slug: "/campuses/dalhousie/residential-life",
   nav: "Residential Life at Dalhousie",
   kicker: "Full residential immersion",
-  title: "Boarding is seen as preparation,",
+  title: "Boarding is preparation,",
   emphasis: "not separation.",
   subhead:
-    "At the Mountain Campus, residential life is the environment in which children learn to manage themselves, belong to a house, contribute to a community and grow through the ordinary responsibilities of every day.",
+    "Residential life at Dalhousie Campus gives children repeated opportunities to become more capable of managing themselves. Time. Belongings. Study. Friendships. Responsibilities. Everyday decisions. They grow in independence while remaining part of a close community of peers, house parents, mentors and teachers.",
   primary: "Visit Dalhousie Campus",
-  secondary: "View Pastoral Care",
+  secondary: "Explore House Culture & Pastoral Care",
   image: img.dalResidentialHero,
   image2: img.dalResidentialSplit,
-  closeEyebrow: "How parents stay close",
+  closeEyebrow: "Independence and community",
   pulls: [
     {
       slot: "grid",
@@ -362,61 +404,70 @@ export const dalResidential: PageCopy = {
   meta: {
     title: "Residential Life at Dalhousie Campus, Dalhousie Public School",
     description:
-      "The house becomes home: a typical residential day, dorm life, dining, prep, house parents, weekend life and supported independence.",
+      "House and dorm life, dining and manners, prep time, house parents and mentors, weekend life, independence with care and the Dalhousie Growth Note.",
   },
   blocks: [
     {
-      h: "The house becomes home.",
+      h: "A home that prepares children for the world",
       p: [
-        "A residential child needs more than accommodation. The house must provide belonging, trusted adults, friendships, routines, support and a shared identity.",
+        "Residential life extends education into the everyday. Children do not simply return to a room after class. They continue learning through routines, shared spaces, relationships, responsibilities and the decisions that come with living as part of a community.",
+        "Independence grows gradually, through practice.",
       ],
     },
     {
-      h: "A typical residential day",
+      h: "House & dorm life",
       p: [
-        "From waking to rest, the rhythm brings together personal routine, meals, classes, Competitive Edge, sport, prep, house time, mentor support and sleep.",
+        "Shared life builds personal responsibility. Living with others requires children to become more aware of themselves. They learn to look after personal belongings. Respect shared spaces. Adjust to different personalities. Participate in routines.",
+        "And understand that their choices affect the people around them. These everyday lessons become part of growing up.",
       ],
     },
     {
-      h: "Dorm life",
+      h: "Dining & manners",
       p: [
-        "Shared living teaches organisation, consideration, boundaries, conflict resolution, humour, patience and the ability to live with people who are different from oneself.",
-      ],
-    },
-    {
-      h: "Dining and manners",
-      p: [
-        "Meals build routine, nutrition, conversation, table manners and respect for a shared space. Dining is part of formation.",
+        "Shared meals do more than provide structure to the day. They create everyday opportunities to practise conversation, consideration, patience and respect for a common environment.",
+        "Manners become something children live, rather than something they are occasionally reminded about.",
       ],
     },
     {
       h: "Prep time",
       p: [
-        "Structured prep gives children the discipline to review learning, complete work, seek help and gradually take greater ownership of study.",
+        "From completing work to managing your own preparation. Structured prep gives students time to revisit learning, organise tasks and seek support.",
+        "Over time, they become more responsible for knowing what needs to be done and how to approach it. The objective is not simply completed homework. It is stronger study habits.",
       ],
     },
     {
-      h: "House parents and mentors",
+      h: "House parents & mentors",
       p: [
-        "Named adults anchor the care structure. Parents know who notices, who supports and how information moves when a child needs help.",
+        "Independence does not mean children are left to work everything out alone. House parents and mentors remain part of the child's residential journey, providing guidance, noticing change and helping students reflect on challenges, decisions and progress.",
+        "Adults remain close enough to support. Children receive enough room to grow.",
       ],
     },
     {
       h: "Weekend life",
       p: [
-        "Weekends balance rest, outdoor activity, clubs, events, service, community and informal time. Residential childhood feels rich, not institutional.",
+        "Residential life needs a different rhythm outside the academic week.",
+        "Sport, recreation, house activities, friendships and time to recharge allow children to enjoy the community they are part of without every moment becoming another formal programme.",
       ],
     },
     {
-      h: "Independence with support",
+      h: "Independence with care",
       p: [
-        "The goal is not early detachment. It is supported independence, the ability to make decisions, manage routines, ask for help and recover from difficulty.",
+        "Residential life will naturally include challenges. Homesickness. Friendship difficulties. Pressure. Uncertainty. Learning how to share space. Learning when to ask for help.",
+        "These experiences are part of growing up. Pastoral care ensures children have adults and systems of support around them as they learn to navigate them.",
       ],
     },
     {
-      h: "Parent communication and Growth Notes",
+      h: "Parent Connect and the Dalhousie Growth Note",
       p: [
-        "Parents receive predictable updates and meaningful context, including academic information, pastoral observations and the child's residential growth.",
+        "Parents should be able to understand more than whether their child has settled. How are routines developing? Is the child participating? Are they becoming more independent? Where are they taking greater responsibility? Where is support still needed?",
+        "The Dalhousie Growth Note is designed to make this residential development more visible.",
+      ],
+    },
+    {
+      h: "Stand on your own. Belong to something larger.",
+      p: [
+        "Residential life works when independence and community grow together. Children become more capable of managing themselves while learning what it means to contribute to others.",
+        "Boarding is where children become.",
       ],
     },
   ],
@@ -425,16 +476,16 @@ export const dalResidential: PageCopy = {
 export const dalStudentLife: PageCopy = {
   slug: "/campuses/dalhousie/student-life",
   nav: "Student Life at Dalhousie",
-  kicker: "Living, learning and growing together",
-  title: "Community is",
-  emphasis: "part of education.",
+  kicker: "Life beyond the classroom",
+  title: "Living, learning and",
+  emphasis: "growing together.",
   subhead:
-    "The Mountain Campus gives children repeated opportunities to participate, represent, perform, serve, lead and belong. Student life is not an add-on to academics; it is where confidence and character become visible.",
+    "At Dalhousie Campus, the school experience continues beyond lessons and preparation. Assemblies, speaking, performance, house activities, service, friendships and shared traditions give children different ways to participate, contribute and discover themselves.",
   primary: "Visit Dalhousie Campus",
   secondary: "Explore the Confidence Code",
   image: img.dalStudentLifeHero,
   image2: img.dalStudentLifeSplit,
-  closeEyebrow: "In their own words",
+  closeEyebrow: "Every child has a part to play",
   pulls: [
     {
       slot: "grid",
@@ -446,55 +497,62 @@ export const dalStudentLife: PageCopy = {
   meta: {
     title: "Student Life at Dalhousie Campus, Dalhousie Public School",
     description:
-      "Assemblies and traditions, clubs, debate and performance, service and duties, friendships, celebrations, weekend life and student voices.",
+      "Assemblies, speaking and performance, creative pursuits, service and duties, friendships, traditions and weekend life at the Mountain Campus.",
   },
   blocks: [
     {
-      h: "Assemblies and traditions",
+      h: "Confidence is built through participation.",
       p: [
-        "Shared rituals create identity and continuity. Assemblies, house gatherings and school traditions give children a sense of belonging to something larger than themselves.",
+        "A voice becomes stronger by being used. Children develop confidence by having opportunities to participate. To answer. To present. To perform. To debate. To contribute to an assembly. To take responsibility for a group or task.",
+        "These moments build communication and presence gradually. The goal is not to make every child the loudest. It is to make every child more comfortable being heard.",
       ],
     },
     {
-      h: "Clubs and creative pursuits",
+      h: "Assemblies, speaking & performance",
       p: [
-        "Clubs give children space to explore, make, practise and share. Their value lies in the experience, not the length of the list.",
+        "School gatherings and performance opportunities allow students to practise more than presentation. They learn to organise thoughts. Listen. Respond. Stand before others. And carry themselves with greater confidence.",
+        "These experiences connect directly to the Dalhousie Confidence Code: Speak. Perform. Persuade. Polish. Lead.",
       ],
     },
     {
-      h: "Debate, speaking and performance",
+      h: "Creative pursuits",
       p: [
-        "Stage, debate, presentations, music and performance help children build voice, presence and the ability to be seen without fear.",
+        "Creative experiences give children space to explore interests and forms of expression beyond academics. They allow students to create, interpret, collaborate and share something of their own.",
+        "The value lies not only in the final performance or output. It lies in confidence, curiosity and participation.",
       ],
     },
     {
-      h: "Service and duties",
+      h: "Service & duties",
       p: [
-        "Residential communities depend on contribution. Duties, service and house responsibilities teach leadership by action.",
+        "Contribution is part of belonging. Community becomes meaningful when children have a role within it. House duties, service and shared responsibilities teach students that participation is not only about what they receive.",
+        "It is also about what others can depend on them to do. This is where responsibility starts becoming behaviour.",
       ],
     },
     {
-      h: "Friendships and house community",
+      h: "Friendships & house community",
       p: [
-        "Living together allows children to form deeper friendships, learn conflict resolution and understand the give-and-take of community.",
+        "Residential life creates time for relationships to deepen. Children learn to share spaces, work through differences and support one another across the ordinary rhythm of school life.",
+        "Friendships become part of the emotional strength of the campus experience.",
       ],
     },
     {
-      h: "Celebrations and events",
+      h: "Traditions, celebrations & events",
       p: [
-        "Events bring the School's culture to life and give students roles in planning, performing, hosting and representing.",
+        "Shared occasions create identity. They give students opportunities to participate in something larger than their individual timetable and create memories connected to the community they belong to.",
       ],
     },
     {
       h: "Weekend life",
       p: [
-        "Residential weekends bring variety through outdoor experiences, sport, creative time, informal community and rest.",
+        "Weekends allow another side of student life to emerge. Less formal. More social. More room for recreation, sport, shared experiences and time with friends.",
+        "These moments help the residential community feel like a place children live in, not merely a school they remain at.",
       ],
     },
     {
-      h: "Student voices",
+      h: "A school community in which every child has a part to play.",
       p: [
-        "Student voices bring the campus to life from within, through authentic, age-appropriate reflections shared with consent.",
+        "Student life gives children space to discover where they belong, how they contribute and how confidently they can participate.",
+        "Because growing up together is part of growing well.",
       ],
     },
   ],
@@ -503,16 +561,16 @@ export const dalStudentLife: PageCopy = {
 export const dalSports: PageCopy = {
   slug: "/campuses/dalhousie/sports-outdoors",
   nav: "Sports, Outdoors & Adventure",
-  kicker: "The mountain as part of the education",
-  title: "Strength grows through movement,",
-  emphasis: "effort and challenge.",
+  kicker: "Character in motion",
+  title: "The mountain asks children to move,",
+  emphasis: "adapt and try again.",
   subhead:
-    "The Mountain Campus offers an environment in which physical development is part of daily life. Sport and outdoor experience build courage, teamwork, resilience and confidence in the body.",
+    "At Dalhousie Campus, the environment naturally brings physical activity closer to everyday life. Sport, fitness, outdoor movement and the demands of the terrain help children become stronger, more resilient and more confident in meeting challenge.",
   primary: "Explore the Sports Pathway",
   secondary: "Visit Dalhousie Campus",
   image: img.dalSportsHero,
   image2: img.dalSportsSplit,
-  closeEyebrow: "The proof",
+  closeEyebrow: "Stronger bodies. Stronger responses.",
   pulls: [
     {
       slot: "grid",
@@ -523,55 +581,69 @@ export const dalSports: PageCopy = {
   meta: {
     title: "Sports, Outdoors & Adventure at Dalhousie Campus",
     description:
-      "Fit for Life, house sport, competitive teams, outdoor education, adventure and resilience, with safety and supervision stated accurately.",
+      "Fit for Life, house sport, competitive sport, strength and conditioning, outdoor adventure and the Dalhousie Fitness Card in a mountain setting.",
   },
   blocks: [
     {
+      h: "The mountain is part of the experience.",
+      p: [
+        "The environment asks something of the child. Terrain changes the way children move through the day. Weather asks for adjustment. Outdoor experiences create different kinds of challenge.",
+        "The child learns that effort is normal. That discomfort passes. And that confidence often grows after doing something that first felt difficult.",
+      ],
+    },
+    {
       h: "Fit for Life",
       p: [
-        "Every child builds a foundation of movement, stamina, strength and healthy routine. Progress matters more than comparison.",
+        "The starting point is not competition. It is physical competence. Every child should become more willing to move, participate and build greater confidence in their own body.",
+        "Fitness becomes part of readiness for life, not simply preparation for a sports day.",
       ],
     },
     {
-      h: "House Sport",
+      h: "House sport",
       p: [
-        "House competition creates participation, belonging and the experience of representing others.",
+        "House sport creates participation, energy and belonging. Children compete as part of a group.",
+        "They learn to support teammates, respond to results and understand that effort affects more than the individual.",
       ],
     },
     {
-      h: "Competitive teams",
+      h: "Competitive sport",
       p: [
-        "Students with interest and ability move into clear routes for focused training and competition.",
+        "For students ready for greater challenge, competitive participation can demand more consistency, preparation and composure.",
+        "Training teaches discipline. Competition tests it. And both success and disappointment become opportunities to grow.",
       ],
     },
     {
-      h: "Outdoor education",
+      h: "Strength & conditioning",
       p: [
-        "The mountain environment can support walking, nature awareness, navigation, endurance and supervised outdoor learning.",
+        "Physical progress takes structure. Strength and conditioning help children build capacity gradually and understand that becoming stronger requires consistency rather than occasional intensity.",
       ],
     },
     {
-      h: "Adventure and resilience",
+      h: "Outdoors & adventure",
       p: [
-        "Appropriate challenge teaches children to assess risk, persist, support others and recover when something is difficult.",
+        "Outdoor experiences offer a different relationship with challenge. They ask children to adapt to the environment, work with others and become more comfortable when conditions are not completely predictable.",
+        "In the mountains, the setting itself can become part of resilience-building.",
       ],
     },
     {
-      h: "Strength and conditioning",
+      h: "The Defence Pathway connection",
       p: [
-        "Training is age-appropriate, supervised and connected to both health and sport performance.",
-      ],
-    },
-    {
-      h: "Safety and supervision",
-      p: [
-        "Outdoor confidence depends on careful planning, trained supervision, equipment, permissions and emergency procedures. These details must be stated accurately.",
+        "For students drawn towards defence-oriented futures, physical readiness is one part of a larger preparation.",
+        "The Mountain Campus allows fitness, terrain, discipline and teamwork to connect naturally with the Defence Pathway's larger framework: Mind. Body. Voice. Bearing. Service.",
       ],
     },
     {
       h: "The Dalhousie Fitness Card",
       p: [
-        "Fitness progress is visible through personal goals, participation, coach feedback and next steps.",
+        "Physical development should be visible too. The Fitness Card is designed to help students and parents see progress in participation, fitness and physical development over time.",
+        "Because every child may not become an athlete. But every child can become stronger.",
+      ],
+    },
+    {
+      h: "Stronger bodies. Stronger responses.",
+      p: [
+        "Sport and outdoor life teach children what happens when things become difficult. Keep moving. Adjust. Work with others. Try again.",
+        "Character in motion.",
       ],
     },
   ],
@@ -580,16 +652,16 @@ export const dalSports: PageCopy = {
 export const dalHouseCulture: PageCopy = {
   slug: "/campuses/dalhousie/house-culture-care",
   nav: "House Culture & Pastoral Care",
-  kicker: "The house as the child's community",
-  title: "Known. Guided.",
-  emphasis: "Supported. Shaped.",
+  kicker: "The child should be known",
+  title: "A community to belong to.",
+  emphasis: "Adults to turn to.",
   subhead:
-    "The house gives the residential child a smaller community within the larger School, a place to belong, contribute, seek help and learn the responsibilities of living with others.",
+    "Residential life asks children to become more independent. House culture ensures they do not have to become independent alone. The house gives each child an immediate community within the wider school: a place to belong, contribute, build relationships and receive guidance.",
   primary: "Speak to the Campus",
-  secondary: "View Parent Connect",
+  secondary: "Explore Parent Connect",
   image: img.dalHouseHero,
   image2: img.dalHouseSplit,
-  closeEyebrow: "One parent-connect system",
+  closeEyebrow: "Known. Guided. Supported. Growing.",
   pulls: [
     {
       slot: "grid",
@@ -601,55 +673,70 @@ export const dalHouseCulture: PageCopy = {
   meta: {
     title: "House Culture & Pastoral Care at Dalhousie Campus",
     description:
-      "House structure, house parents and mentors, daily routines, belonging, emotional care, medical support, safeguarding and parent communication.",
+      "The house as a community, house parents and mentors, routine and responsibility, emotional care, health, safeguarding and parent communication.",
   },
   blocks: [
     {
-      h: "House structure",
+      h: "The house as a community",
       p: [
-        "Parents can see how houses are organised, how children are grouped and which adults hold responsibility during different parts of the day.",
+        "Belonging creates the confidence to grow. The house brings students together around shared routines, spaces and responsibilities. Children learn how to live with others. How to contribute. How to adjust. How to respect differences. And how to become dependable within a community.",
+        "Over time, the child moves from simply being part of the house to actively contributing to it.",
       ],
     },
     {
-      h: "House parents and mentors",
+      h: "House parents & mentors",
       p: [
-        "House parents and mentors provide continuity. They notice changes, support adjustment, guide routines and communicate with families.",
+        "Children need adults who know more than their academic results. House parents and mentors can see another side of the child: how they manage routines, how they respond to difficulty, how they build friendships, whether they are participating, where they are becoming more independent and where they may need support.",
+        "These relationships make pastoral care more personal.",
       ],
     },
     {
-      h: "Daily routines",
+      h: "Routine, responsibility & belonging",
       p: [
-        "Routines create security. They help children manage personal care, meals, study, sport, belongings and rest.",
-      ],
-    },
-    {
-      h: "Belonging and responsibility",
-      p: [
-        "House identity gives children a place to contribute. Duties, teams, traditions and shared goals help them understand that belonging comes with responsibility.",
+        "Everyday residential routines provide small opportunities to build responsibility. Being prepared on time. Looking after belongings. Maintaining shared spaces. Completing a duty. Following through on a commitment.",
+        "These behaviours may look ordinary. Repeated over time, they become self-management and maturity.",
       ],
     },
     {
       h: "Emotional care",
       p: [
-        "Children need adults they trust, quiet ways to ask for help and a culture that responds to homesickness, friendship difficulties and pressure with care.",
+        "Growing up will include difficult moments. Homesickness. Disagreements. Academic pressure. Uncertainty. Changes in friendships.",
+        "Children need adults they trust and an environment in which asking for help is treated as part of growing well. Pastoral care is there to support the child through these moments without removing every challenge from their path.",
       ],
     },
     {
-      h: "Medical support",
+      h: "Health & wellbeing",
       p: [
-        "Medical provision, medication processes, emergency response and parent notification are clearly connected to the care system.",
+        "The child's physical wellbeing is part of the wider care environment.",
+        "Daily routines, nutrition, rest and access to appropriate medical support all contribute to how securely a child experiences residential life.",
       ],
     },
     {
-      h: "Safety and safeguarding",
+      h: "Safety & safeguarding",
       p: [
-        "Safeguarding information is direct, current and approved. Parents know the reporting and escalation channels.",
+        "Parents should understand how children are supervised and how concerns are identified, communicated and escalated.",
+        "The School's current safeguarding and supervision information is published here alongside the relevant policies.",
       ],
     },
     {
       h: "Parent communication",
       p: [
-        "Scheduled contact, mentor updates, urgent escalation and Whole Child reporting work together as one parent-connect system.",
+        "Independence for the child should not become uncertainty for the parent. Parents need a clear understanding of who to speak to and how they will remain connected to their child's journey.",
+        "Communication should help families understand academic progress, residential adjustment, wellbeing, participation and areas where the child may need greater support.",
+      ],
+    },
+    {
+      h: "Growth beyond marks",
+      p: [
+        "Residential growth often appears in small changes. A child manages a routine independently. Becomes more considerate in a shared space. Takes responsibility without being asked twice. Handles a difficult friendship more maturely. Begins asking for help at the right time.",
+        "These changes matter. The Dalhousie Growth Note and Whole Child approach are designed to give them greater visibility.",
+      ],
+    },
+    {
+      h: "Care enough to support. Trust enough to let them grow.",
+      p: [
+        "The purpose of pastoral care is not to make childhood free of difficulty. It is to create an environment in which children can meet difficulty with guidance, security and increasing confidence in themselves.",
+        "Known. Guided. Supported. Growing.",
       ],
     },
   ],
@@ -660,20 +747,20 @@ export const dalHouseCulture: PageCopy = {
 export const newChandigarhCampus: PageCopy = {
   slug: "/campuses/new-chandigarh",
   nav: "New Chandigarh Campus",
-  kicker: "The Modern Campus. Built for tomorrow.",
+  kicker: "The Modern Campus",
   title: "All-Round. Without",
   emphasis: "the Running Around.",
   subhead:
-    "New Chandigarh Campus brings academic choice, preparation, confidence, sport, communication, leadership, exposure and residential flexibility together in one contemporary Dalhousie environment. Children do not need to travel between separate systems to receive an all-round education.",
+    "A child should not have to move between school, preparation, sport, communication classes and multiple outside programmes just to receive a complete education. New Chandigarh brings academics, preparation, confidence, sport, leadership and future pathways together within one contemporary Dalhousie environment.",
   primary: "Visit New Chandigarh Campus",
   secondary: "Explore the Academic Journey",
   image: img.chdHero,
   image2: img.chdSplit,
-  closeEyebrow: "The New Chandigarh child",
+  closeEyebrow: "Visit the Modern Campus",
   pulls: [
     {
       slot: "grid",
-      line: "Parents spend years coordinating school, tuition, sport and classes. This campus is the argument against that.",
+      line: "More opportunity for the child. More continuity in the day. Less fragmentation for the family.",
       label: "Explore the Academic Journey",
       alt: "Visit New Chandigarh Campus",
     },
@@ -681,61 +768,110 @@ export const newChandigarhCampus: PageCopy = {
   meta: {
     title: "New Chandigarh Campus, The Modern Campus",
     description:
-      "Academic choice, the stage-by-stage journey from Toddler to Senior School, residential and day-boarding flexibility, confidence, sport and pastoral care.",
+      "The academic journey from early years to senior school, residential and weekday-boarding flexibility, Competitive Edge, confidence, sport and pastoral care.",
   },
   blocks: [
     {
-      h: "The contemporary Dalhousie experience",
+      h: "All-round is not about having more. It is about having everything that matters, in one place.",
       p: [
-        "The campus carries the same Dalhousie promise of character, discipline, care, confidence and life readiness, expressed through a modern academic and residential ecosystem.",
+        "Parents today are not looking only for strong academics. They want their children to communicate confidently, stay physically active, develop wider interests, learn responsibility and move towards the future with greater clarity. The challenge is that these needs often exist in different places.",
+        "New Chandigarh is designed around a different idea. What if more of the child's preparation could already be built into the school experience? Academics. Competitive preparation. Sport. Confidence. Communication. Leadership. Future pathways. Care. Different dimensions of development, one more coordinated environment.",
       ],
     },
     {
-      h: "All-round, in one coordinated environment.",
+      h: "The academic journey",
       p: [
-        "Parents often spend years coordinating school, tuition, sport, communication classes, activities and travel. The New Chandigarh proposition is different: the important dimensions of growth are designed to work together.",
+        "From curiosity to readiness. The academic journey develops with the child. The early years begin with movement, care and discovery. Primary Years strengthen foundations and inquiry. Middle School builds confidence and pathway readiness.",
+        "Senior School brings greater direction, choice and serious preparation.",
       ],
     },
     {
-      h: "Academic journey, curiosity to readiness",
+      h: "Early Years",
       p: [
-        "The journey moves clearly from Toddler and Early Years through Primary, Middle and Senior School. Each stage shows what children learn, how confidence grows and what they are ready for next.",
+        "Movement. Rhythm. Care. Discovery. Young children need more than early academics.",
+        "They need secure relationships, purposeful play, movement, language and the confidence to participate in the world around them.",
       ],
     },
     {
-      h: "Academic choice and pathways",
+      h: "Primary Years",
       p: [
-        "Subject choice, Competitive Edge, Scholars Track, Achievers Track, defence orientation and wider future routes are presented accurately by age and stage.",
+        "Strong foundations. Curious minds. Literacy, numeracy and conceptual learning are joined by inquiry, communication, collaboration and physical development.",
+        "Children begin learning not only what to know, but how to think.",
       ],
     },
     {
-      h: "Residential and day-boarding flexibility",
+      h: "Middle School",
       p: [
-        "Families can compare the residential models available, the daily rhythm and how each option supports academics, sport, prep, care and independence.",
+        "Foundation. Confidence. Pathway readiness. As academic depth increases, students also begin developing stronger study habits, responsibility and greater awareness of their own interests and strengths.",
       ],
     },
     {
-      h: "Confidence, communication and leadership",
+      h: "Senior School",
       p: [
-        "Speaking, performance, collaboration and leadership are part of the experience, not occasional add-ons.",
+        "Direction. Discipline. Serious preparation. Senior School brings academic choices, board readiness, Competitive Edge, mentoring and future pathways into clearer focus.",
+        "The student begins moving from broad possibility towards informed direction.",
       ],
     },
     {
-      h: "Sport and exposure",
+      h: "Residential & weekday-boarding",
       p: [
-        "Physical development, team sport and confirmed specialist opportunities are understood through the child's experience and progress.",
+        "Structure with greater flexibility. Families need different kinds of school experiences.",
+        "New Chandigarh offers the opportunity to bring more of the student's academics, preparation, sport and development into one coordinated day, through the residential and weekday-boarding formats available to the relevant age and stage.",
       ],
     },
     {
-      h: "Pastoral care and parent connect",
+      h: "Serious preparation. Without the second shift.",
       p: [
-        "Modernity must not mean distance. Parents need clear information about mentors, supervision, medical support, safeguarding, communication and reporting.",
+        "One of New Chandigarh's strongest advantages is that serious preparation need not begin only after the school day ends. Dalhousie Competitive Edge brings diagnostics, concept strengthening, guided practice, test discipline, doubt support and mentoring into a more structured academic pathway.",
+        "Students can prepare towards boards and future competitive routes without the constant cycle of school, coaching, travel and late-night work.",
+      ],
+    },
+    {
+      h: "Academic choice without curriculum confusion",
+      p: [
+        "More options should create clearer direction, not more anxiety. As children grow, their academic journey should become more specific. But choice is valuable only when students understand what those choices mean.",
+        "Through teaching, exposure, mentoring and the relevant Scholars and Achievers Tracks, students can begin understanding what interests them, where their strengths are becoming visible, what different pathways demand and what preparation should come next. The aim is not to decide a child's future too early. It is to help them become better prepared to choose it.",
+      ],
+    },
+    {
+      h: "Confidence, communication & leadership",
+      p: [
+        "Academic knowledge becomes more powerful when a child can express it. Students receive opportunities to speak, present, perform, collaborate and take responsibility.",
+        "Over time, they learn to organise an idea. Participate in a group. Speak before others. Listen and respond. And lead when the moment requires it. The goal is not to create louder children. It is to develop more articulate and assured ones.",
+      ],
+    },
+    {
+      h: "Sport, exposure & future readiness",
+      p: [
+        "Sport gives children something the classroom cannot: the direct experience of effort. Teamwork. Competition. A setback. Another attempt.",
+        "Physical development sits alongside academic and social growth so that children become stronger, healthier and more willing to participate.",
+      ],
+    },
+    {
+      h: "Modern should never mean impersonal.",
+      p: [
+        "Opportunity works best when the child remains known. As children encounter more choice and independence, they still need adults who understand their journey.",
+        "Teachers, mentors and pastoral teams help parents stay connected to academic progress, participation, confidence and wellbeing. The campus may be contemporary. The responsibility towards the child remains deeply personal.",
       ],
     },
     {
       h: "The New Chandigarh child",
       p: [
-        "Articulate. Adaptive. Confident. Choice-ready. Globally aware. The aim is a child who can move towards opportunity without losing values, discipline or balance.",
+        "Articulate. Adaptive. Confident. Choice-ready. Globally aware. The aim is a child who can recognise opportunity and respond to it.",
+        "Someone who can communicate an idea. Adapt when circumstances change. Make increasingly informed choices. Work with different people. Prepare seriously without losing balance. And move towards the future without losing the values and discipline that ground them.",
+      ],
+    },
+    {
+      h: "Is New Chandigarh right for your child?",
+      p: [
+        "New Chandigarh may be a strong fit for families seeking academic choice and clearer future pathways, confidence, communication and leadership, all-round development in one connected environment, greater flexibility in the campus experience, serious preparation without a second-shift childhood, sport and wider exposure, a contemporary learning environment without losing Dalhousie values, and preparation for a future with more possibilities.",
+      ],
+    },
+    {
+      h: "See all-round development in action.",
+      p: [
+        "A campus is easiest to understand when you see how the day actually moves. Visit the classrooms. See how students participate. Understand how academic preparation fits into the day. Explore sport and student life. Meet the adults who guide and support the child.",
+        "And experience how more of childhood can come together in one place. All-Round. Without the Running Around.",
       ],
     },
   ],
@@ -745,16 +881,16 @@ export const chdAcademicJourney: PageCopy = {
   kind: "sequence",
   slug: "/campuses/new-chandigarh/academic-journey",
   nav: "Academic Journey",
-  kicker: "The New Chandigarh academic journey",
-  title: "From curiosity",
-  emphasis: "to readiness.",
+  kicker: "From curiosity to readiness",
+  title: "Every stage prepares the child",
+  emphasis: "for what comes next.",
   subhead:
-    "A strong academic journey changes as the child grows. Early learning begins in movement, care and discovery. Primary builds foundations and inquiry. Middle School builds readiness. Senior School brings direction, choice and serious preparation.",
+    "The academic journey at New Chandigarh changes as the child grows. The youngest children need movement, care and discovery. Primary learners need strong foundations and curiosity. Middle School students need confidence and emerging direction. Senior students need clearer choices and serious preparation.",
   primary: "Explore the Stages",
   secondary: "Speak to Admissions",
   image: img.chdJourneyHero,
   image2: img.chdJourneySplit,
-  closeEyebrow: "How parents see progress",
+  closeEyebrow: "Progress parents can understand",
   pulls: [
     {
       slot: "grid",
@@ -766,55 +902,49 @@ export const chdAcademicJourney: PageCopy = {
   meta: {
     title: "Academic Journey, New Chandigarh Campus",
     description:
-      "Toddler, Early Years, Primary, Middle and Senior School: what children learn at each stage, how the stages connect and how progress is reported.",
+      "Toddler and Early Years, Primary, Middle and Senior School: what children learn at each stage, how the stages connect and how progress is reported.",
   },
   blocks: [
     {
-      h: "Toddler Programme",
+      h: "One connected journey rather than a series of disconnected stages.",
       p: [
-        "Learning through movement, rhythm and care. The youngest children need a secure routine, warm relationships, language-rich interaction and opportunities to explore through the body and senses.",
+        "The stages are designed to build on one another. Curiosity becomes understanding. Understanding builds confidence. Confidence supports choice. Choice creates direction.",
+        "The level of academic challenge changes as the child grows, but the Dalhousie commitment to confidence, care, responsibility and the whole child remains consistent.",
       ],
     },
     {
-      h: "Early Years Programme",
+      h: "Toddler & Early Years",
       p: [
-        "Learning through play, discovery and expression. Children build language, social confidence, imagination, early numeracy and the ability to participate in a group.",
+        "Movement, rhythm, play and discovery. The earliest stages create security first. Children learn through movement, sensory exploration, relationships, play and language while gradually becoming comfortable participating within a group.",
+        "The goal is not to push formal academics earlier, but to build the confidence and foundations from which future learning can grow.",
       ],
     },
     {
       h: "Primary Years",
       p: [
-        "Learning through inquiry, thinking and connection. Strong literacy and numeracy foundations are joined by curiosity, communication, collaboration and physical development.",
+        "Inquiry, thinking and connection. The Primary Years strengthen literacy, numeracy and conceptual understanding while preserving curiosity.",
+        "Children learn to ask questions, connect ideas, communicate what they understand and participate with greater confidence.",
       ],
     },
     {
       h: "Middle School",
       p: [
-        "Foundation, confidence and pathway readiness. Students move into greater subject depth, stronger study habits, responsibility and early direction.",
+        "Foundation, confidence and pathway readiness. Middle School introduces greater subject depth alongside stronger study habits, self-management and wider awareness of future possibilities.",
+        "Students begin recognising interests and strengths without being forced to make final decisions too early.",
       ],
     },
     {
       h: "Senior School",
       p: [
-        "Direction, discipline and serious preparation. Students need clear subject choices, board readiness, future pathways, mentoring and visible progress.",
+        "Direction, discipline and serious preparation. Senior School brings academic choices, board readiness, mentoring and future pathways into sharper focus.",
+        "The student begins moving from broad possibility towards informed direction, supported by structured preparation and guidance.",
       ],
     },
     {
-      h: "Transitions that feel connected.",
+      h: "Progress parents can understand",
       p: [
-        "Each stage prepares for the next. Parents can see how pedagogy, assessment, support and independence evolve without abrupt changes in philosophy.",
-      ],
-    },
-    {
-      h: "The Preparation System across stages",
-      p: [
-        "Competitive Edge, Sports Pathway, Confidence Code, Life Code, Residential Advantage and whole-child reporting adapt to the child's age and readiness.",
-      ],
-    },
-    {
-      h: "Assessment and parent reporting",
-      p: [
-        "Reporting combines academic progress with confidence, responsibility, physical development and mentor insight.",
+        "Assessment should help parents understand more than a score. It should show where the child is progressing, where support is needed and what they are ready for next.",
+        "As children grow older, academic reporting can sit alongside wider insights into confidence, responsibility, participation and readiness.",
       ],
     },
   ],
@@ -827,12 +957,12 @@ export const chdEarlyYears: PageCopy = {
   title: "Movement. Rhythm.",
   emphasis: "Care. Discovery.",
   subhead:
-    "Young children learn first through secure relationships, movement, imitation, play, language and the freedom to explore. The early-years environment is calm, purposeful and full of possibility.",
+    "Young children learn through relationships, movement, play, language and the freedom to explore. The Early Years experience at New Chandigarh creates a secure, engaging environment where children can build confidence, curiosity and the foundations for future learning.",
   primary: "Book a Visit",
   secondary: "Speak to Admissions",
   image: img.chdEarlyHero,
   image2: img.chdEarlySplit,
-  closeEyebrow: "Ready for what is next",
+  closeEyebrow: "Ready for what comes next",
   pulls: [
     {
       slot: "grid",
@@ -844,61 +974,49 @@ export const chdEarlyYears: PageCopy = {
   meta: {
     title: "Toddler & Early Years, New Chandigarh Campus",
     description:
-      "The Toddler and Early Years Programmes: a predictable day, language and communication, physical and social development, care, safety and readiness for Primary.",
+      "A secure beginning, the Toddler Programme, learning through play, language and expression, physical and social development, and readiness for Primary.",
   },
   blocks: [
     {
+      h: "A secure beginning",
+      p: [
+        "Confidence begins with feeling safe enough to explore. For a young child, belonging comes before achievement. Familiar routines, caring adults and a warm environment help children become comfortable with school, interact with others and gradually participate more independently.",
+        "This sense of security gives them the confidence to explore, communicate and learn.",
+      ],
+    },
+    {
       h: "The Toddler Programme",
       p: [
-        "Movement, rhythm, sensory exploration, language and care create a secure beginning. Parents receive clear information about age eligibility, timing, routines and adult support.",
+        "Movement, rhythm and care. For the youngest learners, the day is built around movement, sensory discovery, language and simple routines. Children begin to understand what it means to be part of a group while developing early confidence, social awareness and independence.",
+        "The focus is not on bringing formal academics earlier. It is on creating the emotional, physical and social foundations that make later learning stronger.",
       ],
     },
     {
-      h: "The Early Years Programme",
+      h: "Learning through play",
       p: [
-        "Play, discovery and expression help children build curiosity, communication, early concepts and the confidence to participate.",
+        "Play. Discover. Express. Play is how young children investigate the world. Through purposeful play, they experiment, imagine, build, solve problems and learn how to interact with others.",
+        "Early concepts begin to make sense because children experience them rather than simply being told about them. Learning remains joyful, active and connected to curiosity.",
       ],
     },
     {
-      h: "A day that feels predictable",
+      h: "Language, communication & expression",
       p: [
-        "Young children benefit from a steady rhythm of welcome, movement, guided activity, free exploration, meals, rest and departure.",
+        "Stories, songs, conversations and shared experiences help children develop language naturally. They learn to listen, ask questions, express needs and communicate ideas with increasing confidence.",
+        "Art, music, movement and imaginative play give them additional ways to express what they think and feel. Over time, expression becomes an important part of confidence.",
       ],
     },
     {
-      h: "Language and communication",
+      h: "Physical & social development",
       p: [
-        "Conversation, stories, songs, questions and social interaction support vocabulary, listening and expression.",
+        "Movement supports balance, coordination and growing physical confidence, while shared play teaches children how to wait, share, listen, negotiate and understand other points of view.",
+        "These everyday interactions help children become more comfortable within a community and more aware of the people around them.",
       ],
     },
     {
-      h: "Physical and social development",
+      h: "Ready for what comes next",
       p: [
-        "Movement develops coordination and confidence. Shared play helps children practise waiting, sharing, negotiating and belonging.",
-      ],
-    },
-    {
-      h: "Creative expression",
-      p: [
-        "Art, music, movement and imaginative play allow children to communicate before every idea can be explained in words.",
-      ],
-    },
-    {
-      h: "Care and safety",
-      p: [
-        "Parents receive clear information about adult-child ratios, supervision, hygiene, medical response, arrival and departure, and safeguarding.",
-      ],
-    },
-    {
-      h: "Parent communication",
-      p: [
-        "Regular communication helps families understand routines, participation, emerging strengths and areas where the child may need support.",
-      ],
-    },
-    {
-      h: "Readiness for Primary Years",
-      p: [
-        "Readiness is broader than early academics. It includes language, attention, movement, confidence, social ease, curiosity and the ability to follow a shared routine.",
+        "Readiness is more than knowing more. A child is ready for the next stage when they can participate in routines, communicate with confidence, explore with curiosity, manage small responsibilities and engage more independently with learning.",
+        "The Early Years build these foundations carefully, so children move into the Primary Years feeling secure, capable and ready to grow.",
       ],
     },
   ],
@@ -911,12 +1029,12 @@ export const chdPrimaryYears: PageCopy = {
   title: "Learning through inquiry,",
   emphasis: "thinking and connection.",
   subhead:
-    "The Primary Years build literacy, numeracy and conceptual understanding while preserving curiosity, movement, confidence and the joy of discovering how ideas connect.",
+    "The Primary Years strengthen the academic foundations children need while protecting the curiosity that makes learning meaningful. Literacy, numeracy and conceptual learning develop alongside communication, physical growth and increasing responsibility.",
   primary: "Book a Visit",
   secondary: "Explore the Confidence Code",
   image: img.chdPrimaryHero,
   image2: img.chdPrimarySplit,
-  closeEyebrow: "What it looks like",
+  closeEyebrow: "Ready for Middle School",
   pulls: [
     {
       slot: "grid",
@@ -928,55 +1046,48 @@ export const chdPrimaryYears: PageCopy = {
   meta: {
     title: "Primary Years, New Chandigarh Campus",
     description:
-      "Literacy and numeracy, conceptual learning, curiosity and questioning, confidence, sport, Life Code foundations and reporting in the Primary Years.",
+      "Strong foundations, curiosity and conceptual learning, confidence and communication, sport and physical growth, and responsibility beginning early.",
   },
   blocks: [
     {
-      h: "Literacy and numeracy",
+      h: "Strong foundations",
       p: [
-        "Strong foundations give children the tools to read, write, reason, calculate and express what they understand.",
+        "Reading, writing, numeracy and reasoning give children the tools they need across every subject. The emphasis is not only on learning an answer, but on understanding ideas clearly enough to apply them in different contexts.",
+        "Strong foundations give children greater confidence as learning becomes more complex.",
       ],
     },
     {
-      h: "Conceptual learning",
+      h: "Curiosity & conceptual learning",
       p: [
-        "Children learn not only what an answer is, but why it works and where the idea appears in the world around them.",
+        "Children are encouraged to ask questions, make connections and investigate how ideas relate to the world around them.",
+        "Inquiry keeps the learner active. Instead of only remembering information, children begin understanding why something works and how different ideas connect.",
       ],
     },
     {
-      h: "Curiosity and questioning",
+      h: "Confidence & communication",
       p: [
-        "Inquiry helps children ask better questions, make connections, investigate and explain.",
+        "Primary school is an important stage for learning how to express an idea. Classroom discussion, presentations, collaboration and wider participation help children become increasingly comfortable speaking, listening and contributing.",
+        "Confidence grows alongside knowledge.",
       ],
     },
     {
-      h: "Confidence and communication",
+      h: "Sport & physical growth",
       p: [
-        "Classroom participation, show-and-tell, presentation, assembly and collaborative work help children find their voice early.",
+        "Movement and sport support health, coordination, teamwork and confidence.",
+        "Children learn that physical progress also takes practice, effort and persistence, qualities that strengthen their approach to learning as well.",
       ],
     },
     {
-      h: "Sport and physical growth",
+      h: "Responsibility begins early",
       p: [
-        "Movement, games and physical development support health, coordination, teamwork and confidence.",
+        "Children gradually learn to manage belongings, follow routines, complete tasks and take ownership of small responsibilities.",
+        "These everyday habits begin building the self-management and judgement that will matter more as they move into Middle School.",
       ],
     },
     {
-      h: "Life Code foundations",
+      h: "Ready for Middle School",
       p: [
-        "Children begin to manage belongings, routines, small responsibilities, digital habits and participation in a community.",
-      ],
-    },
-    {
-      h: "Assessment and reporting",
-      p: [
-        "Assessment helps teachers and parents understand progress, misconceptions, confidence and readiness for the next stage.",
-      ],
-    },
-    {
-      h: "The Primary Years experience",
-      p: [
-        "Real classroom moments, student work and age-appropriate voices show what learning looks and feels like.",
+        "By the end of the Primary Years, the aim is a child with stronger academic foundations, greater curiosity, growing confidence and a better ability to manage learning independently.",
       ],
     },
   ],
@@ -986,15 +1097,15 @@ export const chdMiddleSchool: PageCopy = {
   slug: "/campuses/new-chandigarh/middle-school",
   nav: "Middle School",
   kicker: "The years of foundation and direction",
-  title: "Foundation, confidence and",
-  emphasis: "pathway readiness.",
+  title: "Foundation. Confidence.",
+  emphasis: "Pathway readiness.",
   subhead:
-    "Middle School is a period of rapid change. Students need deeper academics, stronger habits, physical development, confidence and the first clear view of the choices ahead.",
+    "Middle School is a period of significant change. Academic expectations become deeper while children also become more aware of their interests, strengths and identity. The stage is designed to build stronger academics, better habits and greater confidence without forcing students into premature choices.",
   primary: "Speak to Admissions",
   secondary: "Explore Academic Pathways",
   image: img.chdMiddleHero,
   image2: img.chdMiddleSplit,
-  closeEyebrow: "Reported in full",
+  closeEyebrow: "Towards better decisions",
   pulls: [
     {
       slot: "grid",
@@ -1006,61 +1117,49 @@ export const chdMiddleSchool: PageCopy = {
   meta: {
     title: "Middle School, New Chandigarh Campus",
     description:
-      "A confident transition, subject breadth and concept depth, study habits, confidence, sport, Life Code, an introduction to Competitive Edge and Whole Child reporting.",
+      "Greater academic depth, study habits and self-management, confidence during change, sport and resilience, an introduction to Competitive Edge and pathway readiness.",
   },
   blocks: [
     {
-      h: "A confident transition",
+      h: "Greater academic depth",
       p: [
-        "The move into Middle School is a supported transition towards greater subject depth, independence and personal responsibility.",
+        "Students move into more specialised learning and are expected to connect ideas, manage greater complexity and communicate their understanding with more precision.",
+        "The priority remains concept depth and strong foundations before high-pressure preparation.",
       ],
     },
     {
-      h: "Subject breadth and concept depth",
+      h: "Study habits & self-management",
       p: [
-        "Students encounter more specialised learning and need support to connect ideas, manage workload and understand their own strengths.",
+        "Planning, organisation, revision, note-making and digital discipline become increasingly important.",
+        "Students begin learning that strong performance is built through consistent habits rather than last-minute effort.",
       ],
     },
     {
-      h: "Study habits and self-management",
+      h: "Confidence during change",
       p: [
-        "Planning, note-making, revision, organisation and digital discipline become increasingly important.",
+        "Middle School can be a stage when children become more self-conscious. This makes opportunities to speak, present, collaborate, perform and participate even more important.",
+        "Confidence is built through repeated experience, not simply encouragement.",
       ],
     },
     {
-      h: "Confidence and communication",
+      h: "Sport, responsibility & resilience",
       p: [
-        "Students learn to speak, present, debate, collaborate and respond to feedback with greater maturity.",
-      ],
-    },
-    {
-      h: "Sport and physical development",
-      p: [
-        "Consistent physical activity supports confidence, energy, teamwork and resilience during a stage of significant growth.",
-      ],
-    },
-    {
-      h: "Life Code and responsibility",
-      p: [
-        "Age-appropriate duties, service, decision-making and self-management help students move from dependence towards ownership.",
+        "Regular physical activity supports energy, teamwork and resilience during a stage of rapid growth.",
+        "At the same time, students take on greater responsibility for routines, commitments and everyday choices, helping them move gradually from dependence towards ownership.",
       ],
     },
     {
       h: "Introduction to Competitive Edge",
       p: [
-        "Diagnostics, concept support and early pathway awareness can help students prepare without premature pressure.",
+        "Academic diagnostics, concept strengthening and guided practice can begin giving students greater clarity about where they stand and what they need to improve.",
+        "The objective is readiness, not premature examination pressure.",
       ],
     },
     {
-      h: "Academic guidance",
+      h: "Pathway readiness",
       p: [
-        "Mentoring helps students and families understand strengths, interests, habits and the decisions approaching in Senior School.",
-      ],
-    },
-    {
-      h: "Whole Child reporting",
-      p: [
-        "Progress includes academics, fitness, confidence, responsibility and mentor insight.",
+        "Students do not need to know exactly what they want to pursue yet. They do need opportunities to understand what interests them, where their strengths are becoming visible and what future choices may eventually be available.",
+        "Mentoring helps turn growing awareness into better decisions later.",
       ],
     },
   ],
@@ -1073,12 +1172,12 @@ export const chdSeniorSchool: PageCopy = {
   title: "Choices become",
   emphasis: "pathways.",
   subhead:
-    "Senior School gives students academic clarity, disciplined preparation, strong mentoring and the confidence to move towards university, competitive examinations, defence and wider professional routes.",
+    "Senior School is where academic decisions begin shaping what comes next. Students need clarity about subjects and future routes, disciplined preparation and adults who can help them understand both their ambitions and the work those ambitions require.",
   primary: "Speak to Admissions",
   secondary: "Explore Competitive Edge",
   image: img.chdSeniorHero,
   image2: img.chdSeniorSplit,
-  closeEyebrow: "Where it leads",
+  closeEyebrow: "Ready beyond the examination",
   pulls: [
     {
       slot: "grid",
@@ -1090,61 +1189,56 @@ export const chdSeniorSchool: PageCopy = {
   meta: {
     title: "Senior School, New Chandigarh Campus",
     description:
-      "Subjects and academic choices, board readiness, Competitive Edge, the Scholars and Achievers Tracks, defence pathways, mentoring and career direction.",
+      "Academic choice with clarity, board readiness, Competitive Edge, the Scholars and Achievers Tracks, defence and wider pathways, mentoring and direction.",
   },
   blocks: [
     {
-      h: "Subjects and academic choices",
+      h: "Academic choice with clarity",
       p: [
-        "Parents and students need a clear, current view of subjects, streams, combinations, prerequisites and the implications of each choice.",
+        "Greater choice should not create greater confusion. Students and parents need a clear understanding of subjects, combinations, prerequisites and the future routes connected to each option.",
+        "The goal is not to place every child on the same path, but to help each student choose with greater awareness.",
       ],
     },
     {
       h: "Board readiness",
       p: [
-        "Strong board preparation combines concept clarity, planned revision, practice, feedback and examination discipline.",
+        "Strong board preparation requires concept clarity, planned revision, practice, feedback and examination discipline.",
+        "The academic rhythm helps students prepare steadily rather than relying on pressure at the end of the year.",
       ],
     },
     {
       h: "Dalhousie Competitive Edge",
       p: [
-        "Preparation is integrated into the day through diagnostics, guided practice, testing, doubt support and progress tracking.",
+        "Serious preparation. Without the second shift. Competitive Edge brings diagnostics, guided practice, testing, doubt support and progress tracking into the academic experience.",
+        "Students receive structured preparation without having to create another academic life after the school day.",
       ],
     },
     {
-      h: "Scholars Track",
+      h: "Scholars & Achievers Tracks",
       p: [
-        "For approved competitive and top-university routes, the Scholars Track sets out the intensity, eligibility and support model clearly.",
+        "The Scholars Track supports approved competitive and top-university routes where applicable. The Achievers Track supports board readiness and a wider set of futures across commerce, humanities, law, design, business, entrepreneurship and other approved pathways.",
+        "The purpose is different preparation for different ambitions.",
       ],
     },
     {
-      h: "Achievers Track",
+      h: "Defence & wider future pathways",
       p: [
-        "The Achievers Track supports boards and a broad range of pathways including commerce, humanities, law, design, business, entrepreneurship and other approved routes.",
+        "Students drawn towards defence can understand the academic, physical, communication and service-oriented preparation available through the Dalhousie Defence Pathway, subject to the approved New Chandigarh programme.",
+        "Other students may explore wider future routes through mentoring, academic guidance and the relevant campus opportunities.",
       ],
     },
     {
-      h: "Defence and service pathways",
+      h: "Mentoring, leadership & direction",
       p: [
-        "Students drawn to defence can understand the academic, fitness, communication and SSB-related preparation available.",
+        "Senior students need more than another score. They need support in interpreting progress, setting priorities and deciding what to do next.",
+        "Leadership, presentations and responsibility also help students become more confident in representing their ideas and making increasingly independent decisions.",
       ],
     },
     {
-      h: "Mentoring and progress tracking",
+      h: "Ready beyond the examination",
       p: [
-        "Senior students need adults who can help them set priorities, read performance patterns and make informed decisions.",
-      ],
-    },
-    {
-      h: "Leadership and confidence",
-      p: [
-        "Senior School creates meaningful opportunities to lead, present, mentor younger students and represent the School.",
-      ],
-    },
-    {
-      h: "College and career direction",
-      p: [
-        "Where available, counselling helps students research courses, institutions, applications and the relationship between subject choice and future pathways.",
+        "The aim is not only to complete Senior School successfully.",
+        "It is to leave school able to communicate, make informed choices, manage pressure and move towards the future with greater direction.",
       ],
     },
   ],
@@ -1157,16 +1251,16 @@ export const chdBoarding: PageCopy = {
   title: "Choose the model. Keep",
   emphasis: "the experience connected.",
   subhead:
-    "Families may need different residential arrangements, but every child experiences a coordinated day in which academics, preparation, sport, confidence, care and rest work together.",
+    "Different families need different levels of immersion in the school day. New Chandigarh's residential and weekday-boarding experience is designed to keep academics, preparation, sport, confidence, care and routines more closely connected while giving families flexibility across the models available to their child's age and stage.",
   primary: "Book a Visit",
   secondary: "Speak to Admissions",
   image: img.chdBoardingHero,
   image2: img.chdBoardingSplit,
-  closeEyebrow: "Reported the same way",
+  closeEyebrow: "Choosing the right model",
   pulls: [
     {
       slot: "grid",
-      line: "Day, day-boarding, weekly or full residential. Ask which model suits your child, honestly.",
+      line: "Day-boarding, weekday or full residential. Ask which model suits your child, honestly.",
       label: "Speak to Admissions",
       alt: "Book a Visit",
     },
@@ -1174,53 +1268,42 @@ export const chdBoarding: PageCopy = {
   meta: {
     title: "Residential & Day-Boarding, New Chandigarh Campus",
     description:
-      "Understand the available residential models, who each may suit, a typical day, house and mentor structure, supervision, care and growth reporting.",
+      "One philosophy across different formats, a more connected day, preparation within the rhythm, care and supervision, and choosing the right model.",
   },
   blocks: [
     {
-      h: "Understand the available models",
-      p: ["Day school, day-boarding, weekly boarding and full residential."],
-    },
-    {
-      h: "Who each model may suit",
+      h: "One philosophy across different formats",
       p: [
-        "Each model serves a different family need, based on the child's readiness, commute, academic goals and desired level of immersion.",
+        "The amount of time a student spends on campus may differ, but the larger Dalhousie philosophy remains consistent.",
+        "Each available model should give the child a structured academic experience, opportunities to participate, access to guidance and increasing responsibility appropriate to their stage.",
       ],
     },
     {
-      h: "A typical day",
+      h: "A more connected day",
       p: [
-        "A typical day moves through arrival or waking up, classes, preparation, meals, sport, activities, mentoring, departure or residential evening, and rest.",
+        "The value of weekday-boarding or residential flexibility is not simply that the child stays on campus longer.",
+        "It is that learning, preparation, sport, meals, routines and support can work together more coherently, reducing the number of separate journeys families need to manage.",
       ],
     },
     {
-      h: "House and mentor structure",
+      h: "Preparation within the rhythm",
       p: [
-        "Every model has clear pastoral ownership. Parents know who supports the child and how communication works.",
+        "Where relevant to the student's stage, guided preparation and Competitive Edge can sit within the wider campus day.",
+        "This allows academic work to remain serious without pushing sport, communication, relationships and rest out of the child's routine.",
       ],
     },
     {
-      h: "Meals and prep",
+      h: "Care, supervision & guidance",
       p: [
-        "Each model clearly sets out the meals and preparation periods included, and how they support an all-round, coordinated day.",
+        "Children need increasing independence, but they also need adults who remain close enough to notice when support is required.",
+        "Mentoring, pastoral care, medical support, supervision and parent communication form part of the reassurance around every available model.",
       ],
     },
     {
-      h: "Supervision and safety",
+      h: "Choosing the right model",
       p: [
-        "Arrival, departure, transport where applicable, access, attendance, handover and emergency processes are stated clearly.",
-      ],
-    },
-    {
-      h: "Pastoral and medical care",
-      p: [
-        "Every model connects to the same approved care, medical, safeguarding and parent-contact systems.",
-      ],
-    },
-    {
-      h: "Growth reporting",
-      p: [
-        "Parents can see how academic and whole-child progress is reported, regardless of the residential model.",
+        "The right format depends on the child's age, readiness, academic needs, family routine and the level of independence the family is comfortable with.",
+        "Speak to admissions for the exact formats, timings and eligibility currently available for your child's grade.",
       ],
     },
   ],
@@ -1229,16 +1312,16 @@ export const chdBoarding: PageCopy = {
 export const chdStudentLife: PageCopy = {
   slug: "/campuses/new-chandigarh/student-life",
   nav: "Student Life, Sports & Leadership",
-  kicker: "The all-round experience in action",
-  title: "Expanding what",
-  emphasis: "is possible.",
+  kicker: "Life beyond the lesson",
+  title: "More ways to participate. More ways to",
+  emphasis: "discover what you can become.",
   subhead:
-    "Student life develops articulate, active, collaborative and confident young people through sport, creative work, public speaking, leadership, service and meaningful exposure.",
+    "Student life gives children opportunities to find strengths that may not always appear first in the classroom. Sport, speaking, performance, leadership, clubs, service and shared experiences help students become more confident, adaptable and involved in the community around them.",
   primary: "Visit New Chandigarh Campus",
   secondary: "Explore the Confidence Code",
   image: img.chdStudentLifeHero,
   image2: img.chdStudentLifeSplit,
-  closeEyebrow: "Confidence in action",
+  closeEyebrow: "The New Chandigarh child",
   pulls: [
     {
       slot: "grid",
@@ -1250,59 +1333,56 @@ export const chdStudentLife: PageCopy = {
   meta: {
     title: "Student Life, Sports & Leadership, New Chandigarh Campus",
     description:
-      "Clubs and creative experiences, speaking and performance, leadership, sport, confirmed specialist opportunities, service, events and student stories.",
+      "Confidence through participation, sport and physical development, leadership through responsibility, clubs and creativity, and service and community.",
   },
   blocks: [
     {
-      h: "Life beyond academics",
+      h: "Confidence through participation",
       p: [
-        "The campus experience makes room for interests, friendships, movement, expression and responsibility without forcing families to assemble these opportunities elsewhere.",
+        "Confidence grows through use. Presenting an idea, participating in a discussion, performing, collaborating and taking responsibility all help children become increasingly comfortable being seen and heard.",
+        "The goal is not simply confidence on stage. It is confidence in participation.",
       ],
     },
     {
-      h: "Clubs and creative experiences",
+      h: "Sport & physical development",
       p: [
-        "Clubs create space for children to explore interests, practise skills, make things, collaborate and share their work. The experience matters more than the length of the list.",
+        "Sport develops fitness, teamwork, consistency and resilience. Children learn how to prepare, contribute to a team, respond to a result and try again when something does not go their way.",
+        "Every child may not become an athlete, but every child can become stronger and more willing to participate.",
       ],
     },
     {
-      h: "Speaking and performance",
+      h: "Leadership through responsibility",
       p: [
-        "Assembly, debate, performance and presentation give students repeated opportunities to use their voice.",
+        "Leadership begins before the title. Students learn to lead by following through on a commitment, contributing to a group, listening to others and accepting responsibility for an outcome.",
+        "These experiences help turn confidence into accountability.",
       ],
     },
     {
-      h: "Leadership opportunities",
+      h: "Clubs, creativity & wider exposure",
       p: [
-        "Leadership includes duties, team roles, event responsibility, representation and service, not only titles.",
+        "Different children discover confidence in different spaces. Creative pursuits, clubs, performance and collaborative experiences allow students to explore interests and find areas where participation feels meaningful.",
+        "The point is not to build the longest activity list. It is to give children enough exposure to discover where they can grow.",
       ],
     },
     {
-      h: "Sport and physical development",
+      h: "Specialist sporting experiences",
       p: [
-        "Participation, fitness, teams and training build discipline, energy and character. Current opportunities are listed by age and stage.",
+        "Golf, polo and equestrian form part of the New Chandigarh campus story, presented through what they develop in the child rather than as a facilities checklist.",
+        "Current programmes, eligibility and availability are confirmed by the School while enquiring.",
       ],
     },
     {
-      h: "Golf, polo and equestrian",
+      h: "Service & community",
       p: [
-        "Golf, polo, equestrian and other specialist opportunities are listed only where current availability, age eligibility, delivery model and location are confirmed.",
+        "Student life also teaches that belonging comes with contribution. Service, community responsibilities and shared events give children opportunities to understand that what they do affects other people.",
+        "This is where confidence, responsibility and leadership begin to come together.",
       ],
     },
     {
-      h: "Service and community",
-      p: ["Service helps students understand contribution, empathy and citizenship."],
-    },
-    {
-      h: "Events and student stories",
+      h: "The New Chandigarh child",
       p: [
-        "Current events and approved student voices keep the page alive, specific and believable.",
-      ],
-    },
-    {
-      h: "Confidence Code in action",
-      p: [
-        "Across the campus experience, children learn to Speak, Perform, Persuade, Polish and Lead, turning confidence into a visible, practised capability.",
+        "Articulate. Adaptive. Confident. Choice-ready. Globally aware. The value of student life is not the number of activities on offer.",
+        "It is the child who becomes more willing to participate, more confident communicating, stronger physically and better prepared to recognise and respond to opportunity.",
       ],
     },
   ],
