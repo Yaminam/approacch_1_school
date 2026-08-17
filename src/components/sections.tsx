@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
-import LineIcon, { iconFor } from "./LineIcon";
+import LineIcon, { iconFor, type IconName } from "./LineIcon";
 import { Botanical, Ridge, GoldRule, Crest } from "./Ornament";
 import { cta } from "@/lib/cta";
 
@@ -211,6 +211,9 @@ export function OpeningStatement({
   title: string;
   paras: string[];
 }) {
+  const lens = paras.map((t) => t.length);
+  const balanced =
+    paras.length === 2 && Math.max(...lens) / Math.max(1, Math.min(...lens)) < 1.8;
   return (
     <section className={`${PAD} pb-14 pt-16 sm:pb-16 sm:pt-20`}>
       <Reveal>
@@ -224,10 +227,18 @@ export function OpeningStatement({
           </div>
         </div>
       </Reveal>
-      {/* The supporting argument runs in two measured columns beneath the
-          statement: short lines, and a compact block rather than a tall stack. */}
+      {/* Two measured columns only when the paragraphs are of comparable
+          length. Splitting a long paragraph against a one-line one left the
+          right column almost empty and the block looked broken, so anything
+          lopsided runs as a single centred measure instead. */}
       <Reveal delay={120}>
-        <div className="mx-auto mt-9 grid max-w-5xl gap-x-14 gap-y-5 md:grid-cols-2">
+        <div
+          className={
+            balanced
+              ? "mx-auto mt-9 grid max-w-5xl gap-x-14 gap-y-5 md:grid-cols-2"
+              : "mx-auto mt-9 max-w-2xl space-y-5 text-center"
+          }
+        >
           {paras.map((t, i) => (
             <p key={i} className="text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
               {t}
@@ -245,6 +256,17 @@ export type Item = { h: string; p: string[] };
 export type PullData = { line: string; label: string; alt?: string };
 export type Variant = "portrait" | "cinematic" | "offset" | "plain";
 
+/* The photograph fills its column and the TEXT sets the height.
+
+   Earlier versions guessed an aspect ratio from the character count. Every
+   guess was wrong somewhere: five lines of copy beside a 480px square, or a
+   600px argument beside a 363px landscape. Letting the grid stretch the
+   picture to whatever the words need means the two columns always finish on
+   the same line, whatever the copy does. A floor stops a one-line section
+   producing a sliver. */
+const FRAME =
+  "relative h-full min-h-[18rem] w-full overflow-hidden rounded-[3px] sm:min-h-[22rem]";
+
 /* One movement of the story. Four compositions cycle, so no two consecutive
    sections are built the same way; each uses a different image proportion and
    a different relationship between picture and text. */
@@ -257,7 +279,9 @@ export function Movement({
 }: {
   item: Item;
   image?: string;
-  n: number;
+  /* Undefined when the copy numbers itself ("Step 2. ..."), so the page never
+     shows two competing sequences. */
+  n?: number;
   variant: Variant;
   pull?: PullData;
 }) {
@@ -271,16 +295,16 @@ export function Movement({
   if (variant === "portrait" && image) {
     return (
       <section className={`${PAD} py-12 sm:py-14`}>
-        <div className="grid items-center gap-y-9 lg:grid-cols-12 lg:gap-x-14">
-          <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[1/1] overflow-hidden rounded-[3px]">
+        <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+          <Reveal className="h-full lg:col-span-5">
+            <div className={FRAME}>
               <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 38vw" className="object-cover" />
             </div>
           </Reveal>
           <Reveal delay={110} className="lg:col-span-7">
             <div>
-              <Marker n={n} />
-              <div className="mt-5">{heading}</div>
+              {n !== undefined && <Marker n={n} />}
+              <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
                 <Paras paras={item.p} />
               </div>
@@ -292,28 +316,34 @@ export function Movement({
     );
   }
 
-  /* Wide cinematic frame, the argument beneath in a narrow column with the
-     numeral out in the left margin. */
+  /* Landscape frame held wide on the left, the argument in a narrower column
+     beside it.
+
+     This replaced a full-bleed cinematic band that put the photograph alone
+     across the page with the words underneath. At that scale the picture
+     stopped being part of a composition and became an interruption, and the
+     page lost its rhythm every time one appeared. Every visual movement now
+     pairs image with text; only the proportion and the side change. */
   if (variant === "cinematic" && image) {
     return (
       <section className={`${PAD} py-12 sm:py-14`}>
-        <Reveal>
-          <div className="relative aspect-[5/2] overflow-hidden rounded-[3px]">
-            <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
-          </div>
-        </Reveal>
-        <Reveal delay={110}>
-          <div className="mt-8 grid gap-y-5 lg:grid-cols-12 lg:gap-x-14">
-            <div className="lg:col-span-4">
-              <Marker n={n} />
-              <div className="mt-5">{heading}</div>
+        <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+          <Reveal className="h-full lg:col-span-7">
+            <div className={FRAME}>
+              <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 54vw" className="object-cover" />
             </div>
-            <div className="lg:col-span-7 lg:col-start-6">
-              <Paras paras={item.p} />
+          </Reveal>
+          <Reveal delay={110} className="lg:col-span-5">
+            <div>
+              {n !== undefined && <Marker n={n} />}
+              <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
+              <div className="mt-6">
+                <Paras paras={item.p} measure="max-w-[46ch]" />
+              </div>
               {pull && <Pull {...pull} />}
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
     );
   }
@@ -323,19 +353,19 @@ export function Movement({
   if (variant === "offset" && image) {
     return (
       <section className={`${PAD} py-12 sm:py-14`}>
-        <div className="grid items-center gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+        <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
           <Reveal className="lg:col-span-6">
             <div>
-              <Marker n={n} />
-              <div className="mt-5">{heading}</div>
+              {n !== undefined && <Marker n={n} />}
+              <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
                 <Paras paras={item.p} />
               </div>
               {pull && <Pull {...pull} />}
             </div>
           </Reveal>
-          <Reveal delay={110} className="lg:col-span-6 lg:pt-10">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[3px]">
+          <Reveal delay={110} className="h-full lg:col-span-6">
+            <div className={FRAME}>
               <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 44vw" className="object-cover" />
             </div>
           </Reveal>
@@ -352,8 +382,8 @@ export function Movement({
         <Reveal>
           <div className="grid gap-y-6 lg:grid-cols-12 lg:gap-x-16">
             <div className="lg:col-span-5">
-              <Marker n={n} />
-              <div className="mt-5">{heading}</div>
+              {n !== undefined && <Marker n={n} />}
+              <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <GoldRule className="mt-6 text-brass" width={64} />
             </div>
             <div className="lg:col-span-7">
@@ -379,7 +409,7 @@ export function PairMovement({
   pull,
 }: {
   items: [Item, Item];
-  ns: [number, number];
+  ns?: [number, number];
   pull?: PullData;
 }) {
   return (
@@ -389,7 +419,7 @@ export function PairMovement({
           {items.map((it, i) => (
             <Reveal key={it.h} delay={i * 110}>
               <div className="h-full border-t border-brass/30 pt-7">
-                <Marker n={ns[i]} />
+                {ns && <Marker n={ns[i]} />}
                 <h2 className="mt-4 font-display text-[1.5rem] leading-[1.16] text-clay sm:text-[1.8rem]">
                   {it.h}
                 </h2>
@@ -423,40 +453,49 @@ export function DarkMovement({
   eyebrow?: string;
   pull?: PullData;
 }) {
-  const [lede, ...more] = item.p;
+  /* Centred and measured, not split into two columns.
+
+     The two-column version divided the paragraphs between left and right,
+     which balanced only when both halves happened to be the same length. Any
+     other time one side ran on and the other stopped early, stranding a
+     quarter of a full-width maroon band as empty space. A single centred
+     measure cannot go out of balance whatever the copy does. */
   return (
     <section className="relative overflow-hidden bg-pine-800">
       {image && (
         <>
-          <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-[0.16]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-pine-800 via-pine-800/90 to-pine-800/60" />
+          <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-[0.14]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-pine-800/95 via-pine-800/85 to-pine-800/95" />
         </>
       )}
-      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-32 w-full text-brass-soft/20" />
+      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full text-brass-soft/20" />
       <Botanical className="pointer-events-none absolute -right-6 top-0 hidden h-full w-24 text-brass-soft/15 lg:block" />
-      <div className={`${PAD} relative py-20 sm:py-24`}>
+      <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-24 rotate-180 text-brass-soft/15 lg:block" />
+
+      <div className={`${PAD} relative py-16 sm:py-20`}>
         <Reveal>
-          <div className="grid gap-y-8 lg:grid-cols-12 lg:gap-x-16">
-            <div className="lg:col-span-6">
-              <Crest className="h-10 w-9 text-brass-soft/70" />
-              {eyebrow && (
-                <div className="mt-6">
-                  <Eyebrow gold>{eyebrow}</Eyebrow>
-                </div>
-              )}
-              <h2 className="mt-5 font-display text-[2.1rem] leading-[1.14] text-brass-soft sm:text-[2.8rem]">
-                {item.h}
-              </h2>
-              {lede && (
-                <p className="mt-7 max-w-[54ch] text-[1.0625rem] leading-[1.8] text-sage-soft/90">
-                  {lede}
-                </p>
-              )}
+          <div className="mx-auto max-w-3xl text-center">
+            <Crest className="mx-auto h-10 w-9 text-brass-soft/70" />
+            {eyebrow && (
+              <div className="mt-6">
+                <Eyebrow gold>{eyebrow}</Eyebrow>
+              </div>
+            )}
+            <h2 className="mt-5 font-display text-[2rem] leading-[1.18] text-brass-soft sm:text-[2.6rem]">
+              {item.h}
+            </h2>
+            {/* The heading is centred; the argument is not. Centring two full
+                paragraphs made every line start at a different point and the
+                band became hard to read. The column is centred as a block and
+                the prose inside it stays ranged left. */}
+            <div className="mx-auto mt-7 max-w-[60ch] space-y-5 text-left">
+              {item.p.map((t, i) => (
+                <Paras key={i} paras={[t]} dark size="text-[1.0625rem]" measure="max-w-none" gap="" />
+              ))}
             </div>
-            {more.length > 0 && (
-              <div className="lg:col-span-5 lg:col-start-8 lg:pt-16">
-                <Paras paras={more} dark measure="max-w-[52ch]" size="text-[1rem]" />
-                {pull && <Pull {...pull} dark />}
+            {pull && (
+              <div className="mx-auto mt-2 max-w-[46ch] text-left">
+                <Pull {...pull} dark />
               </div>
             )}
           </div>
@@ -486,17 +525,17 @@ export function SplitBleed({
 }) {
   return (
     <section className="py-12 sm:py-14">
-      <div className="grid items-center gap-y-10 lg:grid-cols-2">
-        <Reveal className={flip ? "lg:order-2" : ""}>
+      <div className="grid items-stretch gap-y-10 lg:grid-cols-2">
+        <Reveal className={`h-full ${flip ? "lg:order-2" : ""}`}>
           <div
-            className={`relative aspect-[4/3] overflow-hidden lg:aspect-[16/10] ${
+            className={`relative h-full min-h-[20rem] w-full overflow-hidden ${
               flip ? "lg:rounded-l-[3px]" : "lg:rounded-r-[3px]"
             }`}
           >
             <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
           </div>
         </Reveal>
-        <Reveal delay={110} className={flip ? "lg:order-1" : ""}>
+        <Reveal delay={110} className={`flex items-center ${flip ? "lg:order-1" : ""}`}>
           <div
             className={`px-6 sm:px-10 ${
               flip ? "lg:ml-auto lg:max-w-[34rem] lg:pr-14" : "lg:mr-auto lg:max-w-[34rem] lg:pl-14"
@@ -524,24 +563,56 @@ export function SplitBleed({
    No borders and no fills: this is a list given air, not a grid of cards. */
 export function IconRow({ items }: { items: Item[] }) {
   const n = items.length;
+
+  /* Column count follows the copy as well as the count. Five columns is right
+     for a two-line item; at 240 characters it produced ten-line ribbons with
+     badly ragged bottoms, so anything wordy drops to three. */
+  const avg = items.reduce((a, it) => a + it.p.reduce((x, t) => x + t.length, 0), 0) / Math.max(n, 1);
+  const wide = avg > 160;
   const cols =
-    n % 3 === 0
-      ? "lg:grid-cols-3"
-      : n % 4 === 0
-        ? "lg:grid-cols-4"
-        : n === 5
-          ? "lg:grid-cols-5"
-          : "lg:grid-cols-2";
+    wide
+      ? n % 3 === 0 || n === 5
+        ? "lg:grid-cols-3"
+        : n % 4 === 0
+          ? "lg:grid-cols-4"
+          : "lg:grid-cols-2"
+      : n % 3 === 0
+        ? "lg:grid-cols-3"
+        : n % 4 === 0
+          ? "lg:grid-cols-4"
+          : n === 5
+            ? "lg:grid-cols-5"
+            : "lg:grid-cols-2";
+
+  /* No two items in one row carry the same glyph: a repeat reads as an error
+     rather than a category. */
+  const used = new Set<IconName>();
+  const FALLBACK: IconName[] = [
+    "leaf", "star", "compass", "book", "people", "chart",
+    "shield", "activity", "voice", "home", "heart", "clock",
+  ];
+  const glyphs = items.map((it) => {
+    let g = iconFor(it.h);
+    if (used.has(g)) g = FALLBACK.find((f) => !used.has(f)) ?? g;
+    used.add(g);
+    return g;
+  });
+
   return (
     <section className={`${PAD} py-12 sm:py-14`}>
-      <div className={`grid gap-x-12 gap-y-12 sm:grid-cols-2 ${cols}`}>
+      <div className={`grid gap-x-12 gap-y-10 sm:grid-cols-2 ${cols}`}>
         {items.map((it, i) => (
           <Reveal key={it.h} delay={i * 70}>
             <div className="h-full border-t border-sand pt-7">
-              <LineIcon name={iconFor(it.h)} className="text-brass" size={44} />
+              <LineIcon name={glyphs[i]} className="text-brass" size={44} />
               <h3 className="mt-5 font-display text-[1.2rem] leading-[1.2] text-clay">{it.h}</h3>
               <div className="mt-3">
-                <Paras paras={it.p} size="text-[0.95rem]" gap="mt-3" measure="max-w-[38ch]" />
+                <Paras
+                  paras={it.p}
+                  size="text-[0.95rem]"
+                  gap="mt-3"
+                  measure={wide ? "max-w-[46ch]" : "max-w-[38ch]"}
+                />
               </div>
             </div>
           </Reveal>

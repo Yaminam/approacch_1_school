@@ -16,7 +16,10 @@ export default function LoadingScreen() {
   // Whenever the splash is shown, hide it again after a short beat.
   useEffect(() => {
     if (!show) return;
-    timer.current = window.setTimeout(() => setShow(false), 1000);
+    /* 1000ms was a full second added to every single navigation, which is
+       what made the site feel slow to move around. Long enough to register
+       as a deliberate brand moment, short enough not to be a toll. */
+    timer.current = window.setTimeout(() => setShow(false), 380);
     return () => window.clearTimeout(timer.current);
   }, [show]);
 

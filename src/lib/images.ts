@@ -167,3 +167,134 @@ export function imagesFor(slug: string, count: number, own: string[]): string[] 
   }
   return out.slice(0, count);
 }
+
+/* ── Choosing a photograph that means something ──────────────────────
+   `imagesFor` above picks from a shared pool by hashing the page slug, which
+   is stable but semantically blind: it put a weightlifting photograph beside
+   "Admission confirmation" and a golf cart beside "More activity does not
+   always mean more growth".
+
+   `imageFor` reads the section's own words and draws from a matching set, so
+   a residential section gets a house, a sport section gets sport. The `used`
+   set is threaded through a page so the same photograph never appears twice
+   on it. Order matters: the first pattern that hits wins. */
+
+const T = {
+  classroom: [
+    `${L}/Inside-The-Classroom.jpg`,
+    `${L}/HISTORY-1-1-scaled-r1rt2xm7znmyu286lk8hm5y9sz2dudy569lgp4a7fs.jpg`,
+    `${L}/CHD-Curriculum-1-scaled-r1rq1qp4unejfzcwglkfwuq99xy5k77bgzrdmgrcb4.jpg`,
+    `${L}/Copy-of-DPS-5-scaled.jpg`,
+  ],
+  sport: [
+    "/images/basketball.jpg",
+    `${L}/Athletics.jpg.jpeg`,
+    `${L}/Football.jpg.jpeg`,
+    `${L}/GYM-scaled-e1734527081671.jpg`,
+    `${L}/CHD-Sports-3-scaled.jpg`,
+    `${L}/Cricket.jpg.jpeg`,
+  ],
+  outdoors: [
+    "/images/trekking.jpg",
+    `${L}/Mountaineering-2-scaled-e1739945534809.jpg`,
+    `${L}/Mountaineering-3-scaled.jpg`,
+    "/images/aerial.jpg",
+    `${L}/DJI_0205-1-1.jpg`,
+    `${L}/TREKKING-scaled-e1734527314582.jpg`,
+  ],
+  voice: [
+    `${L}/DEBATE-1-scaled.jpg`,
+    "/images/theatre.jpg",
+    `${L}/THEATRE-scaled-e1734527218244.jpg`,
+    `${L}/MUSIC-scaled-e1734527666601.jpg`,
+    "/images/debate.jpg",
+    "/images/music.jpg",
+  ],
+  residential: [
+    `${L}/dal-hostel-4-scaled-e1740042107132.jpg`,
+    "/images/chd-hostel.jpg",
+    `${L}/Chandigarh-Hostel-1-scaled-qyonx79iujd64ovo58bcb3epcgfg2798xvwxwqe8fc.jpg`,
+    `${L}/Day-in-the-life-1-scaled.jpg`,
+  ],
+  care: [
+    `${L}/Pastoral-Care.jpg`,
+    `${L}/pastoral-2-scaled.jpg`,
+    `${L}/pastoral-1-scaled.jpg`,
+    `${L}/pastoral-3-scaled.jpg`,
+    `${L}/nurturing.jpg`,
+    `${L}/Health.jpg`,
+  ],
+  defence: [
+    "/images/shooting.jpg",
+    `${L}/SHOOTING-scaled-e1734526935696.jpg`,
+    `${L}/Mountaineering-1-scaled-r1q1be3p2xkzz13w71g3mo9yey4xocg57rq4k7cb8g.jpg`,
+  ],
+  day: [
+    `${L}/Day-in-the-life-1-scaled.jpg`,
+    `${L}/day-in-the-life-3-scaled-r1q2wr745y3yibs88c3gap5nihecfd6ffozvx4adi8.jpg`,
+    "/images/outside.jpg",
+    "/images/yoga.jpg",
+    `${L}/FARM-1-scaled.jpg`,
+  ],
+  admissions: [
+    `${L}/SB-08457-scaled.jpeg`,
+    `${L}/SB-08463-scaled.jpg`,
+    "/images/campus-hero.jpg",
+    `${L}/Dalhousie-School.jpeg`,
+  ],
+  campus: [
+    `${L}/About-Us-Chandigarh-Campus-2-scaled.jpg`,
+    `${L}/Chandigarh-Outside-the-classroom-scaled.jpg`,
+    `${L}/Dalhousie-Outside-the-classroom-1.jpg`,
+    "/images/campus-wide.jpg",
+  ],
+} as const;
+
+const GENERAL = [
+  `${L}/Dalhousie-Outside-the-classroom-1.jpg`,
+  `${L}/Copy-of-DPS-5-scaled.jpg`,
+  "/images/campus-wide.jpg",
+  `${L}/Day-in-the-life-1-scaled.jpg`,
+  `${L}/Inside-The-Classroom.jpg`,
+  "/images/aerial.jpg",
+];
+
+const TOPICS: [RegExp, readonly string[]][] = [
+  [/defence|uniform|serve|service|bearing|nda|ssb|cadet/i, T.defence],
+  [/residential|boarding|house|dorm|hostel|dining|weekend|prep time/i, T.residential],
+  [/sport|fitness|physical|athlet|movement|stronger|squad|conditioning/i, T.sport],
+  [/confidence|voice|speak|stage|debate|perform|persuade|communicat|leader/i, T.voice],
+  [/care|pastoral|wellbeing|emotional|mentor|teacher|people|parent|known|support/i, T.care],
+  [/admission|enquir|apply|visit|register|fee|process|document|step \d/i, T.admissions],
+  [/mountain|himalay|outdoor|adventure|terrain|nature|distraction/i, T.outdoors],
+  [/campus|chandigarh|environment|two ways|experiences/i, T.campus],
+  [/day|rhythm|routine|morning|rest|responsib|independen|life code|habit/i, T.day],
+  [/academic|classroom|learn|study|concept|exam|board|curriculum|subject|report|growth|progress|proof|measure/i, T.classroom],
+];
+
+/* Every photograph the picker can reach, in one list. A twelve-block page
+   exhausts a six-image topic pool and then the general list, and the old
+   fallback returned the same file every time after that: the preparation
+   system showed one photograph twice. */
+const CATALOGUE: string[] = Array.from(
+  new Set([...Object.values(T).flat(), ...GENERAL]),
+);
+
+/** A photograph chosen from the section's own words, unique within a page. */
+export function imageFor(text: string, used: Set<string>): string {
+  const take = (pool: readonly string[]) => pool.find((p) => !used.has(p));
+
+  for (const [re, pool] of TOPICS) {
+    if (!re.test(text)) continue;
+    const hit = take(pool);
+    if (hit) {
+      used.add(hit);
+      return hit;
+    }
+  }
+  /* Topic exhausted: widen to the general set, then to everything, so a long
+     page keeps finding a photograph it has not already used. */
+  const wider = take(GENERAL) ?? take(CATALOGUE) ?? CATALOGUE[used.size % CATALOGUE.length];
+  used.add(wider);
+  return wider;
+}

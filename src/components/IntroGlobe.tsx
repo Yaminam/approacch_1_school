@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import MegaMenu from "@/components/MegaMenu";
 
 // Photos tiled onto the sphere.
@@ -94,13 +95,24 @@ const TILE_H = 132;
 const SS = 2;
 
 export default function IntroGlobe() {
+  const pathname = usePathname();
   const [phase, setPhase] = useState<"hidden" | "showing" | "leaving" | "done">("hidden");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  /* The globe is the front door, so it belongs on the front page. It sits in
+     the root layout, which meant a deep link to a fee table or an admissions
+     form was also met by a full-screen 3D sphere of a hundred image tiles
+     before any content could be read. */
+  const isEntrance = pathname === "/";
+
   useEffect(() => {
+    if (!isEntrance) {
+      setPhase("done");
+      return;
+    }
     const seen = sessionStorage.getItem("dps-intro-seen");
     setPhase(seen ? "done" : "showing");
-  }, []);
+  }, [isEntrance]);
 
   useEffect(() => {
     if (phase === "showing" || phase === "leaving") {

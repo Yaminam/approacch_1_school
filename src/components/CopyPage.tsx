@@ -1,7 +1,7 @@
 import PageHero from "./PageHero";
 import Reveal from "./Reveal";
 import { cta } from "@/lib/cta";
-import { imagesFor } from "@/lib/images";
+import { imageFor } from "@/lib/images";
 import {
   PAD,
   Paras,
@@ -35,9 +35,20 @@ import type { PageCopy, PullSlot, Block } from "@/lib/copy/types";
    NOTHING IS DROPPED. Every block, paragraph, proof line and call to action
    in the deck still renders. */
 
-/* Short parallel items are a genuine set; an argument needs a column. */
-const HEAVY = 200;
 const weight = (b: Block) => b.p.reduce((n, t) => n + t.length, 0);
+
+/* Is this block an argument, or one item of a set?
+
+   Character count alone got this wrong. On the Defence Pathway, "Mind",
+   "Body", "Voice", "Bearing" and "Service" each run about 240 characters,
+   which cleared a 200-character bar, so five members of one obvious set were
+   each given a full movement and one of them ended up alone on a full-height
+   maroon band under a one-word heading.
+
+   The reliable signal in this deck is SHAPE, not length: an argument is
+   written as two or more paragraphs. A single paragraph, however long, is an
+   item. The generous character fallback catches the rare long single. */
+const isArgument = (b: Block) => b.p.length >= 2 || weight(b) >= 420;
 
 /* The deck numbers some headings itself ("1. Dalhousie Competitive Edge"). */
 const stripNum = (h: string) => h.replace(/^\s*\d+\.\s*/, "");
@@ -58,7 +69,7 @@ function planParts(middle: Block[]): Part[] {
      different treatments. */
   const segs: { heavy: boolean; blocks: Block[] }[] = [];
   for (const b of middle) {
-    const heavy = weight(b) >= HEAVY;
+    const heavy = isArgument(b);
     const last = segs[segs.length - 1];
     if (last && last.heavy === heavy) last.blocks.push(b);
     else segs.push({ heavy, blocks: [b] });
@@ -79,9 +90,25 @@ function planParts(middle: Block[]): Part[] {
     }
   }
 
+  /* Now choose a composition for each argument.
+
+     The rhythm proposes; the content disposes. Assigning compositions purely
+     by position in a cycle is what produced the mismatches: a long two-
+     paragraph argument squeezed into the compressed pair, a short one alone
+     on a full-height maroon band. Each proposal is therefore checked against
+     the block before it is accepted, and rejected proposals fall through to
+     the next image composition, which suits almost anything. */
+  const PAIRABLE = 460; // two of these sit comfortably side by side
+  const BAND = 460; // below this a dark band is mostly empty space
+  const BAND_MAX = 900; // above this it becomes a wall of reversed-out text
+  const IMAGES: Kind[] = ["portrait", "offset", "cinematic", "bleed"];
+
   const out: Part[] = [];
   let step = 0;
   let n = 0;
+  let img = 0;
+  let darkUsed = 0;
+
   for (const seg of segs) {
     if (!seg.heavy) {
       out.push({ t: "set", blocks: seg.blocks });
@@ -89,25 +116,48 @@ function planParts(middle: Block[]): Part[] {
     }
     let i = 0;
     while (i < seg.blocks.length) {
-      const kind = RHYTHM[step % RHYTHM.length];
+      const b = seg.blocks[i];
+      const next = seg.blocks[i + 1];
+      const proposed = RHYTHM[step % RHYTHM.length];
       step++;
-      if (kind === "pair" && i + 1 < seg.blocks.length) {
-        out.push({
-          t: "pair",
-          blocks: [seg.blocks[i], seg.blocks[i + 1]],
-          ns: [++n, ++n],
-        });
+
+      /* A pair needs two arguments that are both short AND of similar length.
+         Length alone was not enough: two blocks under the cap but one half
+         the other still left one column trailing 280px of empty ivory. */
+      const ratio = next ? Math.max(weight(b), weight(next)) / Math.max(1, Math.min(weight(b), weight(next))) : 99;
+      if (
+        proposed === "pair" &&
+        next &&
+        weight(b) <= PAIRABLE &&
+        weight(next) <= PAIRABLE &&
+        ratio < 1.5
+      ) {
+        out.push({ t: "pair", blocks: [b, next], ns: [++n, ++n] });
         i += 2;
         continue;
       }
-      /* A pair with nothing to pair with falls back to a held moment. */
-      const solo: Kind = kind === "pair" ? "plain" : kind;
-      out.push({ t: "move", kind: solo, block: seg.blocks[i], n: ++n });
+
+      /* A dark band needs enough copy to fill it, and one page should not
+         become a run of maroon slabs. */
+      if (proposed === "dark" && weight(b) >= BAND && weight(b) <= BAND_MAX && darkUsed < 2) {
+        darkUsed++;
+        out.push({ t: "move", kind: "dark", block: b, n: ++n });
+        i++;
+        continue;
+      }
+
+      const kind = IMAGES[img++ % IMAGES.length];
+      out.push({ t: "move", kind, block: b, n: ++n });
       i++;
     }
   }
   return out;
 }
+
+/* Copy that numbers itself: "Step 2. ...", "3) ...", "Question 4: ...".
+   When the headings already carry a sequence, the composer must not stamp a
+   second one beside them. The admissions process read "01  Step 2." */
+const SELF_NUMBERED = /^\s*(?:(?:step|phase|stage|part|question)\s+)?\d+\s*[.):]/i;
 
 /* A dated run is a chronology, not an argument. */
 const YEAR = /^\s*((?:1[89]|20)\d{2})\s*[,.–—-]?\s*/;
@@ -158,17 +208,27 @@ export default function CopyPage({ page }: { page: PageCopy }) {
 
   const parts = chronological ? [] : planParts(middle);
 
-  /* One photograph per movement that carries one. "plain" takes none. */
-  const need = parts.filter((p) => p.t === "move" && p.kind !== "plain").length;
-  const shots = imagesFor(page.slug, Math.max(need, 1), [page.image2 ?? ""]);
-  let shot = 0;
+  /* If most of the run numbers itself, drop our markers for the whole page,
+     so one page never mixes two counting systems. */
+  const selfNumbered =
+    middle.length > 0 &&
+    middle.filter((b) => SELF_NUMBERED.test(b.h)).length / middle.length >= 0.5;
+
+  /* A photograph is chosen from each section's own words rather than from a
+     slug-hashed pool, so the picture belongs to the argument beside it. The
+     set keeps any one photograph from appearing twice on a page, and seeding
+     it with the hero stops the hero repeating below the fold. */
+  const used = new Set<string>([page.image]);
+  const shotFor = (b: Block) => imageFor(`${b.h} ${b.p.join(" ")}`, used);
 
   /* Pulls attach to movements, spread through the page rather than clustered
      at the top. */
   const slotOrder: PullSlot[] = ["lead", "grid", "split", "list"];
   const pulls = slotOrder.flatMap((s) => (page.pulls ?? []).filter((p) => p.slot === s));
+  /* A pull sits beside a photograph, where there is a column for it. Under a
+     two-up pair it hung off the left edge, detached from both columns. */
   const moveIdx = parts
-    .map((p, i) => (p.t === "move" || p.t === "pair" ? i : -1))
+    .map((p, i) => (p.t === "move" && p.kind !== "dark" ? i : -1))
     .filter((i) => i >= 0);
   const pullFor = new Map<number, (typeof pulls)[number]>();
   pulls.forEach((pl, i) => {
@@ -201,11 +261,15 @@ export default function CopyPage({ page }: { page: PageCopy }) {
           if (part.t === "set") return <IconRow key={i} items={part.blocks} />;
           if (part.t === "pair")
             return (
-              <PairMovement key={i} items={part.blocks} ns={part.ns} pull={pullFor.get(i)} />
+              <PairMovement
+                key={i}
+                items={part.blocks}
+                ns={selfNumbered ? undefined : part.ns}
+              />
             );
 
           const pull = pullFor.get(i);
-          const img = part.kind === "plain" ? undefined : shots[shot++ % shots.length];
+          const img = part.kind === "plain" ? undefined : shotFor(part.block);
 
           if (part.kind === "dark") {
             return (
@@ -216,7 +280,14 @@ export default function CopyPage({ page }: { page: PageCopy }) {
             const flip = bleedFlip;
             bleedFlip = !bleedFlip;
             return (
-              <SplitBleed key={i} item={part.block} image={img} n={part.n} flip={flip} pull={pull} />
+              <SplitBleed
+                key={i}
+                item={part.block}
+                image={img}
+                n={selfNumbered ? undefined : part.n}
+                flip={flip}
+                pull={pull}
+              />
             );
           }
           return (
@@ -224,7 +295,7 @@ export default function CopyPage({ page }: { page: PageCopy }) {
               key={i}
               item={part.block}
               image={img}
-              n={part.n}
+              n={selfNumbered ? undefined : part.n}
               variant={(part.kind === "bleed" ? "offset" : part.kind) as Variant}
               pull={pull}
             />

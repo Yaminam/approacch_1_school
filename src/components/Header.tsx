@@ -153,7 +153,7 @@ export default function Header() {
             </Link>
             <Link
               href="/admissions/book-a-visit"
-              className="hidden items-center sm:whitespace-nowrap rounded-full bg-clay px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-paper transition-transform hover:-translate-y-0.5 sm:inline-flex sm:px-5"
+              className="hidden items-center sm:whitespace-nowrap rounded-full bg-brass-soft px-4 py-2 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-pine-800 transition-transform hover:-translate-y-0.5 sm:inline-flex sm:px-5"
             >
               Book a visit
             </Link>
