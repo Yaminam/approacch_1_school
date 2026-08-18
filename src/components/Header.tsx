@@ -57,8 +57,11 @@ export default function Header() {
       }`}
     >
       <div className="flex w-full items-center justify-between gap-3 px-4 py-2 sm:px-8 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6 lg:px-10">
-        {/* Crest lockup: the mark, then the tagline in gold beneath it. */}
-        <Link href="/" className="flex flex-col justify-center" aria-label="Dalhousie Public School home">
+        {/* The mark on its own. The gold tagline that sat under it was set at
+            0.48rem to fit the header's height, which is too small to read and
+            duplicated the wordmark already inside the logo. It still carries
+            the site title, the footer and the intro. */}
+        <Link href="/" className="flex items-center" aria-label="Dalhousie Public School home">
           <Image
             src="/images/logo.svg"
             alt="Dalhousie Public School"
@@ -66,15 +69,8 @@ export default function Header() {
             height={42}
             unoptimized
             priority
-            className={`h-6 w-auto shrink-0 sm:h-7 ${onDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
+            className={`h-7 w-auto shrink-0 sm:h-8 ${onDark ? "[filter:brightness(0)_invert(1)]" : ""}`}
           />
-          <span
-            className={`mt-0.5 hidden text-[0.48rem] font-bold uppercase tracking-[0.28em] sm:block ${
-              onDark ? "text-brass-soft/90" : "text-brass"
-            }`}
-          >
-            Exceptional by Nature
-          </span>
         </Link>
 
         {/* Desktop bar uses the short label so no item ever wraps to two lines;
