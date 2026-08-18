@@ -503,6 +503,15 @@ export type Variant = "portrait" | "cinematic" | "offset" | "plain";
 const FRAME =
   "relative h-full max-h-[26rem] min-h-[16rem] w-full overflow-hidden rounded-[3px] sm:min-h-[19rem]";
 
+/* A column that carries the ask is deeper than one that does not: the heading,
+   the argument and then a panel of about 280px. Held to the ordinary 26rem
+   ceiling the photograph stopped less than half way down it, which is what
+   left both campus pages with one section running 790px against a 416px
+   picture while its neighbours ran 390 to 570. When a movement carries an
+   inline ask its picture is allowed to follow the column further. */
+const FRAME_TALL =
+  "relative h-full max-h-[38rem] min-h-[16rem] w-full overflow-hidden rounded-[3px] sm:min-h-[19rem]";
+
 /* Stretched cell, centred picture. The frame matches the words up to a
    ceiling; past it the photograph holds its size and sits centred against the
    taller column, rather than growing into a 760px slab. */
@@ -539,7 +548,7 @@ export function Movement({
         <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
           <Reveal className="h-full lg:col-span-5">
             <div className={HOLD}>
-              <div className={FRAME}>
+              <div className={pull ? FRAME_TALL : FRAME}>
                 <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 38vw" className="object-cover" />
               </div>
             </div>
@@ -573,7 +582,7 @@ export function Movement({
         <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
           <Reveal className="h-full lg:col-span-7">
             <div className={HOLD}>
-              <div className={FRAME}>
+              <div className={pull ? FRAME_TALL : FRAME}>
                 <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 54vw" className="object-cover" />
               </div>
             </div>
@@ -611,7 +620,7 @@ export function Movement({
           </Reveal>
           <Reveal delay={110} className="h-full lg:col-span-6">
             <div className={HOLD}>
-              <div className={FRAME}>
+              <div className={pull ? FRAME_TALL : FRAME}>
                 <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 44vw" className="object-cover" />
               </div>
             </div>

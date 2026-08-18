@@ -119,12 +119,24 @@ function planParts(middle: Block[]): Part[] {
      paragraph, picture, paragraph, for five thousand pixels. The rhythm can
      only do its job if something interrupts the fallback. */
   const IMAGE_RUN = 3;
-  const IMAGES: Kind[] = ["portrait", "offset", "cinematic"];
+  /* The picture must change sides every time, so the compositions are picked
+     by side rather than from one list.
+
+     Cycling portrait, offset, cinematic put the picture left, right, left —
+     which reads as alternating until the cycle wraps and two left-hand
+     pictures land back to back. On New Chandigarh that fell on Senior School
+     and Residential, and the pair of them looked like the same section
+     printed twice. Alternating the side and cycling the proportion within it
+     means no two consecutive movements can place the picture together. */
+  const LEFT: Kind[] = ["portrait", "cinematic"];
+  const RIGHT: Kind[] = ["offset"];
 
   const out: Part[] = [];
   let step = 0;
   let n = 0;
-  let img = 0;
+  let li = 0;
+  let ri = 0;
+  let onLeft = true;
   let darkUsed = 0;
   let imgRun = 0;
 
@@ -158,27 +170,51 @@ function planParts(middle: Block[]): Part[] {
       }
 
       /* A dark band needs enough copy to fill it, and one page should not
-         become a run of maroon slabs. */
-      if (proposed === "dark" && weight(b) >= BAND && weight(b) <= BAND_MAX && darkUsed < 2) {
+         become a run of maroon slabs.
+
+         It is also offered whenever the image run has gone long, not only at
+         its turn in the cycle. Both campus pages were reaching the end without
+         a single dark movement, because the one step that proposes it never
+         coincided with a block in the band's length range: the transition the
+         whole system is built around simply never fired. Offering it at the
+         break gives a long block the band it was sized for, instead of
+         stretching it beside a capped photograph. New Chandigarh's tallest
+         section was 816px for exactly that reason. */
+      if (
+        (proposed === "dark" || imgRun >= IMAGE_RUN) &&
+        weight(b) >= BAND &&
+        weight(b) <= BAND_MAX &&
+        darkUsed < 2
+      ) {
         darkUsed++;
         out.push({ t: "move", kind: "dark", block: b, n: ++n });
+        /* The dark band carries its picture on the left, so it takes its turn
+           in the alternation: whatever follows puts its picture on the right. */
+        onLeft = false;
         imgRun = 0;
         i++;
         continue;
       }
 
-      /* The run has gone on too long and nothing else would take this block,
-         so it goes without a photograph: a held moment on a warmer ground that
-         breaks the march and gives the pictures either side somewhere to
-         breathe. */
-      if (imgRun >= IMAGE_RUN) {
+      /* Too long for the dark band is also too long to sit beside a bounded
+         photograph. The picture stops at its ceiling and the words keep going,
+         which is what made New Chandigarh's tallest section 816px against a
+         416px image while every other section on the page ran 390 to 570. A
+         block this long takes the full width instead.
+
+         Or the run has gone on too long and nothing else would take this
+         block. Either way it goes without a photograph: a held moment on the
+         warmer ground that breaks the march and gives the pictures on each
+         side somewhere to breathe. */
+      if (weight(b) > BAND_MAX || imgRun >= IMAGE_RUN) {
         out.push({ t: "move", kind: "plain", block: b, n: ++n });
         imgRun = 0;
         i++;
         continue;
       }
 
-      const kind = IMAGES[img++ % IMAGES.length];
+      const kind = onLeft ? LEFT[li++ % LEFT.length] : RIGHT[ri++ % RIGHT.length];
+      onLeft = !onLeft;
       out.push({ t: "move", kind, block: b, n: ++n });
       imgRun++;
       i++;
@@ -276,19 +312,28 @@ export default function CopyPage({ page }: { page: PageCopy }) {
      whole site the same block again.
 
      A section with no photograph has room across the page, so the ask becomes
-     the thin transition into whatever follows. Beside a photograph it depends
-     on the argument: a long one has a column deep enough to close with the
-     ask inline, while a short one would leave a CTA hanging under two lines
-     of text, so it takes its own two-column moment instead. Only a page that
-     has already asked once earns the featured treatment for its last ask,
-     which is the only one with a tinted ground and a filled button. */
+     the thin transition into whatever follows.
+
+     Beside a photograph it depends on how full the column already is, and the
+     first version of this rule had it backwards. The photograph is capped at
+     26rem; the column holds the heading, the argument and then the ask. A
+     SHORT argument leaves slack, so the ask closes the column inline without
+     the section outgrowing its picture. A LONG one has already passed the
+     picture on its own, and adding a 250px panel underneath is what made New
+     Chandigarh's tallest section 816px against a 416px image while its
+     neighbours ran 390 to 570 — and what made the two campus pages, which
+     carry the same kind of content, resolve differently. A long argument
+     therefore hands the ask its own band instead.
+
+     Only a page that has already asked once earns the featured treatment for
+     its last ask, the only one with a tinted ground and a filled button. */
   const FEATURED_MIN = 2; // a page must have built to a second ask
-  const DEEP = 420; // characters: enough column to close inline
+  const FULL = 420; // characters: past this the column is already deeper than its picture
   function pullVariant(part: (typeof parts)[number], n: number): PullVariant {
     if (pulls.length >= FEATURED_MIN && n === pulls.length - 1) return "featured";
     if (part.t !== "move") return "strip";
     if (part.kind === "plain") return "strip";
-    return weight(part.block) >= DEEP ? "inline" : "split";
+    return weight(part.block) < FULL ? "inline" : "split";
   }
 
   return (
