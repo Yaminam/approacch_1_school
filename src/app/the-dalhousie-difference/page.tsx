@@ -330,30 +330,40 @@ function Experience() {
           </article>
         </Reveal>
 
-        {/* 08 closes the run as a cinematic full-width frame with the words
-            beneath it, so the section ends on an image rather than a tile. */}
+        {/* 08 closes the run as the mirror of 07: the photograph held left at
+            a bounded height, the words right.
+
+            It was a full-width 21/8 frame with the words beneath. At the shell
+            width that renders 1296x494 — the largest element on the page by
+            some margin, and a photograph at that scale stops being part of a
+            composition and becomes an interruption. It is the same failure the
+            inner-page composer dropped its full-bleed variant for. Mirroring
+            07 also bookends the six cards between two wide compositions facing
+            opposite ways. */}
         <Reveal>
-          <div className="mt-6">
-            <div className="relative aspect-[21/8] w-full overflow-hidden rounded-[6px]">
-              <Image src={h.image} alt="" fill sizes="100vw" className="object-cover" />
+          <article className="group mt-6 grid overflow-hidden rounded-[6px] border border-sand bg-paper lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+            <div className="relative min-h-[260px] overflow-hidden lg:min-h-[340px]">
+              <Image
+                src={h.image}
+                alt=""
+                fill
+                sizes="(max-width:1024px) 100vw, 56vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              />
             </div>
-            <div className="mt-8 grid gap-y-5 lg:grid-cols-12 lg:gap-x-14">
-              <div className="lg:col-span-5">
-                <span className="font-display text-[1rem] leading-none text-brass [font-variant-numeric:tabular-nums]">
-                  08
-                </span>
-                <h3 className="mt-3 font-display text-[1.5rem] leading-[1.16] text-clay sm:text-[1.85rem]">
-                  {h.title}
-                </h3>
-              </div>
-              <div className="lg:col-span-6 lg:col-start-7">
-                <p className="max-w-[54ch] text-[1rem] leading-[1.75] text-pine/70">{h.body}</p>
-                <div className="mt-6">
-                  <ArrowLink label={h.cta.label} href={h.cta.href} />
-                </div>
+            <div className="flex flex-col justify-center p-8 sm:p-10">
+              <span className="font-display text-[1rem] leading-none text-brass [font-variant-numeric:tabular-nums]">
+                08
+              </span>
+              <h3 className="mt-3 max-w-[18ch] font-display text-[1.5rem] leading-[1.16] text-clay sm:text-[1.85rem]">
+                {h.title}
+              </h3>
+              <p className="mt-4 max-w-[46ch] text-[0.95rem] leading-[1.72] text-pine/70">{h.body}</p>
+              <div className="mt-7">
+                <ArrowLink label={h.cta.label} href={h.cta.href} />
               </div>
             </div>
-          </div>
+          </article>
         </Reveal>
       </div>
     </section>
