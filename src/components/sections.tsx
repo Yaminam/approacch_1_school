@@ -442,14 +442,19 @@ export function OpeningStatement({
   eyebrow,
   title,
   paras,
+  lede = false,
 }: {
   eyebrow?: string;
   title: string;
   paras: string[];
+  /* Set only where the opening is a short standfirst introducing a run rather
+     than an argument in its own right — the heritage chronology. Scoped, not
+     global: every other page's opening keeps the two-column treatment. */
+  lede?: boolean;
 }) {
   const lens = paras.map((t) => t.length);
   const balanced =
-    paras.length === 2 && Math.max(...lens) / Math.max(1, Math.min(...lens)) < 1.8;
+    !lede && paras.length === 2 && Math.max(...lens) / Math.max(1, Math.min(...lens)) < 1.8;
   return (
     <section className={`${PAD} pb-14 pt-16 sm:pb-16 sm:pt-20`}>
       <Reveal>
@@ -472,11 +477,25 @@ export function OpeningStatement({
           className={
             balanced
               ? "mx-auto mt-9 grid max-w-5xl gap-x-14 gap-y-5 md:grid-cols-2"
-              : "mx-auto mt-9 max-w-2xl space-y-5 text-center"
+              : lede
+                ? "mx-auto mt-9 max-w-[52ch] space-y-6 text-center"
+                : "mx-auto mt-9 max-w-2xl space-y-5 text-center"
           }
         >
+          {/* As a standfirst it is set a size up and its lines are balanced
+              rather than merely pretty. At a 75-character measure with pretty
+              wrapping each paragraph ended on a short orphan line — "than half
+              a century." alone under a full one — which is what made the
+              heritage opening look broken. */}
           {paras.map((t, i) => (
-            <p key={i} className="text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
+            <p
+              key={i}
+              className={
+                lede
+                  ? "text-[1.15rem] leading-[1.72] text-pine/75 [text-wrap:balance] sm:text-[1.2rem]"
+                  : "text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]"
+              }
+            >
               {t}
             </p>
           ))}

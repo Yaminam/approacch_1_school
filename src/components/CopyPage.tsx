@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import PageHero from "./PageHero";
 import Reveal from "./Reveal";
+import Chronology, { type Era } from "./Chronology";
 import { cta } from "@/lib/cta";
 import { imageFor } from "@/lib/images";
 import {
@@ -231,36 +232,17 @@ const SELF_NUMBERED = /^\s*(?:(?:step|phase|stage|part|question)\s+)?\d+\s*[.):]
 /* A dated run is a chronology, not an argument. */
 const YEAR = /^\s*((?:1[89]|20)\d{2})\s*[,.–—-]?\s*/;
 
-function Chronology({ blocks }: { blocks: Block[] }) {
-  return (
-    <section className={`${PAD} py-20 sm:py-24`}>
-      <ol className="mx-auto max-w-3xl">
-        {blocks.map((b, i) => {
-          const m = b.h.match(YEAR);
-          const year = m ? m[1] : "";
-          const title = m ? b.h.slice(m[0].length) : b.h;
-          return (
-            <Reveal key={b.h} delay={Math.min(i, 6) * 50}>
-              <li className="grid gap-x-10 gap-y-2 border-t border-sand py-8 sm:grid-cols-[6rem_1fr]">
-                <span className="font-display text-[1.6rem] leading-none text-brass/70 [font-variant-numeric:tabular-nums]">
-                  {year}
-                </span>
-                <div>
-                  <h3 className="font-display text-[1.3rem] leading-[1.2] text-clay sm:text-[1.5rem]">
-                    {title.charAt(0).toUpperCase() + title.slice(1)}
-                  </h3>
-                  <div className="mt-3">
-                    <Paras paras={b.p} size="text-[0.98rem]" gap="mt-3" measure="max-w-[58ch]" />
-                  </div>
-                </div>
-              </li>
-            </Reveal>
-          );
-        })}
-      </ol>
-    </section>
-  );
-}
+/* A dated run is drawn as a timeline, not a list. The renderer lives in its
+   own client component because it tracks scroll to fill the spine. */
+const toEras = (blocks: Block[]): Era[] =>
+  blocks.map((b) => {
+    const m = b.h.match(YEAR);
+    return {
+      year: m ? m[1] : "",
+      title: m ? b.h.slice(m[0].length) : b.h,
+      paras: b.p,
+    };
+  });
 
 export default function CopyPage({ page }: { page: PageCopy }) {
   const primary = cta(page.primary);
@@ -356,10 +338,10 @@ export default function CopyPage({ page }: { page: PageCopy }) {
         secondary={secondary}
       />
 
-      {lead && <OpeningStatement title={lead.h} paras={lead.p} />}
+      {lead && <OpeningStatement title={lead.h} paras={lead.p} lede={chronological} />}
 
       {chronological ? (
-        <Chronology blocks={middle} />
+        <Chronology items={toEras(middle)} />
       ) : (
         parts.map((part, i) => {
           if (part.t === "set") return <IconRow key={i} items={part.blocks} />;
