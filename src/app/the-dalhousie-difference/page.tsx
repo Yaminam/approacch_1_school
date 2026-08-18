@@ -33,7 +33,7 @@ const SHELL = "mx-auto w-full max-w-[86rem] px-6 sm:px-10";
 function Eyebrow({ children, gold = false }: { children: React.ReactNode; gold?: boolean }) {
   return (
     <p
-      className={`text-[0.68rem] font-bold uppercase leading-relaxed tracking-[0.24em] ${
+      className={`text-[0.75rem] font-bold uppercase leading-relaxed tracking-[0.22em] lg:text-[0.68rem] lg:tracking-[0.24em] ${
         gold ? "text-brass-soft" : "text-brass"
       }`}
     >
@@ -54,7 +54,7 @@ function ArrowLink({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center gap-2.5 text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-colors ${
+      className={`group inline-flex min-h-11 items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.18em] transition-colors lg:min-h-0 lg:text-[0.68rem] ${
         dark ? "text-brass-soft hover:text-paper" : "text-clay hover:text-brass"
       }`}
     >
@@ -90,7 +90,10 @@ function Hero() {
       <div className={`${SHELL} relative grid items-center gap-y-10 pb-16 pt-8 lg:grid-cols-12 lg:gap-x-12 lg:pb-24 lg:pt-12`}>
         <div className="lg:col-span-5">
           <nav className="flex items-center gap-2 text-[0.78rem] font-semibold text-mist">
-            <Link href="/" className="transition-colors hover:text-clay">
+            <Link
+              href="/"
+              className="inline-flex min-h-11 items-center transition-colors hover:text-clay lg:min-h-0"
+            >
               Home
             </Link>
             <span aria-hidden className="text-sand">

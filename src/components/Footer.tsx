@@ -24,12 +24,12 @@ export default function Footer() {
 
           <div>
             <h3 className="eyebrow text-brass-soft">Explore</h3>
-            <ul className="mt-5 space-y-2.5">
+            <ul className="mt-5 space-y-1 lg:space-y-2.5">
               {nav.map((n) => (
                 <li key={n.href}>
                   <a
                     href={n.href}
-                    className="text-sage-soft transition-colors hover:text-paper"
+                    className="inline-flex min-h-11 items-center lg:min-h-0 text-sage-soft transition-colors hover:text-paper"
                   >
                     {n.label}
                   </a>
@@ -40,27 +40,27 @@ export default function Footer() {
 
           <div>
             <h3 className="eyebrow text-brass-soft">Get in touch</h3>
-            <ul className="mt-5 space-y-2.5 text-sage-soft">
+            <ul className="mt-5 space-y-1 text-sage-soft lg:space-y-2.5">
               <li>
-                <a href={`tel:${school.phoneRaw}`} className="hover:text-paper">
+                <a href={`tel:${school.phoneRaw}`} className="inline-flex min-h-11 items-center lg:min-h-0 hover:text-paper">
                   {school.phone}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${school.email}`} className="hover:text-paper">
+                <a href={`mailto:${school.email}`} className="inline-flex min-h-11 items-center lg:min-h-0 hover:text-paper">
                   {school.email}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${school.emailChd}`} className="hover:text-paper">
+                <a href={`mailto:${school.emailChd}`} className="inline-flex min-h-11 items-center lg:min-h-0 hover:text-paper">
                   {school.emailChd}
                 </a>
               </li>
               <li className="flex gap-4 pt-2">
-                <a href={school.instagram} target="_blank" rel="noreferrer" className="hover:text-paper">
+                <a href={school.instagram} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center lg:min-h-0 hover:text-paper">
                   Instagram
                 </a>
-                <a href={school.facebook} target="_blank" rel="noreferrer" className="hover:text-paper">
+                <a href={school.facebook} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center lg:min-h-0 hover:text-paper">
                   Facebook
                 </a>
               </li>

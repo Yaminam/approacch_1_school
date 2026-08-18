@@ -39,18 +39,21 @@ export default function PageHero({
       <div className="relative mx-auto grid max-w-[78rem] items-center gap-y-9 px-6 pb-14 pt-8 sm:px-10 sm:pb-16 lg:grid-cols-12 lg:gap-x-10 lg:pb-[4.5rem] lg:pt-10">
         <div className="lg:col-span-5">
           <nav className="flex items-center gap-2 text-[0.8rem] font-semibold text-mist">
-            <Link href="/" className="transition-colors hover:text-clay">Home</Link>
+            <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-clay lg:min-h-0">Home</Link>
             <span aria-hidden className="text-sand">/</span>
             <span className="text-clay">{eyebrow}</span>
           </nav>
 
-          <h1 className="mt-5 max-w-[16ch] font-display text-[2.4rem] leading-[1.05] text-clay sm:text-[2.9rem] lg:text-[3.2rem]">
+          {/* A wider measure and a smaller top size: at 3.2rem in a 16ch column
+              the title ran to five lines and split "better-prepared" across
+              two of them. */}
+          <h1 className="mt-5 max-w-[20ch] font-display text-[2.05rem] leading-[1.08] text-clay sm:text-[2.4rem] lg:text-[2.75rem]">
             {title}
             {emphasis && <span className="block italic text-clay/90">{emphasis}</span>}
           </h1>
 
           {kicker && (
-            <p className="mt-4 text-[0.68rem] font-bold uppercase tracking-[0.24em] text-brass">
+            <p className="mt-4 text-[0.75rem] font-bold uppercase tracking-[0.22em] text-brass lg:text-[0.68rem] lg:tracking-[0.24em]">
               {kicker}
             </p>
           )}
@@ -58,7 +61,7 @@ export default function PageHero({
           <GoldRule className="mt-4 text-brass" width={64} />
 
           {subtitle && (
-            <p className="mt-6 max-w-[44ch] text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
+            <p className="mt-6 max-w-[46ch] text-[1rem] leading-[1.7] text-pine/75 [text-wrap:pretty]">
               {subtitle}
             </p>
           )}
@@ -77,7 +80,7 @@ export default function PageHero({
               {secondary && (
                 <Link
                   href={secondary.href}
-                  className="group inline-flex items-center gap-2.5 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-clay transition-colors hover:text-brass"
+                  className="group inline-flex min-h-11 lg:min-h-0 items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-clay transition-colors hover:text-brass lg:text-[0.68rem]"
                 >
                   <span className="border-b border-current pb-1">{secondary.label}</span>
                   <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>

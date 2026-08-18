@@ -67,7 +67,7 @@ export function MasterPromise() {
               </p>
               <Link
                 href="/the-dalhousie-difference"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-4 hover:text-pine"
+                className="mt-6 inline-flex min-h-11 lg:min-h-0 items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-4 hover:text-pine"
               >
                 Discover the Dalhousie Difference
                 <span aria-hidden>&rarr;</span>
@@ -109,7 +109,7 @@ export function SevenPathways() {
             </div>
             <Link
               href="/preparation-system"
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-brass-soft transition-colors hover:text-paper"
+              className="inline-flex min-h-11 lg:min-h-0 items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-brass-soft transition-colors hover:text-paper"
             >
               Explore the pathways
               <span aria-hidden>-&gt;</span>
@@ -218,7 +218,7 @@ function ArgumentBand({
                 {alt && altHref && (
                   <Link
                     href={altHref}
-                    className="text-sm font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-4 hover:text-pine"
+                    className="inline-flex min-h-11 lg:min-h-0 items-center text-sm font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-4 hover:text-pine"
                   >
                     {alt}
                   </Link>
@@ -377,7 +377,7 @@ export function FindYourExperience() {
                 <span className="font-display text-2xl text-brass">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 text-xl leading-snug text-pine">{s.h}</h3>
                 <p className="mt-2.5 flex-1 text-sm leading-relaxed text-mist">{s.body}</p>
-                <Link href={s.href} className="mt-5 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
+                <Link href={s.href} className="mt-5 inline-flex min-h-11 lg:min-h-0 items-center text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
                   {s.cta} &rarr;
                 </Link>
               </article>

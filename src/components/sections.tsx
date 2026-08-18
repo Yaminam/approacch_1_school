@@ -32,7 +32,8 @@ export const PAD = "mx-auto max-w-[78rem] px-6 sm:px-10";
 export function Eyebrow({ children, gold = false }: { children: React.ReactNode; gold?: boolean }) {
   return (
     <p
-      className={`text-[0.68rem] font-bold uppercase tracking-[0.24em] ${
+      /* 10.88px was below comfortable reading on a phone. */
+      className={`text-[0.75rem] font-bold uppercase tracking-[0.22em] lg:text-[0.68rem] lg:tracking-[0.24em] ${
         gold ? "text-brass-soft" : "text-brass"
       }`}
     >
@@ -127,7 +128,9 @@ export function GoldLink({
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center gap-2.5 text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-colors ${
+      /* min-h-11 on small screens: at 21px tall these were well under any
+         touch-target guideline. Desktop keeps its compact rhythm. */
+      className={`group inline-flex min-h-11 items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.18em] transition-colors lg:min-h-0 lg:text-[0.68rem] ${
         dark ? "text-brass-soft hover:text-paper" : "text-clay hover:text-brass"
       }`}
     >
@@ -188,7 +191,7 @@ export function Pull({
         {a && (
           <Link
             href={a.href}
-            className={`text-[0.68rem] font-bold uppercase tracking-[0.18em] transition-colors ${
+            className={`inline-flex min-h-11 lg:min-h-0 items-center text-[0.72rem] font-bold uppercase tracking-[0.18em] transition-colors lg:text-[0.68rem] ${
               dark ? "text-sage-soft/70 hover:text-brass-soft" : "text-mist hover:text-clay"
             }`}
           >
@@ -265,7 +268,12 @@ export type Variant = "portrait" | "cinematic" | "offset" | "plain";
    the same line, whatever the copy does. A floor stops a one-line section
    producing a sliver. */
 const FRAME =
-  "relative h-full min-h-[18rem] w-full overflow-hidden rounded-[3px] sm:min-h-[22rem]";
+  "relative h-full max-h-[26rem] min-h-[16rem] w-full overflow-hidden rounded-[3px] sm:min-h-[19rem]";
+
+/* Stretched cell, centred picture. The frame matches the words up to a
+   ceiling; past it the photograph holds its size and sits centred against the
+   taller column, rather than growing into a 760px slab. */
+const HOLD = "flex h-full items-center";
 
 /* One movement of the story. Four compositions cycle, so no two consecutive
    sections are built the same way; each uses a different image proportion and
@@ -297,8 +305,10 @@ export function Movement({
       <section className={`${PAD} py-12 sm:py-14`}>
         <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
           <Reveal className="h-full lg:col-span-5">
-            <div className={FRAME}>
-              <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 38vw" className="object-cover" />
+            <div className={HOLD}>
+              <div className={FRAME}>
+                <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 38vw" className="object-cover" />
+              </div>
             </div>
           </Reveal>
           <Reveal delay={110} className="lg:col-span-7">
@@ -329,8 +339,10 @@ export function Movement({
       <section className={`${PAD} py-12 sm:py-14`}>
         <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
           <Reveal className="h-full lg:col-span-7">
-            <div className={FRAME}>
-              <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 54vw" className="object-cover" />
+            <div className={HOLD}>
+              <div className={FRAME}>
+                <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 54vw" className="object-cover" />
+              </div>
             </div>
           </Reveal>
           <Reveal delay={110} className="lg:col-span-5">
@@ -365,8 +377,10 @@ export function Movement({
             </div>
           </Reveal>
           <Reveal delay={110} className="h-full lg:col-span-6">
-            <div className={FRAME}>
-              <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 44vw" className="object-cover" />
+            <div className={HOLD}>
+              <div className={FRAME}>
+                <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 44vw" className="object-cover" />
+              </div>
             </div>
           </Reveal>
         </div>
@@ -453,53 +467,50 @@ export function DarkMovement({
   eyebrow?: string;
   pull?: PullData;
 }) {
-  /* Centred and measured, not split into two columns.
+  /* The dark movement is a split, not a centred column.
 
-     The two-column version divided the paragraphs between left and right,
-     which balanced only when both halves happened to be the same length. Any
-     other time one side ran on and the other stopped early, stranding a
-     quarter of a full-width maroon band as empty space. A single centred
-     measure cannot go out of balance whatever the copy does. */
+     Two earlier versions both failed on a wide screen. Dividing the
+     paragraphs across two columns balanced only when the halves happened to
+     match. Centring everything read as a 60-character ribbon adrift in a
+     1440px maroon field. Putting the photograph on one side and the whole
+     argument on the other fills the width, keeps the prose ranged left where
+     it is readable, and stretches the picture to the text so the two always
+     finish level. */
   return (
     <section className="relative overflow-hidden bg-pine-800">
-      {image && (
-        <>
-          <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-[0.14]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-pine-800/95 via-pine-800/85 to-pine-800/95" />
-        </>
-      )}
-      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-28 w-full text-brass-soft/20" />
-      <Botanical className="pointer-events-none absolute -right-6 top-0 hidden h-full w-24 text-brass-soft/15 lg:block" />
-      <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-24 rotate-180 text-brass-soft/15 lg:block" />
+      <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-brass-soft/20" />
+      <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-20 text-brass-soft/12 lg:block" />
 
-      <div className={`${PAD} relative py-16 sm:py-20`}>
-        <Reveal>
-          <div className="mx-auto max-w-3xl text-center">
-            <Crest className="mx-auto h-10 w-9 text-brass-soft/70" />
-            {eyebrow && (
-              <div className="mt-6">
-                <Eyebrow gold>{eyebrow}</Eyebrow>
+      <div className={`${PAD} relative py-14 sm:py-16`}>
+        <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+          {image && (
+            <Reveal className="h-full lg:col-span-6">
+              <div className="relative h-full max-h-[24rem] min-h-[15rem] w-full self-center overflow-hidden rounded-[3px] sm:min-h-[18rem]">
+                <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 46vw" className="object-cover" />
+                <div className="absolute inset-0 bg-pine-800/20" />
               </div>
-            )}
-            <h2 className="mt-5 font-display text-[2rem] leading-[1.18] text-brass-soft sm:text-[2.6rem]">
-              {item.h}
-            </h2>
-            {/* The heading is centred; the argument is not. Centring two full
-                paragraphs made every line start at a different point and the
-                band became hard to read. The column is centred as a block and
-                the prose inside it stays ranged left. */}
-            <div className="mx-auto mt-7 max-w-[60ch] space-y-5 text-left">
-              {item.p.map((t, i) => (
-                <Paras key={i} paras={[t]} dark size="text-[1.0625rem]" measure="max-w-none" gap="" />
-              ))}
+            </Reveal>
+          )}
+          <Reveal delay={110} className={image ? "lg:col-span-6" : "lg:col-span-8"}>
+            <div className="flex h-full flex-col justify-center">
+              <Crest className="h-9 w-8 text-brass-soft/70" />
+              {eyebrow && (
+                <div className="mt-5">
+                  <Eyebrow gold>{eyebrow}</Eyebrow>
+                </div>
+              )}
+              <h2 className="mt-4 font-display text-[1.9rem] leading-[1.18] text-brass-soft sm:text-[2.4rem]">
+                {item.h}
+              </h2>
+              <div className="mt-6 space-y-5">
+                {item.p.map((t, i) => (
+                  <Paras key={i} paras={[t]} dark size="text-[1.0625rem]" measure="max-w-[54ch]" gap="" />
+                ))}
+              </div>
+              {pull && <Pull {...pull} dark />}
             </div>
-            {pull && (
-              <div className="mx-auto mt-2 max-w-[46ch] text-left">
-                <Pull {...pull} dark />
-              </div>
-            )}
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -528,7 +539,7 @@ export function SplitBleed({
       <div className="grid items-stretch gap-y-10 lg:grid-cols-2">
         <Reveal className={`h-full ${flip ? "lg:order-2" : ""}`}>
           <div
-            className={`relative h-full min-h-[20rem] w-full overflow-hidden ${
+            className={`relative h-full max-h-[24rem] min-h-[16rem] w-full self-center overflow-hidden ${
               flip ? "lg:rounded-l-[3px]" : "lg:rounded-r-[3px]"
             }`}
           >
