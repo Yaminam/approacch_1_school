@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import PageHero from "./PageHero";
 import Reveal from "./Reveal";
 import { cta } from "@/lib/cta";
@@ -10,9 +11,11 @@ import {
   DarkMovement,
   IconRow,
   PairMovement,
+  Pull,
   ClosingStatement,
   ClosingCta,
   type Variant,
+  type PullVariant,
 } from "./sections";
 import type { PageCopy, PullSlot, Block } from "@/lib/copy/types";
 
@@ -235,12 +238,33 @@ export default function CopyPage({ page }: { page: PageCopy }) {
   const moveIdx = parts
     .map((p, i) => (p.t === "move" && p.kind !== "dark" ? i : -1))
     .filter((i) => i >= 0);
-  const pullFor = new Map<number, (typeof pulls)[number]>();
+  const pullFor = new Map<number, { pull: (typeof pulls)[number]; n: number }>();
   pulls.forEach((pl, i) => {
     const spot = Math.floor(((i + 1) * moveIdx.length) / (pulls.length + 1));
     const at = moveIdx[Math.min(moveIdx.length - 1, spot)];
-    if (at !== undefined && !pullFor.has(at)) pullFor.set(at, pl);
+    if (at !== undefined && !pullFor.has(at)) pullFor.set(at, { pull: pl, n: i });
   });
+
+  /* Which composition the ask takes is decided by what surrounds it, not by
+     where it falls in the list. Thirty-five of the thirty-nine pages in the
+     deck carry exactly one pull, so choosing by position would have given the
+     whole site the same block again.
+
+     A section with no photograph has room across the page, so the ask becomes
+     the thin transition into whatever follows. Beside a photograph it depends
+     on the argument: a long one has a column deep enough to close with the
+     ask inline, while a short one would leave a CTA hanging under two lines
+     of text, so it takes its own two-column moment instead. Only a page that
+     has already asked once earns the featured treatment for its last ask,
+     which is the only one with a tinted ground and a filled button. */
+  const FEATURED_MIN = 2; // a page must have built to a second ask
+  const DEEP = 420; // characters: enough column to close inline
+  function pullVariant(part: (typeof parts)[number], n: number): PullVariant {
+    if (pulls.length >= FEATURED_MIN && n === pulls.length - 1) return "featured";
+    if (part.t !== "move") return "strip";
+    if (part.kind === "plain") return "strip";
+    return weight(part.block) >= DEEP ? "inline" : "split";
+  }
 
   return (
     <main className="bg-cream">
@@ -271,23 +295,36 @@ export default function CopyPage({ page }: { page: PageCopy }) {
               />
             );
 
-          const pull = pullFor.get(i);
+          const slot = pullFor.get(i);
+          const variant = slot ? pullVariant(part, slot.n) : undefined;
+          /* Only the inline composition belongs inside the movement's column.
+             The other three are sections in their own right and are emitted
+             after it, so they sit between the two sections rather than being
+             tucked into one. */
+          const inline = variant === "inline" ? slot!.pull : undefined;
           const img = part.kind === "plain" ? undefined : shotFor(part.block);
-
-          if (part.kind === "dark") {
-            return (
-              <DarkMovement key={i} item={part.block} image={img} eyebrow={page.kicker} pull={pull} />
-            );
-          }
+          /* The split band carries a photograph of its own, drawn from the same
+             picker after the movement has taken its, so the two are never the
+             same shot and nothing repeats down the page. */
+          const pullImg =
+            slot && variant === "split" ? imageFor(slot.pull.line, used) : undefined;
           return (
-            <Movement
-              key={i}
-              item={part.block}
-              image={img}
-              n={selfNumbered ? undefined : part.n}
-              variant={part.kind as Variant}
-              pull={pull}
-            />
+            <Fragment key={i}>
+              {part.kind === "dark" ? (
+                <DarkMovement item={part.block} image={img} eyebrow={page.kicker} pull={inline} />
+              ) : (
+                <Movement
+                  item={part.block}
+                  image={img}
+                  n={selfNumbered ? undefined : part.n}
+                  variant={part.kind as Variant}
+                  pull={inline}
+                />
+              )}
+              {slot && variant && variant !== "inline" && (
+                <Pull {...slot.pull} variant={variant} image={pullImg} />
+              )}
+            </Fragment>
           );
         })
       )}

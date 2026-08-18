@@ -171,79 +171,265 @@ export function PrimaryCta({
   );
 }
 
-/* An in-flow invitation: a line of argument in italic display, then the link.
-   No container, because a filled panel here reads as an advertisement. */
+/* ── The mid-page call to action ───────────────────────────────────── */
+
+/* Four compositions, chosen by what surrounds the ask rather than by where it
+   falls in a list. Nearly every page carries exactly one of these, so keying
+   the design off position would have given the whole site the same block
+   again, which is the repetition this replaces.
+
+     inline    beside a photograph, under a long argument. No panel at all:
+               a rule, the marker, the sentence, a link. It reads as the last
+               paragraph of the section rather than an insert.
+     strip     where the section carries no photograph. A full-width rule
+               above and below on the ivory, acting as the transition into
+               the next section.
+     split     beside a photograph, under a short argument, where a CTA
+               jammed into the column would look thin. It gets its own
+               two-column moment with a drawn detail opposite.
+     featured  only on a page that has built to a second ask. The one
+               composition allowed a tinted ground and a filled button.
+
+   Nothing here is a maroon slab. An earlier version reversed the whole block
+   out in burgundy to stop it blending; it stopped blending and started
+   reading as an advertisement dropped between the sections. */
+
+export type PullVariant = "inline" | "strip" | "split" | "featured";
+
+const MARKER = "Where this leads";
+
+/* Three levels, so the page never shows a filled button for every ask:
+   featured gets the filled burgundy, the standalone rows get an outlined
+   pill, and the inline one is a link with an arrow. */
+function PullActions({
+  c,
+  a,
+  variant,
+  dark,
+}: {
+  c: { label: string; href: string };
+  a?: { label: string; href: string };
+  variant: PullVariant;
+  dark: boolean;
+}) {
+  const primary =
+    variant === "featured" || variant === "inline" ? (
+      <Link
+        href={c.href}
+        className={`group inline-flex min-h-11 max-w-full items-center gap-2.5 rounded-full px-7 py-3 text-[0.66rem] font-bold uppercase leading-tight tracking-[0.13em] transition-transform duration-300 hover:-translate-y-0.5 lg:min-h-0 ${
+          dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
+        }`}
+      >
+        {c.label}
+        <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
+          &rarr;
+        </span>
+      </Link>
+    ) : (
+      <Link
+        href={c.href}
+        className={`group inline-flex min-h-11 max-w-full items-center gap-2.5 rounded-full border px-6 py-2.5 text-[0.66rem] font-bold uppercase leading-tight tracking-[0.13em] transition-colors lg:min-h-0 ${
+          dark
+            ? "border-brass-soft/50 text-brass-soft hover:border-brass-soft hover:bg-brass-soft/10"
+            : "border-clay/45 text-clay hover:border-clay hover:bg-blush/60"
+        }`}
+      >
+        {c.label}
+        <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
+          &rarr;
+        </span>
+      </Link>
+    );
+
+  return (
+    <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+      {primary}
+      {a && <GoldLink label={a.label} href={a.href} dark={dark} />}
+    </div>
+  );
+}
+
+function PullMarker({ dark, centred = false }: { dark: boolean; centred?: boolean }) {
+  return (
+    <div className={`flex items-center gap-3 ${centred ? "justify-center" : ""}`}>
+      <span aria-hidden className={`h-px w-7 shrink-0 ${dark ? "bg-brass-soft/70" : "bg-brass"}`} />
+      <p
+        className={`text-[0.75rem] font-bold uppercase tracking-[0.22em] lg:text-[0.66rem] ${
+          dark ? "text-brass-soft" : "text-brass"
+        }`}
+      >
+        {MARKER}
+      </p>
+    </div>
+  );
+}
+
 export function Pull({
   line,
   label,
   alt,
+  variant = "inline",
+  image,
   dark = false,
 }: {
   line: string;
   label: string;
   alt?: string;
+  variant?: PullVariant;
+  /* Only the split composition carries one. */
+  image?: string;
   dark?: boolean;
 }) {
   const c = cta(label);
   const a = alt ? cta(alt) : undefined;
+
+  /* A thin transition on the ivory: rules above and below, nothing filled. */
+  if (variant === "strip") {
+    return (
+      <section className={`${PAD} py-10 sm:py-12`}>
+        <Reveal>
+          <div className="border-y border-brass/30 py-10 sm:py-12">
+            <div className="grid gap-y-7 lg:grid-cols-12 lg:items-center lg:gap-x-14">
+              <div className="lg:col-span-7">
+                <PullMarker dark={false} />
+                <p className="mt-4 max-w-[40ch] font-display text-[1.4rem] italic leading-[1.32] text-clay sm:text-[1.6rem]">
+                  {line}
+                </p>
+              </div>
+              <div className="lg:col-span-5">
+                <div className="flex flex-wrap items-center gap-x-7 gap-y-3 lg:justify-end">
+                  <PullActions c={c} a={a} variant="strip" dark={false} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    );
+  }
+
+  /* The ask as a full-width burgundy band with a photograph in it.
+
+     Two earlier attempts at this composition failed the same way. The crest
+     alone on pale blush read as a missing image, a faint outline floating in
+     an empty rectangle. Putting the crest on burgundy fixed the emptiness but
+     left a decorative plate sitting next to text on ivory, which still looked
+     like a placeholder for a picture. So the whole band goes dark and takes a
+     real photograph: the ask reads as a deliberate break in the page rather
+     than something parked beside it. */
+  if (variant === "split") {
+    return (
+      <section className="relative overflow-hidden bg-clay">
+        <Ridge
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full text-brass-soft/20"
+        />
+        <Botanical
+          aria-hidden
+          className="pointer-events-none absolute -left-6 top-0 hidden h-full w-20 text-brass-soft/12 lg:block"
+        />
+        <div className={`${PAD} relative py-14 sm:py-16`}>
+          <Reveal>
+            <div className="grid items-center gap-y-9 lg:grid-cols-12 lg:gap-x-14">
+              <div className={image ? "lg:col-span-6" : "lg:col-span-8"}>
+                <PullMarker dark />
+                <p className="mt-5 max-w-[38ch] font-display text-[1.5rem] leading-[1.26] text-paper sm:text-[1.85rem]">
+                  {line}
+                </p>
+                <PullActions c={c} a={a} variant="split" dark />
+              </div>
+              {image && (
+                <div className="lg:col-span-6">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[3px]">
+                    <Image
+                      src={image}
+                      alt=""
+                      fill
+                      sizes="(max-width:1024px) 100vw, 46vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
+
+  /* The one composition allowed a tinted ground and a filled button, and only
+     on a page that has already asked once. */
+  if (variant === "featured") {
+    return (
+      <section className={`${PAD} py-12 sm:py-16`}>
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[4px] border border-brass/30 bg-blush/50 px-6 py-11 sm:px-12 sm:py-14">
+            <Botanical
+              aria-hidden
+              className="pointer-events-none absolute -left-4 -top-6 h-[150%] w-24 text-brass/15"
+            />
+            <Ridge
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-14 w-full text-brass/20"
+            />
+            <div className="relative mx-auto max-w-[44rem] text-center">
+              <div className="flex justify-center">
+                <LineIcon name={iconFor(line)} className="text-brass" size={46} />
+              </div>
+              <div className="mt-6">
+                <PullMarker dark={false} centred />
+              </div>
+              <p className="mt-5 font-display text-[1.6rem] leading-[1.24] text-clay sm:text-[2rem]">
+                {line}
+              </p>
+              <div className="mt-7 flex justify-center">
+                <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+                  <PullActions c={c} a={a} variant="featured" dark={false} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+    );
+  }
+
   return (
-    /* The in-page invitation, and the one element on the page that should not
-       blend.
+    /* Inline: a light pane in the column, not a maroon block and not bare type.
 
-       Two earlier versions failed in the same direction. Borderless on the
-       ivory it read as one more paragraph; on a pale blush panel it was
-       separated but still quiet, another warm rectangle among warm
-       rectangles. The page runs on cream for screen after screen, so the way
-       to make the ask land is to invert it: a deep maroon panel, gold type,
-       the crest and a ridge drawn in behind it. Against that run of ivory it
-       is the first thing the eye goes to.
-
-       Inside a dark movement the ground is already maroon, so the same panel
-       would disappear. There it becomes a lit pane on a brass hairline
-       instead, which reads as raised rather than reversed.
-
-       In both, the ask is a filled brass button and the alternative is a gold
-       link, so the primary action is never in doubt. */
+       Bare type under a gold rule was tried and disappeared into the prose it
+       was meant to follow. Reversing it out in burgundy was tried too and read
+       as an advertisement. This is the middle: the page ground is cream, so a
+       panel one step lighter than the page, on a brass hairline, separates
+       without shouting. The ringed gold mark gives the eye something to catch,
+       and the ask is a filled button because this variant sits in a column of
+       running prose where a text link is exactly what gets missed. */
     <div
-      className={`relative mt-10 overflow-hidden rounded-[4px] p-7 sm:p-9 ${
-        dark ? "border border-brass-soft/35 bg-paper/[0.07]" : "bg-clay"
+      className={`mt-9 overflow-hidden rounded-[4px] border p-6 sm:p-7 ${
+        dark ? "border-brass-soft/35 bg-paper/[0.07]" : "border-brass/30 bg-paper"
       }`}
     >
-      <Botanical
-        className={`pointer-events-none absolute -right-5 -top-8 h-[150%] w-28 ${
-          dark ? "text-brass-soft/10" : "text-brass-soft/20"
-        }`}
-      />
-      <Ridge
-        className={`pointer-events-none absolute inset-x-0 bottom-0 h-14 w-full ${
-          dark ? "text-brass-soft/15" : "text-brass-soft/25"
-        }`}
-      />
-
-      <div className="relative">
-        <div className="flex items-center gap-3.5">
-          <Crest className="h-7 w-6 shrink-0 text-brass-soft/80" />
-          <span aria-hidden className="h-px w-8 shrink-0 bg-brass-soft/55" />
-          <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-brass-soft lg:text-[0.65rem]">
-            Where this leads
+      <div className="flex items-start gap-4 sm:gap-5">
+        <LineIcon
+          name={iconFor(line)}
+          className={`shrink-0 ${dark ? "text-brass-soft/80" : "text-brass"}`}
+          size={44}
+        />
+        <div className="min-w-0">
+          <PullMarker dark={dark} />
+          <p
+            className={`mt-3 max-w-[34ch] font-display text-[1.2rem] leading-[1.32] sm:text-[1.34rem] ${
+              dark ? "text-brass-soft" : "text-clay"
+            }`}
+          >
+            {line}
           </p>
         </div>
-
-        <p className="mt-5 max-w-[42ch] font-display text-[1.35rem] italic leading-[1.3] text-paper sm:text-[1.55rem]">
-          {line}
-        </p>
-
-        <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
-          <Link
-            href={c.href}
-            className="group inline-flex max-w-full min-h-11 items-center gap-2 rounded-full bg-brass-soft px-6 py-3 text-[0.65rem] font-bold uppercase leading-tight tracking-[0.11em] text-pine-800 transition-transform duration-300 hover:-translate-y-0.5 lg:min-h-0"
-          >
-            {c.label}
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
-              &rarr;
-            </span>
-          </Link>
-          {a && <GoldLink label={a.label} href={a.href} dark />}
+      </div>
+      <div className={`mt-6 border-t pt-5 ${dark ? "border-brass-soft/25" : "border-brass/25"}`}>
+        <div className="-mt-6">
+          <PullActions c={c} a={a} variant="inline" dark={dark} />
         </div>
       </div>
     </div>
@@ -683,15 +869,19 @@ export function IconRow({ items }: { items: Item[] }) {
         <ol>
           {items.map((it, i) => (
             <Reveal key={it.h} delay={Math.min(i, 6) * 60}>
-              <li className="grid gap-x-14 gap-y-4 border-t border-sand py-8 sm:py-9 lg:grid-cols-12">
-                <div className="flex items-center gap-5 lg:col-span-4">
-                  <LineIcon name={glyphs[i]} className="text-brass" size={44} />
-                  <h3 className="font-display text-[1.3rem] leading-[1.18] text-clay sm:text-[1.5rem]">
+              {/* A fixed name column rather than a four-of-twelve span. At a
+                  third of the page the short names left 250px of empty ivory
+                  before the argument began, so each row read as two things
+                  sitting apart instead of one horizontal line. */}
+              <li className="grid gap-x-10 gap-y-3 border-t border-sand py-8 sm:py-9 lg:grid-cols-[15rem_1fr] lg:items-center">
+                <div className="flex items-center gap-4">
+                  <LineIcon name={glyphs[i]} className="shrink-0 text-brass" size={42} />
+                  <h3 className="font-display text-[1.3rem] leading-[1.18] text-clay sm:text-[1.45rem]">
                     {it.h}
                   </h3>
                 </div>
-                <div className="lg:col-span-8">
-                  <Paras paras={it.p} size="text-[1rem]" gap="mt-3" measure="max-w-[64ch]" />
+                <div>
+                  <Paras paras={it.p} size="text-[1rem]" gap="mt-3" measure="max-w-[68ch]" />
                 </div>
               </li>
             </Reveal>
