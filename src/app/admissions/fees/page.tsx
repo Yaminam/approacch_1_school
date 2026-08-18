@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import FeeSelector from "@/components/FeeSelector";
-import { Eyebrow } from "@/components/ui";
+import { PAD, Eyebrow, PrimaryCta, GoldLink } from "@/components/sections";
+import { Ridge, Botanical } from "@/components/Ornament";
 import { fees } from "@/lib/pageCopy";
 
 export const metadata: Metadata = fees.meta;
@@ -20,32 +20,24 @@ export default function Page() {
 
       <FeeSelector />
 
-      <section className="grain-pine">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
-          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-            <div>
-              <Eyebrow dark>Before you commit</Eyebrow>
-              <h2 className="mt-6 max-w-2xl text-3xl leading-[1.05] text-paper sm:text-4xl lg:text-5xl">
+      <section className="relative overflow-hidden bg-pine-800">
+        <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-brass-soft/20" />
+        <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-20 text-brass-soft/12 lg:block" />
+        <div className={`${PAD} relative py-16 sm:py-20`}>
+          <div className="grid gap-y-10 lg:grid-cols-12 lg:items-end lg:gap-x-14">
+            <div className="lg:col-span-7">
+              <Eyebrow gold>Before you commit</Eyebrow>
+              <h2 className="mt-5 max-w-[24ch] font-display text-[1.9rem] leading-[1.12] text-brass-soft sm:text-[2.4rem]">
                 No hidden lines. No surprises in term two.
               </h2>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-sage-soft">
+              <p className="mt-5 max-w-[54ch] text-[1.0625rem] leading-[1.75] text-sage-soft/85 [text-wrap:pretty]">
                 Ask admissions to walk you through the full year for your child&apos;s grade and
                 residential model, including what is charged separately.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Link
-                href="/admissions/enquire"
-                className="rounded-full bg-clay px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
-              >
-                Speak to admissions
-              </Link>
-              <Link
-                href="/admissions/book-a-visit"
-                className="rounded-full border border-paper/45 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-colors hover:border-brass-soft hover:text-brass-soft"
-              >
-                Book a visit
-              </Link>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4 lg:col-span-5 lg:justify-end">
+              <PrimaryCta label="Speak to admissions" href="/admissions/enquire" dark />
+              <GoldLink label="Book a visit" href="/admissions/book-a-visit" dark />
             </div>
           </div>
         </div>

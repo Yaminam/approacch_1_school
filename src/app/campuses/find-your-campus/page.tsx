@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import CampusChooser from "@/components/CampusChooser";
-import { Eyebrow, Section } from "@/components/ui";
+import { PAD, Eyebrow, PrimaryCta, GoldLink } from "@/components/sections";
+import { Ridge, Botanical } from "@/components/Ornament";
 import { findYourCampus } from "@/lib/pageCopy";
 
 export const metadata: Metadata = findYourCampus.meta;
+
+/* Rebuilt onto the heritage editorial system: display face for the headings,
+   pine/75 for the prose in place of the old mist grey, hairlines on the sand
+   rule, and the shared CTA components rather than three separately hand-rolled
+   pill styles. The quiz itself is CampusChooser, which the home page also
+   renders, so it is left as it is. */
 
 const p = findYourCampus;
 const how = p.blocks[0];
@@ -15,7 +21,7 @@ const closing = p.blocks[p.blocks.length - 1];
 
 export default function Page() {
   return (
-    <main>
+    <main className="bg-cream">
       <PageHero
         eyebrow={p.nav}
         title={p.title}
@@ -25,8 +31,8 @@ export default function Page() {
       />
 
       {/* How the guide works */}
-      <Section tone="cream">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <section className={`${PAD} py-16 sm:py-20`}>
+        <div className="grid gap-x-14 gap-y-12 lg:grid-cols-[0.85fr_1.15fr]">
           {/* Sticky on desktop so the explanation stays with the questions as
               they scroll, rather than leaving the column empty below it. The
               callout that used to sit here repeated the paragraph's own closing
@@ -34,44 +40,49 @@ export default function Page() {
           <Reveal>
             <div className="lg:sticky lg:top-32">
               <Eyebrow>{p.kicker}</Eyebrow>
-              <h2 className="mt-5 font-display text-3xl leading-[1.05] text-pine sm:text-4xl">
+              <h2 className="mt-5 max-w-[20ch] font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
                 {how.h}
               </h2>
               {how.p.map((t, i) => (
-                <p key={i} className="mt-5 max-w-[52ch] leading-relaxed text-mist">{t}</p>
+                <p
+                  key={i}
+                  className="mt-5 max-w-[52ch] text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]"
+                >
+                  {t}
+                </p>
               ))}
-              <a
-                href="#finder"
-                className="mt-8 inline-flex items-center justify-center sm:whitespace-nowrap rounded-full bg-clay px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
-              >
-                Start the campus finder
-              </a>
+              <div className="mt-8">
+                <PrimaryCta label="Start the campus finder" href="#finder" />
+              </div>
             </div>
           </Reveal>
 
           <Reveal delay={110}>
-            <div>
-              <div>
-                {questions.map((q, i) => (
-                  <div key={q.h} className="border-t hair py-5">
-                    <div className="flex gap-5">
-                      <span className="font-display text-lg text-brass">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div>
-                        <h3 className="font-bold text-pine">{q.h.replace(/^Question \d+: /, "")}</h3>
-                        {q.p.map((t, j) => (
-                          <p key={j} className="mt-1.5 text-sm leading-relaxed text-mist">{t}</p>
-                        ))}
-                      </div>
-                    </div>
+            <ol>
+              {questions.map((q, i) => (
+                <li key={q.h} className="grid gap-x-6 border-t border-sand py-6 sm:grid-cols-[3rem_1fr]">
+                  <span
+                    aria-hidden
+                    className="font-display text-[1.5rem] leading-none text-brass/50 [font-variant-numeric:tabular-nums]"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="mt-2 sm:mt-0">
+                    <h3 className="font-display text-[1.2rem] leading-[1.25] text-clay">
+                      {q.h.replace(/^Question \d+: /, "")}
+                    </h3>
+                    {q.p.map((t, j) => (
+                      <p key={j} className="mt-2.5 max-w-[58ch] text-[1rem] leading-[1.7] text-pine/75">
+                        {t}
+                      </p>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </li>
+              ))}
+            </ol>
           </Reveal>
         </div>
-      </Section>
+      </section>
 
       {/* The tool itself */}
       <div id="finder" className="scroll-mt-24">
@@ -79,34 +90,31 @@ export default function Page() {
       </div>
 
       {/* Reassurance and next step */}
-      <section className="grain-pine">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
-          <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-            <Reveal>
+      <section className="relative overflow-hidden bg-pine-800">
+        <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-brass-soft/20" />
+        <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-20 text-brass-soft/12 lg:block" />
+        <div className={`${PAD} relative py-16 sm:py-20`}>
+          <div className="grid gap-y-10 lg:grid-cols-12 lg:items-end lg:gap-x-14">
+            <Reveal className="lg:col-span-7">
               <div>
-                <Eyebrow dark>{p.closeEyebrow}</Eyebrow>
-                <h2 className="mt-6 max-w-2xl text-3xl leading-[1.05] text-paper sm:text-4xl lg:text-5xl">
+                <Eyebrow gold>{p.closeEyebrow}</Eyebrow>
+                <h2 className="mt-5 max-w-[24ch] font-display text-[1.9rem] leading-[1.12] text-brass-soft sm:text-[2.4rem]">
                   {closing.h}
                 </h2>
                 {closing.p.map((t, i) => (
-                  <p key={i} className="mt-5 max-w-2xl text-lg leading-relaxed text-sage-soft">{t}</p>
+                  <p
+                    key={i}
+                    className="mt-5 max-w-[54ch] text-[1.0625rem] leading-[1.75] text-sage-soft/85 [text-wrap:pretty]"
+                  >
+                    {t}
+                  </p>
                 ))}
               </div>
             </Reveal>
-            <Reveal delay={120}>
-              <div className="flex flex-wrap gap-3 lg:justify-end">
-                <Link
-                  href="/admissions/book-a-visit"
-                  className="rounded-full bg-clay px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
-                >
-                  Book a visit
-                </Link>
-                <Link
-                  href="/campuses/compare"
-                  className="rounded-full border border-paper/45 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-paper transition-colors hover:border-brass-soft hover:text-brass-soft"
-                >
-                  Compare campuses
-                </Link>
+            <Reveal delay={120} className="lg:col-span-5">
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-4 lg:justify-end">
+                <PrimaryCta label="Book a visit" href="/admissions/book-a-visit" dark />
+                <GoldLink label="Compare campuses" href="/campuses/compare" dark />
               </div>
             </Reveal>
           </div>

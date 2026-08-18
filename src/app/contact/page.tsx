@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import EnquiryForm from "@/components/EnquiryForm";
-import { Eyebrow, Section } from "@/components/ui";
+import { PAD, Eyebrow, GoldLink } from "@/components/sections";
 import { contact as page } from "@/lib/pageCopy";
 import { contact as details, school, whatsappHref } from "@/lib/content";
 
 export const metadata: Metadata = page.meta;
+
+/* Rebuilt onto the heritage editorial system. The page had been left on the
+   old kit: rounded-3xl shadowed panels for the two campus contacts, the mist
+   grey on every secondary line, and a 2xl sans heading where the rest of the
+   site sets the display face. */
 
 const routes = [
   { label: "Admissions", body: "Enquiries are directed by campus, grade and residential preference.", href: "/admissions/enquire", cta: "Start an enquiry" },
@@ -16,9 +20,14 @@ const routes = [
   { label: "Policies and disclosures", body: "Statutory disclosures, safeguarding, privacy and website terms.", href: "/policies-disclosures", cta: "Search documents" },
 ];
 
+const CAMPUS_CONTACTS = [
+  { ...details.dalhousie, anchor: "dalhousie", label: "The Mountain Campus" },
+  { ...details.chandigarh, anchor: "new-chandigarh", label: "The Modern Campus" },
+];
+
 export default function Page() {
   return (
-    <main>
+    <main className="bg-cream">
       <PageHero
         eyebrow={page.nav}
         title={page.title}
@@ -28,49 +37,63 @@ export default function Page() {
       />
 
       {/* Group and campus contacts */}
-      <Section tone="cream">
+      <section className={`${PAD} py-16 sm:py-20`}>
         <Eyebrow>{page.kicker}</Eyebrow>
-        <h2 className="mt-5 max-w-2xl text-3xl leading-[1.05] text-pine sm:text-4xl">
+        <h2 className="mt-5 max-w-[26ch] font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
           Dalhousie Public School, group and campus contacts.
         </h2>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {[
-            { ...details.dalhousie, anchor: "dalhousie", label: "The Mountain Campus" },
-            { ...details.chandigarh, anchor: "new-chandigarh", label: "The Modern Campus" },
-          ].map((c, i) => (
+        {/* Two campuses, identical weight. Hairline-ruled columns rather than
+            shadowed panels, so neither reads as the primary one. */}
+        <div className="mt-12 grid gap-x-14 gap-y-12 lg:grid-cols-2">
+          {CAMPUS_CONTACTS.map((c, i) => (
             <Reveal key={c.name} delay={i * 100}>
               <article
                 id={c.anchor}
-                className="h-full scroll-mt-28 rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm"
+                className={`flex h-full scroll-mt-28 flex-col border-t border-brass/30 pt-7 ${
+                  i ? "lg:-ml-7 lg:border-l lg:border-l-sand lg:pl-7" : ""
+                }`}
               >
-                <span className="eyebrow text-brass">{c.label}</span>
-                <h3 className="mt-3 text-2xl text-pine">{c.name}</h3>
-                <p className="mt-4 leading-relaxed text-mist">{c.address}</p>
-                <dl className="mt-6 space-y-3 text-sm">
-                  <div>
-                    <dt className="font-bold text-pine">Admissions and general office</dt>
-                    <dd className="mt-1">
-                      <a href={`mailto:${c.email}`} className="inline-flex min-h-11 items-center py-1.5 font-bold text-clay hover:text-pine">{c.email}</a>
-                      <a href={`tel:${c.phone.replace(/[^0-9+]/g, "")}`} className="inline-flex min-h-11 items-center py-1.5 font-bold text-clay hover:text-pine">{c.phone}</a>
-                    </dd>
-                  </div>
+                <Eyebrow>{c.label}</Eyebrow>
+                <h3 className="mt-4 font-display text-[1.5rem] leading-[1.18] text-clay sm:text-[1.75rem]">
+                  {c.name}
+                </h3>
+                <p className="mt-4 max-w-[42ch] text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
+                  {c.address}
+                </p>
+                <dl className="mt-6 flex-1">
+                  <dt className="text-[0.75rem] font-bold uppercase tracking-[0.16em] text-brass lg:text-[0.66rem]">
+                    Admissions and general office
+                  </dt>
+                  <dd className="mt-2 flex flex-col">
+                    <a
+                      href={`mailto:${c.email}`}
+                      className="inline-flex min-h-11 items-center text-[1rem] font-bold text-clay transition-colors hover:text-brass lg:min-h-0 lg:py-1"
+                    >
+                      {c.email}
+                    </a>
+                    <a
+                      href={`tel:${c.phone.replace(/[^0-9+]/g, "")}`}
+                      className="inline-flex min-h-11 items-center text-[1rem] font-bold text-clay transition-colors hover:text-brass lg:min-h-0 lg:py-1 [font-variant-numeric:tabular-nums]"
+                    >
+                      {c.phone}
+                    </a>
+                  </dd>
                 </dl>
-                <div className="mt-7 flex flex-wrap gap-3">
+                <div className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
+                  {/* A plain anchor, not PrimaryCta: this leaves the site for
+                      WhatsApp and has to keep target/rel, which the Link-based
+                      component does not carry. Styling matches PrimaryCta. */}
                   <a
                     href={whatsappHref(`Hi! I would like to contact the ${c.name}.`)}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full bg-clay px-6 py-3 text-sm font-bold uppercase tracking-[0.1em] text-paper transition-transform hover:-translate-y-0.5"
+                    className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-clay px-7 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-paper transition-transform hover:-translate-y-0.5 lg:min-h-0"
                   >
                     WhatsApp
+                    <span aria-hidden>&rarr;</span>
                   </a>
-                  <Link
-                    href="/admissions/book-a-visit"
-                    className="rounded-full border-2 border-pine px-6 py-3 text-sm font-bold uppercase tracking-[0.1em] text-pine transition-colors hover:border-clay hover:text-clay"
-                  >
-                    Book a visit
-                  </Link>
+                  <GoldLink label="Book a visit" href="/admissions/book-a-visit" />
                 </div>
               </article>
             </Reveal>
@@ -78,71 +101,96 @@ export default function Page() {
         </div>
 
         <Reveal>
-          <div className="mt-8 rounded-3xl border border-pine/12 bg-blush/60 p-8">
-            <span className="eyebrow text-clay">Group contact</span>
-            <h3 className="mt-3 text-2xl text-pine">Dalhousie Public School</h3>
-            <p className="mt-3 text-mist">
-              <a href={`mailto:${school.email}`} className="font-bold text-clay hover:text-pine">{school.email}</a>
-              {"  ·  "}
-              <a href={`tel:${school.phoneRaw}`} className="font-bold text-clay hover:text-pine">{school.phone}</a>
+          <div className="mt-12 rounded-[4px] border border-brass/30 bg-blush/45 p-7 sm:p-9">
+            <div className="flex items-center gap-3">
+              <span aria-hidden className="h-px w-7 bg-brass" />
+              <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-brass lg:text-[0.66rem]">
+                Group contact
+              </p>
+            </div>
+            <h3 className="mt-4 font-display text-[1.5rem] leading-[1.18] text-clay sm:text-[1.75rem]">
+              Dalhousie Public School
+            </h3>
+            <p className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
+              <a
+                href={`mailto:${school.email}`}
+                className="inline-flex min-h-11 items-center text-[1rem] font-bold text-clay transition-colors hover:text-brass lg:min-h-0"
+              >
+                {school.email}
+              </a>
+              <a
+                href={`tel:${school.phoneRaw}`}
+                className="inline-flex min-h-11 items-center text-[1rem] font-bold text-clay transition-colors hover:text-brass lg:min-h-0 [font-variant-numeric:tabular-nums]"
+              >
+                {school.phone}
+              </a>
             </p>
-            <p className="mt-3 text-sm text-mist">
+            <p className="mt-3 max-w-[58ch] text-[0.95rem] leading-[1.7] text-pine/70">
               Office timings and department-specific routes are confirmed by the School office.
             </p>
           </div>
         </Reveal>
-      </Section>
+      </section>
 
       {/* Route by purpose */}
-      <Section tone="paper">
-        <Eyebrow>By purpose</Eyebrow>
-        <h2 className="mt-5 max-w-2xl text-3xl leading-[1.05] text-pine sm:text-4xl">
-          Department-specific contact.
-        </h2>
-        <div className="mt-11 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {routes.map((r, i) => (
-            <Reveal key={r.label} delay={i * 70}>
-              <article className="flex h-full flex-col border-t hair pt-6">
-                <span className="font-display text-2xl text-brass">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 text-xl text-pine">{r.label}</h3>
-                <p className="mt-2.5 flex-1 leading-relaxed text-mist">{r.body}</p>
-                <Link href={r.href} className="mt-4 inline-flex min-h-11 items-center py-2 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
-                  {r.cta} &rarr;
-                </Link>
-              </article>
-            </Reveal>
-          ))}
+      <section className="bg-paper">
+        <div className={`${PAD} py-16 sm:py-20`}>
+          <Eyebrow>By purpose</Eyebrow>
+          <h2 className="mt-5 max-w-[26ch] font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
+            Department-specific contact.
+          </h2>
+          <div className="mt-11 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {routes.map((r, i) => (
+              <Reveal key={r.label} delay={i * 70}>
+                <article className="flex h-full flex-col border-t border-sand pt-6">
+                  <span
+                    aria-hidden
+                    className="font-display text-[2rem] leading-none text-brass/45 [font-variant-numeric:tabular-nums]"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-4 font-display text-[1.25rem] leading-[1.2] text-clay">{r.label}</h3>
+                  <p className="mt-3 flex-1 text-[1rem] leading-[1.7] text-pine/75">{r.body}</p>
+                  <div className="mt-5">
+                    <GoldLink label={r.cta} href={r.href} />
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* General contact form */}
-      <Section tone="cream" id="form">
-        <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
-          <div>
-            <Eyebrow>General contact form</Eyebrow>
-            <h2 className="mt-5 max-w-xl text-3xl leading-[1.05] text-pine sm:text-4xl">
-              Send us a message and we will route it.
-            </h2>
-            <div className="mt-9">
-              <EnquiryForm variant="contact" />
-            </div>
-          </div>
-          <aside className="lg:pt-2">
-            <Reveal>
-              <div className="border-t hair py-7">
-                <h3 className="text-xl text-pine">Privacy</h3>
-                <p className="mt-2.5 leading-relaxed text-mist">
-                  Your information is used to respond to the enquiry in accordance with the approved
-                  privacy notice.
-                </p>
-                <Link href="/policies-disclosures" className="mt-3 inline-flex min-h-11 items-center py-2 text-sm font-bold uppercase tracking-[0.1em] text-clay hover:text-pine">
-                  Read the privacy notice &rarr;
-                </Link>
+      <section id="form" className="bg-cream">
+        <div className={`${PAD} py-16 sm:py-20`}>
+          <div className="grid gap-x-14 gap-y-12 lg:grid-cols-[1.25fr_0.75fr]">
+            <div>
+              <Eyebrow>General contact form</Eyebrow>
+              <h2 className="mt-5 max-w-[22ch] font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
+                Send us a message and we will route it.
+              </h2>
+              <div className="mt-9">
+                <EnquiryForm variant="contact" />
               </div>
-            </Reveal>
-          </aside>
+            </div>
+            <aside className="lg:pt-2">
+              <Reveal>
+                <div className="border-t border-brass/30 pt-7">
+                  <h3 className="font-display text-[1.3rem] leading-[1.2] text-clay">Privacy</h3>
+                  <p className="mt-3 max-w-[46ch] text-[1rem] leading-[1.72] text-pine/75">
+                    Your information is used to respond to the enquiry in accordance with the approved
+                    privacy notice.
+                  </p>
+                  <div className="mt-5">
+                    <GoldLink label="Read the privacy notice" href="/policies-disclosures" />
+                  </div>
+                </div>
+              </Reveal>
+            </aside>
+          </div>
         </div>
-      </Section>
+      </section>
     </main>
   );
 }

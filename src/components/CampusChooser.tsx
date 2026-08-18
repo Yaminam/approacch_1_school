@@ -159,19 +159,19 @@ export default function CampusChooser() {
         <div className="text-center">
           <div className="flex justify-center">
             <span className="flex items-center gap-3">
-              <span className="eyebrow text-clay">Find your campus</span>
+              <span className="block text-[0.75rem] font-bold uppercase tracking-[0.22em] text-brass lg:text-[0.68rem]">Find your campus</span>
             </span>
           </div>
           <h2 className="mt-6 text-4xl leading-[1.02] text-pine sm:text-5xl">
             Which Dalhousie experience fits your child?
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-mist">
+          <p className="mx-auto mt-6 max-w-xl text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
             Answer six questions about your child and your family&apos;s priorities. This is a
             guided fit quiz, not a test. There are no right or wrong answers.
           </p>
         </div>
 
-        <div className="mt-12 rounded-3xl border border-pine/12 bg-cream p-6 sm:p-10">
+        <div className="mt-12 rounded-[4px] border border-brass/30 bg-cream p-6 sm:p-10">
           {question ? (
             <div>
               {/* progress */}
@@ -182,12 +182,12 @@ export default function CampusChooser() {
                     style={{ width: `${progress * 100}%` }}
                   />
                 </div>
-                <span className="text-sm font-bold text-mist">
+                <span className="text-[0.8rem] font-bold uppercase tracking-[0.14em] text-brass [font-variant-numeric:tabular-nums]">
                   {step + 1} / {TOTAL_QUESTIONS}
                 </span>
               </div>
 
-              <h3 key={step} className="pop text-2xl text-pine sm:text-3xl">
+              <h3 key={step} className="pop font-display text-[1.5rem] leading-[1.2] text-clay sm:text-[1.9rem]">
                 {question.q}
               </h3>
 
@@ -196,7 +196,7 @@ export default function CampusChooser() {
                   <button
                     key={o.label}
                     onClick={() => choose(o)}
-                    className="group flex items-center gap-4 rounded-2xl border border-pine/15 bg-paper p-6 text-left transition-all duration-200 hover:-translate-y-1 hover:border-clay hover:bg-brass-soft/10"
+                    className="group flex min-h-11 items-center gap-4 rounded-[3px] border border-sand bg-paper p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-brass hover:bg-blush/50"
                   >
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-sage-soft font-display text-lg font-semibold text-pine transition-colors group-hover:border-clay group-hover:bg-clay group-hover:text-paper">
                       {String.fromCharCode(65 + oi)}
@@ -209,7 +209,7 @@ export default function CampusChooser() {
               {step > 0 && (
                 <button
                   onClick={back}
-                  className="mt-7 text-sm font-bold text-mist transition-colors hover:text-clay"
+                  className="mt-7 inline-flex min-h-11 items-center text-[0.85rem] font-bold text-pine/70 transition-colors hover:text-clay lg:min-h-0"
                 >
                   &larr; Back
                 </button>
@@ -232,9 +232,9 @@ function Result({ winner, onRestart }: { winner: Campus; onRestart: () => void }
   return (
     <div className="pop">
       <div className="text-center">
-        <span className="eyebrow text-clay">Your result</span>
-        <h3 className="mt-3 text-2xl text-pine sm:text-3xl">{r.heading}</h3>
-        <p className="mx-auto mt-4 max-w-xl leading-relaxed text-mist">{r.reason}</p>
+        <span className="block text-[0.75rem] font-bold uppercase tracking-[0.22em] text-brass lg:text-[0.68rem]">Your result</span>
+        <h3 className="mt-4 font-display text-[1.5rem] leading-[1.2] text-clay sm:text-[1.9rem]">{r.heading}</h3>
+        <p className="mx-auto mt-4 max-w-xl text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">{r.reason}</p>
       </div>
 
       <div className="mx-auto mt-8 max-w-md text-left">
@@ -245,7 +245,7 @@ function Result({ winner, onRestart }: { winner: Campus; onRestart: () => void }
           {r.why.map((w) => (
             <li key={w} className="flex items-start gap-3">
               <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
-              <span className="leading-relaxed text-mist">{w}</span>
+              <span className="text-[1rem] leading-[1.7] text-pine/75">{w}</span>
             </li>
           ))}
         </ul>
@@ -255,7 +255,7 @@ function Result({ winner, onRestart }: { winner: Campus; onRestart: () => void }
         {list.map((c) => (
           <div
             key={c.id}
-            className="overflow-hidden rounded-2xl border border-pine/15 bg-paper text-left"
+            className="overflow-hidden rounded-[3px] border border-sand bg-paper text-left"
           >
             <div className="relative h-44">
               <Image
@@ -270,8 +270,8 @@ function Result({ winner, onRestart }: { winner: Campus; onRestart: () => void }
               </span>
             </div>
             <div className="p-6">
-              <h4 className="text-2xl text-pine">{c.name}</h4>
-              <p className="mt-2 text-sm leading-relaxed text-mist">{c.blurb}</p>
+              <h4 className="font-display text-[1.35rem] leading-[1.2] text-clay">{c.name}</h4>
+              <p className="mt-2.5 text-[0.95rem] leading-[1.7] text-pine/75">{c.blurb}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   href={campusHref[c.id]}
@@ -295,7 +295,7 @@ function Result({ winner, onRestart }: { winner: Campus; onRestart: () => void }
         ))}
       </div>
 
-      <p className="mt-8 text-center text-sm leading-relaxed text-mist">
+      <p className="mt-8 text-center text-[0.95rem] leading-[1.7] text-pine/70">
         Still have questions? This quiz guides you. Conversation completes it, and our admissions
         team can help interpret the result with you.
       </p>

@@ -64,8 +64,8 @@ const SUBMIT_LABEL: Record<Variant, string> = {
 };
 
 const field =
-  "w-full rounded-xl border border-pine/20 bg-paper px-4 py-3 text-pine outline-none transition-colors placeholder:text-mist/60 focus:border-clay";
-const label = "block text-sm font-bold text-pine";
+  "w-full min-h-11 rounded-[3px] border border-sand bg-paper px-4 py-3 text-[1rem] text-pine outline-none transition-colors placeholder:text-pine/40 focus:border-brass";
+const label = "block text-[0.75rem] font-bold uppercase tracking-[0.16em] text-brass lg:text-[0.68rem]";
 
 export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant }) {
   const [campus, setCampus] = useState("");
@@ -130,11 +130,11 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
   if (sent) {
     const c = CONFIRMATION[variant];
     return (
-      <div className="rounded-3xl border border-pine/12 bg-paper p-8 soft-shadow-sm sm:p-10">
-        <span className="eyebrow text-clay">Confirmation</span>
-        <h3 className="mt-4 text-2xl text-pine sm:text-3xl">{c.h}</h3>
-        <p className="mt-3 leading-relaxed text-mist">{c.p}</p>
-        <div className="mt-7 flex flex-wrap gap-4 border-t hair pt-6 text-sm">
+      <div className="rounded-[4px] border border-brass/30 bg-blush/45 p-8 sm:p-10">
+        <span className="block text-[0.75rem] font-bold uppercase tracking-[0.2em] text-brass lg:text-[0.66rem]">Confirmation</span>
+        <h3 className="mt-4 font-display text-[1.5rem] leading-[1.18] text-clay sm:text-[1.85rem]">{c.h}</h3>
+        <p className="mt-4 max-w-[58ch] text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">{c.p}</p>
+        <div className="mt-7 flex flex-wrap gap-x-8 gap-y-2 border-t border-brass/25 pt-6 text-[0.95rem]">
           <a href={`mailto:${school.email}`} className="font-bold text-clay hover:text-pine">
             {school.email}
           </a>
@@ -144,7 +144,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
         </div>
         <button
           onClick={() => setSent(false)}
-          className="mt-6 text-sm font-bold text-mist underline decoration-brass decoration-2 underline-offset-4 hover:text-clay"
+          className="mt-6 inline-flex min-h-11 items-center text-[0.9rem] font-bold text-pine/70 underline decoration-brass decoration-2 underline-offset-4 transition-colors hover:text-clay lg:min-h-0"
         >
           Send another
         </button>
@@ -153,7 +153,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
   }
 
   return (
-    <form onSubmit={submit} className="rounded-3xl border border-pine/12 bg-paper p-7 soft-shadow-sm sm:p-9">
+    <form onSubmit={submit} className="rounded-[4px] border border-brass/30 bg-blush/35 p-6 sm:p-9">
       {/* Campus */}
       <fieldset>
         <legend className={label}>
@@ -165,14 +165,14 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
               type="button"
               key={c.value}
               onClick={() => setCampus(c.value)}
-              className={`rounded-2xl border p-4 text-left transition-colors ${
+              className={`min-h-11 rounded-[3px] border p-4 text-left transition-colors ${
                 campus === c.value
                   ? "border-clay bg-blush/50"
                   : "border-pine/15 bg-cream hover:border-clay/50"
               }`}
             >
-              <span className="block font-bold text-pine">{c.label}</span>
-              <span className="mt-1 block text-xs leading-snug text-mist">{c.note}</span>
+              <span className="block font-display text-[1.05rem] leading-tight text-clay">{c.label}</span>
+              <span className="mt-1.5 block text-[0.8rem] leading-snug text-pine/70">{c.note}</span>
             </button>
           ))}
         </div>
@@ -201,7 +201,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
       {/* Student */}
       {variant !== "contact" && (
         <>
-          <p className="mt-8 eyebrow text-clay">Tell us about your child</p>
+          <p className="mt-9 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-brass lg:text-[0.66rem]">Tell us about your child</p>
           <div className="mt-3 grid gap-4 sm:grid-cols-3">
             <div>
               <label className={label} htmlFor="child">Student name</label>
@@ -233,7 +233,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
             )}
           </div>
 
-          <p className="mt-8 eyebrow text-clay">
+          <p className="mt-9 text-[0.75rem] font-bold uppercase tracking-[0.2em] text-brass lg:text-[0.66rem]">
             {variant === "visit" ? "What would you like to understand better?" : "What would you like to know more about?"}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -245,7 +245,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
                 className={`min-h-11 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors ${
                   interests.includes(i)
                     ? "border-clay bg-clay text-paper"
-                    : "border-pine/20 text-pine hover:border-clay hover:text-clay"
+                    : "border-sand text-pine hover:border-brass hover:text-clay"
                 }`}
               >
                 {i}
@@ -270,14 +270,14 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
       </div>
 
       {/* Consent */}
-      <label className="mt-7 flex cursor-pointer items-start gap-3 border-t hair pt-6">
+      <label className="mt-8 flex cursor-pointer items-start gap-3 border-t border-brass/25 pt-6">
         <input
           type="checkbox"
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
           className="mt-0.5 h-5 w-5 shrink-0 accent-[#6b0630]"
         />
-        <span className="text-sm leading-relaxed text-mist">{CONSENT[variant]}</span>
+        <span className="text-[0.95rem] leading-[1.7] text-pine/75">{CONSENT[variant]}</span>
       </label>
 
       {error && <p className="mt-4 text-sm font-semibold text-clay">{error}</p>}
@@ -289,7 +289,7 @@ export default function EnquiryForm({ variant = "enquire" }: { variant?: Variant
         {SUBMIT_LABEL[variant]}
       </button>
 
-      <p className="mt-5 text-sm text-mist">
+      <p className="mt-5 text-[0.95rem] leading-[1.7] text-pine/70">
         Need help sooner? Call{" "}
         <a href={`tel:${school.phoneRaw}`} className="font-bold text-clay hover:text-pine">{school.phone}</a>{" "}
         or write to{" "}

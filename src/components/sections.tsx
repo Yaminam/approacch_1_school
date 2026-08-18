@@ -159,7 +159,9 @@ export function PrimaryCta({
   return (
     <Link
       href={href}
-      className={`inline-flex items-center gap-2.5 rounded-full px-7 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] transition-transform hover:-translate-y-0.5 ${
+      /* min-h-11 on a phone: at 35px the filled pill sat under the touch-target
+         guideline, which GoldLink beside it already clears. */
+      className={`inline-flex min-h-11 items-center gap-2.5 rounded-full px-7 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] transition-transform hover:-translate-y-0.5 lg:min-h-0 ${
         dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
       }`}
     >
