@@ -187,59 +187,64 @@ export function Pull({
   const c = cta(label);
   const a = alt ? cta(alt) : undefined;
   return (
-    /* The in-page invitation, given its own surface.
+    /* The in-page invitation, and the one element on the page that should not
+       blend.
 
-       Earlier versions kept it borderless on the same ivory as the prose,
-       marked only by a thin rule. It read as one more paragraph: the reader
-       had no signal that the page had stopped explaining and started asking.
-       A call to action is the one element that should not blend.
+       Two earlier versions failed in the same direction. Borderless on the
+       ivory it read as one more paragraph; on a pale blush panel it was
+       separated but still quiet, another warm rectangle among warm
+       rectangles. The page runs on cream for screen after screen, so the way
+       to make the ask land is to invert it: a deep maroon panel, gold type,
+       the crest and a ridge drawn in behind it. Against that run of ivory it
+       is the first thing the eye goes to.
 
-       So it sits on a warm panel with a hairline border and a gold marker,
-       distinct from the argument above it but still made of the same
-       materials. Inside it, the ask is a filled button and the alternative is
-       a gold link, so the primary action is never in doubt. */
+       Inside a dark movement the ground is already maroon, so the same panel
+       would disappear. There it becomes a lit pane on a brass hairline
+       instead, which reads as raised rather than reversed.
+
+       In both, the ask is a filled brass button and the alternative is a gold
+       link, so the primary action is never in doubt. */
     <div
-      className={`mt-10 overflow-hidden rounded-[4px] border p-6 sm:p-7 ${
-        dark
-          ? "border-brass-soft/30 bg-paper/[0.06]"
-          : "border-brass/30 bg-blush/45"
+      className={`relative mt-10 overflow-hidden rounded-[4px] p-7 sm:p-9 ${
+        dark ? "border border-brass-soft/35 bg-paper/[0.07]" : "bg-clay"
       }`}
     >
-      <div className="flex items-center gap-3">
-        <span
-          aria-hidden
-          className={`h-px w-7 ${dark ? "bg-brass-soft/70" : "bg-brass"}`}
-        />
-        <p
-          className={`text-[0.75rem] font-bold uppercase tracking-[0.2em] lg:text-[0.65rem] ${
-            dark ? "text-brass-soft/85" : "text-brass"
-          }`}
-        >
-          Where this leads
-        </p>
-      </div>
-
-      <p
-        className={`mt-4 max-w-[46ch] font-display text-[1.15rem] italic leading-[1.35] sm:text-[1.3rem] ${
-          dark ? "text-brass-soft" : "text-clay"
+      <Botanical
+        className={`pointer-events-none absolute -right-5 -top-8 h-[150%] w-28 ${
+          dark ? "text-brass-soft/10" : "text-brass-soft/20"
         }`}
-      >
-        {line}
-      </p>
+      />
+      <Ridge
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-14 w-full ${
+          dark ? "text-brass-soft/15" : "text-brass-soft/25"
+        }`}
+      />
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <Link
-          href={c.href}
-          className={`group inline-flex max-w-full items-center gap-2 rounded-full px-6 py-3 text-[0.65rem] font-bold uppercase leading-tight tracking-[0.11em] transition-transform duration-300 hover:-translate-y-0.5 ${
-            dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
-          }`}
-        >
-          {c.label}
-          <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
-            &rarr;
-          </span>
-        </Link>
-        {a && <GoldLink label={a.label} href={a.href} dark={dark} />}
+      <div className="relative">
+        <div className="flex items-center gap-3.5">
+          <Crest className="h-7 w-6 shrink-0 text-brass-soft/80" />
+          <span aria-hidden className="h-px w-8 shrink-0 bg-brass-soft/55" />
+          <p className="text-[0.75rem] font-bold uppercase tracking-[0.22em] text-brass-soft lg:text-[0.65rem]">
+            Where this leads
+          </p>
+        </div>
+
+        <p className="mt-5 max-w-[42ch] font-display text-[1.35rem] italic leading-[1.3] text-paper sm:text-[1.55rem]">
+          {line}
+        </p>
+
+        <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
+          <Link
+            href={c.href}
+            className="group inline-flex max-w-full min-h-11 items-center gap-2 rounded-full bg-brass-soft px-6 py-3 text-[0.65rem] font-bold uppercase leading-tight tracking-[0.11em] text-pine-800 transition-transform duration-300 hover:-translate-y-0.5 lg:min-h-0"
+          >
+            {c.label}
+            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
+              &rarr;
+            </span>
+          </Link>
+          {a && <GoldLink label={a.label} href={a.href} dark />}
+        </div>
       </div>
     </div>
   );
