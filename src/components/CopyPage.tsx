@@ -8,7 +8,6 @@ import {
   OpeningStatement,
   Movement,
   DarkMovement,
-  SplitBleed,
   IconRow,
   PairMovement,
   ClosingStatement,
@@ -54,10 +53,16 @@ const isArgument = (b: Block) => b.p.length >= 2 || weight(b) >= 420;
 const stripNum = (h: string) => h.replace(/^\s*\d+\.\s*/, "");
 const clean = (b: Block): Block => ({ ...b, h: stripNum(b.h) });
 
-type Kind = Variant | "dark" | "bleed" | "pair";
+type Kind = Variant | "dark" | "pair";
 
-/* Six compositions, consuming seven blocks a cycle: the pair takes two. */
-const RHYTHM: Kind[] = ["portrait", "offset", "pair", "cinematic", "dark", "bleed"];
+/* Five compositions, consuming six blocks a cycle: the pair takes two.
+
+   The bleeding split is gone. Running a photograph off the page edge at half
+   the viewport made it the loudest thing on the page every time it appeared,
+   and no ceiling fixed that: at 950px wide it dominates whatever its height.
+   Every visual movement now sits inside the container with a bounded frame,
+   which is what makes the run read as one consistent rhythm. */
+const RHYTHM: Kind[] = ["portrait", "offset", "pair", "cinematic", "dark"];
 
 type Part =
   | { t: "move"; kind: Kind; block: Block; n: number }
@@ -101,7 +106,7 @@ function planParts(middle: Block[]): Part[] {
   const PAIRABLE = 460; // two of these sit comfortably side by side
   const BAND = 460; // below this a dark band is mostly empty space
   const BAND_MAX = 900; // above this it becomes a wall of reversed-out text
-  const IMAGES: Kind[] = ["portrait", "offset", "cinematic", "bleed"];
+  const IMAGES: Kind[] = ["portrait", "offset", "cinematic"];
 
   const out: Part[] = [];
   let step = 0;
@@ -237,8 +242,6 @@ export default function CopyPage({ page }: { page: PageCopy }) {
     if (at !== undefined && !pullFor.has(at)) pullFor.set(at, pl);
   });
 
-  let bleedFlip = false;
-
   return (
     <main className="bg-cream">
       <PageHero
@@ -276,27 +279,13 @@ export default function CopyPage({ page }: { page: PageCopy }) {
               <DarkMovement key={i} item={part.block} image={img} eyebrow={page.kicker} pull={pull} />
             );
           }
-          if (part.kind === "bleed" && img) {
-            const flip = bleedFlip;
-            bleedFlip = !bleedFlip;
-            return (
-              <SplitBleed
-                key={i}
-                item={part.block}
-                image={img}
-                n={selfNumbered ? undefined : part.n}
-                flip={flip}
-                pull={pull}
-              />
-            );
-          }
           return (
             <Movement
               key={i}
               item={part.block}
               image={img}
               n={selfNumbered ? undefined : part.n}
-              variant={(part.kind === "bleed" ? "offset" : part.kind) as Variant}
+              variant={part.kind as Variant}
               pull={pull}
             />
           );
