@@ -199,12 +199,21 @@ export default function Page() {
               each answer carries its own campus name instead. */}
           {/* 4.25rem is the site header's measured height. Opaque, not a tint:
               at 95% the copy scrolling underneath ghosted through it. */}
-          <div className="sticky top-[4.25rem] z-30 hidden border-b border-brass/30 bg-cream py-4 lg:block">
+          <div className="sticky top-[4.25rem] z-30 hidden border-b border-brass/30 bg-cream py-3.5 lg:block">
             <div className="grid grid-cols-2 gap-x-14">
               {CAMPUSES.map((c, i) => (
-                <div key={c.key} className={i ? "-ml-7 border-l border-sand pl-7" : ""}>
-                  <span className="font-display text-[1.1rem] text-clay">{c.name}</span>
-                  <span className="ml-3 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brass">
+                <div
+                  key={c.key}
+                  className={`flex items-center gap-3.5 ${i ? "-ml-7 border-l border-sand pl-7" : ""}`}
+                >
+                  {/* The crop is what makes the pinned bar readable at a glance:
+                      by the time you are four screens into the comparison the
+                      photographs at the top are long gone. */}
+                  <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full">
+                    <Image src={c.image} alt="" fill sizes="36px" className="object-cover" />
+                  </span>
+                  <span className="font-display text-[1.05rem] leading-tight text-clay">{c.name}</span>
+                  <span className="text-[0.6rem] font-bold uppercase tracking-[0.18em] text-brass">
                     {c.label}
                   </span>
                 </div>
@@ -215,7 +224,13 @@ export default function Page() {
           {CLUSTERS.map((cluster, ci) => (
             <div key={cluster.title} className={ci > 0 ? "mt-16" : "mt-12"}>
               <Reveal>
-                <div className="flex items-center gap-6">
+                <div className="flex items-baseline gap-5">
+                  <span
+                    aria-hidden
+                    className="font-display text-[1.4rem] leading-none text-brass/45 [font-variant-numeric:tabular-nums]"
+                  >
+                    {String(ci + 1).padStart(2, "0")}
+                  </span>
                   <h2 className="font-display text-[1.5rem] leading-[1.2] text-clay sm:text-[1.8rem]">
                     {cluster.title}
                   </h2>
@@ -224,35 +239,77 @@ export default function Page() {
               </Reveal>
 
               <div className="mt-6">
-                {cluster.rows.map((r) => (
-                  <Reveal key={r.dimension}>
-                    <div className="border-t border-sand py-8 sm:py-9">
-                      <p className="text-[0.75rem] font-bold uppercase tracking-[0.18em] text-brass lg:text-[0.66rem]">
-                        {r.dimension}
-                      </p>
-                      {/* One grid per row, so the two answers always start on
-                          the same line however long either of them runs. */}
-                      <div className="mt-5 grid gap-x-14 gap-y-7 lg:grid-cols-2">
-                        {CAMPUSES.map((c, i) => (
-                          <div
-                            key={c.key}
-                            /* The rule sits in the middle of the gutter; the
-                               negative margin cancels the padding so neither
-                               column's text shifts off its own edge. */
-                            className={i ? "lg:-ml-7 lg:border-l lg:border-sand lg:pl-7" : ""}
-                          >
-                            <p className="mb-2 text-[0.75rem] font-bold uppercase tracking-[0.16em] text-clay/60 lg:hidden">
-                              {c.name}
-                            </p>
-                            <p className="text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
-                              {r[c.key]}
+                {cluster.rows.map((r, ri) => {
+                  /* Both columns carry the same words. Printing them twice is
+                     the worst possible way to say "these are the same" — and
+                     this row sits under a heading that reads "What does not
+                     change". Said once, across the full width, it becomes the
+                     point of the section rather than a duplication. */
+                  if (r.dal === r.chd) {
+                    return (
+                      <Reveal key={r.dimension}>
+                        <div className="mt-6 rounded-[4px] border border-brass/30 bg-blush/45 px-6 py-8 sm:px-9 sm:py-10">
+                          <div className="flex items-center gap-3">
+                            <span aria-hidden className="h-px w-7 bg-brass" />
+                            <p className="text-[0.75rem] font-bold uppercase tracking-[0.2em] text-brass lg:text-[0.66rem]">
+                              Both campuses &middot; {r.dimension}
                             </p>
                           </div>
-                        ))}
+                          <p className="mt-5 max-w-[54ch] font-display text-[1.3rem] italic leading-[1.4] text-clay sm:text-[1.5rem]">
+                            {r.dal}
+                          </p>
+                        </div>
+                      </Reveal>
+                    );
+                  }
+
+                  /* A quiet alternating ground. With nothing but hairlines the
+                     run read as one undifferentiated block of text; the band
+                     gives the eye a row to hold on to without adding a border
+                     to every cell. */
+                  const tint = ri % 2 === 1;
+                  return (
+                    <Reveal key={r.dimension}>
+                      <div
+                        className={`rounded-[4px] px-5 py-8 sm:px-7 sm:py-9 ${
+                          tint ? "bg-blush/35" : "border-t border-sand"
+                        }`}
+                      >
+                        <div className="flex items-baseline gap-4">
+                          <span
+                            aria-hidden
+                            className="font-display text-[1.15rem] leading-none text-brass/50 [font-variant-numeric:tabular-nums]"
+                          >
+                            {String(ri + 1).padStart(2, "0")}
+                          </span>
+                          <h3 className="font-display text-[1.15rem] leading-[1.25] text-clay sm:text-[1.3rem]">
+                            {r.dimension}
+                          </h3>
+                        </div>
+                        {/* One grid per row, so the two answers always start on
+                            the same line however long either of them runs. */}
+                        <div className="mt-5 grid gap-x-14 gap-y-7 lg:grid-cols-2">
+                          {CAMPUSES.map((c, i) => (
+                            <div
+                              key={c.key}
+                              /* The rule sits in the middle of the gutter; the
+                                 negative margin cancels the padding so neither
+                                 column's text shifts off its own edge. */
+                              className={i ? "lg:-ml-7 lg:border-l lg:border-sand lg:pl-7" : ""}
+                            >
+                              <p className="mb-2 text-[0.75rem] font-bold uppercase tracking-[0.16em] text-clay/60 lg:hidden">
+                                {c.name}
+                              </p>
+                              <p className="text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
+                                {r[c.key]}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </Reveal>
-                ))}
+                    </Reveal>
+                  );
+                })}
               </div>
             </div>
           ))}
