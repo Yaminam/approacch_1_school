@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
+import Link from "next/link";
 import EnquiryForm from "@/components/EnquiryForm";
+import LineIcon, { type IconName } from "@/components/LineIcon";
 import { PAD, Eyebrow, GoldLink } from "@/components/sections";
 import { contact as page } from "@/lib/pageCopy";
 import { contact as details, school, whatsappHref } from "@/lib/content";
@@ -13,11 +15,14 @@ export const metadata: Metadata = page.meta;
    grey on every secondary line, and a 2xl sans heading where the rest of the
    site sets the display face. */
 
-const routes = [
-  { label: "Admissions", body: "Enquiries are directed by campus, grade and residential preference.", href: "/admissions/enquire", cta: "Start an enquiry" },
-  { label: "Book a visit", body: "Choose a campus and a preferred date, and we will confirm the schedule.", href: "/admissions/book-a-visit", cta: "Book a visit" },
-  { label: "Fees", body: "Approved fees by campus, grade and residential model.", href: "/admissions/fees", cta: "View fees" },
-  { label: "Policies and disclosures", body: "Statutory disclosures, safeguarding, privacy and website terms.", href: "/policies-disclosures", cta: "Search documents" },
+/* Marks are assigned here rather than derived from the label. The keyword
+   matcher reads "admissions", "visit" and "fees" as the same enquiry family
+   and would have drawn the same calendar three times out of four. */
+const routes: { label: string; body: string; href: string; cta: string; icon: IconName }[] = [
+  { label: "Admissions", body: "Enquiries are directed by campus, grade and residential preference.", href: "/admissions/enquire", cta: "Start an enquiry", icon: "people" },
+  { label: "Book a visit", body: "Choose a campus and a preferred date, and we will confirm the schedule.", href: "/admissions/book-a-visit", cta: "Book a visit", icon: "calendar" },
+  { label: "Fees", body: "Approved fees by campus, grade and residential model.", href: "/admissions/fees", cta: "View fees", icon: "chart" },
+  { label: "Policies and disclosures", body: "Statutory disclosures, safeguarding, privacy and website terms.", href: "/policies-disclosures", cta: "Search documents", icon: "document" },
 ];
 
 const CAMPUS_CONTACTS = [
@@ -141,20 +146,33 @@ export default function Page() {
           </h2>
           <div className="mt-11 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {routes.map((r, i) => (
-              <Reveal key={r.label} delay={i * 70}>
-                <article className="flex h-full flex-col border-t border-sand pt-6">
-                  <span
-                    aria-hidden
-                    className="font-display text-[2rem] leading-none text-brass/45 [font-variant-numeric:tabular-nums]"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-4 font-display text-[1.25rem] leading-[1.2] text-clay">{r.label}</h3>
-                  <p className="mt-3 flex-1 text-[1rem] leading-[1.7] text-pine/75">{r.body}</p>
-                  <div className="mt-5">
-                    <GoldLink label={r.cta} href={r.href} />
+              <Reveal key={r.label} delay={i * 70} className="h-full">
+                {/* The whole column is the link, not just the line at the
+                    bottom of it, and the rule over it goes gold on approach. */}
+                <Link
+                  href={r.href}
+                  className="group flex h-full flex-col border-t border-sand pt-6 transition-colors duration-300 hover:border-brass"
+                >
+                  <div className="flex items-center gap-4">
+                    <LineIcon name={r.icon} className="shrink-0 text-brass" size={40} />
+                    <span
+                      aria-hidden
+                      className="font-display text-[1.7rem] leading-none text-brass/40 [font-variant-numeric:tabular-nums]"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                </article>
+                  <h3 className="mt-5 font-display text-[1.25rem] leading-[1.2] text-clay transition-colors duration-300 group-hover:text-brass">
+                    {r.label}
+                  </h3>
+                  <p className="mt-3 flex-1 text-[1rem] leading-[1.7] text-pine/75">{r.body}</p>
+                  <span className="mt-6 inline-flex min-h-11 items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-clay lg:min-h-0 lg:text-[0.68rem]">
+                    <span className="border-b border-current pb-1">{r.cta}</span>
+                    <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
+                      &rarr;
+                    </span>
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -174,9 +192,16 @@ export default function Page() {
                 <EnquiryForm variant="contact" />
               </div>
             </div>
+            {/* Sticky on desktop. The form runs past a thousand pixels and the
+                aside is four lines, so ranged at the top it left most of the
+                right-hand column empty for the whole scroll. Travelling with
+                the form, it stays beside whatever field is being filled. */}
             <aside className="lg:pt-2">
-              <Reveal>
-                <div className="border-t border-brass/30 pt-7">
+              {/* The sticky element must be a direct child of the stretched
+                  grid cell. Wrapped in Reveal it sat in a box only as tall as
+                  its own four lines and had nowhere to travel, so it scrolled
+                  away like static content. */}
+              <div className="border-t border-brass/30 pt-7 lg:sticky lg:top-28">
                   <h3 className="font-display text-[1.3rem] leading-[1.2] text-clay">Privacy</h3>
                   <p className="mt-3 max-w-[46ch] text-[1rem] leading-[1.72] text-pine/75">
                     Your information is used to respond to the enquiry in accordance with the approved
@@ -185,8 +210,7 @@ export default function Page() {
                   <div className="mt-5">
                     <GoldLink label="Read the privacy notice" href="/policies-disclosures" />
                   </div>
-                </div>
-              </Reveal>
+              </div>
             </aside>
           </div>
         </div>
