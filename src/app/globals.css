@@ -67,9 +67,14 @@
     line-height: 1.04;
     text-wrap: balance;
   }
+  /* A wash, not a fill. Solid brass-soft behind pine-800 turned any selected
+     heading into a gold slab that read as a rendering fault rather than a
+     selection. Keeping the text's own colour and tinting behind it also means
+     one rule works on cream and on the dark maroon bands, where forcing a
+     near-black text colour left the selection unreadable. */
   ::selection {
-    background: var(--color-brass-soft);
-    color: var(--color-pine-800);
+    background: color-mix(in srgb, var(--color-brass) 32%, transparent);
+    color: inherit;
   }
 }
 
