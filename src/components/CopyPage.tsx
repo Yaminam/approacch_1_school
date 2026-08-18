@@ -267,8 +267,15 @@ export default function CopyPage({ page }: { page: PageCopy }) {
   const secondary = cta(page.secondary);
 
   const blocks: Block[] = page.blocks.map(clean);
-  const lead = blocks[0];
-  const rest = blocks.slice(1);
+  /* The first block is normally the page's opening statement, and gets the
+     centred treatment at 2.9rem. But when it numbers itself it is not an
+     opening, it is the first item of a sequence: the admissions process
+     rendered "Step 1. Complete registration" centred and grand, then Step 2
+     onwards as ordinary movements, so the first step of the process did not
+     look like a step at all. A self-numbered opener stays in the run. */
+  const opens = blocks.length > 0 && !SELF_NUMBERED.test(blocks[0].h);
+  const lead = opens ? blocks[0] : undefined;
+  const rest = opens ? blocks.slice(1) : blocks;
   const close = rest.length > 1 ? rest[rest.length - 1] : undefined;
   const middle = close ? rest.slice(0, -1) : rest;
 
