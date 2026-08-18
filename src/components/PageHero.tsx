@@ -36,8 +36,8 @@ export default function PageHero({
       {/* Botanical drawing down the left margin, well outside the text column. */}
       <Botanical className="pointer-events-none absolute -left-8 top-20 hidden h-[24rem] w-24 text-brass/15 xl:block" />
 
-      <div className="relative mx-auto grid max-w-[78rem] items-center gap-y-9 px-6 pb-14 pt-8 sm:px-10 sm:pb-16 lg:grid-cols-12 lg:gap-x-10 lg:pb-[4.5rem] lg:pt-10">
-        <div className="lg:col-span-5">
+      <div className="relative z-10 mx-auto grid max-w-[78rem] items-center gap-y-9 px-6 pb-14 pt-8 sm:px-10 sm:pb-16 lg:grid-cols-12 lg:gap-x-10 lg:pb-[4.5rem] lg:pt-10">
+        <div className="lg:col-span-6">
           <nav className="flex items-center gap-2 text-[0.8rem] font-semibold text-mist">
             <Link href="/" className="inline-flex min-h-11 items-center transition-colors hover:text-clay lg:min-h-0">Home</Link>
             <span aria-hidden className="text-sand">/</span>
@@ -67,11 +67,11 @@ export default function PageHero({
           )}
 
           {(primary || secondary) && (
-            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
               {primary && (
                 <Link
                   href={primary.href}
-                  className="inline-flex items-center gap-2.5 rounded-full bg-clay px-7 py-3 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-paper transition-transform hover:-translate-y-0.5"
+                  className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-clay px-6 py-3 text-[0.68rem] font-bold uppercase tracking-[0.13em] text-paper transition-transform hover:-translate-y-0.5 lg:min-h-0"
                 >
                   {primary.label}
                   <span aria-hidden>&rarr;</span>
@@ -80,7 +80,7 @@ export default function PageHero({
               {secondary && (
                 <Link
                   href={secondary.href}
-                  className="group inline-flex min-h-11 lg:min-h-0 items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-clay transition-colors hover:text-brass lg:text-[0.68rem]"
+                  className="group inline-flex min-h-11 lg:min-h-0 items-center gap-2.5 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-clay transition-colors hover:text-brass lg:text-[0.68rem]"
                 >
                   <span className="border-b border-current pb-1">{secondary.label}</span>
                   <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
@@ -104,9 +104,9 @@ export default function PageHero({
 
       {/* Desktop: the photograph runs off the right edge and dissolves into the
           ivory. Two stops, not one, or the seam shows as a hard vertical line. */}
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[56%] lg:block">
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block">
         <div className="relative h-full w-full">
-          <Image src={image} alt="" fill priority sizes="56vw" className="object-cover" />
+          <Image src={image} alt="" fill priority sizes="52vw" className="object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/25 to-transparent" />
           <div className="absolute inset-y-0 left-0 w-56 bg-gradient-to-r from-cream via-cream/70 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-cream/80 to-transparent" />
