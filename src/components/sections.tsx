@@ -116,6 +116,54 @@ export function Paras({
   );
 }
 
+/* "What this part of the day builds: ..." summarises the whole movement; it is
+   not another paragraph of it. Inline in the narrowest text column (454px on a
+   five-of-twelve span) the longest of them — 63 characters — wrapped onto a
+   second line and read as a ragged afterthought, and no type size fixed that
+   without dropping below 12px. Lifted out to the full width of the section it
+   sits on one line and closes the movement like a caption rule. */
+export function splitTags(p: string[]) {
+  const prose: string[] = [];
+  const tags: { label: string; body: string }[] = [];
+  for (const t of p) {
+    const g = tagOf(t);
+    if (g) tags.push(g);
+    else prose.push(t);
+  }
+  return { prose, tags };
+}
+
+export function TagStrip({
+  tags,
+  dark = false,
+}: {
+  tags: { label: string; body: string }[];
+  dark?: boolean;
+}) {
+  if (!tags.length) return null;
+  return (
+    <div className={`mt-10 border-t pt-5 ${dark ? "border-brass-soft/25" : "border-brass/30"}`}>
+      {tags.map((g, i) => (
+        <p
+          key={i}
+          className={`${i ? "mt-3" : ""} flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[1.0625rem] leading-[1.6] ${
+            dark ? "text-sage-soft/85" : "text-pine/75"
+          }`}
+        >
+          <span
+            className={`shrink-0 text-[0.75rem] font-bold uppercase tracking-[0.18em] lg:text-[0.62rem] ${
+              dark ? "text-brass-soft" : "text-brass"
+            }`}
+          >
+            {g.label}
+          </span>
+          <span>{g.body}</span>
+        </p>
+      ))}
+    </div>
+  );
+}
+
 export function GoldLink({
   label,
   href,
@@ -178,26 +226,59 @@ export function Pull({
   const c = cta(label);
   const a = alt ? cta(alt) : undefined;
   return (
-    <div className={`mt-9 border-t pt-6 ${dark ? "border-brass-soft/25" : "border-sand"}`}>
+    /* The in-page invitation, given its own surface.
+
+       Earlier versions kept it borderless on the same ivory as the prose,
+       marked only by a thin rule. It read as one more paragraph: the reader
+       had no signal that the page had stopped explaining and started asking.
+       A call to action is the one element that should not blend.
+
+       So it sits on a warm panel with a hairline border and a gold marker,
+       distinct from the argument above it but still made of the same
+       materials. Inside it, the ask is a filled button and the alternative is
+       a gold link, so the primary action is never in doubt. */
+    <div
+      className={`mt-10 overflow-hidden rounded-[4px] border p-6 sm:p-7 ${
+        dark
+          ? "border-brass-soft/30 bg-paper/[0.06]"
+          : "border-brass/30 bg-blush/45"
+      }`}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          aria-hidden
+          className={`h-px w-7 ${dark ? "bg-brass-soft/70" : "bg-brass"}`}
+        />
+        <p
+          className={`text-[0.75rem] font-bold uppercase tracking-[0.2em] lg:text-[0.65rem] ${
+            dark ? "text-brass-soft/85" : "text-brass"
+          }`}
+        >
+          Where this leads
+        </p>
+      </div>
+
       <p
-        className={`max-w-[46ch] font-display text-[1.2rem] italic leading-snug ${
+        className={`mt-4 max-w-[46ch] font-display text-[1.15rem] italic leading-[1.35] sm:text-[1.3rem] ${
           dark ? "text-brass-soft" : "text-clay"
         }`}
       >
         {line}
       </p>
-      <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3">
-        <GoldLink label={c.label} href={c.href} dark={dark} />
-        {a && (
-          <Link
-            href={a.href}
-            className={`inline-flex min-h-11 lg:min-h-0 items-center text-[0.72rem] font-bold uppercase tracking-[0.18em] transition-colors lg:text-[0.68rem] ${
-              dark ? "text-sage-soft/70 hover:text-brass-soft" : "text-mist hover:text-clay"
-            }`}
-          >
-            {a.label}
-          </Link>
-        )}
+
+      <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+        <Link
+          href={c.href}
+          className={`group inline-flex max-w-full items-center gap-2 rounded-full px-6 py-3 text-[0.65rem] font-bold uppercase leading-tight tracking-[0.11em] transition-transform duration-300 hover:-translate-y-0.5 ${
+            dark ? "bg-brass-soft text-pine-800" : "bg-clay text-paper"
+          }`}
+        >
+          {c.label}
+          <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
+            &rarr;
+          </span>
+        </Link>
+        {a && <GoldLink label={a.label} href={a.href} dark={dark} />}
       </div>
     </div>
   );
@@ -293,6 +374,7 @@ export function Movement({
   variant: Variant;
   pull?: PullData;
 }) {
+  const { prose, tags } = splitTags(item.p);
   const heading = (
     <h2 className="font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
       {item.h}
@@ -316,12 +398,13 @@ export function Movement({
               {n !== undefined && <Marker n={n} />}
               <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
-                <Paras paras={item.p} />
+                <Paras paras={prose} />
               </div>
               {pull && <Pull {...pull} />}
             </div>
           </Reveal>
         </div>
+        <TagStrip tags={tags} />
       </section>
     );
   }
@@ -350,12 +433,13 @@ export function Movement({
               {n !== undefined && <Marker n={n} />}
               <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
-                <Paras paras={item.p} measure="max-w-[46ch]" />
+                <Paras paras={prose} measure="max-w-[46ch]" />
               </div>
               {pull && <Pull {...pull} />}
             </div>
           </Reveal>
         </div>
+        <TagStrip tags={tags} />
       </section>
     );
   }
@@ -371,7 +455,7 @@ export function Movement({
               {n !== undefined && <Marker n={n} />}
               <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
-                <Paras paras={item.p} />
+                <Paras paras={prose} />
               </div>
               {pull && <Pull {...pull} />}
             </div>
@@ -384,6 +468,7 @@ export function Movement({
             </div>
           </Reveal>
         </div>
+        <TagStrip tags={tags} />
       </section>
     );
   }
@@ -401,10 +486,11 @@ export function Movement({
               <GoldRule className="mt-6 text-brass" width={64} />
             </div>
             <div className="lg:col-span-7">
-              <Paras paras={item.p} />
+              <Paras paras={prose} />
               {pull && <Pull {...pull} />}
             </div>
           </div>
+          <TagStrip tags={tags} />
         </Reveal>
       </div>
     </section>
@@ -467,6 +553,7 @@ export function DarkMovement({
   eyebrow?: string;
   pull?: PullData;
 }) {
+  const { prose, tags } = splitTags(item.p);
   /* The dark movement is a split, not a centred column.
 
      Two earlier versions both failed on a wide screen. Dividing the
@@ -485,9 +572,16 @@ export function DarkMovement({
         <div className="grid items-stretch gap-y-9 lg:grid-cols-12 lg:gap-x-14">
           {image && (
             <Reveal className="h-full lg:col-span-6">
-              <div className="relative h-full max-h-[24rem] min-h-[15rem] w-full self-center overflow-hidden rounded-[3px] sm:min-h-[18rem]">
-                <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 46vw" className="object-cover" />
-                <div className="absolute inset-0 bg-pine-800/20" />
+              {/* On cream a short photograph beside long prose reads as air. On
+                  maroon it reads as a hole: 556x384 against a 698px column left
+                  300px of empty band. The dark picture therefore runs to the
+                  height of the argument, and only centres once it hits a
+                  ceiling well above the usual section. */}
+              <div className={HOLD}>
+                <div className="relative h-full max-h-[36rem] min-h-[15rem] w-full overflow-hidden rounded-[3px] sm:min-h-[20rem]">
+                  <Image src={image} alt="" fill sizes="(max-width:1024px) 100vw, 46vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-pine-800/20" />
+                </div>
               </div>
             </Reveal>
           )}
@@ -503,7 +597,7 @@ export function DarkMovement({
                 {item.h}
               </h2>
               <div className="mt-6 space-y-5">
-                {item.p.map((t, i) => (
+                {prose.map((t, i) => (
                   <Paras key={i} paras={[t]} dark size="text-[1.0625rem]" measure="max-w-[54ch]" gap="" />
                 ))}
               </div>
@@ -511,6 +605,7 @@ export function DarkMovement({
             </div>
           </Reveal>
         </div>
+        <TagStrip tags={tags} dark />
       </div>
     </section>
   );
