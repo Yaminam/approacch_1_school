@@ -624,23 +624,36 @@ export function IconRow({ items }: { items: Item[] }) {
 
   /* Column count follows the copy as well as the count. Five columns is right
      for a two-line item; at 240 characters it produced ten-line ribbons with
-     badly ragged bottoms, so anything wordy drops to three. */
+     badly ragged bottoms, so anything wordy drops to three.
+
+     A grid only reads as a set when its last row is full. Five wordy items in
+     three columns left an empty cell in the bottom-right, so the Defence
+     Pathway's five dimensions ended on a visible hole — and because one of
+     them ran 90 characters longer than its neighbours, the two rows were
+     different heights as well. Where no column count divides the run, the set
+     is laid out as full-width rows instead: mark and heading held left, the
+     argument beside them. That takes any count without an orphan. */
   const avg = items.reduce((a, it) => a + it.p.reduce((x, t) => x + t.length, 0), 0) / Math.max(n, 1);
   const wide = avg > 160;
-  const cols =
-    wide
-      ? n % 3 === 0 || n === 5
-        ? "lg:grid-cols-3"
-        : n % 4 === 0
-          ? "lg:grid-cols-4"
-          : "lg:grid-cols-2"
-      : n % 3 === 0
-        ? "lg:grid-cols-3"
-        : n % 4 === 0
-          ? "lg:grid-cols-4"
-          : n === 5
-            ? "lg:grid-cols-5"
-            : "lg:grid-cols-2";
+  const fits = (c: number) => n % c === 0;
+  const colCount = wide
+    ? fits(3)
+      ? 3
+      : fits(2)
+        ? 2
+        : 0
+    : n === 5
+      ? 5
+      : fits(4)
+        ? 4
+        : fits(3)
+          ? 3
+          : fits(2)
+            ? 2
+            : 0;
+  const cols = { 5: "lg:grid-cols-5", 4: "lg:grid-cols-4", 3: "lg:grid-cols-3", 2: "lg:grid-cols-2" }[
+    colCount as 2 | 3 | 4 | 5
+  ];
 
   /* No two items in one row carry the same glyph: a repeat reads as an error
      rather than a category. */
@@ -655,6 +668,31 @@ export function IconRow({ items }: { items: Item[] }) {
     used.add(g);
     return g;
   });
+
+  /* No column count divides the run: full-width rows, no orphan cell. */
+  if (!cols) {
+    return (
+      <section className={`${PAD} py-12 sm:py-14`}>
+        <ol>
+          {items.map((it, i) => (
+            <Reveal key={it.h} delay={Math.min(i, 6) * 60}>
+              <li className="grid gap-x-14 gap-y-4 border-t border-sand py-8 sm:py-9 lg:grid-cols-12">
+                <div className="flex items-center gap-5 lg:col-span-4">
+                  <LineIcon name={glyphs[i]} className="text-brass" size={44} />
+                  <h3 className="font-display text-[1.3rem] leading-[1.18] text-clay sm:text-[1.5rem]">
+                    {it.h}
+                  </h3>
+                </div>
+                <div className="lg:col-span-8">
+                  <Paras paras={it.p} size="text-[1rem]" gap="mt-3" measure="max-w-[64ch]" />
+                </div>
+              </li>
+            </Reveal>
+          ))}
+        </ol>
+      </section>
+    );
+  }
 
   return (
     <section className={`${PAD} py-12 sm:py-14`}>

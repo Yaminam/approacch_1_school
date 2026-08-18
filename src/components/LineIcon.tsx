@@ -130,12 +130,12 @@ const KEYS: [RegExp, IconName][] = [
   /* Named dimensions first. "Mind" and "Body" match none of the general
      patterns below, so both fell through to the leaf default and the Defence
      Pathway showed the same glyph twice in one row. */
-  [/^\s*mind/i, "compass"],
-  [/^\s*body/i, "activity"],
-  [/^\s*voice/i, "voice"],
-  [/^\s*bearing/i, "shield"],
-  [/^\s*service/i, "people"],
-  [/^\s*character/i, "star"],
+  [/^\s*mind\b/i, "compass"],
+  [/^\s*body\b/i, "activity"],
+  [/^\s*voice\b/i, "voice"],
+  [/^\s*bearing\b/i, "shield"],
+  [/^\s*service\b/i, "people"],
+  [/^\s*character\b/i, "star"],
   [/defence|service|discipline|bearing|safeguard|safety|duty/i, "shield"],
   [/sport|fitness|physical|movement|athlet|outdoor|adventure/i, "activity"],
   [/confidence|voice|speak|stage|debate|perform|persuade|communicat/i, "voice"],
