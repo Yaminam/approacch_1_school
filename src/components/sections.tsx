@@ -829,14 +829,19 @@ export function IconRow({ items }: { items: Item[] }) {
   const avg = items.reduce((a, it) => a + it.p.reduce((x, t) => x + t.length, 0), 0) / Math.max(n, 1);
   const wide = avg > 160;
   const fits = (c: number) => n % c === 0;
-  const colCount = wide
-    ? fits(3)
-      ? 3
-      : fits(2)
-        ? 2
-        : 0
-    : n === 5
-      ? 5
+  /* Five across is one complete row, so the orphan rule never applied to it.
+     Wordy fives were being dropped to three columns and then to stacked rows,
+     which read as a vertical list of five things rather than one set laid out
+     side by side. A five-item set now stays horizontal whatever its length;
+     the columns get a tighter gutter and a step-smaller measure to carry it. */
+  const colCount = n === 5
+    ? 5
+    : wide
+      ? fits(3)
+        ? 3
+        : fits(2)
+          ? 2
+          : 0
       : fits(4)
         ? 4
         : fits(3)
@@ -893,23 +898,55 @@ export function IconRow({ items }: { items: Item[] }) {
 
   return (
     <section className={`${PAD} py-12 sm:py-14`}>
-      <div className={`grid gap-x-12 gap-y-10 sm:grid-cols-2 ${cols}`}>
-        {items.map((it, i) => (
-          <Reveal key={it.h} delay={i * 70}>
-            <div className="h-full border-t border-sand pt-7">
-              <LineIcon name={glyphs[i]} className="text-brass" size={44} />
-              <h3 className="mt-5 font-display text-[1.2rem] leading-[1.2] text-clay">{it.h}</h3>
-              <div className="mt-3">
-                <Paras
-                  paras={it.p}
-                  size="text-[0.95rem]"
-                  gap="mt-3"
-                  measure={wide ? "max-w-[46ch]" : "max-w-[38ch]"}
+      {/* Five across is set as one ruled table rather than five separate
+          tiles: a single rule over the whole row, and hairlines down the
+          gutters. Five short stub rules read as five loose objects, and the
+          columns cannot be made the same length when one item runs 90
+          characters longer than another — dividers running the full height
+          are what make that unevenness stop mattering. */}
+      {/* Ruled top AND bottom. The grid already stretches every cell to the
+          tallest, so closing the row turns five columns of unequal copy into
+          five cells of equal extent: the eye reads the rules, not where each
+          paragraph happens to stop. */}
+      <div className={colCount === 5 ? "border-y border-brass/30 py-9" : ""}>
+        <div
+          className={`grid gap-y-10 sm:grid-cols-2 ${
+            colCount === 5 ? "gap-x-8" : "gap-x-12"
+          } ${cols}`}
+        >
+          {items.map((it, i) => (
+            <Reveal key={it.h} delay={i * 70}>
+              <div
+                className={
+                  colCount === 5
+                    ? `h-full ${i ? "lg:-ml-4 lg:border-l lg:border-sand lg:pl-4" : ""}`
+                    : "h-full border-t border-sand pt-7"
+                }
+              >
+                <LineIcon
+                  name={glyphs[i]}
+                  className="text-brass"
+                  size={colCount === 5 ? 40 : 44}
                 />
+                <h3
+                  className={`mt-5 font-display leading-[1.2] text-clay ${
+                    colCount === 5 ? "text-[1.15rem]" : "text-[1.2rem]"
+                  }`}
+                >
+                  {it.h}
+                </h3>
+                <div className="mt-3">
+                  <Paras
+                    paras={it.p}
+                    size={colCount === 5 ? "text-[0.92rem]" : "text-[0.95rem]"}
+                    gap="mt-3"
+                    measure={colCount === 5 ? "max-w-none" : wide ? "max-w-[46ch]" : "max-w-[38ch]"}
+                  />
+                </div>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
