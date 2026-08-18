@@ -223,10 +223,15 @@ function Distinctions() {
         {/* Seven equal columns at the widest breakpoint, divided by hairlines
             rather than boxed as seven separate cards. */}
         <div className="mt-14 overflow-hidden rounded-[6px] border border-sand bg-paper">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+          {/* Four across, not seven. Seven columns inside the shell gave each
+              distinction about 150px, which wrapped every heading onto three
+              lines and squeezed a five-point list into a ribbon. Seven items
+              in four columns leaves one empty cell on the second row, which is
+              a far smaller price than the cramping was. */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4">
             {distinctions.items.map((d, i) => (
               <Reveal key={d.title} delay={Math.min(i, 6) * 60}>
-                <article className="group flex h-full flex-col border-b border-sand p-6 transition-colors duration-300 last:border-b-0 hover:bg-blush/40 sm:border-r sm:last:border-r-0 xl:border-b-0">
+                <article className="group flex h-full flex-col border-b border-sand p-6 transition-colors duration-300 last:border-b-0 hover:bg-blush/40 sm:border-r sm:last:border-r-0">
                   <span className="font-display text-[1.9rem] leading-none text-brass/70 [font-variant-numeric:tabular-nums] transition-colors duration-300 group-hover:text-brass">
                     {String(i + 1).padStart(2, "0")}
                   </span>

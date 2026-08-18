@@ -47,9 +47,21 @@ export default function PageHero({
           {/* A wider measure and a smaller top size: at 3.2rem in a 16ch column
               the title ran to five lines and split "better-prepared" across
               two of them. */}
+          {/* The emphasis normally drops to its own line, which is what gives
+              the heroes their two-part shape. On a very short title that break
+              is arbitrary: "How can / we help?" split a four-word question
+              across two lines for no reason. Below this length the two halves
+              stay on one line — at 2.75rem twenty characters run about 480px
+              inside a 564px column. One hero in the deck of forty-three is
+              short enough to qualify. */}
           <h1 className="mt-5 max-w-[20ch] font-display text-[2.05rem] leading-[1.08] text-clay sm:text-[2.4rem] lg:text-[2.75rem]">
             {title}
-            {emphasis && <span className="block italic text-clay/90">{emphasis}</span>}
+            {emphasis &&
+              (title.length + emphasis.length + 1 <= 20 ? (
+                <span className="italic text-clay/90"> {emphasis}</span>
+              ) : (
+                <span className="block italic text-clay/90">{emphasis}</span>
+              ))}
           </h1>
 
           {kicker && (
