@@ -86,14 +86,21 @@ export function Paras({
         const tag = tagOf(t);
         if (tag) {
           return (
+            /* The tag sits under the argument, inside its column. It must hold
+               one line: wrapped onto two it read as a ragged afterthought.
+               The prose measure is dropped so it can use the full width of the
+               column, and it is set a step below the body — it is a summary of
+               the section, not another sentence of it — which is what buys the
+               longest of them (63 characters) its single line in the narrowest
+               column the composer uses. */
             <p
               key={i}
-              className={`${i ? gap : ""} flex ${measure} items-baseline gap-3 border-l pl-4 ${size} leading-[1.75] ${
+              className={`${i ? gap : ""} flex items-baseline gap-x-3 border-l pl-4 text-[0.875rem] leading-[1.6] ${
                 dark ? "border-brass-soft/60 text-sage-soft/85" : "border-brass/60 text-pine/75"
               }`}
             >
               <span
-                className={`shrink-0 text-[0.6rem] font-bold uppercase tracking-[0.18em] ${
+                className={`shrink-0 text-[0.6rem] font-bold uppercase tracking-[0.16em] ${
                   dark ? "text-brass-soft" : "text-brass"
                 }`}
               >
@@ -113,54 +120,6 @@ export function Paras({
         );
       })}
     </>
-  );
-}
-
-/* "What this part of the day builds: ..." summarises the whole movement; it is
-   not another paragraph of it. Inline in the narrowest text column (454px on a
-   five-of-twelve span) the longest of them — 63 characters — wrapped onto a
-   second line and read as a ragged afterthought, and no type size fixed that
-   without dropping below 12px. Lifted out to the full width of the section it
-   sits on one line and closes the movement like a caption rule. */
-export function splitTags(p: string[]) {
-  const prose: string[] = [];
-  const tags: { label: string; body: string }[] = [];
-  for (const t of p) {
-    const g = tagOf(t);
-    if (g) tags.push(g);
-    else prose.push(t);
-  }
-  return { prose, tags };
-}
-
-export function TagStrip({
-  tags,
-  dark = false,
-}: {
-  tags: { label: string; body: string }[];
-  dark?: boolean;
-}) {
-  if (!tags.length) return null;
-  return (
-    <div className={`mt-10 border-t pt-5 ${dark ? "border-brass-soft/25" : "border-brass/30"}`}>
-      {tags.map((g, i) => (
-        <p
-          key={i}
-          className={`${i ? "mt-3" : ""} flex flex-wrap items-baseline gap-x-4 gap-y-1 text-[1.0625rem] leading-[1.6] ${
-            dark ? "text-sage-soft/85" : "text-pine/75"
-          }`}
-        >
-          <span
-            className={`shrink-0 text-[0.75rem] font-bold uppercase tracking-[0.18em] lg:text-[0.62rem] ${
-              dark ? "text-brass-soft" : "text-brass"
-            }`}
-          >
-            {g.label}
-          </span>
-          <span>{g.body}</span>
-        </p>
-      ))}
-    </div>
   );
 }
 
@@ -374,7 +333,6 @@ export function Movement({
   variant: Variant;
   pull?: PullData;
 }) {
-  const { prose, tags } = splitTags(item.p);
   const heading = (
     <h2 className="font-display text-[1.85rem] leading-[1.14] text-clay sm:text-[2.35rem]">
       {item.h}
@@ -398,13 +356,12 @@ export function Movement({
               {n !== undefined && <Marker n={n} />}
               <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
-                <Paras paras={prose} />
+                <Paras paras={item.p} />
               </div>
               {pull && <Pull {...pull} />}
             </div>
           </Reveal>
         </div>
-        <TagStrip tags={tags} />
       </section>
     );
   }
@@ -433,13 +390,12 @@ export function Movement({
               {n !== undefined && <Marker n={n} />}
               <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
-                <Paras paras={prose} measure="max-w-[46ch]" />
+                <Paras paras={item.p} measure="max-w-[46ch]" />
               </div>
               {pull && <Pull {...pull} />}
             </div>
           </Reveal>
         </div>
-        <TagStrip tags={tags} />
       </section>
     );
   }
@@ -455,7 +411,7 @@ export function Movement({
               {n !== undefined && <Marker n={n} />}
               <div className={n !== undefined ? "mt-5" : ""}>{heading}</div>
               <div className="mt-6">
-                <Paras paras={prose} />
+                <Paras paras={item.p} />
               </div>
               {pull && <Pull {...pull} />}
             </div>
@@ -468,7 +424,6 @@ export function Movement({
             </div>
           </Reveal>
         </div>
-        <TagStrip tags={tags} />
       </section>
     );
   }
@@ -486,11 +441,10 @@ export function Movement({
               <GoldRule className="mt-6 text-brass" width={64} />
             </div>
             <div className="lg:col-span-7">
-              <Paras paras={prose} />
+              <Paras paras={item.p} />
               {pull && <Pull {...pull} />}
             </div>
           </div>
-          <TagStrip tags={tags} />
         </Reveal>
       </div>
     </section>
@@ -553,7 +507,6 @@ export function DarkMovement({
   eyebrow?: string;
   pull?: PullData;
 }) {
-  const { prose, tags } = splitTags(item.p);
   /* The dark movement is a split, not a centred column.
 
      Two earlier versions both failed on a wide screen. Dividing the
@@ -597,7 +550,7 @@ export function DarkMovement({
                 {item.h}
               </h2>
               <div className="mt-6 space-y-5">
-                {prose.map((t, i) => (
+                {item.p.map((t, i) => (
                   <Paras key={i} paras={[t]} dark size="text-[1.0625rem]" measure="max-w-[54ch]" gap="" />
                 ))}
               </div>
@@ -605,7 +558,6 @@ export function DarkMovement({
             </div>
           </Reveal>
         </div>
-        <TagStrip tags={tags} dark />
       </div>
     </section>
   );
