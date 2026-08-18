@@ -71,29 +71,31 @@ export default function FaqSearch({
             {query && ` matching "${query}"`}
           </p>
 
-          <div className="mt-8 space-y-4">
+          {/* Hairline rules, not a stack of shadowed 20px-radius cards: the FAQ list
+                was the last run of old-system cards left on an inner page. */}
+          <div className="mt-8">
             {shown.map((f, i) => (
               <Reveal key={f.q} delay={i * 40}>
-                <details className="group rounded-[1.25rem] border border-pine/12 bg-paper p-6 soft-shadow-sm">
+                <details className="group border-t border-sand py-6">
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
                     <span>
                       <span className="eyebrow text-brass">{f.topic}</span>
-                      <span className="mt-2 block font-display text-xl text-pine">{f.q}</span>
+                      <span className="mt-2 block font-display text-[1.25rem] leading-[1.25] text-clay">{f.q}</span>
                     </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-sage-soft text-clay transition-transform group-open:rotate-45">
+                    <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-brass/45 text-clay transition-transform group-open:rotate-45">
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                         <line x1="7" y1="2.5" x2="7" y2="11.5" />
                         <line x1="2.5" y1="7" x2="11.5" y2="7" />
                       </svg>
                     </span>
                   </summary>
-                  <p className="mt-4 leading-relaxed text-mist">{f.a}</p>
+                  <p className="mt-4 max-w-[68ch] text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">{f.a}</p>
                 </details>
               </Reveal>
             ))}
 
             {shown.length === 0 && (
-              <div className="rounded-[1.25rem] border border-pine/12 bg-paper p-8 text-center">
+              <div className="rounded-[4px] border border-brass/30 bg-blush/45 p-8 text-center">
                 <p className="text-lg text-pine">No answer matches that yet.</p>
                 <p className="mt-2 text-mist">
                   If the answer affects eligibility, fees, policy or a child-specific decision, ask

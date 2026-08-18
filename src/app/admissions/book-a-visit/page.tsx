@@ -34,9 +34,9 @@ export default function Page() {
             <h2 className="mt-5 max-w-xl text-3xl leading-[1.05] text-pine sm:text-4xl">
               Choose a campus, tell us about your child, and pick a morning.
             </h2>
-            <p className="mt-5 max-w-xl leading-relaxed text-mist">
-              Your visit is confirmed after the admissions team contacts you.
-            </p>
+            {/* The confirmation line used to sit here as well as in the aside's
+                "Choose a preferred date" block, so the same sentence appeared
+                twice within one screen. The deck owns it; this copy went. */}
             <div className="mt-9">
               <EnquiryForm variant="visit" />
             </div>

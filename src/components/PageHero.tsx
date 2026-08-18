@@ -92,7 +92,11 @@ export default function PageHero({
 
         {/* Mobile and tablet: the photograph sits under the words. */}
         <div className="lg:hidden">
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[1.25rem]">
+          {/* 3px, not 1.25rem. The heritage system sets photographs almost
+              square-cornered everywhere else; this was the one frame left on
+              the old 20px radius, and being in the shared hero it was the
+              first thing seen on a phone on every page of the site. */}
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[3px]">
             <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
           </div>
         </div>
