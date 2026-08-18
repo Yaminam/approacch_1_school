@@ -107,8 +107,18 @@ function planParts(middle: Block[]): Part[] {
      the block before it is accepted, and rejected proposals fall through to
      the next image composition, which suits almost anything. */
   const PAIRABLE = 460; // two of these sit comfortably side by side
+  const PAIR_RATIO = 1.8; // how unequal a pair may be before it looks broken
   const BAND = 460; // below this a dark band is mostly empty space
   const BAND_MAX = 900; // above this it becomes a wall of reversed-out text
+  /* No more than this many image movements may run back to back.
+
+     Dalhousie Campus Academics is eight blocks of 190 to 540 characters. Every
+     one of them cleared the argument test, none of them cleared the pair guard
+     at a 1.5 ratio, and none was long enough for a dark band, so all eight
+     fell through to the same image composition and the page marched: picture,
+     paragraph, picture, paragraph, for five thousand pixels. The rhythm can
+     only do its job if something interrupts the fallback. */
+  const IMAGE_RUN = 3;
   const IMAGES: Kind[] = ["portrait", "offset", "cinematic"];
 
   const out: Part[] = [];
@@ -116,6 +126,7 @@ function planParts(middle: Block[]): Part[] {
   let n = 0;
   let img = 0;
   let darkUsed = 0;
+  let imgRun = 0;
 
   for (const seg of segs) {
     if (!seg.heavy) {
@@ -134,13 +145,14 @@ function planParts(middle: Block[]): Part[] {
          the other still left one column trailing 280px of empty ivory. */
       const ratio = next ? Math.max(weight(b), weight(next)) / Math.max(1, Math.min(weight(b), weight(next))) : 99;
       if (
-        proposed === "pair" &&
+        (proposed === "pair" || imgRun >= IMAGE_RUN) &&
         next &&
         weight(b) <= PAIRABLE &&
         weight(next) <= PAIRABLE &&
-        ratio < 1.5
+        ratio < PAIR_RATIO
       ) {
         out.push({ t: "pair", blocks: [b, next], ns: [++n, ++n] });
+        imgRun = 0;
         i += 2;
         continue;
       }
@@ -150,12 +162,25 @@ function planParts(middle: Block[]): Part[] {
       if (proposed === "dark" && weight(b) >= BAND && weight(b) <= BAND_MAX && darkUsed < 2) {
         darkUsed++;
         out.push({ t: "move", kind: "dark", block: b, n: ++n });
+        imgRun = 0;
+        i++;
+        continue;
+      }
+
+      /* The run has gone on too long and nothing else would take this block,
+         so it goes without a photograph: a held moment on a warmer ground that
+         breaks the march and gives the pictures either side somewhere to
+         breathe. */
+      if (imgRun >= IMAGE_RUN) {
+        out.push({ t: "move", kind: "plain", block: b, n: ++n });
+        imgRun = 0;
         i++;
         continue;
       }
 
       const kind = IMAGES[img++ % IMAGES.length];
       out.push({ t: "move", kind, block: b, n: ++n });
+      imgRun++;
       i++;
     }
   }

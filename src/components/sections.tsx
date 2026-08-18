@@ -228,7 +228,7 @@ function PullActions({
     ) : (
       <Link
         href={c.href}
-        className={`group inline-flex min-h-11 max-w-full items-center gap-2.5 rounded-full border px-6 py-2.5 text-[0.66rem] font-bold uppercase leading-tight tracking-[0.13em] transition-colors lg:min-h-0 ${
+        className={`group inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border px-5 py-2.5 text-[0.64rem] font-bold uppercase leading-tight tracking-[0.1em] transition-colors lg:min-h-0 ${
           dark
             ? "border-brass-soft/50 text-brass-soft hover:border-brass-soft hover:bg-brass-soft/10"
             : "border-clay/45 text-clay hover:border-clay hover:bg-blush/60"
@@ -242,7 +242,7 @@ function PullActions({
     );
 
   return (
-    <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
+    <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
       {primary}
       {a && <GoldLink label={a.label} href={a.href} dark={dark} />}
     </div>
@@ -331,7 +331,7 @@ export function Pull({
         <div className={`${PAD} relative py-14 sm:py-16`}>
           <Reveal>
             <div className="grid items-center gap-y-9 lg:grid-cols-12 lg:gap-x-14">
-              <div className={image ? "lg:col-span-6" : "lg:col-span-8"}>
+              <div className={image ? "lg:col-span-7" : "lg:col-span-9"}>
                 <PullMarker dark />
                 <p className="mt-5 max-w-[38ch] font-display text-[1.5rem] leading-[1.26] text-paper sm:text-[1.85rem]">
                   {line}
@@ -339,13 +339,13 @@ export function Pull({
                 <PullActions c={c} a={a} variant="split" dark />
               </div>
               {image && (
-                <div className="lg:col-span-6">
+                <div className="lg:col-span-5">
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[3px]">
                     <Image
                       src={image}
                       alt=""
                       fill
-                      sizes="(max-width:1024px) 100vw, 46vw"
+                      sizes="(max-width:1024px) 100vw, 38vw"
                       className="object-cover"
                     />
                   </div>
