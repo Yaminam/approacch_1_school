@@ -284,7 +284,12 @@ export default function FeeSelector() {
               </div>
             </div>
 
-            <Reveal delay={120}>
+            {/* Sticky, and a direct child of the stretched grid cell. The
+                notes column runs far past this panel, so ranged at the top it
+                left 450px of empty ivory beside it; inside a Reveal wrapper
+                the sticky had a box only as tall as itself and nowhere to
+                travel. */}
+            <div className="lg:sticky lg:top-28">
               <div className="rounded-[4px] border border-brass/30 bg-blush/40 p-7 sm:p-8">
                 <Eyebrow>How to pay</Eyebrow>
                 <h3 className="mt-4 font-display text-[1.4rem] leading-[1.2] text-clay sm:text-[1.6rem]">
@@ -320,7 +325,7 @@ export default function FeeSelector() {
                   {feePayment.email}
                 </a>
               </div>
-            </Reveal>
+            </div>
           </div>
         </div>
       </section>

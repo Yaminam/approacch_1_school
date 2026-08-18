@@ -35,43 +35,48 @@ export default function Page() {
           </div>
 
           <aside className="lg:pt-2" id="prospectus">
-            <Reveal>
-              <div className="rounded-3xl border border-pine/12 bg-paper p-7 soft-shadow-sm">
-                <span className="eyebrow text-clay">Prospectus access</span>
-                <h3 className="mt-4 text-2xl text-pine">Download the current prospectus.</h3>
-                <p className="mt-2 leading-relaxed text-mist">
+            {/* Sticky, and a direct child of the stretched grid cell: the form
+                beside it runs far longer, so ranged at the top this left 735px
+                of empty column for the whole scroll. */}
+            <div className="lg:sticky lg:top-28">
+              <div className="rounded-[4px] border border-brass/30 bg-blush/40 p-7">
+                <span className="block text-[0.75rem] font-bold uppercase tracking-[0.22em] text-brass lg:text-[0.68rem]">
+                  Prospectus access
+                </span>
+                <h3 className="mt-4 font-display text-[1.4rem] leading-[1.2] text-clay sm:text-[1.6rem]">
+                  Download the current prospectus.
+                </h3>
+                <p className="mt-3 text-[1rem] leading-[1.72] text-pine/75">
                   Prospectus access should not create unnecessary friction. Open it now, no form required.
                 </p>
                 <a
                   href={brochurePdf}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 block rounded-full bg-clay px-6 py-3.5 text-center text-sm font-bold uppercase tracking-[0.12em] text-paper transition-transform hover:-translate-y-0.5"
+                  className="mt-6 block min-h-11 rounded-full bg-clay px-6 py-3.5 text-center text-[0.68rem] font-bold uppercase tracking-[0.16em] text-paper transition-transform hover:-translate-y-0.5"
                 >
                   Download prospectus
                 </a>
                 <Link
                   href="/admissions/fees"
-                  className="mt-3 block rounded-full border-2 border-pine px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.1em] text-pine transition-colors hover:border-clay hover:text-clay"
+                  className="mt-3 block min-h-11 rounded-full border border-clay/45 px-6 py-3 text-center text-[0.66rem] font-bold uppercase tracking-[0.13em] text-clay transition-colors hover:border-clay hover:bg-blush/60"
                 >
                   Fees &amp; dues {feeScope.year}
                 </Link>
               </div>
-            </Reveal>
 
-            <Reveal delay={100}>
-              <div className="mt-8">
-                <h3 className="text-xl text-pine">Inside the prospectus</h3>
+              <div className="mt-8 border-t border-sand pt-7">
+                <h3 className="font-display text-[1.3rem] leading-[1.2] text-clay">Inside the prospectus</h3>
                 <ul className="mt-4 space-y-3">
                   {prospectusIncludes.map((it) => (
                     <li key={it} className="flex items-start gap-3">
-                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
-                      <span className="leading-relaxed text-mist">{it}</span>
+                      <span aria-hidden className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brass" />
+                      <span className="text-[1rem] leading-[1.7] text-pine/75">{it}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-            </Reveal>
+            </div>
           </aside>
         </div>
       </Section>
