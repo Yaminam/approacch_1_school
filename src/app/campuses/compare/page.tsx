@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
+import { PAD, Eyebrow, PrimaryCta, GoldLink } from "@/components/sections";
+import { Ridge, Botanical } from "@/components/Ornament";
 import { compareCampuses } from "@/lib/pageCopy";
 import { img } from "@/lib/images";
 
@@ -14,11 +16,23 @@ const p = compareCampuses;
    language, expandable detail and direct links to each campus", and explicit
    that neither campus may be presented as superior.
 
-   The comparison is grouped into three clusters rather than run as ten ruled
-   rows. A long spec table with a hairline under every row is the laziest
-   possible layout for this, and it buries the one thing a parent is here for:
-   which experience fits their child. Both columns keep identical structure,
-   weight and photography so neither reads as the better option. */
+   Rebuilt onto the heritage editorial system, which this page had been left
+   behind by. Three things were wrong with it beyond the styling:
+
+   - Each column stacked its own list, so the dimension was printed twice, side
+     by side. A comparison states the thing being compared ONCE and puts the
+     two answers under it; printing it twice makes the reader match labels
+     across a 56px gutter to work out what lines up with what.
+   - Because the columns stacked separately, two answers of different lengths
+     pushed everything below them out of step, so the rows stopped aligning
+     after the first one.
+   - The campus names were lg:hidden. On a desktop nothing on screen said
+     which column was which; you had to scroll back to the photographs. The
+     names now sit in a header that sticks under the site header for as long
+     as the comparison is on screen.
+
+   Both columns keep identical structure, weight and photography so neither
+   reads as the better option. */
 
 const CAMPUSES = [
   {
@@ -133,14 +147,14 @@ export default function Page() {
         image={p.image}
       />
 
-      <div className="tone-1 lit">
+      <div className="bg-cream">
         {/* The two campuses, given identical treatment */}
-        <section className="mx-auto max-w-7xl px-6 pt-20 sm:px-8 sm:pt-24">
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
+        <section className={`${PAD} pt-16 sm:pt-20`}>
+          <div className="grid gap-x-14 gap-y-12 lg:grid-cols-2">
             {CAMPUSES.map((c, i) => (
               <Reveal key={c.key} delay={i * 110}>
                 <Link href={c.href} className="group block">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] soft-shadow">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-[3px]">
                     <Image
                       src={c.image}
                       alt={`${c.name}, ${c.label}`}
@@ -150,25 +164,25 @@ export default function Page() {
                     />
                   </div>
                   <div className="mt-6">
-                    <span className="text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-brass">
-                      {c.label}
-                    </span>
-                    <h2 className="mt-3 font-display text-[1.7rem] leading-tight text-pine sm:text-[2.1rem]">
+                    <Eyebrow>{c.label}</Eyebrow>
+                    <h2 className="mt-4 font-display text-[1.7rem] leading-[1.14] text-clay sm:text-[2.1rem]">
                       {c.name}
                     </h2>
-                    <p className="mt-3 max-w-[46ch] leading-relaxed text-mist">{c.line}</p>
-                    <ul className="mt-5 flex flex-wrap gap-2">
+                    <p className="mt-3 max-w-[42ch] font-display text-[1.15rem] italic leading-[1.4] text-pine/70">
+                      {c.line}
+                    </p>
+                    <ul className="mt-6 flex flex-wrap gap-2">
                       {c.marks.map((m) => (
                         <li
                           key={m}
-                          className="rounded-full border border-pine/15 bg-paper px-3.5 py-1.5 text-sm font-semibold text-pine"
+                          className="rounded-full border border-brass/35 px-3.5 py-1.5 text-[0.78rem] font-semibold text-pine/75 lg:text-[0.72rem]"
                         >
                           {m}
                         </li>
                       ))}
                     </ul>
-                    <span className="mt-6 inline-flex items-center gap-2 text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-clay underline decoration-brass decoration-2 underline-offset-[6px]">
-                      Explore the campus
+                    <span className="mt-7 inline-flex min-h-11 items-center gap-2.5 text-[0.78rem] font-bold uppercase tracking-[0.18em] text-clay transition-colors group-hover:text-brass lg:min-h-0 lg:text-[0.68rem]">
+                      <span className="border-b border-current pb-1">Explore the campus</span>
                       <span aria-hidden className="transition-transform group-hover:translate-x-1">&rarr;</span>
                     </span>
                   </div>
@@ -178,40 +192,64 @@ export default function Page() {
           </div>
         </section>
 
-        {/* Grouped comparison. Three clusters, no hairline under every row. */}
-        <section className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-24">
+        {/* The comparison. Dimension stated once, the two answers beneath it. */}
+        <section className={`${PAD} pb-20 pt-14 sm:pb-24 sm:pt-16`}>
+          {/* Which column is which, held under the site header for the length
+              of the comparison. Desktop only: on a phone the columns stack, so
+              each answer carries its own campus name instead. */}
+          {/* 4.25rem is the site header's measured height. Opaque, not a tint:
+              at 95% the copy scrolling underneath ghosted through it. */}
+          <div className="sticky top-[4.25rem] z-30 hidden border-b border-brass/30 bg-cream py-4 lg:block">
+            <div className="grid grid-cols-2 gap-x-14">
+              {CAMPUSES.map((c, i) => (
+                <div key={c.key} className={i ? "-ml-7 border-l border-sand pl-7" : ""}>
+                  <span className="font-display text-[1.1rem] text-clay">{c.name}</span>
+                  <span className="ml-3 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-brass">
+                    {c.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {CLUSTERS.map((cluster, ci) => (
-            <div key={cluster.title} className={ci > 0 ? "mt-16" : ""}>
+            <div key={cluster.title} className={ci > 0 ? "mt-16" : "mt-12"}>
               <Reveal>
-                <div className="flex items-center gap-5">
-                  <h2 className="font-display text-[1.5rem] leading-tight text-clay sm:text-[1.8rem]">
+                <div className="flex items-center gap-6">
+                  <h2 className="font-display text-[1.5rem] leading-[1.2] text-clay sm:text-[1.8rem]">
                     {cluster.title}
                   </h2>
-                  <span className="h-px flex-1 bg-pine/15" />
+                  <span aria-hidden className="h-px flex-1 bg-brass/35" />
                 </div>
               </Reveal>
 
-              <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-10">
-                {CAMPUSES.map((c) => (
-                  <Reveal key={c.key}>
-                    <div
-                      className={`h-full rounded-[1.25rem] p-7 ${
-                        c.key === "dal" ? "tone-2" : "bg-paper"
-                      }`}
-                    >
-                      <p className="text-[0.6875rem] font-bold uppercase tracking-[0.18em] text-brass lg:hidden">
-                        {c.name}
+              <div className="mt-6">
+                {cluster.rows.map((r) => (
+                  <Reveal key={r.dimension}>
+                    <div className="border-t border-sand py-8 sm:py-9">
+                      <p className="text-[0.75rem] font-bold uppercase tracking-[0.18em] text-brass lg:text-[0.66rem]">
+                        {r.dimension}
                       </p>
-                      <dl className="mt-2 space-y-6 lg:mt-0">
-                        {cluster.rows.map((r) => (
-                          <div key={r.dimension}>
-                            <dt className="font-display text-[0.95rem] uppercase tracking-[0.1em] text-mist">
-                              {r.dimension}
-                            </dt>
-                            <dd className="mt-2 leading-relaxed text-pine/85">{r[c.key]}</dd>
+                      {/* One grid per row, so the two answers always start on
+                          the same line however long either of them runs. */}
+                      <div className="mt-5 grid gap-x-14 gap-y-7 lg:grid-cols-2">
+                        {CAMPUSES.map((c, i) => (
+                          <div
+                            key={c.key}
+                            /* The rule sits in the middle of the gutter; the
+                               negative margin cancels the padding so neither
+                               column's text shifts off its own edge. */
+                            className={i ? "lg:-ml-7 lg:border-l lg:border-sand lg:pl-7" : ""}
+                          >
+                            <p className="mb-2 text-[0.75rem] font-bold uppercase tracking-[0.16em] text-clay/60 lg:hidden">
+                              {c.name}
+                            </p>
+                            <p className="text-[1.0625rem] leading-[1.75] text-pine/75 [text-wrap:pretty]">
+                              {r[c.key]}
+                            </p>
                           </div>
                         ))}
-                      </dl>
+                      </div>
                     </div>
                   </Reveal>
                 ))}
@@ -222,41 +260,32 @@ export default function Page() {
       </div>
 
       {/* Close */}
-      <section className="grain-pine lit-deep">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 sm:py-28">
-          {/* Label on the rule, matching the close band used across the site. */}
+      <section className="relative overflow-hidden bg-pine-800">
+        <Ridge className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-brass-soft/20" />
+        <Botanical className="pointer-events-none absolute -left-6 top-0 hidden h-full w-20 text-brass-soft/12 lg:block" />
+        <div className={`${PAD} relative py-16 sm:py-20`}>
           <Reveal>
             <div className="flex items-center gap-6">
-              <span className="eyebrow shrink-0 text-brass-soft">Neither is the lesser</span>
-              <span aria-hidden className="h-px flex-1 bg-paper/20" />
+              <Eyebrow gold>Neither is the lesser</Eyebrow>
+              <span aria-hidden className="h-px flex-1 bg-brass-soft/25" />
             </div>
           </Reveal>
 
           <div className="mt-10 grid gap-y-10 lg:grid-cols-12 lg:gap-x-16">
             <Reveal className="lg:col-span-6">
-              <h2 className="font-display text-[2rem] leading-[1.06] text-paper sm:text-[2.6rem] lg:text-[3rem]">
+              <h2 className="font-display text-[1.9rem] leading-[1.12] text-brass-soft sm:text-[2.4rem]">
                 The question is not which campus is better.
               </h2>
             </Reveal>
             <Reveal delay={120} className="lg:col-span-6">
               <div>
-                <p className="max-w-[60ch] text-lg leading-relaxed text-sage-soft [text-wrap:pretty]">
+                <p className="max-w-[54ch] text-[1.0625rem] leading-[1.75] text-sage-soft/85 [text-wrap:pretty]">
                   It is which experience is right for the child and family. Six short questions will
                   get you closer to an answer than any table can.
                 </p>
-                <div className="mt-9 flex flex-wrap items-center gap-x-9 gap-y-4">
-                  <Link
-                    href="/campuses/find-your-campus"
-                    className="inline-flex items-center justify-center rounded-full bg-brass-soft px-8 py-4 text-[0.8125rem] font-bold uppercase tracking-[0.12em] text-pine-800 transition-transform hover:-translate-y-0.5"
-                  >
-                    Find Your Campus
-                  </Link>
-                  <Link
-                    href="/admissions/book-a-visit"
-                    className="text-[0.8125rem] font-bold uppercase tracking-[0.1em] text-brass-soft underline decoration-brass-soft/50 decoration-2 underline-offset-[6px] transition-colors hover:text-paper hover:decoration-paper"
-                  >
-                    Visit a campus
-                  </Link>
+                <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+                  <PrimaryCta label="Find Your Campus" href="/campuses/find-your-campus" dark />
+                  <GoldLink label="Visit a campus" href="/admissions/book-a-visit" dark />
                 </div>
               </div>
             </Reveal>

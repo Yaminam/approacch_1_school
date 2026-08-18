@@ -21,7 +21,9 @@ export default function StickyVisit() {
     >
       {/* Deliberately quiet: the page already carries its own calls to
           action, so this is a small reminder rather than a second campaign. */}
-      <BookVisitButton className="flex items-center gap-2 rounded-full border border-brass/40 bg-cream/95 px-4 py-2 text-[0.66rem] font-bold uppercase tracking-[0.14em] text-clay backdrop-blur transition-colors duration-300 hover:border-clay hover:bg-blush/70">
+      {/* min-h-11 on a phone: at 34px this floating pill was the last control
+          on the site still under the touch-target guideline. */}
+      <BookVisitButton className="flex min-h-11 items-center gap-2 rounded-full border border-brass/40 bg-cream/95 px-4 py-2 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-clay backdrop-blur transition-colors duration-300 hover:border-clay hover:bg-blush/70 lg:min-h-0 lg:text-[0.66rem]">
         <svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
           <rect x="2.5" y="3.5" width="13" height="12" rx="2" />
           <line x1="2.5" y1="7" x2="15.5" y2="7" />
